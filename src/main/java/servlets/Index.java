@@ -1,5 +1,6 @@
 package servlets;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +17,10 @@ public class Index extends HttpServlet {
 
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
-        printWriter.write("Siema Heniu!");
-        printWriter.write("<br><a href='/details-client'>Client details</a> ");
+        //printWriter.write("Siema Heniu!");
+        //printWriter.write("<br><a href='/details-client'>Client details</a> ");
 
+        RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
+        rd.forward(req, resp);
     }
 }
