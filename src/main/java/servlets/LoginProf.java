@@ -1,5 +1,6 @@
 package servlets;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,8 @@ public class LoginProf extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+        RequestDispatcher rd = req.getRequestDispatcher("login-prof.jsp");
+        rd.forward(req, resp);
 
     }
 }
