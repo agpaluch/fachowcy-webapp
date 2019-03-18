@@ -7,47 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27c23ab8-1201-44d7-8085-1a0a76e1e414" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/freemarker/TemplateProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/details-client.ftlh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/details-prof.ftlh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/login-client.ftlh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/login-prof.ftlh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/search-results.ftlh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/signup-client.ftlh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/signup-prof.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/DetailsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/DetailsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/DetailsProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/DetailsProf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/Index.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/Index.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/LoginClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/LoginClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/LoginProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/LoginProf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/SearchResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/SearchResults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/SignupClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/SignupClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/SignupProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/SignupProf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/index.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login-prof.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/DetailsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/DetailsClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/DetailsProf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/DetailsProf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/Index.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/Index.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/LoginClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/LoginClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/LoginProf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/LoginProf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/SearchResults.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/SearchResults.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/SignupClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/SignupClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/SignupProf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/SignupProf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/DetailsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/DetailsClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/DetailsProf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/DetailsProf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/Index.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/Index.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/LoginClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/LoginClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/LoginProf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/LoginProf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/SearchResults.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/SearchResults.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/SignupClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/SignupClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/SignupProf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/SignupProf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/lib/professionals-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/lib/professionals-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/index.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/login-prof.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/fm-templates/index.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/index.ftlh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webapp/fm-templates/index.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/fm-templates/index.ftlh" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -98,46 +60,50 @@
     <session id="1469969314">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="css" value="3" />
           <entry key="flth" value="1" />
           <entry key="ftlh" value="8" />
-          <entry key="java" value="14" />
+          <entry key="java" value="15" />
           <entry key="jsp" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="CSS" value="3" />
           <entry key="FTL" value="8" />
-          <entry key="JAVA" value="14" />
+          <entry key="JAVA" value="15" />
           <entry key="JSP" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="ftlh" value="240" />
+          <entry key="ftlh" value="466" />
           <entry key="java" value="102" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="FTL" value="240" />
+          <entry key="FTL" value="466" />
           <entry key="JAVA" value="102" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/servlets/Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="41" column="32" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="32" />
+            <state relative-caret-position="300">
+              <caret line="41" column="45" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,10 +112,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/freemarker/TemplateProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/index.ftlh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="146">
+              <caret line="125" column="56" selection-start-line="125" selection-start-column="56" selection-end-line="125" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -161,6 +139,7 @@
       <list>
         <option value="Jsp File" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -192,6 +171,11 @@
         <option value="$PROJECT_DIR$/src/main/java/servlets/SignupProf.java" />
         <option value="$PROJECT_DIR$/src/main/java/servlets/Index.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/fm-templates/index.ftlh" />
+        <option value="$PROJECT_DIR$/src/main/webapp/fm-templates/modern-business.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/css/modern-business.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/fm-templates/index.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/fm-templates/index.ftlh" />
       </list>
     </option>
   </component>
@@ -228,6 +212,11 @@
       </expand>
       <select />
     </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/src/main/webapp/bootstrap/package.json" />
+    </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="67" />
@@ -296,30 +285,21 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jjdzw2-fachowcy-web" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jjdzw2-fachowcy-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
               <item name="fm-templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="mave&#9;ACTION&#9;ActivateMavenProjectsToolWindow" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552863093342" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552952082379" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -327,11 +307,12 @@
     <property name="project.structure.side.proportion" value="0.39555556" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/webapp" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/fm-templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/css" />
+      <recent name="$PROJECT_DIR$/src/main/webapp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -432,16 +413,18 @@
       <workItem from="1552761432304" duration="2192000" />
       <workItem from="1552832947204" duration="71000" />
       <workItem from="1552849157891" duration="1468000" />
+      <workItem from="1552946969803" duration="5209000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6861000" />
+    <option name="totallyTimeSpent" value="12070000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25379092" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3104549" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -451,7 +434,7 @@
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2512235" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30995107" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -486,20 +469,8 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/servlets/Search.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/login-prof.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/login-prof.jsp" />
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -610,28 +581,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/freemarker/TemplateProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="11" column="74" lean-forward="true" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
+        <state relative-caret-position="102">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/index.ftlh">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/css/modern-business.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="315">
+          <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding>
+            <element signature="e#25977#26211#2" expanded="true" />
+            <element signature="e#26816#26969#1" expanded="true" />
+            <element signature="e#27009#27243#1" expanded="true" />
+            <element signature="e#30336#30612#2" expanded="true" />
+            <element signature="e#31245#31398#1" expanded="true" />
+            <element signature="e#31438#31714#1" expanded="true" />
+            <element signature="e#61310#61497#2" expanded="true" />
+            <element signature="e#61726#61862#2" expanded="true" />
+            <element signature="e#62265#62398#2" expanded="true" />
+            <element signature="e#63869#64022#1" expanded="true" />
+            <element signature="e#76076#76306#2" expanded="true" />
+            <element signature="e#77173#77409#2" expanded="true" />
+            <element signature="e#104435#104612#2" expanded="true" />
+            <element signature="e#104658#104835#2" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servlets/Index.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="41" column="32" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="32" />
+        <state relative-caret-position="300">
+          <caret line="41" column="45" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/index.ftlh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="125" column="56" selection-start-line="125" selection-start-column="56" selection-end-line="125" selection-end-column="56" />
         </state>
       </provider>
     </entry>
