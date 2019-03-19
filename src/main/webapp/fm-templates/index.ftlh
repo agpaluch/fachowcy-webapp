@@ -45,15 +45,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-7 py-4">
-                    <h4 class="text-white">About</h4>
-                    <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+                    <h4 class="text-white"></h4>
+                    <p class="text-muted"></p>
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4">
-                    <h4 class="text-white">Contact</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                        <li><a href="#" class="text-white">Like on Facebook</a></li>
-                        <li><a href="#" class="text-white">Email me</a></li>
+                        <li><a href="/signup-client" class="text-white">Rejestracja klient</a></li>
+                        <li><a href="/login-client" class="text-white">Login klient</a></li>
+                        <li><a href="/signup-prof" class="text-white">Rejestracja fachowiec</a></li>
+                        <li><a href="/login-prof" class="text-white">Login fachowiec</a></li>
+                        <li><a href="#" class="text-white">Kontakt</a></li>
                     </ul>
                 </div>
             </div>
@@ -74,14 +75,14 @@
 
 <main role="main">
 
-    <section class="jumbotron text-center">
+    <section class="jumbotron text-center" >
         <div class="container">
             <h1 class="jumbotron-heading"> Sprzedam Opla </h1>
             <p class="lead text-muted"> Kup Pan Opla </p>
 
-            <form method="post" href="/search-results" class="btn btn-primary my-2"">
-                <input type="text" name="id"/>
-                <a type = "submit" href="/search-results" class="btn btn-primary my-2">Szukaj</a>
+            <form class="btn btn-secondary my-2" method="post" action="/search-results">
+                <input type="text" name="search"/>
+                <input class="btn btn-primary my-2" type="submit" name="save" value="Szukaj" />
             </form>
 
         </div>
