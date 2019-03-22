@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jjdzw2-fachowcy-web" />
+        <module name="webapp" />
       </profile>
     </annotationProcessing>
   </component>
