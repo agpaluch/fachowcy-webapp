@@ -35,13 +35,13 @@ public class ClientsDatabaseDaoBean implements UserCRUDDao {
 
 
     @Override
-    public void readUser(String email) throws NoSuchUserException {
+    public String readUser(String email) throws NoSuchUserException {
         if (!validateEmail(email)){
             throw new NoSuchUserException();
         }
         RepositoryOfUsers.fillDatabase();
-        System.out.println(RepositoryOfUsers.getClientsDatabaseDaoBean().getClientLogin().get(email));
-        System.out.println(RepositoryOfUsers.getClientsDatabaseDaoBean().getClientDetails().get(email));
+        return RepositoryOfUsers.getClientsDatabaseDaoBean().getClientLogin().get(email).toString() +
+                RepositoryOfUsers.getClientsDatabaseDaoBean().getClientDetails().get(email).toString();
     }
 
 

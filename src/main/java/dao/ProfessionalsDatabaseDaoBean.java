@@ -35,13 +35,15 @@ public class ProfessionalsDatabaseDaoBean implements UserCRUDDao {
     }
 
     @Override
-    public void readUser(String email) throws NoSuchUserException {
+    public String readUser(String email) throws NoSuchUserException {
         if (!validateEmail(email)){
             throw new NoSuchUserException();
         }
         RepositoryOfUsers.fillDatabase();
-        System.out.println(RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalLogin().get(email));
-        System.out.println(RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalDetails().get(email));
+        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalLogin().get(email).toString()+
+         RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalDetails().get(email).toString();
+
+
     }
 
     @Override

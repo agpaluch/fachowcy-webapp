@@ -13,6 +13,13 @@ public enum TypeOfProfession {
         this.fullName = fullName;
     }
 
+/*    @Override
+    public String toString() {
+        return "Profession{" +
+                "fullName='" + fullName + '\'' +
+                '}';
+    }*/
+
     public String getFullName() {
         return fullName;
     }

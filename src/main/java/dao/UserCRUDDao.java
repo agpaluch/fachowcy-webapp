@@ -8,7 +8,7 @@ public interface UserCRUDDao {
 
     void createUser(String email, UserLogin userLogin, ClientProfile clientProfile) throws UserAlreadyExistsException;
 
-    void readUser(String email) throws NoSuchUserException;
+    String readUser(String email) throws NoSuchUserException;
 
     default void updateUser(String email, UserLogin userLogin, ClientProfile clientProfile)
             throws NoSuchUserException, UserAlreadyExistsException{

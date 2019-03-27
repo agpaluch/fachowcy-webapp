@@ -134,9 +134,10 @@ public class ProfessionalDetails implements ProfessionalProfile {
 
     public String toString(){
         return ("Name: " + getName()  + "\n"+
-                "Surname: " + getSurname()  + "\n" + "Profession: " + getProfession().toString() + "\n"+
+                "Surname: " + getSurname()  + "\n" + "Profession: " +
+                getProfession().toString() + "\n"+
                 "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity() +"\n"+
-                "City district: " + getDistrict() + "\n"+ "Longitude: " + getLongitude() + "\n"+
+                "City district: " + getDistrict().toString() + "\n"+ "Longitude: " + getLongitude() + "\n"+
                 "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+
                 "Comments: " + getComments());
     }

@@ -6,7 +6,7 @@
 <h2>Rejestracja fachowca</h2>
 
 <form method="post" action="/signup-prof">
-    E-mail: <input type="text" id="register-email" name="email"/><br/><br/>
+    E-mail: <input type="email" id="register-email" name="email"/><br/><br/>
     Password: <input type="password" name="password"/><br/><br/>
     Confirm password: <input type="password" name="confirmPassword"/><br/><br/>
     Name: <input type="text" name="name"/><br/><br/>
