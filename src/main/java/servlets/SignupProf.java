@@ -1,10 +1,12 @@
 package servlets;
 
-import com.infoshareacademy.ClientDetails;
-import com.infoshareacademy.ProfessionalDetails;
+import dao.ProfessionalDetails;
+import dao.ProfessionalLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import repository.CityDistrict;
+import repository.TypeOfProfession;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,11 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @WebServlet("/signup-prof")
 public class SignupProf extends HttpServlet {
@@ -47,15 +48,16 @@ public class SignupProf extends HttpServlet {
         rd.forward(req, resp);*/
 
 
-
-
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, List<Object>> dataMap = new HashMap<>();
+        dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
+        dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
+        
 
         try {
-            template.process(map, printWriter);
+            template.process(dataMap, printWriter);
         } catch (TemplateException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -66,35 +68,40 @@ public class SignupProf extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ClientDetails clientDetails = new ClientDetails();
-        ProfessionalDetails professionalDetails = new ProfessionalDetails();
+
+
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
         String name = req.getParameter("name");
-   /*     String surname = req.getParameter("surname");
-        String profession = req.getParameter("profession");
+        String surname = req.getParameter("surname");
+
+        String professionString = req.getParameter("profession");
+        TypeOfProfession profession = TypeOfProfession.valueOf(professionString);
+
         String phoneNumberString = req.getParameter("phoneNumber");
+        int phoneNumber = Integer.parseInt(phoneNumberString);
+
         String city = req.getParameter("city");
+
+        String cityDistrictString = req.getParameter("cityDistrict");
+        CityDistrict cityDistrict = CityDistrict.valueOf(cityDistrictString);
+
         String longitudeString = req.getParameter("longitude");
-        String latitudeString = req.getParameter("latitude");*/
+        Double longitude = Double.parseDouble(longitudeString);
+        String latitudeString = req.getParameter("latitude");
+        Double latitude = Double.parseDouble(latitudeString);
 
 
-        //req.setAttribute("error", "error");
+        ProfessionalLogin professionalLogin = new ProfessionalLogin(email, password);
+        ProfessionalDetails professionalDetails = new ProfessionalDetails(name, surname, profession, phoneNumber, city, cityDistrict, longitude, latitude);
 
 
-
-        //user.setName(req.getParameter("name"));
-
-        //user.setAge(Integer.parseInt(req.getParameter("age")));
-
-/*        usersRepositoryDao.addUser(user);
-
-        user = usersRepositoryDao.getUserById(4);
 
         PrintWriter printWriter = resp.getWriter();
-        printWriter.write("<!DOCTYPE html><html><body>" + user + "</body></html>");*/
+        printWriter.write(professionalLogin.toString() + professionalDetails.toString());
+
     }
 
 

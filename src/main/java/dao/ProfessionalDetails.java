@@ -2,19 +2,20 @@ package dao;
 
 
 import repository.CityDistrict;
+import repository.TypeOfProfession;
 
 public class ProfessionalDetails implements ProfessionalProfile {
 
     //profile information
     private String name;
     private String surname;
-    private String profession;
+    private TypeOfProfession profession;
     private int phoneNumber;
     private String city = "Warsaw";
     private CityDistrict district;
     private double longitude;
     private double latitude;
-    private int numberLikes;
+    private int numberLikes=0;
     private String comments;
 
 
@@ -23,10 +24,9 @@ public class ProfessionalDetails implements ProfessionalProfile {
         //Non-parametric constructor used in MenuAdd
     }
 
-    public ProfessionalDetails(String name, String surname, String profession,
+    public ProfessionalDetails(String name, String surname, TypeOfProfession profession,
                              int phoneNumber, String City, CityDistrict district,
-                             double longitude, double latitude,
-                             int numberLikes, String comments) {
+                             double longitude, double latitude) {
 
         this.name = name;
         this.surname = surname;
@@ -36,15 +36,13 @@ public class ProfessionalDetails implements ProfessionalProfile {
         this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.numberLikes = numberLikes;
-        this.comments = comments;
 
 
 
     }
 
     @Override
-    public String getProfession() {
+    public TypeOfProfession getProfession() {
         return profession;
     }
 
@@ -101,7 +99,7 @@ public class ProfessionalDetails implements ProfessionalProfile {
         this.surname = surname;
     }
 
-    public void setProfession(String profession) {
+    public void setProfession(TypeOfProfession profession) {
         this.profession = profession;
     }
 
@@ -136,7 +134,7 @@ public class ProfessionalDetails implements ProfessionalProfile {
 
     public String toString(){
         return ("Name: " + getName()  + "\n"+
-                "Surname: " + getSurname()  + "\n" + "Profession: " + getProfession() + "\n"+
+                "Surname: " + getSurname()  + "\n" + "Profession: " + getProfession().toString() + "\n"+
                 "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity() +"\n"+
                 "City district: " + getDistrict() + "\n"+ "Longitude: " + getLongitude() + "\n"+
                 "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+

@@ -1,20 +1,22 @@
 package dao;
 
+import java.time.LocalDate;
+
 public class ClientLogin implements UserLogin {
 
     //login credentials
     private String email;
     private String password;
-    private String signUpDate;
+    private LocalDate signUpDate;
 
 
 
-    public ClientLogin(String email, String password, String signUpDate) {
+    public ClientLogin(String email, String password) {
 
 
         this.email = email;
         this.password = password;
-        this.signUpDate = signUpDate;
+        this.signUpDate = LocalDate.now();
 
 
     }
@@ -34,7 +36,7 @@ public class ClientLogin implements UserLogin {
     }
 
     @Override
-    public String getSignUpDate() {
+    public LocalDate getSignUpDate() {
         return signUpDate;
     }
 
@@ -51,7 +53,7 @@ public class ClientLogin implements UserLogin {
     }
 
     @Override
-    public void setSignUpDate(String signUpDate) {
+    public void setSignUpDate(LocalDate signUpDate) {
         this.signUpDate = signUpDate;
     }
 

@@ -1,11 +1,12 @@
 package dao;
 
 
+import repository.TypeOfProfession;
 
 public interface ProfessionalProfile extends ClientProfile {
 
-    String getProfession();
+    TypeOfProfession getProfession();
 
-    void setProfession(String profession);
+    void setProfession(TypeOfProfession profession);
 
 }

@@ -21,16 +21,17 @@ public enum CityDistrict {
     WOLA("Wola"),
     ZOLIBORZ("Żoliborz");
 
+/*
     @Override
     public String toString() {
         return "CityDistrict{" +
                 "fullName='" + fullName + '\'' +
                 '}';
-    }
+    }*/
 
     private final String fullName;
 
-    private CityDistrict(String fullName) {
+    CityDistrict(String fullName) {
         this.fullName = fullName;
     }
 

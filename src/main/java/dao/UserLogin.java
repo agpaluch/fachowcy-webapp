@@ -1,15 +1,17 @@
 package dao;
 
+import java.time.LocalDate;
+
 public interface UserLogin {
 
     String getEmail();
     String getPassword();
-    String getSignUpDate();
+    LocalDate getSignUpDate();
 
 
     void setEmail(String email);
     void setPassword(String password);
-    void setSignUpDate(String signUpDate);
+    void setSignUpDate(LocalDate signUpDate);
 
 
 }
