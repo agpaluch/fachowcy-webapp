@@ -23,7 +23,7 @@
              <option value = "${d}">${d.fullName}</option>
            </#list>
     </select><br/><br/>
-    Longitude: <input type="number" name="longitude"/><br/><br/>
+    <Longitude></Longitude>: <input type="number" name="longitude"/><br/><br/>
     Latitude: <input type="number" name="latitude"/><br/><br/>
     <input type="submit" name="save" value="save"/><br/><br/>
 </form>
