@@ -5,6 +5,7 @@ import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 
 import javax.ejb.Local;
+import java.util.Map;
 
 @Local
 public interface UserCRUDDao {

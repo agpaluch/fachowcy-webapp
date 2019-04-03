@@ -6,10 +6,12 @@ import exceptions.NoSuchUserException;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import repository.City;
 import repository.CityDistrict;
 import repository.RepositoryOfUsers;
 import repository.TypeOfProfession;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +26,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import static java.lang.Long.parseLong;
 
 @WebServlet("/signup-prof")
 public class SignupProf extends HttpServlet {
@@ -56,6 +60,7 @@ public class SignupProf extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, List<Object>> dataMap = new HashMap<>();
+        dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
         dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
         
@@ -82,11 +87,12 @@ public class SignupProf extends HttpServlet {
         String surname = req.getParameter("surname");
 
 
-
+        //TODO: check if at the beginning of the phone number there is "+" and change it into "00"
         String phoneNumberString = req.getParameter("phoneNumber");
-        int phoneNumber = Integer.parseInt(phoneNumberString);
+        long phoneNumber = Long.parseLong(phoneNumberString);
 
-        String city = req.getParameter("city");
+        String cityString = req.getParameter("city");
+        City city = City.valueOf(cityString);
 
         String cityDistrictString = req.getParameter("cityDistrict");
         CityDistrict cityDistrict = CityDistrict.valueOf(cityDistrictString);
@@ -94,6 +100,7 @@ public class SignupProf extends HttpServlet {
         String professionString = req.getParameter("profession");
         TypeOfProfession profession = TypeOfProfession.valueOf(professionString);
 
+        //TODO: connect with Google API to get location
         String longitudeString = req.getParameter("longitude");
         Double longitude = Double.parseDouble(longitudeString);
         String latitudeString = req.getParameter("latitude");
@@ -102,6 +109,11 @@ public class SignupProf extends HttpServlet {
 
         ProfessionalLogin professionalLogin = new ProfessionalLogin(email, password);
         ProfessionalDetails professionalDetails = new ProfessionalDetails(name, surname, profession, phoneNumber, city, cityDistrict, longitude, latitude);
+
+/*        req.setAttribute("professionalLogin", professionalLogin);
+        req.setAttribute("professionalDetails", professionalDetails);
+        RequestDispatcher rd = req.getRequestDispatcher("details-prof.ftlh");
+        rd.forward(req, resp);*/
 
         PrintWriter printWriter = resp.getWriter();
         printWriter.write(professionalLogin.toString() + professionalDetails.toString());

@@ -60,7 +60,7 @@ public class ClientLogin implements UserLogin {
 
     public String toString(){
         return("Email: " + getEmail() + "\n" +
-                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate());
+                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate() + "\n" );
     }
 
 
