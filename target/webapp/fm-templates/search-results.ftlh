@@ -73,7 +73,7 @@
                                     <div class="col-md-4">
                                         <div class="card mb-4 shadow-sm">
                                             <img src="http://www.mountainhearth.com/wp-content/uploads/2014/01/P1010070-1024x768.jpg" height="300px">
-                                            <div class="card-body align-items-center">
+                                            <div class="card-body">
                                                 <p class="card-text">
                                                         ${sr.getName()} </br>
                                                         ${sr.getSurname()}
