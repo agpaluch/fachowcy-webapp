@@ -7,30 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27c23ab8-1201-44d7-8085-1a0a76e1e414" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/clientsDatabase.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/professionalsDatabase.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/ClientsDatabaseDaoBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/ClientsDatabaseDaoBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/ProfessionalDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/ProfessionalDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/ProfessionalsDatabaseDaoBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/ProfessionalsDatabaseDaoBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/UserCRUDDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/UserCRUDDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/CityDistrict.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/CityDistrict.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ImportJson.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/RepositoryOfUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/RepositoryOfUsers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/TypeOfProfession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/TypeOfProfession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/DetailsClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/DetailsClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/LoginClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/LoginClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/servlets/SignupProf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/servlets/SignupProf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/fm-templates/login-client.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/login-client.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/fm-templates/signup-prof.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/fm-templates/signup-prof.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/DetailsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/DetailsClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/LoginClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/LoginClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/servlets/SignupProf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/servlets/SignupProf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/DetailsClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/DetailsClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/LoginClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/LoginClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/SignupProf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/WEB-INF/classes/servlets/SignupProf.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/fm-templates/login-client.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/fm-templates/login-client.ftlh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/webapp/fm-templates/signup-prof.ftlh" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp/fm-templates/signup-prof.ftlh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jboss-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jboss-web.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -156,16 +135,18 @@
         <counts>
           <entry key="ftlh" value="4" />
           <entry key="html" value="1" />
-          <entry key="java" value="71" />
+          <entry key="java" value="76" />
           <entry key="json" value="3" />
+          <entry key="xml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="FTL" value="4" />
           <entry key="HTML" value="1" />
-          <entry key="JAVA" value="71" />
+          <entry key="JAVA" value="76" />
           <entry key="JSON" value="3" />
+          <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -174,6 +155,7 @@
           <entry key="ftlh" value="264" />
           <entry key="java" value="2434" />
           <entry key="json" value="48" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -182,57 +164,35 @@
           <entry key="JAVA" value="2434" />
           <entry key="JSON" value="48" />
           <entry key="PLAIN_TEXT" value="27" />
+          <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.30" value="1" />
+          <entry key="project.open.time.39" value="1" />
+          <entry key="project.open.time.48" value="1" />
+          <entry key="project.open.time.49" value="1" />
+          <entry key="project.open.time.51" value="1" />
+          <entry key="project.open.time.54" value="1" />
+          <entry key="project.open.time.57" value="1" />
+          <entry key="project.open.time.59" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/servlets/SignupProf.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/servlets/DetailsProf.java">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/servlets/LoginProf.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="28" column="87" selection-start-line="28" selection-start-column="87" selection-end-line="28" selection-end-column="87" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/signup-prof.ftlh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="40" />
+            <state relative-caret-position="555">
+              <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -241,7 +201,43 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/servlets/LoginClient.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dao/ClientLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalDetails.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1389">
+              <caret line="137" column="50" lean-forward="true" selection-start-line="137" selection-start-column="50" selection-end-line="137" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-555">
+              <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalsDatabaseDaoBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="13" column="65" lean-forward="true" selection-start-line="13" selection-start-column="65" selection-end-line="13" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -249,8 +245,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/servlets/DetailsClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="51" column="35" lean-forward="true" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+            <state relative-caret-position="555">
+              <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -261,7 +257,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/servlets/Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
+            <state relative-caret-position="330">
               <caret line="35" selection-start-line="35" selection-end-line="44" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -273,8 +269,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/login-client.ftlh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="36" column="54" lean-forward="true" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+            <state relative-caret-position="540">
+              <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -282,7 +278,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/servlets/SignupClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
+            <state relative-caret-position="195">
               <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
             </state>
           </provider>
@@ -312,7 +308,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/servlets/Search.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/login-prof.jsp" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -351,7 +346,6 @@
         <option value="$PROJECT_DIR$/src/main/java/dao/ClientsDatabaseDaoBean.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/UserCRUDDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/clientsDatabase.json" />
-        <option value="$PROJECT_DIR$/src/main/java/repository/RepositoryOfUsers.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/ProfessionalsDatabaseDaoBean.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/ProfessionalDetails.java" />
@@ -363,6 +357,8 @@
         <option value="$PROJECT_DIR$/src/main/java/servlets/LoginClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/servlets/DetailsClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/servlets/SignupProf.java" />
+        <option value="$PROJECT_DIR$/src/main/java/repository/RepositoryOfUsers.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jboss-web.xml" />
       </list>
     </option>
   </component>
@@ -452,6 +448,22 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="exceptions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjdzw2-fachowcy-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jjdzw2-fachowcy-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="freemarker" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjdzw2-fachowcy-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jjdzw2-fachowcy-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -484,6 +496,14 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="fm-templates" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="jjdzw2-fachowcy-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jjdzw2-fachowcy-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -495,7 +515,7 @@
     <property name="SearchEverywhereHistoryKey" value="profession&#9;null&#9;null&#10;mave&#9;ACTION&#9;ActivateMavenProjectsToolWindow" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553696190550" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553711995169" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Java InfoShare materials/16-17.03/jjdzw2-materialy-JEE-Podstawy/jjdzw2-usersengine/pom.xml" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -646,18 +666,23 @@
       <workItem from="1553452288130" duration="1896000" />
       <workItem from="1553669422732" duration="13826000" />
       <workItem from="1553683802967" duration="2443000" />
-      <workItem from="1553688531768" duration="6969000" />
+      <workItem from="1553688531768" duration="8106000" />
+      <workItem from="1553877688160" duration="786000" />
+      <workItem from="1553932037541" duration="745000" />
+      <workItem from="1553950417723" duration="1312000" />
+      <workItem from="1554136130004" duration="3376000" />
+      <workItem from="1554231569987" duration="1201000" />
+      <workItem from="1554304877289" duration="2101000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44617000" />
+    <option name="totallyTimeSpent" value="55275000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2952913" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3272147" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -668,13 +693,13 @@
       <window_info id="Learn" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.08646003" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30831975" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30831975" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39967373" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32972974" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32952693" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32952693" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="SonarLint" order="10" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
@@ -705,13 +730,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/servlets/Search.java" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/login-prof.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/signup-client.ftlh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -793,13 +811,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ClientLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/trial.html" />
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalProfile.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -815,46 +826,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/repository/ImportJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/repository/ImportJson.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/ClientsDatabaseDaoBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/repository/RepositoryOfUsers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-28">
-          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#699#700#0" expanded="true" />
-            <element signature="e#744#745#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1455">
-          <caret line="137" column="50" lean-forward="true" selection-start-line="137" selection-start-column="50" selection-end-line="137" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -879,31 +855,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/repository/TypeOfProfession.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/repository/TypeOfProfession.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/repository/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/servlets/SignupProf.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalsDatabaseDaoBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+        <state relative-caret-position="1260">
+          <caret line="107" selection-start-line="107" selection-end-line="107" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#425#426#0" expanded="true" />
-            <element signature="e#465#466#0" expanded="true" />
-            <element signature="e#537#538#0" expanded="true" />
-            <element signature="e#579#580#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servlets/DetailsProf.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
+        <state relative-caret-position="465">
+          <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -914,9 +881,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/signup-prof.ftlh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" selection-start-line="20" selection-end-line="24" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/repository/RepositoryOfUsers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jboss-web.xml">
+      <provider editor-type-id="com.intellij.javaee.oss.jboss.editor.JBossWebRootProvider" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/servlets/DetailsClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servlets/Index.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="330">
           <caret line="35" selection-start-line="35" selection-end-line="44" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -924,58 +930,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/signup-prof.ftlh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/fm-templates/login-client.ftlh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="36" column="54" lean-forward="true" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+        <state relative-caret-position="540">
+          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/servlets/DetailsClient.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/servlets/SignupClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="51" column="35" lean-forward="true" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="195">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/servlets/LoginClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/repository/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ClientLogin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        <state relative-caret-position="675">
+          <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/servlets/SignupClient.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalDetails.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+        <state relative-caret-position="1389">
+          <caret line="137" column="50" lean-forward="true" selection-start-line="137" selection-start-column="50" selection-end-line="137" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/servlets/SignupProf.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalLogin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-555">
+          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/ProfessionalsDatabaseDaoBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="13" column="65" lean-forward="true" selection-start-line="13" selection-start-column="65" selection-end-line="13" selection-end-column="65" />
         </state>
       </provider>
     </entry>
