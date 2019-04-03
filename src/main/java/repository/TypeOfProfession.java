@@ -1,5 +1,8 @@
 package repository;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum TypeOfProfession {
 
     PLUMBER("hydraulik"),
@@ -23,5 +26,6 @@ public enum TypeOfProfession {
     public String getFullName() {
         return fullName;
     }
+
 
 }
