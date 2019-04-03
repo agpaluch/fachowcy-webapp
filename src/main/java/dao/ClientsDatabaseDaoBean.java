@@ -5,9 +5,10 @@ import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 import repository.RepositoryOfUsers;
 
+import javax.ejb.Stateful;
 import java.util.Map;
 
-
+@Stateful
 public class ClientsDatabaseDaoBean implements UserCRUDDao {
 
     private Map<String, ClientLogin> clientLogin;
