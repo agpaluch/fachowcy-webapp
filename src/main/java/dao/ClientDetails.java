@@ -1,15 +1,16 @@
 package dao;
 
-import interfaces.ClientProfile;
-import jsonimport.CityDistrict;
+
+import repository.City;
+import repository.CityDistrict;
 
 public class ClientDetails implements ClientProfile {
 
     //profile information
     private String name;
     private String surname;
-    private int phoneNumber;
-    private String city = "Warsaw";
+    private long phoneNumber;
+    private City city;
     private CityDistrict district;
     private double longitude;
     private double latitude;
@@ -22,14 +23,14 @@ public class ClientDetails implements ClientProfile {
     }
 
     public ClientDetails(String name, String surname,
-                               int phoneNumber, String City, CityDistrict district,
+                               long phoneNumber, City city, CityDistrict district,
                                double longitude, double latitude,
                                int numberLikes, String comments) {
 
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
-        this.city = "Warsaw";
+        this.city = city;
         this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -50,12 +51,12 @@ public class ClientDetails implements ClientProfile {
     }
 
     @Override
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
     @Override
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
@@ -95,11 +96,11 @@ public class ClientDetails implements ClientProfile {
         this.surname = surname;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
@@ -128,7 +129,7 @@ public class ClientDetails implements ClientProfile {
     public String toString(){
         return ("Name: " + getName()  + "\n"+
                 "Surname: " + getSurname()  + "\n" +
-                "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity() +"\n"+
+                "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity().toString() +"\n"+
                 "City district: " + getDistrict() + "\n"+ "Longitude: " + getLongitude() + "\n"+
                 "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+
                 "Comments: " + getComments());

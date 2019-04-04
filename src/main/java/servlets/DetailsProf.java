@@ -46,4 +46,22 @@ public class DetailsProf extends HttpServlet {
         }
 
     }
+
+/*    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=utf-8");
+        PrintWriter printWriter = resp.getWriter();
+
+        Map<String, Integer> map = new HashMap<>();
+
+        try {
+            template.process(map, printWriter);
+        } catch (TemplateException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+
+        printWriter.write(req.getAttribute("professionalLogin").toString() +
+                req.getAttribute("professionalDetails").toString());
+    }*/
 }

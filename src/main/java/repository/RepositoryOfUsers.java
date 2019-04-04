@@ -46,7 +46,6 @@ public class RepositoryOfUsers {
         String contentProfessionals = readFileToString(inputStreamProf);
 
         professionalsDatabaseDaoBean =  new Gson().fromJson(contentProfessionals, ProfessionalsDatabaseDaoBean.class);
-        System.out.println("uwaga");
     }
 
     private static String readFileToString(InputStream inputStream){

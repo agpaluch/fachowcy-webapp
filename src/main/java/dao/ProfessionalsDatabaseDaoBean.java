@@ -69,7 +69,7 @@ public class ProfessionalsDatabaseDaoBean implements UserCRUDDao {
 
     public List<ProfessionalDetails> getByProfession(String profession){
 
-        List<ProfessionalDetails> values = new ArrayList(professionalDetails.values());
+        List<ProfessionalDetails> values = new ArrayList<>(professionalDetails.values());
 
         //return values;
 

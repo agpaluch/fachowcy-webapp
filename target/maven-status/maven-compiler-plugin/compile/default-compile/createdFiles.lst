@@ -1,9 +1,0 @@
-servlets/DetailsProf.class
-servlets/SignupClient.class
-servlets/DetailsClient.class
-freemarker/TemplateProvider.class
-servlets/Index.class
-servlets/LoginProf.class
-servlets/SignupProf.class
-servlets/SearchResults.class
-servlets/LoginClient.class

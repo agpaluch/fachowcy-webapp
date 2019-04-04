@@ -4,6 +4,10 @@ package dao;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 
+import javax.ejb.Local;
+import java.util.Map;
+
+@Local
 public interface UserCRUDDao {
 
     void createUser(String email, UserLogin userLogin, ClientProfile clientProfile) throws UserAlreadyExistsException;

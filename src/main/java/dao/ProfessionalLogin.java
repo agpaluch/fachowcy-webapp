@@ -70,7 +70,7 @@ public class ProfessionalLogin implements UserLogin {
 
     public String toString(){
         return("Login: " + getEmail() + "\n" +
-                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate());
+                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate()+ "\n" );
     }
 
 
