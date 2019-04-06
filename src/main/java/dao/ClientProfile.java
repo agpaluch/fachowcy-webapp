@@ -1,14 +1,15 @@
 package dao;
 
 
+import repository.City;
 import repository.CityDistrict;
 
 public interface ClientProfile {
 
     String getName();
     String getSurname();
-    int getPhoneNumber();
-    String getCity();
+    long getPhoneNumber();
+    City getCity();
     CityDistrict getDistrict();
     double getLongitude();
     double getLatitude();
@@ -18,8 +19,8 @@ public interface ClientProfile {
 
     void setName(String name);
     void setSurname(String name);
-    void setPhoneNumber(int phoneNumber);
-    void setCity(String city);
+    void setPhoneNumber(long phoneNumber);
+    void setCity(City city);
     void setDistrict(CityDistrict district);
     void setLongitude(double longitude);
     void setLatitude(double latitude);

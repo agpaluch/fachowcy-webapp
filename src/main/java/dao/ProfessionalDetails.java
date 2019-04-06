@@ -1,6 +1,7 @@
 package dao;
 
 
+import repository.City;
 import repository.CityDistrict;
 import repository.TypeOfProfession;
 
@@ -10,8 +11,8 @@ public class ProfessionalDetails implements ProfessionalProfile {
     private String name;
     private String surname;
     private TypeOfProfession profession;
-    private int phoneNumber;
-    private String city = "Warsaw";
+    private long phoneNumber;
+    private City city;
     private CityDistrict district;
     private double longitude;
     private double latitude;
@@ -25,14 +26,14 @@ public class ProfessionalDetails implements ProfessionalProfile {
     }
 
     public ProfessionalDetails(String name, String surname, TypeOfProfession profession,
-                             int phoneNumber, String City, CityDistrict district,
-                             double longitude, double latitude) {
+                               long phoneNumber, City city, CityDistrict district,
+                               double longitude, double latitude) {
 
         this.name = name;
         this.surname = surname;
         this.profession = profession;
         this.phoneNumber = phoneNumber;
-        this.city = "Warsaw";
+        this.city = city;
         this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -57,12 +58,12 @@ public class ProfessionalDetails implements ProfessionalProfile {
     }
 
     @Override
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
     @Override
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
@@ -103,11 +104,11 @@ public class ProfessionalDetails implements ProfessionalProfile {
         this.profession = profession;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
@@ -136,7 +137,7 @@ public class ProfessionalDetails implements ProfessionalProfile {
         return ("Name: " + getName()  + "\n"+
                 "Surname: " + getSurname()  + "\n" + "Profession: " +
                 getProfession().toString() + "\n"+
-                "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity() +"\n"+
+                "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity().toString() +"\n"+
                 "City district: " + getDistrict().toString() + "\n"+ "Longitude: " + getLongitude() + "\n"+
                 "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+
                 "Comments: " + getComments());
