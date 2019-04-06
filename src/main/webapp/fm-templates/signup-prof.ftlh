@@ -1,10 +1,17 @@
 <html>
 <head>
+
     <Title>Rejestracja fachowca</Title>
+    <meta charset="utf-8">
 
     <style>
         div[id]{
             color: red;
+        }
+
+        #map {
+            height: 200;
+            width: 200;
         }
     </style>
 
@@ -55,15 +62,74 @@
     <div>Latitude: <input type="number" name="latitude"/><br/><br/></div>
     <div>Longitude: <input type="number" name="longitude"/><br/><br/></div>
 
-    <input type="submit" name="save" value="Zarejestruj"/><br/><br/>
+    <input type="submit" name="save" value="Zarejestruj" onclick="checkEverything()"/><br/><br/>
+
+<#--    AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM-->
+
 </form>
 
 
+<div id="map"></div>
 
+<script>
+    var map;
+    var service;
+    var infowindow;
+
+    function initMap() {
+        infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 52.2298508, lng: 21.0095361},
+            zoom: 8
+        });
+
+        var request = {
+            query: 'Museum of Contemporary Art Australia',
+            fields: ['name', 'geometry'],
+        };
+
+        service = new google.maps.places.PlacesService(map);
+
+        service.findPlaceFromQuery(request, function(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+                map.setCenter(results[0].geometry.location);
+            }
+        });
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
+        }
+
+    }
+</script>
 
 
 
 <script>
+
+    //Check al the fields (after the button to submit data is clicked)
+    function checkEverything(){
+        var res1 = validateFieldEmail();
+        var res2 = validateFieldPassword();
+        var res3 = validateConfirmFieldPassword();
+        var res4 = validateNameField();
+        var res5 = validateSurnameField();
+        var res6 = validatePhoneNumberField();
+        if (!(res1 && res2 && res3 && res4 && res5 && res6)){
+            alert('Niepoprawne dane')
+        }
+    }
 
 
     //Check if the content of the field for e-mail is a valid e-mail address.
@@ -71,10 +137,13 @@
         let element = document.getElementById('email-validation');
         if (validateEmail('register-email')){
             element.innerText = "";
+            return true;
         } else if (isEmpty('register-email')){
             element.innerText = "Podaj swój adres e-mail."
+            return false;
         } else {
             element.innerText = "Podany przez Ciebie adres e-mail jest nieprawidłowy.";
+            return false;
         }
     }
 
@@ -85,12 +154,16 @@
         let element = document.getElementById('password-validation');
         if (expression.test(password)){
             element.innerHTML = "Hasło nie może zawierać spacji, tabulatorów ani innych 'białych znaków'";
+            return false;
         } else if ((!validateMinLengthString('register-password', 8) || !validateMaxLengthString('register-password', 20))){
             element.innerHTML = "Hasło musi zawierać pomiędzy 8 a 20 znaków.";
+            return false;
         } else if (isEmpty('register-password')){
             element.innerText = "Podaj hasło."
+            return false;
         } else {
             element.innerHTML = "";
+            return true;
         }
 
         if (!(document.getElementById('register-confirm-password').value==="")){
@@ -105,10 +178,13 @@
         let check = document.getElementById('register-password').value === document.getElementById('register-confirm-password').value;
         if (!check){
             element.innerHTML = "Hasło jest niezgodne.";
+            return false;
         } else if (isEmpty('register-password')) {
             element.innerText = "Potwierdź hasło."
+            return false;
         } else {
             element.innerHTML = "";
+            return true;
         }
     }
 
@@ -119,10 +195,13 @@
         let valueOfField = document.getElementById('register-name').value;
         if (validateString(valueOfField)){
             htmlElement.innerHTML = "";
+            return true;
         } else if (valueOfField.replace(/\s/g,'').length===0) {
             htmlElement.innerHTML = "Wpisz imię.";
+            return false;
         } else {
             htmlElement.innerHTML = "Niepoprawne imię. Imię musi zawierać tylko litery.";
+            return false;
         }
     }
 
@@ -133,10 +212,13 @@
         let valueOfField = document.getElementById('register-surname').value;
         if (validateString(valueOfField)){
             htmlElement.innerHTML = "";
+            return true;
         } else if (valueOfField.replace(/\s/g,'').length===0) {
             htmlElement.innerHTML = "Wpisz nazwisko.";
+            return false;
         } else {
             htmlElement.innerHTML = "Niepoprawne nazwisko. Nazwisko musi zawierać tylko litery.";
+            return false;
         }
     }
 
@@ -149,10 +231,13 @@
         let htmlElement = document.getElementById('phone-number-validation');
         if (expression.test(phoneNumber)){
             htmlElement.innerHTML = "";
+            return true;
         } else if (isEmpty('register-phone-number')) {
             htmlElement.innerHTML = "Wpisz numer telefonu.";
+            return false;
         } else {
             htmlElement.innerHTML = "Niepoprawny numer telefonu.";
+            return false;
         }
 
     }
@@ -189,9 +274,10 @@
     }
 
 
-
-
-
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&callback=initMap"
+        async defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initMap"
+        async defer></script>
 </body>
 </html>

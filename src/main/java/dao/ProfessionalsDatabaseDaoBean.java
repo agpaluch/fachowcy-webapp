@@ -4,26 +4,26 @@ package dao;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 import repository.RepositoryOfUsers;
-import repository.TypeOfProfession;
 
+import javax.ejb.Stateful;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 
+@Stateful
 public class ProfessionalsDatabaseDaoBean implements UserCRUDDao {
 
     private Map<String, ProfessionalLogin> professionalLogin;
     private Map<String, ProfessionalDetails> professionalDetails;
 
 
-    public Map<String, ProfessionalLogin> getProfessionalLogin() {
+    public Map<String, ProfessionalLogin> getLogin() {
         return professionalLogin;
     }
 
-    public Map<String, ProfessionalDetails> getProfessionalDetails() {
+    public Map<String, ProfessionalDetails> getDetails() {
         return professionalDetails;
     }
 
@@ -35,8 +35,8 @@ public class ProfessionalsDatabaseDaoBean implements UserCRUDDao {
             throw new UserAlreadyExistsException();
         }
         RepositoryOfUsers.fillDatabase();
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalDetails().put(email, (ProfessionalDetails) clientProfile);
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalLogin().put(email, (ProfessionalLogin) userLogin);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().put(email, (ProfessionalDetails) clientProfile);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().put(email, (ProfessionalLogin) userLogin);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class ProfessionalsDatabaseDaoBean implements UserCRUDDao {
             throw new NoSuchUserException();
         }
         RepositoryOfUsers.fillDatabase();
-        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalLogin().get(email).toString()+
-         RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalDetails().get(email).toString();
+        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().get(email).toString()+
+         RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().get(email).toString();
 
 
     }
@@ -57,23 +57,24 @@ public class ProfessionalsDatabaseDaoBean implements UserCRUDDao {
             throw new NoSuchUserException();
         }
         RepositoryOfUsers.fillDatabase();
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalLogin().remove(email);
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalDetails().remove(email);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().remove(email);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().remove(email);
     }
 
     @Override
     public boolean validateEmail(String email){
         RepositoryOfUsers.fillDatabase();
-        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getProfessionalLogin().containsKey(email);
+        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().containsKey(email);
     }
+
 
     public List<ProfessionalDetails> getByProfession(String profession){
 
-        List<ProfessionalDetails> values = new ArrayList<>(professionalDetails.values());
+        RepositoryOfUsers.fillDatabase();
+        List<ProfessionalDetails> values =
+                new ArrayList<>(RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().values());
 
-        //return values;
-
-        return values.stream().filter(professionalDetails1 -> professionalDetails1.getProfession().toString()
+        return values.stream().filter(pd -> pd.getProfession().toString()
                 .equalsIgnoreCase(profession)).collect(Collectors.toList());
     }
 
