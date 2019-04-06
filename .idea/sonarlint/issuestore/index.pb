@@ -1,0 +1,23 @@
+
+W
+'src/main/java/servlets/DetailsProf.java,d/b/db55a49c95bc3ac40a576463dc77b59571319ecb
+W
+'src/main/java/servlets/LoginClient.java,d/6/d689a5515ab2459eaaeeafb52481a6e66e65a447
+U
+%src/main/java/servlets/LoginProf.java,b/a/ba7f8a5ec47392f57e4bc5cb6776a79c1e081e9d
+Y
+)src/main/java/servlets/SearchResults.java,e/f/ef07c1218eb8207b2daac02d59746f7f490d7f00
+X
+(src/main/java/servlets/SignupClient.java,f/9/f9c23c400d435418fb870fef5cc948d4dc519d34
+V
+&src/main/java/servlets/SignupProf.java,c/7/c7f1928052e35afdc622b7c97231255fcaa6367c
+O
+src/main/webapp/WEB-INF/web.xml,2/e/2e22b6edd746fa3dc40ad7276c87c8d87d72a392
+U
+%src/main/webapp/WEB-INF/jboss-web.xml,7/2/72f0f52ca57a42c75080315317a87779895d655c
+7
+pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
+Y
+)src/main/java/servlets/DetailsClient.java,c/a/ca557fce24005cb90aa8c65bd0fdcb709291f9f5
+Q
+!src/main/java/servlets/Index.java,1/6/16b563b2d3c0ed18a58a96045bb6f7e6bcee8c87
