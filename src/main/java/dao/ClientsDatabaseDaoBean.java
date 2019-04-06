@@ -15,10 +15,10 @@ public class ClientsDatabaseDaoBean implements UserCRUDDao {
     private Map<String, ClientDetails> clientDetails;
 
 
-    public Map<String, ClientLogin> getClientLogin() {
+    public Map<String, ClientLogin> getLogin() {
         return clientLogin;
     }
-    public Map<String, ClientDetails> getClientDetails() {
+    public Map<String, ClientDetails> getDetails() {
         return clientDetails;
     }
 
@@ -30,8 +30,8 @@ public class ClientsDatabaseDaoBean implements UserCRUDDao {
             throw new UserAlreadyExistsException();
         }
         RepositoryOfUsers.fillDatabase();
-        RepositoryOfUsers.getClientsDatabaseDaoBean().getClientDetails().put(email, (ClientDetails) clientProfile);
-        RepositoryOfUsers.getClientsDatabaseDaoBean().getClientLogin().put(email, (ClientLogin) userLogin);
+        RepositoryOfUsers.getClientsDatabaseDaoBean().getDetails().put(email, (ClientDetails) clientProfile);
+        RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().put(email, (ClientLogin) userLogin);
     }
 
 
@@ -41,8 +41,8 @@ public class ClientsDatabaseDaoBean implements UserCRUDDao {
             throw new NoSuchUserException();
         }
         RepositoryOfUsers.fillDatabase();
-        return RepositoryOfUsers.getClientsDatabaseDaoBean().getClientLogin().get(email).toString() +
-                RepositoryOfUsers.getClientsDatabaseDaoBean().getClientDetails().get(email).toString();
+        return RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().get(email).toString() +
+                RepositoryOfUsers.getClientsDatabaseDaoBean().getDetails().get(email).toString();
     }
 
 
@@ -52,15 +52,15 @@ public class ClientsDatabaseDaoBean implements UserCRUDDao {
             throw new NoSuchUserException();
         }
         RepositoryOfUsers.fillDatabase();
-        RepositoryOfUsers.getClientsDatabaseDaoBean().getClientLogin().remove(email);
-        RepositoryOfUsers.getClientsDatabaseDaoBean().getClientDetails().remove(email);
+        RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().remove(email);
+        RepositoryOfUsers.getClientsDatabaseDaoBean().getDetails().remove(email);
     }
 
 
     @Override
     public boolean validateEmail(String email){
         RepositoryOfUsers.fillDatabase();
-        return RepositoryOfUsers.getClientsDatabaseDaoBean().getClientLogin().containsKey(email);
+        return RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().containsKey(email);
     }
 
 }

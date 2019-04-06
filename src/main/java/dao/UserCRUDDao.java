@@ -10,6 +10,10 @@ import java.util.Map;
 @Local
 public interface UserCRUDDao {
 
+    Map<String, ?> getLogin();
+
+    Map<String, ?> getDetails();
+
     void createUser(String email, UserLogin userLogin, ClientProfile clientProfile) throws UserAlreadyExistsException;
 
     String readUser(String email) throws NoSuchUserException;
