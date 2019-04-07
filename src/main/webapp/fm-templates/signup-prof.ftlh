@@ -22,7 +22,7 @@
 <#--TODO: 1. connect with Google API to get location
 2. Make separate files for js and css code.-->
 
-<form method="post" action="/signup-prof">
+<form method="post" action="/signup-prof" onSubmit="return checkEverything()">
 
     <div>E-mail: <input type="text" id="register-email" name="email" oninput="validateFieldEmail()" /><br/><br/></div>
     <div id="email-validation"></div>
@@ -40,6 +40,10 @@
     <div>Phone number: <input type="text" id="register-phone-number" name="phoneNumber"
                               oninput="validatePhoneNumberField()"/><br/><br/></div>
     <div id="phone-number-validation"></div>
+    <div>Enter your address: <input type="text" id="register-address" name="address"
+                              oninput="initMap()"/><br/><br/></div>
+    <div id="address-validation"></div>
+
 
     Profession: <select name="profession">
            <#list professions as profession>
@@ -62,7 +66,7 @@
     <div>Latitude: <input type="number" name="latitude"/><br/><br/></div>
     <div>Longitude: <input type="number" name="longitude"/><br/><br/></div>
 
-    <input type="submit" name="save" value="Zarejestruj" onclick="checkEverything()"/><br/><br/>
+    <input type="submit" name="save" value="Zarejestruj"/><br/><br/>
 
 <#--    AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM-->
 
@@ -84,7 +88,7 @@
         });
 
         var request = {
-            query: 'Museum of Contemporary Art Australia',
+            query: document.getElementById('register-address').value,
             fields: ['name', 'geometry'],
         };
 
@@ -127,7 +131,7 @@
         var res5 = validateSurnameField();
         var res6 = validatePhoneNumberField();
         if (!(res1 && res2 && res3 && res4 && res5 && res6)){
-            alert('Niepoprawne dane')
+            return false;
         }
     }
 
