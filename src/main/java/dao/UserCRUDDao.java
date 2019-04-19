@@ -31,7 +31,4 @@ public interface UserCRUDDao {
         //returns true if a given e-mail already exists in the database
 
 
-
-
-
 }

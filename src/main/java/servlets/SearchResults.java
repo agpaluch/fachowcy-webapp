@@ -1,9 +1,6 @@
 package servlets;
 
-import dao.ProfessionalDetails;
-import dao.ProfessionalLogin;
-import dao.ProfessionalsDatabaseDaoBean;
-import dao.UserCRUDDao;
+import dao.*;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -31,9 +28,7 @@ public class SearchResults extends HttpServlet {
     Template template;
 
     @EJB(beanName="ProfessionalsDatabaseDaoBean")
-    UserCRUDDao userCRUDDao;
-
-
+    ProfessionalCRUDDao professionalCRUDDao;
 
     @Override
     public void init() {
@@ -77,9 +72,7 @@ public class SearchResults extends HttpServlet {
         List<ProfessionalDetails> li = pd.getByProfession(s);*/
 
 
-        List<ProfessionalDetails> li = ((ProfessionalsDatabaseDaoBean) userCRUDDao).getByProfession(s);
-
-
+        List<ProfessionalDetails> li = professionalCRUDDao.getByProfession(s);
 
         map.put("searchResults", li);
 

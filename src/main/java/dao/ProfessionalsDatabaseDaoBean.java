@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 
 @Stateful
-public class ProfessionalsDatabaseDaoBean implements UserCRUDDao {
+public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao {
 
     private Map<String, ProfessionalLogin> professionalLogin;
     private Map<String, ProfessionalDetails> professionalDetails;
@@ -67,7 +67,7 @@ public class ProfessionalsDatabaseDaoBean implements UserCRUDDao {
         return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().containsKey(email);
     }
 
-
+    @Override
     public List<ProfessionalDetails> getByProfession(String profession){
 
         RepositoryOfUsers.fillDatabase();
