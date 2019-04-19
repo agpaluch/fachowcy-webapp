@@ -14,7 +14,10 @@
             height: 500;
             width: 800;
         }
+
     </style>
+
+    <script src="googleAPI.js"></script>
 
 </head>
 <body>
@@ -27,43 +30,43 @@
 
     <div>E-mail: <input type="text" id="register-email" name="email" oninput="validateFieldEmail()"/><br/><br/></div>
     <div id="email-validation"></div>
-    <div>Password: <input type="password" id="register-password" name="password"
+    <div>Hasło: <input type="password" id="register-password" name="password"
                           oninput="validateFieldPassword()"/><br/><br/></div>
     <div id="password-validation"></div>
-    <div>Confirm password: <input type="password" id="register-confirm-password" name="confirmPassword"
+    <div>Potwierdź hasło: <input type="password" id="register-confirm-password" name="confirmPassword"
                                   oninput="validateConfirmFieldPassword()"/><br/><br/></div>
     <div id="confirm-password-validation"></div>
-    <div>Name: <input type="text" id="register-name" name="name"
+    <div>Imię: <input type="text" id="register-name" name="name"
                       oninput="validateNameField()"/><br/><br/></div>
     <div id="name-validation"></div>
-    <div>Surname: <input type="text" id="register-surname" name="surname"
+    <div>Nazwisko: <input type="text" id="register-surname" name="surname"
                          oninput="validateSurnameField()"/><br/><br/></div>
     <div id="surname-validation"></div>
-    <div>Phone number: <input type="text" id="register-phone-number" name="phoneNumber"
+    <div>Numer telefonu: <input type="text" id="register-phone-number" name="phoneNumber"
                               oninput="validatePhoneNumberField()"/><br/><br/></div>
     <div id="phone-number-validation"></div>
 
 
-    Profession: <select name="profession">
+    Profesja: <select name="profession">
            <#list professions as profession>
                <option value="${profession}">${profession.fullName}</option>
            </#list>
 </select><br/><br/>
 
-    City: <select name="city">
+    Miasto: <select name="city">
            <#list cities as city>
                <option value="${city}">${city.fullName}</option>
            </#list>
 </select><br/><br/>
 
-    City district: <select name="cityDistrict">
+    Dzielnica: <select name="cityDistrict">
            <#list districts as district>
                <option value="${district}">${district.fullName}</option>
            </#list>
 </select><br/><br/>
 
-    <div>Latitude: <input id="latitude" type="text" name="latitude" readonly/><br/><br/></div>
-    <div>Longitude: <input id="longitude" type="text" name="longitude" readonly/><br/><br/></div>
+    <div>Szerokość geograficzna: <input id="latitude" type="text" name="latitude" readonly/><br/><br/></div>
+    <div>Długość geograficzna: <input id="longitude" type="text" name="longitude" readonly/><br/><br/></div>
 
     <input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>
 
@@ -71,13 +74,13 @@
 
 </form>
 
+<p>Znajdź swoją lokalizację na mapie: </p>
 <div id="trial"></div>
 
-
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-
 <div id="map"></div>
 
+<#--
 <script>
     function initAutocomplete() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -89,7 +92,7 @@
 // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
 // Bias the SearchBox results towards current map's viewport.
         map.addListener('bounds_changed', function () {
@@ -160,6 +163,7 @@
 
 
 </script>
+-->
 
 
 <script>
@@ -320,12 +324,13 @@
 
 </script>
 
-<#--<script src="/webapp/googleAPI.js"></script>-->
+
 
 <#--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&callback=initMap"
         ></script>-->
 <#--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initMap"
         async defer></script>-->
+<script src="googleAPI.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initAutocomplete"></script>
 
 
