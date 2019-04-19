@@ -11,9 +11,16 @@
         }
 
         #map {
-            height: 500;
-            width: 800;
+
+            height: 600;
+            width: 500;
         }
+
+        #search-box{
+            height: 100%;
+            background-color: white;
+        }
+
 
     </style>
 
@@ -26,7 +33,9 @@
 <#--TODO: 1. connect with Google API to get location
 2. Make separate files for js and css code.-->
 
+
 <form method="post" action="/signup-prof" id="id1" onsubmit="event.preventDefault(); return checkEverything();">
+
 
     <div>E-mail: <input type="text" id="register-email" name="email" oninput="validateFieldEmail()"/><br/><br/></div>
     <div id="email-validation"></div>
@@ -68,19 +77,31 @@
     <div>Szerokość geograficzna: <input id="latitude" type="text" name="latitude" readonly/><br/><br/></div>
     <div>Długość geograficzna: <input id="longitude" type="text" name="longitude" readonly/><br/><br/></div>
 
+
     <input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>
+
 
 <#--    AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM-->
 
 </form>
 
+
 <p>Znajdź swoją lokalizację na mapie: </p>
-<div id="trial"></div>
+
 
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
 
+
 <script>
+    // This example adds a search box to a map, using the Google Place Autocomplete
+    // feature. People can enter geographical searches. The search box will return a
+    // pick list containing a mix of places and predicted search terms.
+
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example:
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
     function initAutocomplete() {
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -33.8688, lng: 151.2195},
@@ -88,45 +109,44 @@
             mapTypeId: 'roadmap'
         });
 
-// Create the search box and link it to the UI element.
+        // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-// Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function () {
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
             searchBox.setBounds(map.getBounds());
         });
 
+
         var markers = [];
-// Listen for the event fired when the user selects a prediction and retrieve
-// more details for that place.
-        searchBox.addListener('places_changed', function () {
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
             var places = searchBox.getPlaces();
 
             if (places.length == 0) {
                 return;
             }
 
-
-
-// Clear out the old markers.
-            markers.forEach(function (marker) {
+            // Clear out the old markers.
+            markers.forEach(function(marker) {
                 marker.setMap(null);
             });
             markers = [];
 
-// For each place, get the icon, name and location.
+            // For each place, get the icon, name and location.
             var bounds = new google.maps.LatLngBounds();
-            places.forEach(function (place) {
+            places.forEach(function(place) {
                 if (!place.geometry) {
                     console.log("Returned place contains no geometry");
                     return;
                 } else {
-                    document.getElementById('latitude').value=place.geometry.location.lat();
-                    document.getElementById('longitude').value=place.geometry.location.lng();
-                    //$.post( "/signup-prof", { latitude: 123, longitude: 2 } );
+                    document.getElementById("latitude").value = place.geometry.location.lat();
+                    document.getElementById("longitude").value = place.geometry.location.lng();
                 }
+
                 var icon = {
                     url: place.icon,
                     size: new google.maps.Size(71, 71),
@@ -135,7 +155,7 @@
                     scaledSize: new google.maps.Size(25, 25)
                 };
 
-// Create a marker for each place.
+                // Create a marker for each place.
                 markers.push(new google.maps.Marker({
                     map: map,
                     icon: icon,
@@ -143,25 +163,20 @@
                     position: place.geometry.location
                 }));
 
-
-
                 if (place.geometry.viewport) {
-// Only geocodes have viewport.
+                    // Only geocodes have viewport.
                     bounds.union(place.geometry.viewport);
                 } else {
                     bounds.extend(place.geometry.location);
                 }
-
             });
             map.fitBounds(bounds);
         });
-
-
-
     }
 
-
 </script>
+
+
 
 
 <script>
@@ -174,6 +189,7 @@
         var res4 = validateNameField();
         var res5 = validateSurnameField();
         var res6 = validatePhoneNumberField();
+
         if (res1 && res2 && res3 && res4 && res5 && res6) {
             document.getElementById('id1').submit();
         }
