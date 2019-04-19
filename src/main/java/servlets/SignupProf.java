@@ -79,7 +79,6 @@ public class SignupProf extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
@@ -100,9 +99,9 @@ public class SignupProf extends HttpServlet {
         String professionString = req.getParameter("profession");
         TypeOfProfession profession = TypeOfProfession.valueOf(professionString);
 
-        //TODO: connect with Google API to get location
         String longitudeString = req.getParameter("longitude");
         Double longitude = Double.parseDouble(longitudeString);
+
         String latitudeString = req.getParameter("latitude");
         Double latitude = Double.parseDouble(latitudeString);
 
@@ -110,21 +109,13 @@ public class SignupProf extends HttpServlet {
         ProfessionalLogin professionalLogin = new ProfessionalLogin(email, password);
         ProfessionalDetails professionalDetails = new ProfessionalDetails(name, surname, profession, phoneNumber, city, cityDistrict, longitude, latitude);
 
-/*        req.setAttribute("professionalLogin", professionalLogin);
-        req.setAttribute("professionalDetails", professionalDetails);
-        RequestDispatcher rd = req.getRequestDispatcher("details-prof.ftlh");
-        rd.forward(req, resp);*/
+
 
         PrintWriter printWriter = resp.getWriter();
         printWriter.write(professionalLogin.toString() + professionalDetails.toString());
 
-/*        RepositoryOfUsers.fillDatabase();
-        try {
-            printWriter.write(RepositoryOfUsers.getProfessionalsDatabaseDaoBean().readUser("ccc@gmail.com"));
-        } catch (NoSuchUserException e) {
-            e.printStackTrace();
-        }*/
 
+        resp.sendRedirect("/details-prof");
 
 
     }
