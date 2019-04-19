@@ -80,7 +80,6 @@
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
 
-<#--
 <script>
     function initAutocomplete() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -163,7 +162,6 @@
 
 
 </script>
--->
 
 
 <script>
@@ -330,7 +328,7 @@
         ></script>-->
 <#--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initMap"
         async defer></script>-->
-<script src="googleAPI.js"></script>
+<#--<script src="googleAPI.js"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initAutocomplete"></script>
 
 
