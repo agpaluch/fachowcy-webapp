@@ -11,6 +11,7 @@ import repository.CityDistrict;
 import repository.RepositoryOfUsers;
 import repository.TypeOfProfession;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,10 +36,13 @@ public class SignupProf extends HttpServlet {
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
+    private static final String TEMPLATE_NAME = "index";
+
+
     @Override
     public void init() {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "signup-prof.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -59,7 +63,8 @@ public class SignupProf extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, List<Object>> dataMap = new HashMap<>();
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("content", "signup-prof");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
         dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));

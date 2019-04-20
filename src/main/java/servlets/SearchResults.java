@@ -27,13 +27,18 @@ public class SearchResults extends HttpServlet {
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
+    private static final String TEMPLATE_NAME = "index";
+
+
+
     @EJB(beanName="ProfessionalsDatabaseDaoBean")
     ProfessionalCRUDDao professionalCRUDDao;
+
 
     @Override
     public void init() {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "search-results.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -45,7 +50,8 @@ public class SearchResults extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", "search.results");
 
         try {
             template.process(map, printWriter);

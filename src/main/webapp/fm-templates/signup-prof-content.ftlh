@@ -24,9 +24,12 @@
 
     </style>
 
-    <script src="googleAPI.js"></script>
+    <script src="../../resources/googleAPI.js"></script>
 
 </head>
+
+
+
 <body>
 <h2>Rejestracja fachowca</h2>
 
@@ -344,7 +347,7 @@
         ></script>-->
 <#--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initMap"
         async defer></script>-->
-<#--<script src="googleAPI.js"></script>-->
+<#--<script src="/../src/main/resources/googleAPI.js"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initAutocomplete"></script>
 
 
