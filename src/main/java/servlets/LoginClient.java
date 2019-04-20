@@ -62,11 +62,14 @@ public class LoginClient extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login=req.getParameter("username");
         String password=req.getParameter("password");
-        resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+/*        resp.setContentType("text/html; charset=utf-8");
+        PrintWriter printWriter = resp.getWriter();*/
 
+        resp.sendRedirect("/details-client");
+/*
         RequestDispatcher rd = req.getRequestDispatcher("details-client.ftlh");
         rd.forward(req, resp);
+*/
 
     }
 }

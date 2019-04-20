@@ -41,7 +41,7 @@ public class LoginForm extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
 
         Map<String, Object> map = new HashMap<>();
-        map.put("content",  "login-client");
+        map.put("content",  "login-form");
 
         map.put("", "");
 

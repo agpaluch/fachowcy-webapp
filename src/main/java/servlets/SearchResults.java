@@ -51,7 +51,7 @@ public class SearchResults extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("content", "search.results");
+        map.put("content", "search-results");
 
         try {
             template.process(map, printWriter);
@@ -67,7 +67,8 @@ public class SearchResults extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, List<ProfessionalDetails>> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", "search-results");
         //map.put("se", req.getParameter("search"));
         String s = req.getParameter("search");
 
