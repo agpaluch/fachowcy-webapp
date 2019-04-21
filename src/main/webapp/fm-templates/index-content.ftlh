@@ -21,7 +21,7 @@
 
             <form class="btn btn-secondary my-2" method="post" action="/search-results">
                 <input type="text" name="search"/>
-                <input class="btn btn-primary my-2" type="submit" name="save" value="Szukaj" />
+                <input class="btn btn-dark my-2" type="submit" name="save" value="Szukaj" />
             </form>
 
         </div>
@@ -38,7 +38,7 @@
                             <p class="card-text">Drwal 1</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a type = "submit" href="/details-prof" class="btn btn-primary my-2">Professional details</a>
+                                    <a type = "submit" href="/details-prof" class="btn btn-dark my-2">Professional details</a>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                             <p class="card-text">Drwal 2</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a type = "submit" href="/details-prof" class="btn btn-primary my-2">Professional details</a>
+                                    <a type = "submit" href="/details-prof" class="btn btn-dark my-2">Professional details</a>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             <p class="card-text">Drwal 3</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a type = "submit" href="/details-prof" class="btn btn-primary my-2">Professional details</a>
+                                    <a type = "submit" href="/details-prof" class="btn btn-dark my-2">Professional details</a>
                                 </div>
                             </div>
                         </div>
