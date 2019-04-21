@@ -21,10 +21,12 @@ public class Index extends HttpServlet {
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
+    private static final String TEMPLATE_NAME = "index";
+
     @Override
     public void init() {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "index.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -36,7 +38,8 @@ public class Index extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", "index");
 
         try {
             template.process(map, printWriter);

@@ -1,33 +1,7 @@
-<html>
-
-<head>
-
-    <Title>Rejestracja fachowca</Title>
-    <meta charset="utf-8">
-
-    <style>
-        div[id] {
-            color: red;
-        }
-
-        #map {
-
-            height: 600;
-            width: 500;
-        }
-
-        #search-box{
-            height: 100%;
-            background-color: white;
-        }
 
 
-    </style>
+<main>
 
-    <script src="googleAPI.js"></script>
-
-</head>
-<body>
 <h2>Rejestracja fachowca</h2>
 
 <#--TODO: 1. connect with Google API to get location
@@ -92,6 +66,8 @@
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
 
+
+</main>
 
 <script>
     // This example adds a search box to a map, using the Google Place Autocomplete
@@ -344,9 +320,6 @@
         ></script>-->
 <#--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initMap"
         async defer></script>-->
-<#--<script src="googleAPI.js"></script>-->
+<#--<script src="/../src/main/resources/googleAPI.js"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initAutocomplete"></script>
 
-
-</body>
-</html>

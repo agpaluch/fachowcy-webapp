@@ -23,10 +23,12 @@ public class Login extends HttpServlet {
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
+    private static final String TEMPLATE_NAME = "index";
+
     @Override
     public void init() {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "login.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -37,8 +39,8 @@ public class Login extends HttpServlet {
 
         resp.setContentType("text/html; charset=utf-8");
 
-        Map<String, String> map = new HashMap<>();
-
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", "login");
         map.put("", "");
 
         try {

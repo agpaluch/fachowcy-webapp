@@ -28,10 +28,12 @@ public class LoginClient extends HttpServlet {
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
+    private static final String TEMPLATE_NAME = "index";
+
     @Override
     public void init() {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "login-client.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -43,7 +45,8 @@ public class LoginClient extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", "login-client");
 
         try {
             template.process(map, printWriter);
@@ -59,11 +62,14 @@ public class LoginClient extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login=req.getParameter("username");
         String password=req.getParameter("password");
-        resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+/*        resp.setContentType("text/html; charset=utf-8");
+        PrintWriter printWriter = resp.getWriter();*/
 
+        resp.sendRedirect("/details-client");
+/*
         RequestDispatcher rd = req.getRequestDispatcher("details-client.ftlh");
         rd.forward(req, resp);
+*/
 
     }
 }

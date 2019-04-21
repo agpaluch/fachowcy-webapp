@@ -10,6 +10,7 @@ import java.io.IOException;
 public class TemplateProvider {
 
     public static final String TEMPLATES_DIRECTORY_PATH = "/fm-templates";
+    private static final String TEMPLATE_EXT = ".ftlh";
 
     public static Template createTemplate(ServletContext servletContext, String templateName) throws IOException {
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_27);
@@ -20,8 +21,6 @@ public class TemplateProvider {
         configuration.setLogTemplateExceptions(false);
         configuration.setWrapUncheckedExceptions(true);
 
-        Template template = configuration.getTemplate(templateName);
-
-        return template;
+        return configuration.getTemplate(templateName + TEMPLATE_EXT);
     }
 }
