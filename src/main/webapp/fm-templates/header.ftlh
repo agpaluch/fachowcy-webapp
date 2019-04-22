@@ -1,9 +1,4 @@
 
-
-
-
-
-
     <header>
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
@@ -14,10 +9,9 @@
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4">
                     <ul class="list-unstyled">
+                        <li><a href="/login" class="text-white">Login</a></li>
                         <li><a href="/signup-client" class="text-white">Rejestracja klient</a></li>
-                        <li><a href="/login-client" class="text-white">Login klient</a></li>
                         <li><a href="/signup-prof" class="text-white">Rejestracja fachowiec</a></li>
-                        <li><a href="/login-prof" class="text-white">Login fachowiec</a></li>
                         <li><a href="#" class="text-white">Kontakt</a></li>
                     </ul>
                 </div>

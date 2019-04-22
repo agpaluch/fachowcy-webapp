@@ -3,7 +3,9 @@ package servlets;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import session.SessionInfo;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +21,9 @@ import java.util.logging.Logger;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
+
+    @Inject
+    SessionInfo sessionInfo;
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
@@ -50,4 +55,23 @@ public class Login extends HttpServlet {
         }
 
     }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String isProf = request.getParameter("profLogin");
+        String isClient = request.getParameter("clientLogin");
+
+        if(isClient != null) {
+            sessionInfo.setUserType("client");
+        }
+        if(isProf != null){
+            sessionInfo.setUserType("professional");
+        }
+
+        System.out.println(sessionInfo.getUserType());
+
+        response.sendRedirect("/login-form");
+
+    }
+
 }
