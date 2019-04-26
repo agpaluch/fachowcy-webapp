@@ -18,7 +18,7 @@
     <div id="password-error">${errors.password}</div>
     <div>Potwierdź hasło: <input type="password" id="register-confirmPassword" name="confirmPassword"
                                   oninput="validateConfirmFieldPassword()"/><br/><br/></div>
-    <div id="confirmPassword-error"></div>
+    <div id="confirmPassword-error">${errors.confirmPassword}</div>
     <div>Imię: <input type="text" id="register-name" name="name"
                       oninput="validateNameField()"/><br/><br/></div>
     <div id="name-error">${errors.name}</div>
