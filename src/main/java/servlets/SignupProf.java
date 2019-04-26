@@ -18,15 +18,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.lang.Long.parseLong;
 
@@ -64,11 +68,18 @@ public class SignupProf extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataMap = new HashMap<>();
+        Map<String, String> mapOfErrors = Stream.concat(Arrays.stream(ProfessionalDetails.class.getDeclaredFields())
+                .map(Field::getName), Arrays.stream(ProfessionalLogin.class.getDeclaredFields())
+                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
+
         dataMap.put("content", "signup-prof");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
         dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
-        
+        dataMap.put("errors", mapOfErrors);
+
+
+       //printWriter.write(mapOfErrors.keySet().toString());
 
         try {
             template.process(dataMap, printWriter);
@@ -89,6 +100,7 @@ public class SignupProf extends HttpServlet {
         String confirmPassword = req.getParameter("confirmPassword");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
+
 
 
         //TODO: check if at the beginning of the phone number there is "+" and change it into "00"
@@ -114,13 +126,57 @@ public class SignupProf extends HttpServlet {
         ProfessionalLogin professionalLogin = new ProfessionalLogin(email, password);
         ProfessionalDetails professionalDetails = new ProfessionalDetails(name, surname, profession, phoneNumber, city, cityDistrict, longitude, latitude);
 
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
+        Set<ConstraintViolation<ProfessionalDetails>> constraintViolationSet = validator.validate(professionalDetails);
+        Set<ConstraintViolation<ProfessionalLogin>> constraintViolationSet1 = validator.validate(professionalLogin);
 
 
         PrintWriter printWriter = resp.getWriter();
-        printWriter.write(professionalLogin.toString() + professionalDetails.toString());
+        //printWriter.write(professionalLogin.toString() + professionalDetails.toString());
+
+        //resp.sendRedirect("/details-prof");
 
 
-        resp.sendRedirect("/details-prof");
+
+
+
+
+
+        Map<String, Object> dataMap = new HashMap<>();
+        Map<String, String> mapOfErrors = Stream.concat(Arrays.stream(ProfessionalDetails.class.getDeclaredFields())
+                .map(Field::getName), Arrays.stream(ProfessionalLogin.class.getDeclaredFields())
+                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
+
+        for (ConstraintViolation<ProfessionalLogin> constraintViolation: constraintViolationSet1){
+            mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
+        }
+
+        for (ConstraintViolation<ProfessionalDetails> constraintViolation: constraintViolationSet){
+            mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
+        }
+        //printWriter.write(mapOfErrors.values().toString());
+        dataMap.put("content", "signup-prof");
+        dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
+        dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
+        dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
+        dataMap.put("errors", mapOfErrors);
+
+
+/*        for (ConstraintViolation<ProfessionalDetails> constraintViolation: constraintViolationSet){
+            printWriter.write(constraintViolation.getPropertyPath().toString()+constraintViolation.getMessage());
+        }
+
+        for (ConstraintViolation<ProfessionalLogin> constraintViolation: constraintViolationSet1){
+            printWriter.write(constraintViolation.getPropertyPath().toString()+constraintViolation.getMessage());
+        }*/
+
+        try {
+            template.process(dataMap, printWriter);
+        } catch (TemplateException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
 
 
     }

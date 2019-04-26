@@ -5,10 +5,19 @@ import repository.City;
 import repository.CityDistrict;
 import repository.TypeOfProfession;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class ProfessionalDetails implements ProfessionalProfile {
 
     //profile information
+    @NotBlank(message = "Wpisz imię.")
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Imię może zawierać tylko litery.")
     private String name;
+
+    @NotBlank(message = "Wpisz nazwisko.")
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Nazwisko może zawierać tylko litery.")
     private String surname;
     private TypeOfProfession profession;
     private long phoneNumber;

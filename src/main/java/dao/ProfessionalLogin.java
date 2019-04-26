@@ -1,13 +1,22 @@
 package dao;
 
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 
 public class ProfessionalLogin implements UserLogin {
 
     //login credentials
+    @Email(message = "Nieprawidłowy adres email.")
+    @NotBlank(message = "Wpisz adres email.")
     private String email;
+
+    @Size(min=8, max=20, message = "Hasło musi zawierać pomiędzy 8 a 20 znaków.")
+    @NotBlank(message = "Podaj hasło.")
     private String password;
     private LocalDate signUpDate;
 
