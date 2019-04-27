@@ -79,8 +79,7 @@ public class LoginClient extends HttpServlet {
         for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
             if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
                String keyForClientDetails = entry.getKey();
-                        setUserEmail.setEmail(login);
-                        user.setUser(setUserEmail);
+                        user.setClientLogin(entry.getValue());
                     resp.sendRedirect("/");
             }
             else {
