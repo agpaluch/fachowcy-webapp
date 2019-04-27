@@ -11,6 +11,7 @@ import repository.CityDistrict;
 import repository.RepositoryOfUsers;
 import repository.TypeOfProfession;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,10 +36,13 @@ public class SignupProf extends HttpServlet {
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
+    private static final String TEMPLATE_NAME = "index";
+
+
     @Override
     public void init() {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "signup-prof.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -59,7 +63,8 @@ public class SignupProf extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, List<Object>> dataMap = new HashMap<>();
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("content", "signup-prof");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
         dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
@@ -99,9 +104,9 @@ public class SignupProf extends HttpServlet {
         String professionString = req.getParameter("profession");
         TypeOfProfession profession = TypeOfProfession.valueOf(professionString);
 
-        //TODO: connect with Google API to get location
         String longitudeString = req.getParameter("longitude");
         Double longitude = Double.parseDouble(longitudeString);
+
         String latitudeString = req.getParameter("latitude");
         Double latitude = Double.parseDouble(latitudeString);
 
@@ -109,21 +114,13 @@ public class SignupProf extends HttpServlet {
         ProfessionalLogin professionalLogin = new ProfessionalLogin(email, password);
         ProfessionalDetails professionalDetails = new ProfessionalDetails(name, surname, profession, phoneNumber, city, cityDistrict, longitude, latitude);
 
-/*        req.setAttribute("professionalLogin", professionalLogin);
-        req.setAttribute("professionalDetails", professionalDetails);
-        RequestDispatcher rd = req.getRequestDispatcher("details-prof.ftlh");
-        rd.forward(req, resp);*/
+
 
         PrintWriter printWriter = resp.getWriter();
         printWriter.write(professionalLogin.toString() + professionalDetails.toString());
 
-/*        RepositoryOfUsers.fillDatabase();
-        try {
-            printWriter.write(RepositoryOfUsers.getProfessionalsDatabaseDaoBean().readUser("ccc@gmail.com"));
-        } catch (NoSuchUserException e) {
-            e.printStackTrace();
-        }*/
 
+        resp.sendRedirect("/details-prof");
 
     }
 

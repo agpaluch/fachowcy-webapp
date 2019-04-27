@@ -26,16 +26,18 @@ import java.util.stream.Collectors;
 
 import static repository.RepositoryOfUsers.fillDatabase;
 
-@WebServlet("/login-client")
+@WebServlet("/login-form")
 public class LoginClient extends HttpServlet {
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
+    private static final String TEMPLATE_NAME = "index";
+
     @Override
     public void init() {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "login-client.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -48,20 +50,23 @@ public class LoginClient extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
+
         Map<String,String> map = new HashMap<>();
+
         map.put("error",error);
+        map.put("content", "login-client");
+
         try {
             template.process(map, printWriter);
         } catch (TemplateException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
 
-
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String login = req.getParameter("username");
         String password = req.getParameter("password");
         RepositoryOfUsers.fillDatabase();
@@ -72,12 +77,12 @@ public class LoginClient extends HttpServlet {
                     resp.sendRedirect("/");
             }
             else {
-                resp.sendRedirect("/login-client?error=1");
+                resp.sendRedirect("/login-form?error=1");
             }
         }
 //        resp.setContentType("text/html; charset=utf-8");
 //        PrintWriter printWriter = resp.getWriter();
-
+//
 //        RequestDispatcher rd = req.getRequestDispatcher("details-client.ftlh");
 //        rd.forward(req, resp);
 

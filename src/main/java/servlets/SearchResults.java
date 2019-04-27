@@ -1,9 +1,6 @@
 package servlets;
 
-import dao.ProfessionalDetails;
-import dao.ProfessionalLogin;
-import dao.ProfessionalsDatabaseDaoBean;
-import dao.UserCRUDDao;
+import dao.*;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -30,15 +27,18 @@ public class SearchResults extends HttpServlet {
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
-    @EJB(beanName="ProfessionalsDatabaseDaoBean")
-    UserCRUDDao userCRUDDao;
+    private static final String TEMPLATE_NAME = "index";
 
+
+
+    @EJB(beanName="ProfessionalsDatabaseDaoBean")
+    ProfessionalCRUDDao professionalCRUDDao;
 
 
     @Override
     public void init() {
         try {
-            template = TemplateProvider.createTemplate(getServletContext(), "search-results.ftlh");
+            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -50,7 +50,8 @@ public class SearchResults extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", "search-results");
 
         try {
             template.process(map, printWriter);
@@ -66,7 +67,8 @@ public class SearchResults extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, List<ProfessionalDetails>> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", "search-results");
         //map.put("se", req.getParameter("search"));
         String s = req.getParameter("search");
 
@@ -77,9 +79,7 @@ public class SearchResults extends HttpServlet {
         List<ProfessionalDetails> li = pd.getByProfession(s);*/
 
 
-        List<ProfessionalDetails> li = ((ProfessionalsDatabaseDaoBean) userCRUDDao).getByProfession(s);
-
-
+        List<ProfessionalDetails> li = professionalCRUDDao.getByProfession(s);
 
         map.put("searchResults", li);
 

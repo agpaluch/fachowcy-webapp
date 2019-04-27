@@ -3,7 +3,10 @@ package servlets;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import session.SessionInfo;
 
+import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +19,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/details-prof")
-public class DetailsProf extends HttpServlet {
+@WebServlet("/login")
+public class Login extends HttpServlet {
+
+    @Inject
+    SessionInfo sessionInfo;
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
@@ -37,34 +43,35 @@ public class DetailsProf extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("content", "details-prof");
+        map.put("content", "login");
+        map.put("", "");
 
         try {
-            template.process(map, printWriter);
+            template.process(map, resp.getWriter());
         } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            e.printStackTrace();
         }
 
     }
 
-/*    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Map<String, Integer> map = new HashMap<>();
+        String isProf = request.getParameter("profLogin");
+        String isClient = request.getParameter("clientLogin");
 
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+        if(isClient != null) {
+            sessionInfo.setUserType("client");
+        }
+        if(isProf != null){
+            sessionInfo.setUserType("professional");
         }
 
+        System.out.println(sessionInfo.getUserType());
 
-        printWriter.write(req.getAttribute("professionalLogin").toString() +
-                req.getAttribute("professionalDetails").toString());
-    }*/
+        response.sendRedirect("/login-form");
+
+    }
+
 }
