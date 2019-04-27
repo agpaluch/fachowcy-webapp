@@ -63,7 +63,7 @@ public class SignupProf extends HttpServlet {
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
         dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
-        
+
 
         try {
             template.process(dataMap, printWriter);
@@ -77,7 +77,6 @@ public class SignupProf extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
 
         String email = req.getParameter("email");
@@ -126,10 +125,7 @@ public class SignupProf extends HttpServlet {
         }*/
 
 
-
     }
-
-
 
 
 }

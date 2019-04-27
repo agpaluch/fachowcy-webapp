@@ -1,9 +1,11 @@
 package servlets;
 
+import dao.ClientLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.CityDistrict;
+import repository.RepositoryOfUsers;
 import repository.TypeOfProfession;
 
 import javax.servlet.RequestDispatcher;
@@ -22,6 +24,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static repository.RepositoryOfUsers.fillDatabase;
+
 @WebServlet("/login-client")
 public class LoginClient extends HttpServlet {
 
@@ -39,12 +43,13 @@ public class LoginClient extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       String error= req.getParameter("error");
 
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, Integer> map = new HashMap<>();
-
+        Map<String,String> map = new HashMap<>();
+        map.put("error",error);
         try {
             template.process(map, printWriter);
         } catch (TemplateException e) {
@@ -57,13 +62,25 @@ public class LoginClient extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login=req.getParameter("username");
-        String password=req.getParameter("password");
-        resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+        String login = req.getParameter("username");
+        String password = req.getParameter("password");
+        RepositoryOfUsers.fillDatabase();
 
-        RequestDispatcher rd = req.getRequestDispatcher("details-client.ftlh");
-        rd.forward(req, resp);
+        for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
+            if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
+               String keyForClientDetails = entry.getKey();
+                    resp.sendRedirect("/");
+            }
+            else {
+                resp.sendRedirect("/login-client?error=1");
+            }
+        }
+//        resp.setContentType("text/html; charset=utf-8");
+//        PrintWriter printWriter = resp.getWriter();
+
+//        RequestDispatcher rd = req.getRequestDispatcher("details-client.ftlh");
+//        rd.forward(req, resp);
 
     }
+
 }
