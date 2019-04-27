@@ -1,13 +1,16 @@
 package servlets;
 
 import dao.ClientLogin;
+import dao.User;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.CityDistrict;
 import repository.RepositoryOfUsers;
 import repository.TypeOfProfession;
+import session.SessionInfoBean;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,12 +31,14 @@ import static repository.RepositoryOfUsers.fillDatabase;
 
 @WebServlet("/login-form")
 public class LoginClient extends HttpServlet {
+    @Inject
+    SessionInfoBean user;
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
     private static final String TEMPLATE_NAME = "index";
-
+    User setUserEmail; // creating user object for set user in SessionInfoBean
     @Override
     public void init() {
         try {
@@ -74,6 +79,8 @@ public class LoginClient extends HttpServlet {
         for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
             if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
                String keyForClientDetails = entry.getKey();
+                        setUserEmail.setEmail(login);
+                        user.setUser(setUserEmail);
                     resp.sendRedirect("/");
             }
             else {

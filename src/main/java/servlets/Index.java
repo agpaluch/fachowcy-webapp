@@ -3,6 +3,9 @@ package servlets;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import session.SessionInfoBean;
+
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +20,8 @@ import java.util.logging.Logger;
 
 @WebServlet("/")
 public class Index extends HttpServlet {
-
+@Inject
+    SessionInfoBean userCDI;
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
@@ -40,7 +44,9 @@ public class Index extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "index");
-
+        if(userCDI.getUser()!=null){
+            map.put("username",userCDI.getUser());
+        }
         try {
             template.process(map, printWriter);
         } catch (TemplateException e) {
