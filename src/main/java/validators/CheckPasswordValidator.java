@@ -29,15 +29,15 @@ public class CheckPasswordValidator implements ConstraintValidator<CheckPassword
         }
         catch (final Exception e)
         {
-            isValid = false;
+            isValid=false;
         }
 
-        if ( !isValid ) {
+/*        if ( !isValid ) {
             constraintContext.disableDefaultConstraintViolation();
             constraintContext
                     .buildConstraintViolationWithTemplate( "{my.custom.template}" )
                     .addPropertyNode( "password" ).addConstraintViolation();
-        }
+        }*/
 
 
         return isValid;

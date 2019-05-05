@@ -4,8 +4,11 @@ package dao;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 import repository.RepositoryOfUsers;
+import session.SessionInfo;
 
 import javax.ejb.Stateful;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +16,8 @@ import java.util.stream.Collectors;
 
 
 @Stateful
-public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao {
+@Named("professionalsDatabase")
+public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao, Serializable {
 
     private Map<String, ProfessionalLogin> professionalLogin;
     private Map<String, ProfessionalDetails> professionalDetails;
@@ -39,17 +43,27 @@ public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao {
         RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().put(email, (ProfessionalLogin) userLogin);
     }
 
+
+
     @Override
-    public String readUser(String email) throws NoSuchUserException {
+    public UserLogin findUserLogin(String email) throws NoSuchUserException {
         if (!validateEmail(email)){
             throw new NoSuchUserException();
         }
         RepositoryOfUsers.fillDatabase();
-        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().get(email).toString()+
-         RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().get(email).toString();
-
-
+        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().get(email);
     }
+
+    @Override
+    public ClientProfile findUserDetails(String email) throws NoSuchUserException {
+        if (!validateEmail(email)){
+            throw new NoSuchUserException();
+        }
+        RepositoryOfUsers.fillDatabase();
+        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().get(email);
+    }
+
+
 
     @Override
     public void deleteUser(String email) throws NoSuchUserException{
@@ -61,11 +75,25 @@ public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao {
         RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().remove(email);
     }
 
+
     @Override
     public boolean validateEmail(String email){
         RepositoryOfUsers.fillDatabase();
         return RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().containsKey(email);
     }
+
+    @Override
+    public boolean isAuthorized(String email, String password){
+        RepositoryOfUsers.fillDatabase();
+
+        return RepositoryOfUsers.getProfessionalsDatabaseDaoBean()
+                .getLogin()
+                .values()
+                .stream()
+                .anyMatch(a -> a.getEmail().equals(email) && a.getPassword().equals(password));
+
+    }
+
 
     @Override
     public List<ProfessionalDetails> getByProfession(String profession){

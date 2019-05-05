@@ -12,12 +12,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ FIELD, METHOD, PARAMETER, ANNOTATION_TYPE, TYPE_USE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = CheckProfessionValidator.class)
+@Constraint(validatedBy = CheckCityValidator.class)
 @Documented
-@Repeatable(CheckProfession.List.class)
-public @interface CheckProfession {
+@Repeatable(CheckCity.List.class)
+public @interface CheckCity {
 
-    String message() default "Takiej profesji nie ma w bazie.";
+    String message() default "Takiego miasta nie ma w bazie obsługiwanych miast.";
 
     Class<?>[] groups() default { };
 
@@ -28,6 +28,6 @@ public @interface CheckProfession {
     @Retention(RUNTIME)
     @Documented
     @interface List {
-        CheckProfession[] value();
+        CheckCity[] value();
     }
 }

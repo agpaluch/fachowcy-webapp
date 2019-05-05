@@ -68,7 +68,6 @@ public class Login extends HttpServlet {
             sessionInfo.setUserType("professional");
         }
 
-        System.out.println(sessionInfo.getUserType());
 
         response.sendRedirect("/login-form");
 

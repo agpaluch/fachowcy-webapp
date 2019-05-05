@@ -1,12 +1,11 @@
 package validators;
 
-import repository.TypeOfProfession;
+import repository.City;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CheckProfessionValidator implements ConstraintValidator<CheckProfession, String> {
-
+public class CheckCityValidator implements ConstraintValidator<CheckCity, String> {
 
 
     @Override
@@ -16,7 +15,7 @@ public class CheckProfessionValidator implements ConstraintValidator<CheckProfes
         }
 
         try{
-            TypeOfProfession profession = TypeOfProfession.valueOf(object);
+            City city = City.valueOf(object);
             return true;
         } catch (Exception e){
             return false;

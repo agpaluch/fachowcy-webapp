@@ -16,7 +16,11 @@ public interface UserCRUDDao {
 
     void createUser(String email, UserLogin userLogin, ClientProfile clientProfile) throws UserAlreadyExistsException;
 
-    String readUser(String email) throws NoSuchUserException;
+
+    UserLogin findUserLogin(String email) throws NoSuchUserException;
+
+    ClientProfile findUserDetails(String email) throws NoSuchUserException;
+
 
     default void updateUser(String email, UserLogin userLogin, ClientProfile clientProfile)
             throws NoSuchUserException, UserAlreadyExistsException{
@@ -29,6 +33,8 @@ public interface UserCRUDDao {
 
     boolean validateEmail(String email);
         //returns true if a given e-mail already exists in the database
+
+    boolean isAuthorized(String email, String password);
 
 
 }

@@ -11,7 +11,8 @@
 <form method="post" action="/signup-prof" id="id1" onsubmit="event.preventDefault(); return checkEverything();">
 
 
-    <div>E-mail: <input type="text" id="register-email" name="email" oninput="validateFieldEmail()"/><br/><br/></div>
+    <div>E-mail: <input type="text" id="register-email" name="email"
+                        oninput="validateFieldEmail()" value="${inputData.email}" /><br/><br/></div>
     <div id="email-error">${errors.email}</div>
     <div>Hasło: <input type="password" id="register-password" name="password"
                           oninput="validateFieldPassword()"/><br/><br/></div>
@@ -19,38 +20,52 @@
     <div>Potwierdź hasło: <input type="password" id="register-confirmPassword" name="confirmPassword"
                                   oninput="validateConfirmFieldPassword()"/><br/><br/></div>
     <div id="confirmPassword-error">${errors.confirmPassword}</div>
-    <div>Imię: <input type="text" id="register-name" name="name"
+    <div>Imię: <input type="text" id="register-name" name="name" value="${inputData.name}"
                       oninput="validateNameField()"/><br/><br/></div>
     <div id="name-error">${errors.name}</div>
     <div>Nazwisko: <input type="text" id="register-surname" name="surname"
-                         oninput="validateSurnameField()"/><br/><br/></div>
+                         oninput="validateSurnameField()" value="${inputData.surname}"/><br/><br/></div>
     <div id="surname-error">${errors.surname}</div>
     <div>Numer telefonu: <input type="text" id="register-phoneNumber" name="phoneNumber"
-                              oninput="validatePhoneNumberField()"/><br/><br/></div>
-    <div id="phoneNumber-error"></div>
+                              oninput="validatePhoneNumberField()" value="${inputData.phoneNumber}"/><br/><br/></div>
+    <div id="phoneNumber-error">${errors.phoneNumber}</div>
 
 
     Profesja: <select name="profession">
-           <#list professions as profession>
-               <option value="${profession}">${profession.fullName}</option>
+           <#list professions as prof>
+               <#if inputData.profession==prof>
+                   <option value="${prof}" selected>${prof.fullName}</option>
+               <#else>
+               <option value="${prof}">${prof.fullName}</option>
+                </#if>
            </#list>
 </select><br/><br/>
+    <div id="profession-error">${errors.profession}</div>
 
     Miasto: <select name="city">
            <#list cities as city>
-               <option value="${city}">${city.fullName}</option>
+               <#if inputData.city==city>
+                    <option value="${city}" selected>${city.fullName}</option>
+               <#else>
+                <option value="${city}">${city.fullName}</option>
+               </#if>
            </#list>
 </select><br/><br/>
+    <div id="city-error">${errors.city}</div>
 
-    Dzielnica: <select name="cityDistrict">
+<#--    Dzielnica: <select name="cityDistrict">
            <#list districts as district>
                <option value="${district}">${district.fullName}</option>
            </#list>
-</select><br/><br/>
+</select><br/><br/>-->
 
-    <div>Szerokość geograficzna: <input id="latitude" type="text" name="latitude" readonly/><br/><br/></div>
-    <div>Długość geograficzna: <input id="longitude" type="text" name="longitude" readonly/><br/><br/></div>
+    <div>Szerokość geograficzna: <input id="latitude" type="text" name="latitude" readonly
+                                        value="${inputData.latitude}"/><br/><br/></div>
+    <div id="latitude-error">${errors.latitude}</div>
 
+    <div>Długość geograficzna: <input id="longitude" type="text" name="longitude" readonly
+                                      value="${inputData.longitude}"/><br/><br/></div>
+    <div id="longitude-error">${errors.longitude}</div>
 
     <input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>
 
