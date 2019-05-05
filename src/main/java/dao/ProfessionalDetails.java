@@ -4,18 +4,43 @@ package dao;
 import repository.City;
 import repository.CityDistrict;
 import repository.TypeOfProfession;
+import validators.CheckProfession;
+
+import javax.validation.constraints.*;
 
 public class ProfessionalDetails implements ProfessionalProfile {
 
     //profile information
+    @NotBlank(message = "Wpisz imię.")
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Imię może zawierać tylko litery.")
     private String name;
+
+    @NotBlank(message = "Wpisz nazwisko.")
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Nazwisko może zawierać tylko litery.")
     private String surname;
+
+    //@CheckProfession
     private TypeOfProfession profession;
+
+    //@NotBlank(message = "Wpisz numer telefonu.")
+    //@Pattern(regexp = "^\\d{9}$|^(0048)(\\d{9})$|^(\\+48)\\d{9}$", message = "Niepoprwany numer telefonu.")
     private long phoneNumber;
+
+
     private City city;
     private CityDistrict district;
+
+    //@NotBlank(message = "Znajdź swoją lokalizację.")
+    @Max(value=180L, message = "Niepoprawana lokalizacja.")
+    @Min(value=0L, message = "Niepoprawana lokalizacja.")
     private double longitude;
+
+    //@NotEmpty(message = "Znajdź swoją lokalizację.")
+    @Max(value=180L, message = "Niepoprawana lokalizacja.")
+    @Min(value=0L, message = "Niepoprawana lokalizacja.")
     private double latitude;
+
+    @Min(value=0)
     private int numberLikes=0;
     private String comments;
 

@@ -12,22 +12,22 @@
 
 
     <div>E-mail: <input type="text" id="register-email" name="email" oninput="validateFieldEmail()"/><br/><br/></div>
-    <div id="email-validation"></div>
+    <div id="email-error">${errors.email}</div>
     <div>Hasło: <input type="password" id="register-password" name="password"
                           oninput="validateFieldPassword()"/><br/><br/></div>
-    <div id="password-validation"></div>
-    <div>Potwierdź hasło: <input type="password" id="register-confirm-password" name="confirmPassword"
+    <div id="password-error">${errors.password}</div>
+    <div>Potwierdź hasło: <input type="password" id="register-confirmPassword" name="confirmPassword"
                                   oninput="validateConfirmFieldPassword()"/><br/><br/></div>
-    <div id="confirm-password-validation"></div>
+    <div id="confirmPassword-error">${errors.confirmPassword}</div>
     <div>Imię: <input type="text" id="register-name" name="name"
                       oninput="validateNameField()"/><br/><br/></div>
-    <div id="name-validation"></div>
+    <div id="name-error">${errors.name}</div>
     <div>Nazwisko: <input type="text" id="register-surname" name="surname"
                          oninput="validateSurnameField()"/><br/><br/></div>
-    <div id="surname-validation"></div>
-    <div>Numer telefonu: <input type="text" id="register-phone-number" name="phoneNumber"
+    <div id="surname-error">${errors.surname}</div>
+    <div>Numer telefonu: <input type="text" id="register-phoneNumber" name="phoneNumber"
                               oninput="validatePhoneNumberField()"/><br/><br/></div>
-    <div id="phone-number-validation"></div>
+    <div id="phoneNumber-error"></div>
 
 
     Profesja: <select name="profession">
@@ -166,15 +166,15 @@
         var res5 = validateSurnameField();
         var res6 = validatePhoneNumberField();
 
-        if (res1 && res2 && res3 && res4 && res5 && res6) {
+        //if (res1 && res2 && res3 && res4 && res5 && res6) {
             document.getElementById('id1').submit();
-        }
+        //}
     }
 
 
     //Check if the content of the field for e-mail is a valid e-mail address.
     function validateFieldEmail() {
-        let element = document.getElementById('email-validation');
+        let element = document.getElementById('email-error');
         if (validateEmail('register-email')) {
             element.innerText = "";
             return true;
@@ -191,7 +191,7 @@
     function validateFieldPassword() {
         let expression = /\s+/;
         let password = document.getElementById('register-password').value;
-        let element = document.getElementById('password-validation');
+        let element = document.getElementById('password-error');
         if (expression.test(password)) {
             element.innerHTML = "Hasło nie może zawierać spacji, tabulatorów ani innych 'białych znaków'";
             return false;
@@ -206,16 +206,16 @@
             return true;
         }
 
-        if (!(document.getElementById('register-confirm-password').value === "")) {
+        if (!(document.getElementById('register-confirmPassword').value === "")) {
             validateConfirmFieldPassword();
         }
 
     }
 
-    //Check if confirm-password is the same as password.
+    //Check if confirmPassword is the same as password.
     function validateConfirmFieldPassword() {
-        let element = document.getElementById('confirm-password-validation');
-        let check = document.getElementById('register-password').value === document.getElementById('register-confirm-password').value;
+        let element = document.getElementById('confirmPassword-error');
+        let check = document.getElementById('register-password').value === document.getElementById('register-confirmPassword').value;
         if (!check) {
             element.innerHTML = "Hasło jest niezgodne.";
             return false;
@@ -231,14 +231,14 @@
 
     //Check if name contains only letters and whitespace characters
     function validateNameField() {
-        let htmlElement = document.getElementById('name-validation');
+        let htmlElement = document.getElementById('name-error');
         let valueOfField = document.getElementById('register-name').value;
-        if (validateString(valueOfField)) {
-            htmlElement.innerHTML = "";
-            return true;
-        } else if (valueOfField.replace(/\s/g, '').length === 0) {
+        if (valueOfField.replace(/\s/g, '').length === 0) {
             htmlElement.innerHTML = "Wpisz imię.";
             return false;
+        } else if (validateString(valueOfField)) {
+            htmlElement.innerHTML = "";
+            return true;
         } else {
             htmlElement.innerHTML = "Niepoprawne imię. Imię musi zawierać tylko litery.";
             return false;
@@ -248,14 +248,15 @@
 
     //Check if surname contains only letters and white space characters
     function validateSurnameField() {
-        let htmlElement = document.getElementById('surname-validation');
+        let htmlElement = document.getElementById('surname-error');
         let valueOfField = document.getElementById('register-surname').value;
-        if (validateString(valueOfField)) {
-            htmlElement.innerHTML = "";
-            return true;
-        } else if (valueOfField.replace(/\s/g, '').length === 0) {
+
+        if (valueOfField.replace(/\s/g, '').length === 0) {
             htmlElement.innerHTML = "Wpisz nazwisko.";
             return false;
+        } else if (validateString(valueOfField)) {
+            htmlElement.innerHTML = "";
+            return true;
         } else {
             htmlElement.innerHTML = "Niepoprawne nazwisko. Nazwisko musi zawierać tylko litery.";
             return false;
@@ -266,12 +267,12 @@
     //Only nine digits telephone numbers starting from 0048 or +48 or just bare nine digits phone numbers are accepted.
     function validatePhoneNumberField() {
         let expression = /^\d{9}$|^(0048)(\d{9})$|^(\+48)\d{9}$/;
-        let phoneNumber = document.getElementById('register-phone-number').value.replace(/-|\s/g, "");
-        let htmlElement = document.getElementById('phone-number-validation');
+        let phoneNumber = document.getElementById('register-phoneNumber').value.replace(/-|\s/g, "");
+        let htmlElement = document.getElementById('phoneNumber-error');
         if (expression.test(phoneNumber)) {
             htmlElement.innerHTML = "";
             return true;
-        } else if (isEmpty('register-phone-number')) {
+        } else if (isEmpty('register-phoneNumber')) {
             htmlElement.innerHTML = "Wpisz numer telefonu.";
             return false;
         } else {
