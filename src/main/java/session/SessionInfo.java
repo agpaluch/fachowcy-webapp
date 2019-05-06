@@ -1,13 +1,21 @@
 package session;
 
-import dao.User;
+import dao.ClientProfile;
+import dao.Role;
+import dao.UserLogin;
+import exceptions.NoSuchUserException;
 
 public interface SessionInfo {
 
-    public User getUser();
-    public void setUser(User user);
+    void setUserType(Role userType);
+    Role getUserType();
+    UserLogin getUserLogin();
+    ClientProfile getUserDetails();
 
-    public void setUserType(String userType);
-    public String getUserType();
+
+
+    boolean isAuthorized(String email, String password);
+    void findUserLoginByEmail(String email) throws NoSuchUserException;
+    void findUserDetailsByEmail(String email) throws NoSuchUserException;
 
 }

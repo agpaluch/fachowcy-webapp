@@ -1,64 +1,31 @@
 package dao;
 
 
-import org.hibernate.validator.constraints.Range;
-import validators.CheckCity;
 import validators.CheckProfession;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
 
 
-public class ProfessionalDto {
+public class ProfessionalDto extends ClientDto{
 
-    //profile information
-    @NotBlank(message = "Wpisz imię.")
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Imię może zawierać tylko litery.")
-    private String name;
-
-    @NotBlank(message = "Wpisz nazwisko.")
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Nazwisko może zawierać tylko litery.")
-    private String surname;
-
-    @NotBlank(message = "Wybierz profesję.")
     @CheckProfession
+    @NotBlank(message = "Wybierz profesję.")
     private String profession;
-
-    @NotBlank(message = "Wpisz numer telefonu.")
-    @Pattern(regexp = "(^\\d{9}$)|(^(0048)(\\d{9})$)|(^(\\+48)\\d{9}$)", message = "Niepoprawny numer telefonu.")
-    private String phoneNumber;
-    //"(^\\d{9}$)|(^(0048)(\\d{9})$)|(^(\\+48)\\d{9}$)"
-
-    @NotBlank(message = "Wybierz miasto.")
-    @CheckCity
-    private String city;
-
-    //private String district;
-
-    @NotBlank(message = "Znajdź swoją lokalizację.")
-    @Range(min=-180L, max=180L, message = "Niepoprawana lokalizacja.")
-    private String longitude;
-
-    @NotBlank(message = "Znajdź swoją lokalizację.")
-    @Range(min= -180L, max=180L, message = "Niepoprawana lokalizacja.")
-    private String latitude;
-
-
-    //login credentials
-    @NotBlank(message = "Wpisz adres email.")
-    @Email(message = "Nieprawidłowy adres email.")
-    private String email;
-
-    @NotBlank(message = "Wpisz hasło.")
-    @Size(min=8, max=20, message = "Hasło musi zawierać od 8 do 20 znaków.")
-    private String password;
-
-
 
     public ProfessionalDto(){
 
     }
 
-    public ProfessionalDto(@NotBlank(message = "Wpisz imię.")
+    public ProfessionalDto(String name, String surname, String profession, String phoneNumber, String city,
+                           String longitude, String latitude, String email, String password) {
+
+        super(name, surname, phoneNumber, city,
+                longitude, latitude, email, password);
+        this.profession = profession;
+    }
+
+
+/*    public ProfessionalDto(@NotBlank(message = "Wpisz imię.")
                            @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Imię może zawierać tylko litery.")
                                    String name,
                            @NotBlank(message = "Wpisz nazwisko.")
@@ -84,7 +51,7 @@ public class ProfessionalDto {
                                    String email,
                            @NotBlank(message = "Wpisz hasło.")
                            @Size(min=8, max=20, message = "Hasło musi zawierać od 8 do 20 znaków.")
-                           String password) {
+                                   String password) {
 
         this.name = name;
         this.surname = surname;
@@ -95,7 +62,7 @@ public class ProfessionalDto {
         this.latitude = latitude;
         this.email = email;
         this.password = password;
-    }
+    }*/
 }
 
 

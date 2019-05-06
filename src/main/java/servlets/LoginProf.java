@@ -3,7 +3,9 @@ package servlets;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import session.SessionInfo;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +27,9 @@ public class LoginProf extends HttpServlet {
 
     private static final String TEMPLATE_NAME = "index";
 
+    @Inject
+    SessionInfo sessionInfo;
+
     @Override
     public void init() {
         try {
@@ -42,6 +47,7 @@ public class LoginProf extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "login-prof");
+        map.put("sessionInfo", sessionInfo);
 
         try {
             template.process(map, printWriter);

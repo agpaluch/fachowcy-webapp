@@ -33,8 +33,21 @@
 
         </div>
         <div class="col-2">
-            <div style="color: #FFF; margin-right: 10px;"> Użytkownik anonimowy </div>
-            <a href="/login" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>
+            <div style="color: #FFF; margin-right: 10px;">
+                      <#if sessionInfo.getUserDetails()??>
+                          ${sessionInfo.getUserDetails().getName()}
+                          ${sessionInfo.getUserDetails().getSurname()}
+                      <#else>
+                            Użytkownik anonimowy
+                      </#if>
+            </div>
+            <a href="/login" class="btn btn-outline-success my-2 my-sm-0">
+                                      <#if sessionInfo.getUserDetails()??>
+                                          Log Out
+                                      <#else>
+                                          Log In
+                                      </#if>
+            </a>
         </div>
     <#--        </div>-->
     <#--        </div>-->

@@ -25,8 +25,7 @@ public class ClientDetails implements ClientProfile {
     public ClientDetails(String name, String surname,
                                long phoneNumber, City city,
                                 //CityDistrict district,
-                               double longitude, double latitude,
-                               int numberLikes, String comments) {
+                               double longitude, double latitude) {
 
         this.name = name;
         this.surname = surname;
@@ -35,8 +34,8 @@ public class ClientDetails implements ClientProfile {
         //this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.numberLikes = numberLikes;
-        this.comments = comments;
+        this.numberLikes = 0;
+        this.comments = "";
 
     }
 

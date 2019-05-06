@@ -1,14 +1,16 @@
 package servlets;
 
-import dao.PasswordDto;
-import dao.ProfessionalDetails;
-import dao.ProfessionalDto;
-import dao.ProfessionalLogin;
+import dao.*;
+import exceptions.NoSuchUserException;
+import exceptions.UserAlreadyExistsException;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.*;
+import session.SessionInfo;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +43,14 @@ public class SignupProf extends HttpServlet {
 
     private static final String TEMPLATE_NAME = "index";
 
+    @Inject
+    SessionInfo sessionInfo;
+
+    @Inject
+    @Named("professionalsDatabase")
+    UserCRUDDao professionalsDatabaseDaoBean;
+
+
 
     @Override
     public void init() {
@@ -60,6 +70,9 @@ public class SignupProf extends HttpServlet {
         dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
+        dataMap.put("sessionInfo", sessionInfo);
+        //dataMap.put("context", "/home/agnesmagnes/Documents/jjdzw2-fachowcy-web/src/main/webapp/fm-templates/formValidation.js");
+
 
         try {
             template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -91,9 +104,8 @@ public class SignupProf extends HttpServlet {
         String confirmPassword = req.getParameter("confirmPassword");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
-        String phoneNumberString = req.getParameter("phoneNumber");
-                //.replace("-","")
-                //.replace("+", "00");*/
+        String phoneNumberString = req.getParameter("phoneNumber").replace("-","")
+                .replace("+", "00");
         String cityString = req.getParameter("city");
         //String cityDistrictString = req.getParameter("cityDistrict");
         String professionString = req.getParameter("profession");
@@ -146,7 +158,6 @@ public class SignupProf extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
 
-
         if (constraintViolationsDetails.isEmpty() && (constraintViolationsPassword.isEmpty())){
             long phoneNumber = Long.parseLong(phoneNumberString);
             City city = City.valueOf(cityString);
@@ -157,9 +168,20 @@ public class SignupProf extends HttpServlet {
 
             ProfessionalLogin professionalLogin = new ProfessionalLogin(email, password);
             ProfessionalDetails professionalDetails = new ProfessionalDetails(name, surname, profession, phoneNumber, city, longitude, latitude);
-            printWriter.write(professionalDetails.toString() +"\n" + professionalLogin.toString());
 
-            //resp.sendRedirect("/details-prof");
+            try {
+                professionalsDatabaseDaoBean.createUser(email, professionalLogin, professionalDetails);
+                sessionInfo.setUserType(Role.PROFESSIONAL);
+/*                printWriter.write(professionalsDatabaseDaoBean.findUserLogin(email).toString() +
+                professionalsDatabaseDaoBean.findUserDetails(email).toString());*/
+
+
+            } catch (UserAlreadyExistsException e){
+            //TODO: handle this exception
+            }
+
+
+            resp.sendRedirect("/login-form");
         } else {
 
             try {

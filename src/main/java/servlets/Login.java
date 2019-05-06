@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.Role;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -22,13 +23,13 @@ import java.util.logging.Logger;
 @WebServlet("/login")
 public class Login extends HttpServlet {
 
-    @Inject
-    SessionInfo sessionInfo;
-
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
     private static final String TEMPLATE_NAME = "index";
+
+    @Inject
+    SessionInfo sessionInfo;
 
     @Override
     public void init() {
@@ -46,7 +47,7 @@ public class Login extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "login");
-        map.put("", "");
+        map.put("sessionInfo", sessionInfo);
 
         try {
             template.process(map, resp.getWriter());
@@ -62,10 +63,10 @@ public class Login extends HttpServlet {
         String isClient = request.getParameter("clientLogin");
 
         if(isClient != null) {
-            sessionInfo.setUserType("client");
+            sessionInfo.setUserType(Role.CLIENT);
         }
         if(isProf != null){
-            sessionInfo.setUserType("professional");
+            sessionInfo.setUserType(Role.PROFESSIONAL);
         }
 
 

@@ -8,9 +8,10 @@
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form" method="post">
                             <h3 class="text-center text-dark">Login</h3>
+                            <div>${context}</div>
                             <div class="form-group">
-                                <label for="login" class="text-dark">email:</label><br>
-                                <input type="text" name="login" id="login" class="form-control">
+                                <label for="email" class="text-dark">email:</label><br>
+                                <input type="text" name="email" id="email" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-dark">hasło:</label><br>
@@ -24,6 +25,7 @@
                                 <a href="/signup-prof" class="text-dark">Zarejestruj się</a>
                             </div>
                         </form>
+                        <div>${errorMessage}</div>
                         <h3 class="text-center text-dark pt-5"></h3>
                     </div>
                 </div>

@@ -22,15 +22,15 @@ public class SessionInfoBean implements SessionInfo, Serializable {
     UserCRUDDao professionalsDatabaseDaoBean;
 
 
-    private String userType=null;
+    private Role userType=null;
     private UserLogin userLogin=null;
     private ClientProfile userDetails=null;
 
 
     public boolean isAuthorized(String email, String password) {
-        if (userType.equals("client")) {
+        if (userType==Role.CLIENT) {
             return clientsDatabaseDaoBean.isAuthorized(email, password);
-        } else if (userType.equals("professional")){
+        } else if (userType==Role.PROFESSIONAL){
             return professionalsDatabaseDaoBean.isAuthorized(email, password);
         }
         return false;
@@ -38,24 +38,30 @@ public class SessionInfoBean implements SessionInfo, Serializable {
 
 
     public void findUserLoginByEmail(String email) throws NoSuchUserException {
-          if (userType.equals("client")) {
+          if (userType==Role.CLIENT) {
               userLogin = clientsDatabaseDaoBean.findUserLogin(email);
-          } else if (userType.equals("professional")){
+          } else if (userType==Role.PROFESSIONAL){
               userLogin = professionalsDatabaseDaoBean.findUserLogin(email);
           }
     }
 
 
     public void findUserDetailsByEmail(String email) throws NoSuchUserException {
-        if (userType.equals("client")) {
+        if (userType==Role.CLIENT) {
             userDetails = clientsDatabaseDaoBean.findUserDetails(email);
-        } else if (userType.equals("professional")){
+        } else if (userType==Role.PROFESSIONAL){
             userDetails = professionalsDatabaseDaoBean.findUserDetails(email);
         }
     }
 
+    public void clean() {
+        userType=null;
+        userLogin=null;
+        userDetails=null;
+    }
 
-    public String getUserType() {
+
+    public Role getUserType() {
         return userType;
     }
 
@@ -67,7 +73,7 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         return userDetails;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(Role userType) {
         this.userType = userType;
     }
 

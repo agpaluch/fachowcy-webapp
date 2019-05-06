@@ -51,7 +51,6 @@
 
 <body>
 <#include "header.ftlh">
-
 <#assign content = content + "-content.ftlh">
 <#include content>
 

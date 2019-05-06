@@ -5,7 +5,9 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.CityDistrict;
 import repository.TypeOfProfession;
+import session.SessionInfo;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +32,10 @@ public class LoginClient extends HttpServlet {
 
     private static final String TEMPLATE_NAME = "index";
 
+
+    @Inject
+    SessionInfo sessionInfo;
+
     @Override
     public void init() {
         try {
@@ -47,6 +53,7 @@ public class LoginClient extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "login-client");
+        map.put("sessionInfo", sessionInfo);
 
         try {
             template.process(map, printWriter);
