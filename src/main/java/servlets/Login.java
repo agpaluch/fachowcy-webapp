@@ -4,6 +4,7 @@ import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
+import session.SessionInfoBean;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -23,7 +24,7 @@ import java.util.logging.Logger;
 public class Login extends HttpServlet {
 
     @Inject
-    SessionInfo sessionInfo;
+    SessionInfoBean sessionInfo;
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
@@ -47,7 +48,9 @@ public class Login extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("content", "login");
         map.put("", "");
-
+        if(sessionInfo.getClientLoginUser()!=null){
+            map.put("username",sessionInfo.getClientLoginUser().getEmail());
+        }
         try {
             template.process(map, resp.getWriter());
         } catch (TemplateException e) {
