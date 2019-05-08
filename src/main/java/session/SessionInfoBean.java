@@ -1,5 +1,6 @@
 package session;
 import dao.ClientLogin;
+import dao.ProfessionalLogin;
 import dao.User;
 
 import javax.enterprise.context.SessionScoped;
@@ -12,6 +13,16 @@ public class SessionInfoBean implements SessionInfo, Serializable {
     private User user;
     private String userType;
     private ClientLogin clientLoginUser;
+    private ProfessionalLogin professionalLogin;
+
+    public ProfessionalLogin getProfessionalLogin() {
+        return professionalLogin;
+    }
+
+    public void setProfessionalLogin(ProfessionalLogin professionalLogin) {
+        this.professionalLogin = professionalLogin;
+    }
+
     @Override
     public User getUser() {
         return user;

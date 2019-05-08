@@ -1,9 +1,14 @@
 package servlets;
 
+import dao.ClientLogin;
+import dao.ProfessionalLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import repository.RepositoryOfUsers;
+import session.SessionInfoBean;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +24,8 @@ import java.util.logging.Logger;
 
 @WebServlet("/login-prof")
 public class LoginProf extends HttpServlet {
+    @Inject
+    SessionInfoBean user;
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
@@ -49,5 +56,21 @@ public class LoginProf extends HttpServlet {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
 
+    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        String login = req.getParameter("username");
+        String password = req.getParameter("password");
+        RepositoryOfUsers.fillDatabase();
+        for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
+            if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
+                String keyForClientDetails = entry.getKey();
+                user.setProfessionalLogin(entry.getValue());
+                resp.sendRedirect("/");
+            }
+            else {
+                resp.sendRedirect("/login-form?error=1");
+            }
+        }
     }
 }
