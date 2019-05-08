@@ -70,14 +70,16 @@ public class Login extends HttpServlet {
 
         if(isClient != null) {
             sessionInfo.setUserType("client");
+            response.sendRedirect("/login-client");
         }
         if(isProf != null){
             sessionInfo.setUserType("professional");
+            response.sendRedirect("/login-client");
         }
 
         System.out.println(sessionInfo.getUserType());
 
-        response.sendRedirect("/login-form");
+
 
     }
 

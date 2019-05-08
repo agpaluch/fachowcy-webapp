@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 import static repository.RepositoryOfUsers.fillDatabase;
 
-@WebServlet("/login-form")
+@WebServlet("/login-client")
 public class LoginClient extends HttpServlet {
     @Inject
     SessionInfoBean user;
