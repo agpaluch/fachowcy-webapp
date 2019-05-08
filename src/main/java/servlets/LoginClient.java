@@ -74,17 +74,17 @@ public class LoginClient extends HttpServlet {
 
         String login = req.getParameter("username");
         String password = req.getParameter("password");
-        RepositoryOfUsers.fillDatabase();
 
+        RepositoryOfUsers.fillDatabase();
         for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
-            if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
-               String keyForClientDetails = entry.getKey();
-                        user.setClientLogin(entry.getValue());
+
+                if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
+                    String keyForClientDetails = entry.getKey();
+                    user.setClientLogin(entry.getValue());
                     resp.sendRedirect("/");
-            }
-            else {
-                resp.sendRedirect("/login-form?error=1");
-            }
+                } else {
+                    resp.sendRedirect("/login-form?error=1");
+                }
         }
 //        resp.setContentType("text/html; charset=utf-8");
 //        PrintWriter printWriter = resp.getWriter();

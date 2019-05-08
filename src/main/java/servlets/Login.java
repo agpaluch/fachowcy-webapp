@@ -50,6 +50,10 @@ public class Login extends HttpServlet {
         map.put("", "");
         if(sessionInfo.getClientLoginUser()!=null){
             map.put("username",sessionInfo.getClientLoginUser().getEmail());
+
+        }
+        if(sessionInfo.getProfessionalLogin()!=null){
+            map.put("prof",sessionInfo.getProfessionalLogin().getEmail());
         }
         try {
             template.process(map, resp.getWriter());

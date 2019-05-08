@@ -34,12 +34,13 @@
         </div>
         <div class="col-2">
             <#if username??>
-                <div style="color: #FFF; margin-right: 10px;"> ${clientUsername}</div>
+                <div style="color: #FFF; margin-right: 10px;"> ${username}</div>
                 <a href="" class="btn btn-outline-success my-2 my-sm-0">LogOut</a>
             <#else>
                 <div style="color: #FFF; margin-right: 10px;">Użytkownik anonimowy</div>
                 <a href="/login" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>
             </#if>
+
             <#--<div style="color: #FFF; margin-right: 10px;"> Użytkownik anonimowy </div>-->
             <#--<a href="/login" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>-->
         </div>

@@ -43,13 +43,13 @@ public class LoginProf extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        String error= req.getParameter("error");
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "login-prof");
-
+        map.put("error",error);
         try {
             template.process(map, printWriter);
         } catch (TemplateException e) {
@@ -58,19 +58,20 @@ public class LoginProf extends HttpServlet {
 
     }
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("username");
         String password = req.getParameter("password");
-        RepositoryOfUsers.fillDatabase();
-        for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
-            if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
-                String keyForClientDetails = entry.getKey();
-                user.setProfessionalLogin(entry.getValue());
-                resp.sendRedirect("/");
+
+            RepositoryOfUsers.fillDatabase();
+            for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
+                if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
+                    String keyForClientDetails = entry.getKey();
+                    user.setProfessionalLogin(entry.getValue());
+                    resp.sendRedirect("/");
+                } else {
+                    resp.sendRedirect("/login-form?error=1");
+                }
             }
-            else {
-                resp.sendRedirect("/login-form?error=1");
-            }
-        }
+
     }
 }
