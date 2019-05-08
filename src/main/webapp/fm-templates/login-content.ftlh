@@ -15,7 +15,7 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     <div class="btn-group">
                                         <form id="initial-login-form-p" class="form" method="post">
-                                            <input type="submit" name="profLogin" class="btn btn-dark my-2 text-white" value="Zaloguj jako fachowiec">
+                                            <input type="submit" name="Login" class="btn btn-dark my-2 text-white" value="Zaloguj jako fachowiec">
                                         </form>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     <div class="btn-group">
                                         <form id="initial-login-form-c" class="form" method="post">
-                                            <input type="submit" name="clientLogin" class="btn btn-primary my-2 text-white" value="Zaloguj jako klient">
+                                            <input type="submit" name="Login" class="btn btn-primary my-2 text-white" value="Zaloguj jako klient">
                                         </form>
                                     </div>
                                 </div>
