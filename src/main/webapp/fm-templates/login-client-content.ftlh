@@ -34,9 +34,7 @@
 </div>
 
     </main>
-<center><#if error="1">
-        <div style="color:red">Podałeś zły login lub hasło</div>
-    </#if>
+<center>
 </center>
 </body>
 </html>

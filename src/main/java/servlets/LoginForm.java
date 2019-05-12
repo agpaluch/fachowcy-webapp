@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.ClientLogin;
 import dao.User;
 import dao.UserCRUDDao;
 import dao.UserLogin;
@@ -9,6 +10,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.RepositoryOfUsers;
 import session.SessionInfo;
+import session.SessionInfoBean;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -30,7 +32,7 @@ public class LoginForm extends HttpServlet {
     private static final String TEMPLATE_NAME = "index";
 
     @Inject
-    SessionInfo sessionInfo;
+    SessionInfoBean sessionInfo;
 
 /*    @Inject
     private TemplateProvider templateProvider;*/
@@ -51,13 +53,15 @@ public class LoginForm extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
+        String error= req.getParameter("error");
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "login-form");
-
         /*Map<String, String> map = new HashMap<>();
         map.put("", "");
 */
+        map.put("error",error);
+        map.put("content", "login-client");
         try {
             template.process(map, resp.getWriter());
         } catch (TemplateException e) {
@@ -81,8 +85,17 @@ public class LoginForm extends HttpServlet {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        System.out.println(login);
-        System.out.println(password);
+        RepositoryOfUsers.fillDatabase();
+        for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
+
+            if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
+                String keyForClientDetails = entry.getKey();
+                sessionInfo.setClientLogin(entry.getValue());
+                response.sendRedirect("/");
+            } else {
+                response.sendRedirect("/login-form?error=1");
+            }
+        }
 
         /*String login = request.getParameter("login");
         String password = request.getParameter("password");
