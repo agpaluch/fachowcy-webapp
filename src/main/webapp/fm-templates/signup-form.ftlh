@@ -39,12 +39,12 @@
     </select><br/><br/>-->
 
         <div>Szerokość geograficzna: <input id="latitude" type="text" name="latitude" readonly
-                                            onchange="validateLocationField('latitude')"
+                                            <#--onchange="validateLocationField('latitude')"-->
                                             value="${inputData.latitude}"/><br/><br/></div>
         <div id="latitude-error">${errors.latitude}</div>
 
         <div>Długość geograficzna: <input id="longitude" type="text" name="longitude" readonly
-                                          onchange="validateLocationField('longitude')"
+                                          <#--onchange="validateLocationField('longitude')"-->
                                           value="${inputData.longitude}"/><br/><br/></div>
         <div id="longitude-error">${errors.longitude}</div>
 
