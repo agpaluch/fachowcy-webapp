@@ -1,7 +1,7 @@
 package session;
+
 import dao.ClientLogin;
 import dao.ProfessionalLogin;
-import dao.User;
 import dao.UserLogin;
 import repository.RepositoryOfUsers;
 
@@ -17,40 +17,56 @@ public class SessionInfoBean implements SessionInfo, Serializable {
     private String userType;
     private String password;
     private String email;
-    private ClientLogin clientLoginUser;
-    private ProfessionalLogin professionalLogin;
+    private UserLogin userLogin;
 
-
-
-
+    @Override
     public boolean findUserByEmailAndPassword(){
+
+        for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
+
+            if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
+                userLogin=entry.getValue();
+                return true;
+            }
+
+        }
+
         if (userType.equals("professional")){
 
             for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
 
                 if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                    professionalLogin=entry.getValue();
+                    userLogin=entry.getValue();
                     return true;
                 }
+
             }
+
 
         }
         else {
             for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
 
                 if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                    clientLoginUser = entry.getValue();
+                    userLogin = entry.getValue();
                     return true;
                 }
             }
+
         }
         return false;
+    }
+
+    @Override
+    public UserLogin getUserLogin() {
+        return userLogin;
     }
 
     public String getPassword() {
         return password;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
@@ -59,15 +75,13 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         return email;
     }
 
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
 
 
-    public ProfessionalLogin getProfessionalLogin() {
-        return professionalLogin;
-    }
 
     @Override
     public void setUserType(String userType) {
@@ -79,7 +93,4 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         return this.userType;
     }
 
-    public ClientLogin getClientLoginUser() {
-        return clientLoginUser;
-    }
 }

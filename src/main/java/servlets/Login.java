@@ -48,12 +48,12 @@ public class Login extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("content", "login");
         map.put("", "");
-        if(sessionInfo.getClientLoginUser()!=null){
-            map.put("username",sessionInfo.getClientLoginUser().getEmail());
+        if(sessionInfo.getUserLogin()!=null){
+            map.put("username",sessionInfo.getUserLogin().getEmail());
 
         }
-        if(sessionInfo.getProfessionalLogin()!=null){
-            map.put("prof",sessionInfo.getProfessionalLogin().getEmail());
+        if(sessionInfo.getUserLogin()!=null){
+            map.put("prof",sessionInfo.getUserLogin().getEmail());
         }
         try {
             template.process(map, resp.getWriter());

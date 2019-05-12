@@ -44,8 +44,8 @@ public class Index extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "index");
-        if(userCDI.getClientLoginUser()!=null){
-            map.put("username",userCDI.getClientLoginUser().getEmail());
+        if(userCDI.getUserLogin()!=null){
+            map.put("username",userCDI.getUserLogin().getEmail());
         }
         try {
             template.process(map, printWriter);

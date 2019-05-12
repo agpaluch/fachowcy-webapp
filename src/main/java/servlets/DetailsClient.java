@@ -45,8 +45,8 @@ public class DetailsClient extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "details-client");
-        if(sessionInfoBean.getClientLoginUser()!=null){
-            map.put("clientUsername",sessionInfoBean.getClientLoginUser().getEmail());
+        if(sessionInfoBean.getUserLogin()!=null){
+            map.put("clientUsername",sessionInfoBean.getUserLogin().getEmail());
         }
         try {
             template.process(map, printWriter);

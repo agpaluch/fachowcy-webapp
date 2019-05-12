@@ -7,6 +7,7 @@ import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.RepositoryOfUsers;
+import session.SessionInfo;
 import session.SessionInfoBean;
 
 import javax.inject.Inject;
@@ -27,10 +28,7 @@ public class LoginForm extends HttpServlet {
     private static final String TEMPLATE_NAME = "index";
 
     @Inject
-    SessionInfoBean sessionInfo;
-
-/*    @Inject
-    private TemplateProvider templateProvider;*/
+    SessionInfo sessionInfo;
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
