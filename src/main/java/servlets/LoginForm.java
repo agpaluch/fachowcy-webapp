@@ -1,26 +1,21 @@
 package servlets;
 
 import dao.ClientLogin;
-import dao.User;
 import dao.UserCRUDDao;
 import dao.UserLogin;
-import exceptions.NoSuchUserException;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.RepositoryOfUsers;
-import session.SessionInfo;
 import session.SessionInfoBean;
 
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -57,11 +52,14 @@ public class LoginForm extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "login-form");
-        /*Map<String, String> map = new HashMap<>();
-        map.put("", "");
-*/
-        map.put("error",error);
-        map.put("content", "login-client");
+
+
+        if (error==null){
+            map.put("error","");
+        } else {
+            map.put("error",error);
+        }
+
         try {
             template.process(map, resp.getWriter());
         } catch (TemplateException e) {
@@ -76,48 +74,37 @@ public class LoginForm extends HttpServlet {
 
         UserCRUDDao database = null;
 
+        RepositoryOfUsers.fillDatabase();
+
         if(userType.equals("professional")) {
             database = RepositoryOfUsers.getProfessionalsDatabaseDaoBean();
         } else {
             database = RepositoryOfUsers.getClientsDatabaseDaoBean();
         }
 
-        String login = request.getParameter("login");
+        String email = request.getParameter("login");
         String password = request.getParameter("password");
 
-        RepositoryOfUsers.fillDatabase();
-        for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
+        sessionInfo.setPassword(password);
+        sessionInfo.setEmail(email);
+
+        Map<String, UserLogin> map = new HashMap<String, UserLogin> (database.getLogin());
+
+
+
+        for (Map.Entry<String, ?> entry : database.getLogin().entrySet()) {
 
             if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
                 String keyForClientDetails = entry.getKey();
                 sessionInfo.setClientLogin(entry.getValue());
                 response.sendRedirect("/");
-            } else {
-                response.sendRedirect("/login-form?error=1");
             }
         }
 
-        /*String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        User user = usersRepositoryDao.getUserByLogin(login);
-        if (user != null && user.getPassword().equals(password)) {
-            String name = user.getName();
-            sessionInfo.setLogin(login);
-            sessionInfo.setName(name);
-            response.sendRedirect("/hw/index");
-        } else {
-            Map<String, Object> dataModel = new HashMap<>();
-            dataModel.put("content", "login");
-            dataModel.put("auth", "fail");
-            Template template = templateProvider.getTemplate(
-                    getServletContext(), TEMPLATE_NAME
-            );
-            try {
-                template.process(dataModel, response.getWriter());
-            } catch (TemplateException e) {
-                System.err.println("Error while processing template: " + e);
-            }
-        }*/
+        response.sendRedirect("/login-form?error=1");
+
+
+
     }
 
 }
