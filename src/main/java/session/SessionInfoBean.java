@@ -14,7 +14,6 @@ import java.util.Map;
 public class SessionInfoBean implements SessionInfo, Serializable {
 
 
-
     private String userType;
     private String password;
     private String email;
@@ -22,6 +21,9 @@ public class SessionInfoBean implements SessionInfo, Serializable {
 
     @Override
     public boolean findUserByEmailAndPassword(){
+
+
+        RepositoryOfUsers.fillDatabase();
 
         if (userType.equals("professional")){
 
@@ -32,11 +34,10 @@ public class SessionInfoBean implements SessionInfo, Serializable {
                     return true;
                 }
 
+
             }
 
-
-        }
-        else {
+        } else {
             for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
 
                 if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {

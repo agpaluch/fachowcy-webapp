@@ -56,7 +56,6 @@ public class LoginForm extends HttpServlet {
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("content", "login-form");
         dataMap.put("sessionInfo", sessionInfo);
-        dataMap.put("errorMessage", "");
 
 
         if (error==null){
@@ -78,8 +77,7 @@ public class LoginForm extends HttpServlet {
 
         RepositoryOfUsers.fillDatabase();
 
-
-        String email = request.getParameter("login");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         sessionInfo.setPassword(password);

@@ -88,16 +88,6 @@ public class SignupProf extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
 
-<<<<<<< HEAD
-=======
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("content", "signup-prof");
-        dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
-        dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
-        dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
-
-
->>>>>>> jakub.lapinski
         try {
             template.process(dataMap, printWriter);
         } catch (TemplateException e) {
@@ -181,7 +171,7 @@ public class SignupProf extends HttpServlet {
 
             try {
                 professionalsDatabaseDaoBean.createUser(email, professionalLogin, professionalDetails);
-                sessionInfo.setUserType(Role.PROFESSIONAL);
+                sessionInfo.setUserType("professional");
 /*                printWriter.write(professionalsDatabaseDaoBean.findUserLogin(email).toString() +
                 professionalsDatabaseDaoBean.findUserDetails(email).toString());*/
 

@@ -33,8 +33,8 @@
 
         </div>
         <div class="col-2">
-            <#if username??>
-                <div style="color: #FFF; margin-right: 10px;"> ${sessionInfo.userLogin.email}</div>
+            <#if sessionInfo.getUserLogin()??>
+                <div style="color: #FFF; margin-right: 10px;"> ${sessionInfo.getUserLogin().getEmail()}</div>
                 <a href="" class="btn btn-outline-success my-2 my-sm-0">LogOut</a>
             <#else>
                 <div style="color: #FFF; margin-right: 10px;">Użytkownik anonimowy</div>
