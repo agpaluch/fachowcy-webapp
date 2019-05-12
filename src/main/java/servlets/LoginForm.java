@@ -76,11 +76,6 @@ public class LoginForm extends HttpServlet {
 
         RepositoryOfUsers.fillDatabase();
 
-        if(userType.equals("professional")) {
-            database = RepositoryOfUsers.getProfessionalsDatabaseDaoBean();
-        } else {
-            database = RepositoryOfUsers.getClientsDatabaseDaoBean();
-        }
 
         String email = request.getParameter("login");
         String password = request.getParameter("password");
@@ -88,21 +83,12 @@ public class LoginForm extends HttpServlet {
         sessionInfo.setPassword(password);
         sessionInfo.setEmail(email);
 
-        Map<String, UserLogin> map = new HashMap<String, UserLogin> (database.getLogin());
-
-
-
-        for (Map.Entry<String, ?> entry : database.getLogin().entrySet()) {
-
-            if (entry.getValue().getEmail().equals(login) && entry.getValue().getPassword().equals(password)) {
-                String keyForClientDetails = entry.getKey();
-                sessionInfo.setClientLogin(entry.getValue());
-                response.sendRedirect("/");
-            }
+        if(sessionInfo.findUserByEmailAndPassword()){
+            response.sendRedirect("/");
         }
-
-        response.sendRedirect("/login-form?error=1");
-
+        else {
+            response.sendRedirect("/login-form?error=1");
+        }
 
 
     }

@@ -7,6 +7,7 @@ import repository.RepositoryOfUsers;
 
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Map;
 
 
 @SessionScoped
@@ -16,23 +17,34 @@ public class SessionInfoBean implements SessionInfo, Serializable {
     private String userType;
     private String password;
     private String email;
+    private ClientLogin clientLoginUser;
+    private ProfessionalLogin professionalLogin;
 
-    public UserLogin findUserByEmailAndPassword(String password, String email){
+
+
+
+    public boolean findUserByEmailAndPassword(){
         if (userType.equals("professional")){
 
+            for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
 
-            RepositoryOfUsers
-                    .getProfessionalsDatabaseDaoBean()
-                    .getLogin()
-                    .entrySet()
-                    .stream()
-            .filter(e -> e.getKey().equals(email))
-            .filter()
+                if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
+                    professionalLogin=entry.getValue();
+                    return true;
+                }
+            }
 
-
-            ;
         }
+        else {
+            for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
 
+                if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
+                    clientLoginUser = entry.getValue();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String getPassword() {
@@ -51,23 +63,12 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         this.email = email;
     }
 
-    private ClientLogin clientLoginUser;
-    private ProfessionalLogin professionalLogin;
+
 
     public ProfessionalLogin getProfessionalLogin() {
         return professionalLogin;
     }
 
-    public void setProfessionalLogin(ProfessionalLogin professionalLogin) {
-        this.professionalLogin = professionalLogin;
-    }
-
-
-
-
-    public void setClientLogin(ClientLogin clientLoginUser) {
-        this.clientLoginUser=clientLoginUser;
-    }
     @Override
     public void setUserType(String userType) {
         this.userType = userType;
