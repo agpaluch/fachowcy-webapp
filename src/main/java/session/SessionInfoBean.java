@@ -22,15 +22,6 @@ public class SessionInfoBean implements SessionInfo, Serializable {
     @Override
     public boolean findUserByEmailAndPassword(){
 
-        for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
-
-            if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                userLogin=entry.getValue();
-                return true;
-            }
-
-        }
-
         if (userType.equals("professional")){
 
             for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
