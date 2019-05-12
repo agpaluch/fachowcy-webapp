@@ -68,10 +68,6 @@ public class LoginForm extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String userType = sessionInfo.getUserType();
-
-        UserCRUDDao database = null;
-
         RepositoryOfUsers.fillDatabase();
 
 
