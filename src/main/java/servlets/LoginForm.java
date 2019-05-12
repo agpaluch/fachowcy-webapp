@@ -1,10 +1,15 @@
 package servlets;
 
 import exceptions.NoSuchUserException;
+import dao.ClientLogin;
+import dao.UserCRUDDao;
+import dao.UserLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import repository.RepositoryOfUsers;
 import session.SessionInfo;
+import session.SessionInfoBean;
 
 import javax.inject.Inject;
 import javax.servlet.Servlet;
@@ -46,11 +51,19 @@ public class LoginForm extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
+        String error= req.getParameter("error");
 
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("content", "login-form");
         dataMap.put("sessionInfo", sessionInfo);
         dataMap.put("errorMessage", "");
+
+
+        if (error==null){
+            dataMap.put("error","");
+        } else {
+            dataMap.put("error",error);
+        }
 
         try {
             template.process(dataMap, resp.getWriter());
@@ -62,38 +75,25 @@ public class LoginForm extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String email = request.getParameter("email").trim();
-        String password = request.getParameter("password").trim();
-        Map <String, Object> dataMap = new HashMap<>();
-        dataMap.put("content", "login-form");
-        dataMap.put("sessionInfo", sessionInfo);
-        dataMap.put("errorMessage", "");
+
+        RepositoryOfUsers.fillDatabase();
 
 
-        if (sessionInfo.isAuthorized(email, password)){
-            try {
-                sessionInfo.findUserLoginByEmail(email);
-                sessionInfo.findUserDetailsByEmail(email);
-                if (sessionInfo.getUserType().equals("professional")){
-                    response.sendRedirect("/details-prof");
-                } else if (sessionInfo.getUserType().equals("client")){
-                    response.sendRedirect("/details-client");
-                }
+        String email = request.getParameter("login");
+        String password = request.getParameter("password");
 
-            } catch (NoSuchUserException e){
-                dataMap.put("errorMessage", "Podanego adresu e-mail nie ma w bazie.");
-            }
-        } else {
-            dataMap.put("errorMessage", "Nieprawidłowy adres e-mail lub hasło.");
+        sessionInfo.setPassword(password);
+        sessionInfo.setEmail(email);
+
+        if(sessionInfo.findUserByEmailAndPassword()){
+            response.sendRedirect("/");
+        }
+        else {
+            response.sendRedirect("/login-form?error=1");
         }
 
 
-        try {
-                template.process(dataMap, response.getWriter());
-            } catch (TemplateException e) {
-                System.err.println("Error while processing template: " + e);
-            }
-        }
+    }
 
 
 }

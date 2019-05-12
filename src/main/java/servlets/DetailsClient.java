@@ -3,7 +3,9 @@ package servlets;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+
 import session.SessionInfo;
+
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -21,13 +23,14 @@ import java.util.logging.Logger;
 @WebServlet("/details-client")
 public class DetailsClient extends HttpServlet {
 
+    @Inject
+    SessionInfo sessionInfo;
+
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
     private static final String TEMPLATE_NAME = "index";
 
-    @Inject
-    SessionInfo sessionInfo;
 
     @Override
     public void init() {
@@ -47,6 +50,7 @@ public class DetailsClient extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("content", "details-client");
         map.put("sessionInfo", sessionInfo);
+
 
         try {
             template.process(map, printWriter);

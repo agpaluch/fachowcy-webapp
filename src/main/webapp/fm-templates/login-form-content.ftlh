@@ -24,7 +24,9 @@
                                 <a href="/signup-prof" class="text-dark">Zarejestruj się</a>
                             </div>
                         </form>
-                        <div>${errorMessage}</div>
+                        <#if error=="1">
+                            <div style="color:red">Podałeś zły login lub hasło</div>
+                        </#if>
                         <h3 class="text-center text-dark pt-5"></h3>
                     </div>
                 </div>

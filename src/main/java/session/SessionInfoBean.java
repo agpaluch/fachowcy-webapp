@@ -1,79 +1,85 @@
 package session;
 
-import dao.*;
-import exceptions.NoSuchUserException;
+import dao.ClientLogin;
+import dao.ProfessionalLogin;
+import dao.UserLogin;
+import repository.RepositoryOfUsers;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Map;
 
 
 @SessionScoped
 public class SessionInfoBean implements SessionInfo, Serializable {
 
-    @Inject
-    @Named("clientsDatabase")
-    UserCRUDDao clientsDatabaseDaoBean;
-
-    @Inject
-    @Named("professionalsDatabase")
-    UserCRUDDao professionalsDatabaseDaoBean;
 
 
-    private Role userType=null;
-    private UserLogin userLogin=null;
-    private ClientProfile userDetails=null;
+    private String userType;
+    private String password;
+    private String email;
+    private UserLogin userLogin;
+
+    @Override
+    public boolean findUserByEmailAndPassword(){
+
+        if (userType.equals("professional")){
+
+            for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
+
+                if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
+                    userLogin=entry.getValue();
+                    return true;
+                }
+
+            }
 
 
-    public boolean isAuthorized(String email, String password) {
-        if (userType==Role.CLIENT) {
-            return clientsDatabaseDaoBean.isAuthorized(email, password);
-        } else if (userType==Role.PROFESSIONAL){
-            return professionalsDatabaseDaoBean.isAuthorized(email, password);
+        }
+        else {
+            for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
+
+                if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
+                    userLogin = entry.getValue();
+                    return true;
+                }
+            }
+
         }
         return false;
     }
 
-
-    public void findUserLoginByEmail(String email) throws NoSuchUserException {
-          if (userType==Role.CLIENT) {
-              userLogin = clientsDatabaseDaoBean.findUserLogin(email);
-          } else if (userType==Role.PROFESSIONAL){
-              userLogin = professionalsDatabaseDaoBean.findUserLogin(email);
-          }
-    }
-
-
-    public void findUserDetailsByEmail(String email) throws NoSuchUserException {
-        if (userType==Role.CLIENT) {
-            userDetails = clientsDatabaseDaoBean.findUserDetails(email);
-        } else if (userType==Role.PROFESSIONAL){
-            userDetails = professionalsDatabaseDaoBean.findUserDetails(email);
-        }
-    }
-
-    public void clean() {
-        userType=null;
-        userLogin=null;
-        userDetails=null;
-    }
-
-
-    public Role getUserType() {
-        return userType;
-    }
-
+    @Override
     public UserLogin getUserLogin() {
         return userLogin;
     }
 
-    public ClientProfile getUserDetails() {
-        return userDetails;
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserType(Role userType) {
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String getUserType() {
+        return userType;
+    }
+
+    @Override
+    public void setUserType(String userType) {
         this.userType = userType;
     }
 
@@ -81,7 +87,5 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         this.userLogin = userLogin;
     }
 
-    public void setUserDetails(ClientProfile userDetails) {
-        this.userDetails = userDetails;
-    }
+
 }
