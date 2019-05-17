@@ -11,7 +11,7 @@ public class ClientDetails implements ClientProfile {
     private String surname;
     private long phoneNumber;
     private City city;
-    private CityDistrict district;
+    //private CityDistrict district;
     private double longitude;
     private double latitude;
     private int numberLikes;
@@ -23,19 +23,19 @@ public class ClientDetails implements ClientProfile {
     }
 
     public ClientDetails(String name, String surname,
-                               long phoneNumber, City city, CityDistrict district,
-                               double longitude, double latitude,
-                               int numberLikes, String comments) {
+                               long phoneNumber, City city,
+                                //CityDistrict district,
+                               double longitude, double latitude) {
 
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.city = city;
-        this.district = district;
+        //this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.numberLikes = numberLikes;
-        this.comments = comments;
+        this.numberLikes = 0;
+        this.comments = "";
 
     }
 
@@ -60,10 +60,10 @@ public class ClientDetails implements ClientProfile {
         return city;
     }
 
-    @Override
+/*    @Override
     public CityDistrict getDistrict() {
         return district;
-    }
+    }*/
 
 
     @Override
@@ -104,9 +104,9 @@ public class ClientDetails implements ClientProfile {
         this.city = city;
     }
 
-    public void setDistrict(CityDistrict district) {
+/*    public void setDistrict(CityDistrict district) {
         this.district = district;
-    }
+    }*/
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
@@ -130,7 +130,8 @@ public class ClientDetails implements ClientProfile {
         return ("Name: " + getName()  + "\n"+
                 "Surname: " + getSurname()  + "\n" +
                 "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity().toString() +"\n"+
-                "City district: " + getDistrict() + "\n"+ "Longitude: " + getLongitude() + "\n"+
+                //"City district: " + getDistrict() + "\n"+
+                "Longitude: " + getLongitude() + "\n"+
                 "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+
                 "Comments: " + getComments());
     }

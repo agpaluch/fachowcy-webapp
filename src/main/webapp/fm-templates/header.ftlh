@@ -33,8 +33,16 @@
 
         </div>
         <div class="col-2">
-            <div style="color: #FFF; margin-right: 10px;"> Użytkownik anonimowy </div>
-            <a href="/login" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>
+            <#if sessionInfo.getUserLogin()??>
+                <div style="color: #FFF; margin-right: 10px;"> ${sessionInfo.getUserLogin().getEmail()}</div>
+                <a href="" class="btn btn-outline-success my-2 my-sm-0">LogOut</a>
+            <#else>
+                <div style="color: #FFF; margin-right: 10px;">Użytkownik anonimowy</div>
+                <a href="/login" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>
+            </#if>
+
+            <#--<div style="color: #FFF; margin-right: 10px;"> Użytkownik anonimowy </div>-->
+            <#--<a href="/login" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>-->
         </div>
     <#--        </div>-->
     <#--        </div>-->

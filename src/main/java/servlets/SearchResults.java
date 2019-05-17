@@ -5,6 +5,7 @@ import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.RepositoryOfUsers;
+import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -29,7 +30,8 @@ public class SearchResults extends HttpServlet {
 
     private static final String TEMPLATE_NAME = "index";
 
-
+    @Inject
+    SessionInfo sessionInfo;
 
     @EJB(beanName="ProfessionalsDatabaseDaoBean")
     ProfessionalCRUDDao professionalCRUDDao;
@@ -52,6 +54,7 @@ public class SearchResults extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "search-results");
+        map.put("sessionInfo", sessionInfo);
 
         try {
             template.process(map, printWriter);
@@ -69,6 +72,7 @@ public class SearchResults extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "search-results");
+        map.put("sessionInfo", sessionInfo);
         //map.put("se", req.getParameter("search"));
         String s = req.getParameter("search");
 

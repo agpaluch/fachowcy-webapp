@@ -4,6 +4,10 @@ import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+import session.SessionInfo;
+
+
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +23,14 @@ import java.util.logging.Logger;
 @WebServlet("/details-client")
 public class DetailsClient extends HttpServlet {
 
+    @Inject
+    SessionInfo sessionInfo;
+
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
     private static final String TEMPLATE_NAME = "index";
+
 
     @Override
     public void init() {
@@ -41,6 +49,8 @@ public class DetailsClient extends HttpServlet {
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "details-client");
+        map.put("sessionInfo", sessionInfo);
+
 
         try {
             template.process(map, printWriter);
@@ -50,22 +60,7 @@ public class DetailsClient extends HttpServlet {
 
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("content", "details-client");
-
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
-
-    }
 
 
     }

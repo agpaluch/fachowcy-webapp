@@ -10,7 +10,7 @@ public interface ClientProfile {
     String getSurname();
     long getPhoneNumber();
     City getCity();
-    CityDistrict getDistrict();
+    //CityDistrict getDistrict();
     double getLongitude();
     double getLatitude();
     int getNumberLikes();
@@ -21,7 +21,7 @@ public interface ClientProfile {
     void setSurname(String name);
     void setPhoneNumber(long phoneNumber);
     void setCity(City city);
-    void setDistrict(CityDistrict district);
+    //void setDistrict(CityDistrict district);
     void setLongitude(double longitude);
     void setLatitude(double latitude);
     void setNumberLikes(int numerLikes);

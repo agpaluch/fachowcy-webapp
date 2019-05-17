@@ -1,13 +1,15 @@
 package session;
 
-import dao.User;
+import dao.UserLogin;
 
 public interface SessionInfo {
 
-    public User getUser();
-    public void setUser(User user);
+    void setUserType(String userType);
+    String getUserType();
+    UserLogin getUserLogin();
 
-    public void setUserType(String userType);
-    public String getUserType();
+    boolean findUserByEmailAndPassword();
+    void setPassword(String password);
+    void setEmail(String email);
 
 }

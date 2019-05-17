@@ -6,10 +6,13 @@ import exceptions.UserAlreadyExistsException;
 import repository.RepositoryOfUsers;
 
 import javax.ejb.Stateful;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.Map;
 
 @Stateful
-public class ClientsDatabaseDaoBean implements UserCRUDDao {
+@Named("clientsDatabase")
+public class ClientsDatabaseDaoBean implements UserCRUDDao, Serializable {
 
     private Map<String, ClientLogin> clientLogin;
     private Map<String, ClientDetails> clientDetails;
@@ -36,13 +39,21 @@ public class ClientsDatabaseDaoBean implements UserCRUDDao {
 
 
     @Override
-    public String readUser(String email) throws NoSuchUserException {
+    public UserLogin findUserLogin(String email) throws NoSuchUserException {
         if (!validateEmail(email)){
             throw new NoSuchUserException();
         }
         RepositoryOfUsers.fillDatabase();
-        return RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().get(email).toString() +
-                RepositoryOfUsers.getClientsDatabaseDaoBean().getDetails().get(email).toString();
+        return RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().get(email);
+    }
+
+    @Override
+    public ClientDetails findUserDetails(String email) throws NoSuchUserException {
+        if (!validateEmail(email)){
+            throw new NoSuchUserException();
+        }
+        RepositoryOfUsers.fillDatabase();
+        return RepositoryOfUsers.getClientsDatabaseDaoBean().getDetails().get(email);
     }
 
 
@@ -61,6 +72,18 @@ public class ClientsDatabaseDaoBean implements UserCRUDDao {
     public boolean validateEmail(String email){
         RepositoryOfUsers.fillDatabase();
         return RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().containsKey(email);
+    }
+
+    @Override
+    public boolean isAuthorized(String email, String password){
+        RepositoryOfUsers.fillDatabase();
+
+        return RepositoryOfUsers.getClientsDatabaseDaoBean()
+                .getLogin()
+                .values()
+                .stream()
+                .anyMatch(a -> a.getEmail().equals(email) && a.getPassword().equals(password));
+
     }
 
 }

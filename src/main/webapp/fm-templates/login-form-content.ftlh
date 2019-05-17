@@ -9,8 +9,8 @@
                         <form id="login-form" class="form" method="post">
                             <h3 class="text-center text-dark">Login</h3>
                             <div class="form-group">
-                                <label for="login" class="text-dark">email:</label><br>
-                                <input type="text" name="login" id="login" class="form-control">
+                                <label for="email" class="text-dark">email:</label><br>
+                                <input type="text" name="email" id="email" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-dark">hasło:</label><br>
@@ -24,6 +24,9 @@
                                 <a href="/signup-prof" class="text-dark">Zarejestruj się</a>
                             </div>
                         </form>
+                        <#if error=="1">
+                            <div style="color:red">Podałeś zły login lub hasło</div>
+                        </#if>
                         <h3 class="text-center text-dark pt-5"></h3>
                     </div>
                 </div>

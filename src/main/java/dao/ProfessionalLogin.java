@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 public class ProfessionalLogin implements UserLogin {
 
-    //login credentials
     private String email;
     private String password;
     private LocalDate signUpDate;
@@ -41,16 +40,6 @@ public class ProfessionalLogin implements UserLogin {
 
 
 
-
-    /*    @Override
-    public void setPassword() {
-
-    }
-
-    @Override
-    public void setSignUpDate() {
-
-    }*/
 
     @Override
     public void setEmail(String email) {

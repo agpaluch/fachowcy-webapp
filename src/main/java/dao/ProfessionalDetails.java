@@ -4,20 +4,22 @@ package dao;
 import repository.City;
 import repository.CityDistrict;
 import repository.TypeOfProfession;
+import validators.CheckProfession;
+
+import javax.validation.constraints.*;
 
 public class ProfessionalDetails implements ProfessionalProfile {
 
-    //profile information
     private String name;
     private String surname;
     private TypeOfProfession profession;
     private long phoneNumber;
     private City city;
-    private CityDistrict district;
+    //private CityDistrict district;
     private double longitude;
     private double latitude;
     private int numberLikes=0;
-    private String comments;
+    private String comments="";
 
 
 
@@ -26,7 +28,8 @@ public class ProfessionalDetails implements ProfessionalProfile {
     }
 
     public ProfessionalDetails(String name, String surname, TypeOfProfession profession,
-                               long phoneNumber, City city, CityDistrict district,
+                               long phoneNumber, City city,
+                               //CityDistrict district,
                                double longitude, double latitude) {
 
         this.name = name;
@@ -34,12 +37,9 @@ public class ProfessionalDetails implements ProfessionalProfile {
         this.profession = profession;
         this.phoneNumber = phoneNumber;
         this.city = city;
-        this.district = district;
+        //this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
-
-
-
     }
 
     @Override
@@ -67,10 +67,10 @@ public class ProfessionalDetails implements ProfessionalProfile {
         return city;
     }
 
-    @Override
+/*    @Override
     public CityDistrict getDistrict() {
         return district;
-    }
+    }*/
 
     @Override
     public double getLongitude() {
@@ -112,9 +112,9 @@ public class ProfessionalDetails implements ProfessionalProfile {
         this.city = city;
     }
 
-    public void setDistrict(CityDistrict district) {
+/*    public void setDistrict(CityDistrict district) {
         this.district = district;
-    }
+    }*/
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
@@ -138,7 +138,8 @@ public class ProfessionalDetails implements ProfessionalProfile {
                 "Surname: " + getSurname()  + "\n" + "Profession: " +
                 getProfession().toString() + "\n"+
                 "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity().toString() +"\n"+
-                "City district: " + getDistrict().toString() + "\n"+ "Longitude: " + getLongitude() + "\n"+
+                //"City district: " + getDistrict().toString() + "\n"+
+                "Longitude: " + getLongitude() + "\n"+
                 "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+
                 "Comments: " + getComments());
     }
