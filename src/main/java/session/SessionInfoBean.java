@@ -17,42 +17,26 @@ public class SessionInfoBean implements SessionInfo, Serializable {
     private String userType;
     private String password;
     private String email;
-    private UserLogin userLogin;
+    private ProfessionalLogin professionalLogin;
 
     @Override
     public boolean findUserByEmailAndPassword(){
-
-
         RepositoryOfUsers.fillDatabase();
-
-        if (userType.equals("professional")){
-
             for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
 
                 if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                    userLogin=entry.getValue();
-                    return true;
-                }
-
-
-            }
-
-        } else {
-            for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
-
-                if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                    userLogin = entry.getValue();
+                    professionalLogin = entry.getValue();
                     return true;
                 }
             }
-
-        }
         return false;
-    }
+        }
+
+
 
     @Override
-    public UserLogin getUserLogin() {
-        return userLogin;
+    public ProfessionalLogin getUserLogin() {
+        return professionalLogin;
     }
 
 
@@ -84,8 +68,8 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         this.userType = userType;
     }
 
-    public void setUserLogin(UserLogin userLogin) {
-        this.userLogin = userLogin;
+    public void setUserLogin(ProfessionalLogin professionalLogin) {
+        this.professionalLogin = professionalLogin;
     }
 
 

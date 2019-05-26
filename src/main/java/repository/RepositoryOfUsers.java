@@ -28,10 +28,6 @@ public class RepositoryOfUsers {
 
     private static void readExistingDatabase() {
 
-        //Read existing database of clients from JSON.file and print information about their logins and details
-        InputStream inputStreamClient = RepositoryOfUsers.class.getClassLoader().getResourceAsStream("clientsDatabase.json");
-        String contentClients = readFileToString(inputStreamClient);
-
         //Read existing database of professionals from JSON.file and print information about their logins and details
         InputStream inputStreamProf = RepositoryOfUsers.class.getClassLoader().getResourceAsStream("professionalsDatabase.json");
         String contentProfessionals = readFileToString(inputStreamProf);

@@ -17,6 +17,24 @@
         "month": 11,
         "day": 25
       }
+    },
+    "bbb@gmail.com": {
+      "email": "bbb@gmail.com",
+      "password": "1234",
+      "signUpDate": {
+        "year": 1997,
+        "month": 11,
+        "day": 25
+      }
+    },
+    "aaa@gmail.com": {
+      "email": "aaa@gmail.com",
+      "password": "1645",
+      "signUpDate": {
+        "year": 1997,
+        "month": 11,
+        "day": 25
+      }
     }
   },
   "professionalDetails": {
@@ -43,6 +61,30 @@
       "latitude": 67,
       "numberLikes": 0,
       "comments": "Wszelkie prace związane z elektryką."
+    },
+    "aaa@gmail.com": {
+      "name": "Andrzej",
+      "surname": "Niemrawy",
+      "profession": "ELECTRICIAN",
+      "phoneNumber": 333222111,
+      "city": "Warsaw",
+      "district": "PRAGAPLD",
+      "longitude": 123,
+      "latitude": 160,
+      "numberLikes": 0,
+      "comments": "Miły zaradny trochę niemrawy"
+    },
+    "bbb@gmail.com": {
+      "name": "Arkadiusz",
+      "surname": "Dębski",
+      "profession": "PLUMBER",
+      "phoneNumber": 444555666,
+      "city": "Warsaw",
+      "district": "MOKOTOW",
+      "longitude": 123,
+      "latitude": 67,
+      "numberLikes": 0,
+      "comments": "Nie chce mi się z wami gadać"
     }
   }
 }

@@ -49,7 +49,7 @@ public class SignupProf extends HttpServlet {
 
     @Inject
     @Named("professionalsDatabase")
-    UserCRUDDao professionalsDatabaseDaoBean;
+    ProfessionalDao professionalsDatabaseDaoBean;
 
 
 

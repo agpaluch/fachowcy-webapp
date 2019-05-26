@@ -36,20 +36,20 @@ public class ProfessionalsDatabaseDaoBean implements ProfessionalDao, Serializab
 
 
     @Override
-    public void createUser(String email, UserLogin userLogin, ClientProfile clientProfile)
+    public void createUser(String email, ProfessionalLogin professionalLogin, ClientProfile clientProfile)
             throws UserAlreadyExistsException {
         if (validateEmail(email)){
             throw new UserAlreadyExistsException();
         }
         RepositoryOfUsers.fillDatabase();
         RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().put(email, (ProfessionalDetails) clientProfile);
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().put(email, (ProfessionalLogin) userLogin);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().put(email, professionalLogin);
     }
 
 
 
     @Override
-    public UserLogin findUserLogin(String email) throws NoSuchUserException {
+    public ProfessionalLogin findUserLogin(String email) throws NoSuchUserException {
         if (!validateEmail(email)){
             throw new NoSuchUserException();
         }
