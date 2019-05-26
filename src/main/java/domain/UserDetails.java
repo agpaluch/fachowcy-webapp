@@ -1,26 +1,54 @@
 package domain;
 
-
 import repository.City;
 import repository.TypeOfProfession;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table
 public class UserDetails {
 
+    @Id
+    String login;
+
+    @Column
+    @NotNull
     private String name;
+
+    @Column
+    @NotNull
     private String surname;
+
+    @Column
     private TypeOfProfession profession;
+
+    @Column
+    @NotNull
     private long phoneNumber;
+
+    @Column
     private City city;
     //private CityDistrict district;
+
+    @Column
     private double longitude;
+
+    @Column
     private double latitude;
-    private int numberLikes=0;
-    private String comments="";
 
+    @Column
+    private int numberLikes = 0;
 
+    @Column
+    private String comments = "";
 
     public UserDetails(){
-        //Non-parametric constructor used in MenuAdd
+        // Hibernate
     }
 
     public UserDetails(String name, String surname, TypeOfProfession profession,

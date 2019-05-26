@@ -33,8 +33,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.lang.Long.parseLong;
-
 @WebServlet("/signup-prof")
 public class SignupProf extends HttpServlet {
 
@@ -50,8 +48,8 @@ public class SignupProf extends HttpServlet {
     SessionInfo sessionInfo;
 
     @Inject
-    @Named("professionalsDatabase")
-    UserDao professionalsDatabaseDaoBean;
+    @Named("usersDatabase")
+    UserDao userDao;
 
 
 
@@ -173,7 +171,7 @@ public class SignupProf extends HttpServlet {
             UserDetails userDetails = new UserDetails(name, surname, profession, phoneNumber, city, longitude, latitude);
 
             try {
-                professionalsDatabaseDaoBean.createUser(email, userLogin, userDetails);
+                userDao.createUser(email, userLogin, userDetails);
                 sessionInfo.setUserType("professional");
             } catch (UserAlreadyExistsException e){
             //TODO: handle this exception

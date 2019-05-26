@@ -1,5 +1,5 @@
 {
-  "professionalLogin": {
+  "userLogin": {
     "ccc@gmail.com": {
       "email": "ccc@gmail.com",
       "password": "1234",
@@ -37,7 +37,7 @@
       }
     }
   },
-  "professionalDetails": {
+  "userDetails": {
     "ccc@gmail.com": {
       "name": "Agnieszka",
       "surname": "Kowalski",

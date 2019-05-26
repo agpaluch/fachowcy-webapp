@@ -16,17 +16,18 @@ import java.util.stream.Collectors;
 
 
 @Stateful
-@Named("professionalsDatabase")
+@Named("usersDatabase")
 public class UserDaoBean implements UserDao, Serializable {
 
     private Map<String, UserLogin> userLogin;
     private Map<String, UserDetails> userDetails;
 
-
+    @Override
     public Map<String, UserLogin> getLogin() {
         return userLogin;
     }
 
+    @Override
     public Map<String, UserDetails> getDetails() {
         return userDetails;
     }
