@@ -2,59 +2,58 @@ package domain;
 
 
 import repository.City;
+import repository.TypeOfProfession;
 
-public class ClientDetails implements ClientProfile {
+public class UserDetails {
 
-    //profile information
     private String name;
     private String surname;
+    private TypeOfProfession profession;
     private long phoneNumber;
     private City city;
     //private CityDistrict district;
     private double longitude;
     private double latitude;
-    private int numberLikes;
-    private String comments;
+    private int numberLikes=0;
+    private String comments="";
 
 
-    public ClientDetails(){
-        // Non-parametric constructor used in MenuAdd
+
+    public UserDetails(){
+        //Non-parametric constructor used in MenuAdd
     }
 
-    public ClientDetails(String name, String surname,
+    public UserDetails(String name, String surname, TypeOfProfession profession,
                                long phoneNumber, City city,
-                                //CityDistrict district,
+                               //CityDistrict district,
                                double longitude, double latitude) {
 
         this.name = name;
         this.surname = surname;
+        this.profession = profession;
         this.phoneNumber = phoneNumber;
         this.city = city;
         //this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.numberLikes = 0;
-        this.comments = "";
-
     }
 
+    public TypeOfProfession getProfession() {
+        return profession;
+    }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public String getSurname() {
         return surname;
     }
 
-    @Override
     public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    @Override
     public City getCity() {
         return city;
     }
@@ -64,28 +63,21 @@ public class ClientDetails implements ClientProfile {
         return district;
     }*/
 
-
-    @Override
     public double getLongitude() {
         return longitude;
     }
 
-    @Override
     public double getLatitude() {
         return latitude;
     }
 
-    @Override
     public int getNumberLikes() {
         return numberLikes;
     }
 
-    @Override
     public String getComments() {
         return comments;
     }
-
-
 
     public void setName(String name) {
         this.name = name;
@@ -93,6 +85,10 @@ public class ClientDetails implements ClientProfile {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setProfession(TypeOfProfession profession) {
+        this.profession = profession;
     }
 
     public void setPhoneNumber(long phoneNumber) {
@@ -124,15 +120,18 @@ public class ClientDetails implements ClientProfile {
     }
 
 
-
     public String toString(){
         return ("Name: " + getName()  + "\n"+
-                "Surname: " + getSurname()  + "\n" +
+                "Surname: " + getSurname()  + "\n" + "Profession: " +
+                getProfession().toString() + "\n"+
                 "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity().toString() +"\n"+
-                //"City district: " + getDistrict() + "\n"+
+                //"City district: " + getDistrict().toString() + "\n"+
                 "Longitude: " + getLongitude() + "\n"+
                 "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+
                 "Comments: " + getComments());
     }
 
+
 }
+
+

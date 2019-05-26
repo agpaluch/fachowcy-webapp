@@ -29,7 +29,6 @@ public class LoginForm extends HttpServlet {
     @Inject
     SessionInfo sessionInfo;
 
-
     @Override
     public void init() {
         try {

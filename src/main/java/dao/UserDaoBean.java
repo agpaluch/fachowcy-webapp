@@ -1,9 +1,7 @@
 package dao;
 
-
-import domain.ClientProfile;
-import domain.ProfessionalDetails;
-import domain.ProfessionalLogin;
+import domain.UserDetails;
+import domain.UserLogin;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 import repository.RepositoryOfUsers;
@@ -19,36 +17,36 @@ import java.util.stream.Collectors;
 
 @Stateful
 @Named("professionalsDatabase")
-public class ProfessionalDaoBean implements ProfessionalDao, Serializable {
+public class UserDaoBean implements UserDao, Serializable {
 
-    private Map<String, ProfessionalLogin> professionalLogin;
-    private Map<String, ProfessionalDetails> professionalDetails;
+    private Map<String, UserLogin> userLogin;
+    private Map<String, UserDetails> userDetails;
 
 
-    public Map<String, ProfessionalLogin> getLogin() {
-        return professionalLogin;
+    public Map<String, UserLogin> getLogin() {
+        return userLogin;
     }
 
-    public Map<String, ProfessionalDetails> getDetails() {
-        return professionalDetails;
+    public Map<String, UserDetails> getDetails() {
+        return userDetails;
     }
 
 
     @Override
-    public void createUser(String email, ProfessionalLogin professionalLogin, ClientProfile clientProfile)
+    public void createUser(String email, UserLogin userLogin, UserDetails userDetails)
             throws UserAlreadyExistsException {
         if (validateEmail(email)){
             throw new UserAlreadyExistsException();
         }
         RepositoryOfUsers.fillDatabase();
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().put(email, (ProfessionalDetails) clientProfile);
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().put(email, professionalLogin);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().put(email, userDetails);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().put(email, userLogin);
     }
 
 
 
     @Override
-    public ProfessionalLogin findUserLogin(String email) throws NoSuchUserException {
+    public UserLogin findUserLogin(String email) throws NoSuchUserException {
         if (!validateEmail(email)){
             throw new NoSuchUserException();
         }
@@ -57,7 +55,7 @@ public class ProfessionalDaoBean implements ProfessionalDao, Serializable {
     }
 
     @Override
-    public ClientProfile findUserDetails(String email) throws NoSuchUserException {
+    public UserDetails findUserDetails(String email) throws NoSuchUserException {
         if (!validateEmail(email)){
             throw new NoSuchUserException();
         }
@@ -98,10 +96,10 @@ public class ProfessionalDaoBean implements ProfessionalDao, Serializable {
 
 
     @Override
-    public List<ProfessionalDetails> getByProfession(String profession){
+    public List<UserDetails> getByProfession(String profession){
 
         RepositoryOfUsers.fillDatabase();
-        List<ProfessionalDetails> values =
+        List<UserDetails> values =
                 new ArrayList<>(RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().values());
 
         return values.stream().filter(pd -> pd.getProfession().toString()

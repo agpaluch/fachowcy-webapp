@@ -4,13 +4,13 @@ package domain;
 import java.time.LocalDate;
 
 
-public class ProfessionalLogin {
+public class UserLogin {
 
     private String email;
     private String password;
     private LocalDate signUpDate;
 
-    public ProfessionalLogin(String email, String password) {
+    public UserLogin(String email, String password) {
 
         this.email = email;
         this.password = password;
@@ -18,7 +18,7 @@ public class ProfessionalLogin {
 
     }
 
-    public ProfessionalLogin() {
+    public UserLogin() {
         // Hibernate
     }
 

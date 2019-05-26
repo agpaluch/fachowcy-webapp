@@ -1,6 +1,6 @@
 package session;
 
-import domain.ProfessionalLogin;
+import domain.UserLogin;
 import repository.RepositoryOfUsers;
 
 import javax.enterprise.context.SessionScoped;
@@ -15,15 +15,15 @@ public class SessionInfoBean implements SessionInfo, Serializable {
     private String userType;
     private String password;
     private String email;
-    private ProfessionalLogin professionalLogin;
+    private UserLogin userLogin;
 
     @Override
     public boolean findUserByEmailAndPassword(){
         RepositoryOfUsers.fillDatabase();
-            for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
+            for (Map.Entry<String, UserLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
 
                 if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                    professionalLogin = entry.getValue();
+                    userLogin = entry.getValue();
                     return true;
                 }
             }
@@ -33,8 +33,8 @@ public class SessionInfoBean implements SessionInfo, Serializable {
 
 
     @Override
-    public ProfessionalLogin getUserLogin() {
-        return professionalLogin;
+    public UserLogin getUserLogin() {
+        return userLogin;
     }
 
 
@@ -67,8 +67,8 @@ public class SessionInfoBean implements SessionInfo, Serializable {
     }
 
     @Override
-    public void setUserLogin(ProfessionalLogin professionalLogin) {
-        this.professionalLogin = professionalLogin;
+    public void setUserLogin(UserLogin userLogin) {
+        this.userLogin = userLogin;
     }
 
 

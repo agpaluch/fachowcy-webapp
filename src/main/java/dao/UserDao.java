@@ -1,8 +1,7 @@
 package dao;
 
-import domain.ClientProfile;
-import domain.ProfessionalDetails;
-import domain.ProfessionalLogin;
+import domain.UserDetails;
+import domain.UserLogin;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 
@@ -11,25 +10,25 @@ import java.util.List;
 import java.util.Map;
 
 @Local
-public interface ProfessionalDao {
+public interface UserDao {
 
-    public List<ProfessionalDetails> getByProfession(String profession);
+    public List<UserDetails> getByProfession(String profession);
 
     Map<String, ?> getLogin();
 
     Map<String, ?> getDetails();
 
-    void createUser(String email, ProfessionalLogin professionalLogin, ClientProfile clientProfile)
+    void createUser(String email, UserLogin userLogin, UserDetails userDetails)
             throws UserAlreadyExistsException;
 
-    ProfessionalLogin findUserLogin(String email) throws NoSuchUserException;
+    UserLogin findUserLogin(String email) throws NoSuchUserException;
 
-    ClientProfile findUserDetails(String email) throws NoSuchUserException;
+    UserDetails findUserDetails(String email) throws NoSuchUserException;
 
-    default void updateUser(String email, ProfessionalLogin professionalLogin, ClientProfile clientProfile)
+    default void updateUser(String email, UserLogin userLogin, UserDetails userDetails)
             throws NoSuchUserException, UserAlreadyExistsException{
         deleteUser(email);
-        createUser(email, professionalLogin, clientProfile);
+        createUser(email, userLogin, userDetails);
     }
 
     void deleteUser(String email) throws NoSuchUserException;
