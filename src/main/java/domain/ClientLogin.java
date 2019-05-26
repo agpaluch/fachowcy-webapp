@@ -1,26 +1,28 @@
-package dao;
-
+package domain;
 
 import java.time.LocalDate;
 
+public class ClientLogin implements UserLogin {
 
-public class ProfessionalLogin implements UserLogin {
-
+    //login credentials
     private String email;
     private String password;
     private LocalDate signUpDate;
 
 
-    public ProfessionalLogin(String email, String password) {
+
+    public ClientLogin(String email, String password) {
+
 
         this.email = email;
         this.password = password;
-        this.signUpDate =  LocalDate.now();
+        this.signUpDate = LocalDate.now();
+
 
     }
 
-    public ProfessionalLogin() {
-        //Non-parametric constructor used in MenuAdd
+    public ClientLogin() {
+        // Non-parametric constructor used in MenuAdd
     }
 
     @Override
@@ -37,7 +39,6 @@ public class ProfessionalLogin implements UserLogin {
     public LocalDate getSignUpDate() {
         return signUpDate;
     }
-
 
 
 
@@ -58,10 +59,9 @@ public class ProfessionalLogin implements UserLogin {
 
 
     public String toString(){
-        return("Login: " + getEmail() + "\n" +
-                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate()+ "\n" );
+        return("Email: " + getEmail() + "\n" +
+                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate() + "\n" );
     }
 
 
 }
-

@@ -1,12 +1,8 @@
-package dao;
+package domain;
 
 
 import repository.City;
-import repository.CityDistrict;
 import repository.TypeOfProfession;
-import validators.CheckProfession;
-
-import javax.validation.constraints.*;
 
 public class ProfessionalDetails implements ProfessionalProfile {
 

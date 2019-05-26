@@ -1,6 +1,6 @@
 package session;
 
-import dao.UserLogin;
+import domain.UserLogin;
 
 public interface SessionInfo {
 

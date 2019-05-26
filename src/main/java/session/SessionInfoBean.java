@@ -1,8 +1,8 @@
 package session;
 
-import dao.ClientLogin;
-import dao.ProfessionalLogin;
-import dao.UserLogin;
+import domain.ClientLogin;
+import domain.ProfessionalLogin;
+import domain.UserLogin;
 import repository.RepositoryOfUsers;
 
 import javax.enterprise.context.SessionScoped;

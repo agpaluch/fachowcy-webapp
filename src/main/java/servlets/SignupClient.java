@@ -1,11 +1,12 @@
 package servlets;
 
 import dao.*;
+import domain.ClientDetails;
+import domain.ProfessionalLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.City;
-import repository.TypeOfProfession;
 import session.SessionInfo;
 
 import javax.inject.Inject;
@@ -49,12 +50,12 @@ public class SignupClient extends HttpServlet {
     @Override
     public void init() {
         mapOfValues = Stream.concat(Arrays.stream(ClientDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(ClientLogin.class.getDeclaredFields())
+                .map(Field::getName), Arrays.stream(ProfessionalLogin.class.getDeclaredFields())
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
         mapOfValues.put("confirmPassword", "");
 
         mapOfErrors = Stream.concat(Arrays.stream(ClientDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(ClientLogin.class.getDeclaredFields())
+                .map(Field::getName), Arrays.stream(ProfessionalLogin.class.getDeclaredFields())
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
         mapOfErrors.put("confirmPassword", "");
 
@@ -122,7 +123,7 @@ public class SignupClient extends HttpServlet {
                 validator2.validate(passwordDto);
 
         mapOfErrors = Stream.concat(Arrays.stream(ClientDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(ClientLogin.class.getDeclaredFields())
+                .map(Field::getName), Arrays.stream(ProfessionalLogin.class.getDeclaredFields())
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
         mapOfErrors.put("confirmPassword", "");
 
@@ -158,7 +159,7 @@ public class SignupClient extends HttpServlet {
             Double longitude = Double.parseDouble(longitudeString);
             Double latitude = Double.parseDouble(latitudeString);
 
-            ClientLogin clientLogin = new ClientLogin(email, password);
+            ProfessionalLogin clientLogin = new ProfessionalLogin(email, password);
             ClientDetails clientDetails = new ClientDetails(name, surname, phoneNumber, city, longitude, latitude);
             printWriter.write(clientDetails.toString() +"\n" + clientLogin.toString());
 

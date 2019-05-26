@@ -1,10 +1,13 @@
 package dao;
 
 
+import domain.ClientProfile;
+import domain.ProfessionalDetails;
+import domain.ProfessionalLogin;
+import domain.UserLogin;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 import repository.RepositoryOfUsers;
-import session.SessionInfo;
 
 import javax.ejb.Stateful;
 import javax.inject.Named;
@@ -17,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Stateful
 @Named("professionalsDatabase")
-public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao, Serializable {
+public class ProfessionalsDatabaseDaoBean implements ProfessionalDao, Serializable {
 
     private Map<String, ProfessionalLogin> professionalLogin;
     private Map<String, ProfessionalDetails> professionalDetails;

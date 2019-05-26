@@ -1,6 +1,8 @@
 package dao;
 
 
+import domain.ClientProfile;
+import domain.UserLogin;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 

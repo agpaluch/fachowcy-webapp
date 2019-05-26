@@ -1,7 +1,8 @@
 package servlets;
 
 import dao.*;
-import exceptions.NoSuchUserException;
+import domain.ProfessionalDetails;
+import domain.ProfessionalLogin;
 import exceptions.UserAlreadyExistsException;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;

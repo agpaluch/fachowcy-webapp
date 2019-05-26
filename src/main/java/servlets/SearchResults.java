@@ -1,10 +1,10 @@
 package servlets;
 
 import dao.*;
+import domain.ProfessionalDetails;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import repository.RepositoryOfUsers;
 import session.SessionInfo;
 
 import javax.ejb.EJB;
@@ -34,7 +34,7 @@ public class SearchResults extends HttpServlet {
     SessionInfo sessionInfo;
 
     @EJB(beanName="ProfessionalsDatabaseDaoBean")
-    ProfessionalCRUDDao professionalCRUDDao;
+    ProfessionalDao professionalCRUDDao;
 
 
     @Override

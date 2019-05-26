@@ -1,8 +1,7 @@
-package dao;
+package domain;
 
 
 import repository.City;
-import repository.CityDistrict;
 
 public class ClientDetails implements ClientProfile {
 
