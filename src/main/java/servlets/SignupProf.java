@@ -3,6 +3,8 @@ package servlets;
 import dao.*;
 import domain.ProfessionalDetails;
 import domain.ProfessionalLogin;
+import dto.PasswordDto;
+import dto.ProfessionalDto;
 import exceptions.UserAlreadyExistsException;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;

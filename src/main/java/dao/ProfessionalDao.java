@@ -3,7 +3,6 @@ package dao;
 import domain.ClientProfile;
 import domain.ProfessionalDetails;
 import domain.ProfessionalLogin;
-import domain.UserLogin;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 

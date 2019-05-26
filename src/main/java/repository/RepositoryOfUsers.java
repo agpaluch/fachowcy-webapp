@@ -1,7 +1,7 @@
 package repository;
 
 import com.google.gson.Gson;
-import dao.ProfessionalsDatabaseDaoBean;
+import dao.ProfessionalDaoBean;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,18 +11,18 @@ import java.io.InputStreamReader;
 
 public class RepositoryOfUsers {
 
-    private static ProfessionalsDatabaseDaoBean professionalsDatabaseDaoBean;
+    private static ProfessionalDaoBean professionalDaoBean;
 
     public static void fillDatabase(){
 
-        if (professionalsDatabaseDaoBean==null){
+        if (professionalDaoBean == null){
             RepositoryOfUsers.readExistingDatabase();
         }
 
     }
 
-    public static ProfessionalsDatabaseDaoBean getProfessionalsDatabaseDaoBean() {
-        return professionalsDatabaseDaoBean;
+    public static ProfessionalDaoBean getProfessionalsDatabaseDaoBean() {
+        return professionalDaoBean;
     }
 
 
@@ -32,7 +32,7 @@ public class RepositoryOfUsers {
         InputStream inputStreamProf = RepositoryOfUsers.class.getClassLoader().getResourceAsStream("professionalsDatabase.json");
         String contentProfessionals = readFileToString(inputStreamProf);
 
-        professionalsDatabaseDaoBean =  new Gson().fromJson(contentProfessionals, ProfessionalsDatabaseDaoBean.class);
+        professionalDaoBean =  new Gson().fromJson(contentProfessionals, ProfessionalDaoBean.class);
     }
 
     private static String readFileToString(InputStream inputStream){

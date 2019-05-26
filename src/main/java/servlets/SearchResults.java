@@ -33,8 +33,8 @@ public class SearchResults extends HttpServlet {
     @Inject
     SessionInfo sessionInfo;
 
-    @EJB(beanName="ProfessionalsDatabaseDaoBean")
-    ProfessionalDao professionalCRUDDao;
+    @EJB(beanName = "ProfessionalDaoBean")
+    ProfessionalDao professionalDao;
 
 
     @Override
@@ -83,7 +83,7 @@ public class SearchResults extends HttpServlet {
         List<ProfessionalDetails> li = pd.getByProfession(s);*/
 
 
-        List<ProfessionalDetails> li = professionalCRUDDao.getByProfession(s);
+        List<ProfessionalDetails> li = professionalDao.getByProfession(s);
 
         map.put("searchResults", li);
 

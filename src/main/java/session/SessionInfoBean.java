@@ -1,8 +1,6 @@
 package session;
 
-import domain.ClientLogin;
 import domain.ProfessionalLogin;
-import domain.UserLogin;
 import repository.RepositoryOfUsers;
 
 import javax.enterprise.context.SessionScoped;
@@ -68,6 +66,7 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         this.userType = userType;
     }
 
+    @Override
     public void setUserLogin(ProfessionalLogin professionalLogin) {
         this.professionalLogin = professionalLogin;
     }

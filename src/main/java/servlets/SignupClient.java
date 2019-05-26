@@ -1,8 +1,9 @@
 package servlets;
 
-import dao.*;
 import domain.ClientDetails;
 import domain.ProfessionalLogin;
+import dto.ClientDto;
+import dto.PasswordDto;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
