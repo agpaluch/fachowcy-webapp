@@ -1,8 +1,6 @@
 package session;
 
-import dao.ClientLogin;
-import dao.ProfessionalLogin;
-import dao.UserLogin;
+import domain.UserLogin;
 import repository.RepositoryOfUsers;
 
 import javax.enterprise.context.SessionScoped;
@@ -21,34 +19,18 @@ public class SessionInfoBean implements SessionInfo, Serializable {
 
     @Override
     public boolean findUserByEmailAndPassword(){
-
-
         RepositoryOfUsers.fillDatabase();
-
-        if (userType.equals("professional")){
-
-            for (Map.Entry<String, ProfessionalLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
-
-                if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                    userLogin=entry.getValue();
-                    return true;
-                }
-
-
-            }
-
-        } else {
-            for (Map.Entry<String, ClientLogin> entry : RepositoryOfUsers.getClientsDatabaseDaoBean().getLogin().entrySet()) {
+            for (Map.Entry<String, UserLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
 
                 if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
                     userLogin = entry.getValue();
                     return true;
                 }
             }
-
-        }
         return false;
-    }
+        }
+
+
 
     @Override
     public UserLogin getUserLogin() {
@@ -84,6 +66,7 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         this.userType = userType;
     }
 
+    @Override
     public void setUserLogin(UserLogin userLogin) {
         this.userLogin = userLogin;
     }

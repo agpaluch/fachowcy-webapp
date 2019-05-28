@@ -1,61 +1,87 @@
-package dao;
-
+package domain;
 
 import repository.City;
-import repository.CityDistrict;
+import repository.TypeOfProfession;
 
-public class ClientDetails implements ClientProfile {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-    //profile information
+@Entity
+@Table
+public class UserDetails {
+
+    @Id
+    String login;
+
+    @Column
+    @NotNull
     private String name;
+
+    @Column
+    @NotNull
     private String surname;
+
+    @Column
+    private TypeOfProfession profession;
+
+    @Column
+    @NotNull
     private long phoneNumber;
+
+    @Column
     private City city;
     //private CityDistrict district;
+
+    @Column
     private double longitude;
+
+    @Column
     private double latitude;
-    private int numberLikes;
-    private String comments;
 
+    @Column
+    private int numberLikes = 0;
 
-    public ClientDetails(){
-        // Non-parametric constructor used in MenuAdd
+    @Column
+    private String comments = "";
+
+    public UserDetails(){
+        // Hibernate
     }
 
-    public ClientDetails(String name, String surname,
+    public UserDetails(String name, String surname, TypeOfProfession profession,
                                long phoneNumber, City city,
-                                //CityDistrict district,
+                               //CityDistrict district,
                                double longitude, double latitude) {
 
         this.name = name;
         this.surname = surname;
+        this.profession = profession;
         this.phoneNumber = phoneNumber;
         this.city = city;
         //this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.numberLikes = 0;
-        this.comments = "";
-
     }
 
+    public TypeOfProfession getProfession() {
+        return profession;
+    }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public String getSurname() {
         return surname;
     }
 
-    @Override
     public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    @Override
     public City getCity() {
         return city;
     }
@@ -65,28 +91,21 @@ public class ClientDetails implements ClientProfile {
         return district;
     }*/
 
-
-    @Override
     public double getLongitude() {
         return longitude;
     }
 
-    @Override
     public double getLatitude() {
         return latitude;
     }
 
-    @Override
     public int getNumberLikes() {
         return numberLikes;
     }
 
-    @Override
     public String getComments() {
         return comments;
     }
-
-
 
     public void setName(String name) {
         this.name = name;
@@ -94,6 +113,10 @@ public class ClientDetails implements ClientProfile {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setProfession(TypeOfProfession profession) {
+        this.profession = profession;
     }
 
     public void setPhoneNumber(long phoneNumber) {
@@ -125,15 +148,18 @@ public class ClientDetails implements ClientProfile {
     }
 
 
-
     public String toString(){
         return ("Name: " + getName()  + "\n"+
-                "Surname: " + getSurname()  + "\n" +
+                "Surname: " + getSurname()  + "\n" + "Profession: " +
+                getProfession().toString() + "\n"+
                 "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity().toString() +"\n"+
-                //"City district: " + getDistrict() + "\n"+
+                //"City district: " + getDistrict().toString() + "\n"+
                 "Longitude: " + getLongitude() + "\n"+
                 "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+
                 "Comments: " + getComments());
     }
 
+
 }
+
+

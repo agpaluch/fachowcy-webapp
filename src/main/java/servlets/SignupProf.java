@@ -1,7 +1,10 @@
 package servlets;
 
 import dao.*;
-import exceptions.NoSuchUserException;
+import domain.UserDetails;
+import domain.UserLogin;
+import dto.PasswordDto;
+import dto.ProfessionalDto;
 import exceptions.UserAlreadyExistsException;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
@@ -30,8 +33,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.lang.Long.parseLong;
-
 @WebServlet("/signup-prof")
 public class SignupProf extends HttpServlet {
 
@@ -47,20 +48,20 @@ public class SignupProf extends HttpServlet {
     SessionInfo sessionInfo;
 
     @Inject
-    @Named("professionalsDatabase")
-    UserCRUDDao professionalsDatabaseDaoBean;
+    @Named("usersDatabase")
+    UserDao userDao;
 
 
 
     @Override
     public void init() {
-        mapOfValues = Stream.concat(Arrays.stream(ProfessionalDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(ProfessionalLogin.class.getDeclaredFields())
+        mapOfValues = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
+                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
         mapOfValues.put("confirmPassword", "");
 
-        mapOfErrors = Stream.concat(Arrays.stream(ProfessionalDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(ProfessionalLogin.class.getDeclaredFields())
+        mapOfErrors = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
+                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
         mapOfErrors.put("confirmPassword", "");
 
@@ -130,8 +131,8 @@ public class SignupProf extends HttpServlet {
         Set<ConstraintViolation<PasswordDto>> constraintViolationsPassword =
                 validator2.validate(passwordDto);
 
-        mapOfErrors = Stream.concat(Arrays.stream(ProfessionalDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(ProfessionalLogin.class.getDeclaredFields())
+        mapOfErrors = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
+                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
         mapOfErrors.put("confirmPassword", "");
 
@@ -166,16 +167,12 @@ public class SignupProf extends HttpServlet {
             Double longitude = Double.parseDouble(longitudeString);
             Double latitude = Double.parseDouble(latitudeString);
 
-            ProfessionalLogin professionalLogin = new ProfessionalLogin(email, password);
-            ProfessionalDetails professionalDetails = new ProfessionalDetails(name, surname, profession, phoneNumber, city, longitude, latitude);
+            UserLogin userLogin = new UserLogin(email, password);
+            UserDetails userDetails = new UserDetails(name, surname, profession, phoneNumber, city, longitude, latitude);
 
             try {
-                professionalsDatabaseDaoBean.createUser(email, professionalLogin, professionalDetails);
+                userDao.createUser(email, userLogin, userDetails);
                 sessionInfo.setUserType("professional");
-/*                printWriter.write(professionalsDatabaseDaoBean.findUserLogin(email).toString() +
-                professionalsDatabaseDaoBean.findUserDetails(email).toString());*/
-
-
             } catch (UserAlreadyExistsException e){
             //TODO: handle this exception
             }

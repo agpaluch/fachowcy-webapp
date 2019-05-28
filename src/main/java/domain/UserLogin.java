@@ -1,57 +1,59 @@
-package dao;
+package domain;
 
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
+@Entity
+@Table
+public class UserLogin {
 
-public class ProfessionalLogin implements UserLogin {
-
+    @Id
     private String email;
+
+    @Column
+    @NotEmpty
     private String password;
+
+    @NotNull
+    @PastOrPresent
     private LocalDate signUpDate;
 
-
-    public ProfessionalLogin(String email, String password) {
-
+    public UserLogin(String email, String password) {
         this.email = email;
         this.password = password;
         this.signUpDate =  LocalDate.now();
-
     }
 
-    public ProfessionalLogin() {
-        //Non-parametric constructor used in MenuAdd
+    public UserLogin() {
+        // Hibernate
     }
 
-    @Override
     public String getEmail() {
         return email;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
 
-    @Override
     public LocalDate getSignUpDate() {
         return signUpDate;
     }
 
-
-
-
-    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @Override
     public void setSignUpDate(LocalDate signUpDate) {
         this.signUpDate = signUpDate;
     }

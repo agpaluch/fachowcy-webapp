@@ -1,10 +1,10 @@
 package dao;
 
-
+import domain.UserDetails;
+import domain.UserLogin;
 import exceptions.NoSuchUserException;
 import exceptions.UserAlreadyExistsException;
 import repository.RepositoryOfUsers;
-import session.SessionInfo;
 
 import javax.ejb.Stateful;
 import javax.inject.Named;
@@ -16,31 +16,32 @@ import java.util.stream.Collectors;
 
 
 @Stateful
-@Named("professionalsDatabase")
-public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao, Serializable {
+@Named("usersDatabase")
+public class UserDaoBean implements UserDao, Serializable {
 
-    private Map<String, ProfessionalLogin> professionalLogin;
-    private Map<String, ProfessionalDetails> professionalDetails;
+    private Map<String, UserLogin> userLogin;
+    private Map<String, UserDetails> userDetails;
 
-
-    public Map<String, ProfessionalLogin> getLogin() {
-        return professionalLogin;
+    @Override
+    public Map<String, UserLogin> getLogin() {
+        return userLogin;
     }
 
-    public Map<String, ProfessionalDetails> getDetails() {
-        return professionalDetails;
+    @Override
+    public Map<String, UserDetails> getDetails() {
+        return userDetails;
     }
 
 
     @Override
-    public void createUser(String email, UserLogin userLogin, ClientProfile clientProfile)
+    public void createUser(String email, UserLogin userLogin, UserDetails userDetails)
             throws UserAlreadyExistsException {
         if (validateEmail(email)){
             throw new UserAlreadyExistsException();
         }
         RepositoryOfUsers.fillDatabase();
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().put(email, (ProfessionalDetails) clientProfile);
-        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().put(email, (ProfessionalLogin) userLogin);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().put(email, userDetails);
+        RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().put(email, userLogin);
     }
 
 
@@ -55,7 +56,7 @@ public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao, Serial
     }
 
     @Override
-    public ClientProfile findUserDetails(String email) throws NoSuchUserException {
+    public UserDetails findUserDetails(String email) throws NoSuchUserException {
         if (!validateEmail(email)){
             throw new NoSuchUserException();
         }
@@ -96,10 +97,10 @@ public class ProfessionalsDatabaseDaoBean implements ProfessionalCRUDDao, Serial
 
 
     @Override
-    public List<ProfessionalDetails> getByProfession(String profession){
+    public List<UserDetails> getByProfession(String profession){
 
         RepositoryOfUsers.fillDatabase();
-        List<ProfessionalDetails> values =
+        List<UserDetails> values =
                 new ArrayList<>(RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getDetails().values());
 
         return values.stream().filter(pd -> pd.getProfession().toString()

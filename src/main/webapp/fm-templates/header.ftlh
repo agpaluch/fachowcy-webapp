@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4">
                     <ul class="list-unstyled">
-                        <li><a href="/login" class="text-white">Login</a></li>
+                        <li><a href="/login-form" class="text-white">Login</a></li>
                         <li><a href="/signup-client" class="text-white">Rejestracja klient</a></li>
                         <li><a href="/signup-prof" class="text-white">Rejestracja fachowiec</a></li>
                         <li><a href="#" class="text-white">Kontakt</a></li>
@@ -35,10 +35,10 @@
         <div class="col-2">
             <#if sessionInfo.getUserLogin()??>
                 <div style="color: #FFF; margin-right: 10px;"> ${sessionInfo.getUserLogin().getEmail()}</div>
-                <a href="" class="btn btn-outline-success my-2 my-sm-0">LogOut</a>
+                <a href="/logout" class="btn btn-outline-success my-2 my-sm-0">LogOut</a>
             <#else>
                 <div style="color: #FFF; margin-right: 10px;">Użytkownik anonimowy</div>
-                <a href="/login" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>
+                <a href="/login-form" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>
             </#if>
 
             <#--<div style="color: #FFF; margin-right: 10px;"> Użytkownik anonimowy </div>-->

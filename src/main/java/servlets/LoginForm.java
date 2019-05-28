@@ -1,20 +1,13 @@
 package servlets;
 
-import exceptions.NoSuchUserException;
-import dao.ClientLogin;
-import dao.UserCRUDDao;
-import dao.UserLogin;
+import domain.UserLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.RepositoryOfUsers;
 import session.SessionInfo;
-import session.SessionInfoBean;
 
 import javax.inject.Inject;
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +29,6 @@ public class LoginForm extends HttpServlet {
 
     @Inject
     SessionInfo sessionInfo;
-
 
     @Override
     public void init() {
@@ -83,14 +75,28 @@ public class LoginForm extends HttpServlet {
         sessionInfo.setPassword(password);
         sessionInfo.setEmail(email);
 
-        if(sessionInfo.findUserByEmailAndPassword()){
+        UserLogin userFound = findUserByEmailAndPassword(email, password);
+
+        if(userFound != null) {
             response.sendRedirect("/");
+            sessionInfo.setUserLogin(userFound);
         }
         else {
             response.sendRedirect("/login-form?error=1");
         }
 
 
+    }
+
+    private UserLogin findUserByEmailAndPassword(String email, String password){
+        RepositoryOfUsers.fillDatabase();
+        for (Map.Entry<String, UserLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
+            if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
+                UserLogin userLogin = entry.getValue();
+                return userLogin;
+            }
+        }
+        return null;
     }
 
 
