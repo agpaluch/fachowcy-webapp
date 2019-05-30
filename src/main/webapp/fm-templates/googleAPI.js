@@ -52,8 +52,8 @@ function initAutocomplete() {
                 console.log("Returned place contains no geometry");
                 return;
             } else {
-                document.getElementById('latitude').value=place.geometry.location.lat();
-                document.getElementById('longitude').value=place.geometry.location.lng();
+                document.getElementById('register-latitude').value=place.geometry.location.lat();
+                document.getElementById('register-longitude').value=place.geometry.location.lng();
                 //$.post( "/signup-prof", { latitude: 123, longitude: 2 } );
             }
             var icon = {
