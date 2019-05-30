@@ -10,7 +10,9 @@
 <main>
     <h2>Rejestracja fachowca</h2>
 
-    <form method="post" action="/signup-prof" id="id1" onsubmit="event.preventDefault(); return checkEverything();">
+    <#--<form method="post" action="/signup-prof" id="id1" onsubmit="event.preventDefault(); return checkEverything();">-->
+        <form id="form">
+
 
         Profesja: <select name="profession">
            <#list professions as prof>
@@ -25,16 +27,58 @@
     <#include "signup-form.ftlh">
     </form>
 
+    <div id="odp"></div>
+
 </main>
 
 
-
-<#--
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initAutocomplete"></script>
--->
 
 
     <#include "JSform.ftlh">
+
+<script>
+    (function() {
+        const inputEmail = document.getElementById('register-email');
+        const inputPassword = document.getElementById('register-password');
+        const inputName = document.getElementById('register-name');
+        const inputSurname = document.getElementById('register-surname');
+        const inputPhoneNumber = document.getElementById('register-phoneNumber');
+        const inputCity = document.getElementById('register-city');
+        const inputLatitude= document.getElementById('register-latitude');
+        const inputLongitude = document.getElementById('register-longitude');
+        const odp = document.getElementById('odp');
+
+        document.getElementById('submitButton').addEventListener('click', (clickEvent) => {
+            clickEvent.preventDefault();
+            if (checkEverything()){
+                fetch('signup-prof', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: inputEmail.value,
+                        password: inputPassword.value,
+                        name: inputName.value,
+                        surname: inputSurname.value,
+                        phoneNumber: inputPhoneNumber.value,
+                        city: inputCity.value,
+                        latitude: inputLatitude.value,
+                        longitude: inputLongitude.value
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.status === 200) {
+                        return response.json();
+                    }
+                    odp.innerHTML = response.statusText;
+                })
+            }
+        });
+
+    })();
+</script>
+
 
 </body>
 </html>

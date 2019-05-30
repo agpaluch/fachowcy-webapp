@@ -21,7 +21,7 @@
         <div id="phoneNumber-error">${errors.phoneNumber}</div>
 
 
-        Miasto: <select name="city">
+        Miasto: <select name="city" id="register-city">
            <#list cities as city>
                <#if inputData.city==city>
                     <option value="${city}" selected>${city.fullName}</option>
@@ -38,18 +38,19 @@
                </#list>
     </select><br/><br/>-->
 
-        <div>Szerokość geograficzna: <input id="latitude" type="text" name="latitude" readonly
+        <div>Szerokość geograficzna: <input id="register-latitude" type="text" name="latitude" readonly
                                             <#--onchange="validateLocationField('latitude')"-->
                                             value="${inputData.latitude}"/><br/><br/></div>
         <div id="latitude-error">${errors.latitude}</div>
 
-        <div>Długość geograficzna: <input id="longitude" type="text" name="longitude" readonly
+        <div>Długość geograficzna: <input id="register-longitude" type="text" name="longitude" readonly
                                           <#--onchange="validateLocationField('longitude')"-->
                                           value="${inputData.longitude}"/><br/><br/></div>
         <div id="longitude-error">${errors.longitude}</div>
 
-        <input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>
+        <#--<input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>-->
 
+         <button id="submitButton" class="btn btn-success">Zarejestruj</button>
 
     <#--    AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM-->
 
