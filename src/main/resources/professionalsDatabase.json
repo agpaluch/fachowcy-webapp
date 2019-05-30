@@ -39,11 +39,12 @@
   },
   "userDetails": {
     "ccc@gmail.com": {
+      "email": "ccc@gmail.com",
       "name": "Agnieszka",
       "surname": "Kowalski",
       "profession": "PLUMBER",
       "phoneNumber": 572198086,
-      "city": "Warsaw",
+      "city": "WARSZAWA",
       "district": "PRAGAPLD",
       "longitude": 123,
       "latitude": 160,
@@ -51,11 +52,12 @@
       "comments": "Wszelkie prace związane z hydrauliką."
     },
     "ddd@gmail.com": {
+      "email": "ddd@gmail.com",
       "name": "Arkadiusz",
       "surname": "Dębski",
       "profession": "ELECTRICIAN",
       "phoneNumber": 572198786,
-      "city": "Warsaw",
+      "city": "WARSZAWA",
       "district": "MOKOTOW",
       "longitude": 123,
       "latitude": 67,
@@ -63,11 +65,12 @@
       "comments": "Wszelkie prace związane z elektryką."
     },
     "aaa@gmail.com": {
+      "email": "bbb@gmail.com",
       "name": "Andrzej",
       "surname": "Niemrawy",
       "profession": "ELECTRICIAN",
       "phoneNumber": 333222111,
-      "city": "Warsaw",
+      "city": "WARSZAWA",
       "district": "PRAGAPLD",
       "longitude": 123,
       "latitude": 160,
@@ -75,11 +78,12 @@
       "comments": "Miły zaradny trochę niemrawy"
     },
     "bbb@gmail.com": {
+      "email": "aaa@gmail.com",
       "name": "Arkadiusz",
       "surname": "Dębski",
       "profession": "PLUMBER",
       "phoneNumber": 444555666,
-      "city": "Warsaw",
+      "city": "WARSZAWA",
       "district": "MOKOTOW",
       "longitude": 123,
       "latitude": 67,

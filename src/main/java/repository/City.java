@@ -4,7 +4,6 @@ public enum City {
 
     WARSZAWA("Warszawa");
 
-
     private final String fullName;
 
     City(String fullName) {

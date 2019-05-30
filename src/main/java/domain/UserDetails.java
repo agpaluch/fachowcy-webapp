@@ -3,18 +3,24 @@ package domain;
 import repository.City;
 import repository.TypeOfProfession;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table
+@Table(name = "userDetails")
 public class UserDetails {
 
     @Id
-    String login;
+    @Column(name = "id")
+    private Long id;
+
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id")
+    @MapsId
+    UserLogin userLogin;
+
+    @Column(name = "email")
+    String email;
 
     @Column
     @NotNull
@@ -25,6 +31,7 @@ public class UserDetails {
     private String surname;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private TypeOfProfession profession;
 
     @Column
@@ -32,6 +39,7 @@ public class UserDetails {
     private long phoneNumber;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private City city;
     //private CityDistrict district;
 
@@ -51,11 +59,11 @@ public class UserDetails {
         // Hibernate
     }
 
-    public UserDetails(String name, String surname, TypeOfProfession profession,
+    public UserDetails(String email, String name, String surname, TypeOfProfession profession,
                                long phoneNumber, City city,
                                //CityDistrict district,
                                double longitude, double latitude) {
-
+        this.email = email;
         this.name = name;
         this.surname = surname;
         this.profession = profession;
@@ -64,6 +72,14 @@ public class UserDetails {
         //this.district = district;
         this.longitude = longitude;
         this.latitude = latitude;
+    }
+
+    public UserLogin getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(UserLogin userLogin) {
+        this.userLogin = userLogin;
     }
 
     public TypeOfProfession getProfession() {
@@ -147,19 +163,29 @@ public class UserDetails {
         this.comments = comments;
     }
 
-
-    public String toString(){
-        return ("Name: " + getName()  + "\n"+
-                "Surname: " + getSurname()  + "\n" + "Profession: " +
-                getProfession().toString() + "\n"+
-                "Phone number: " + getPhoneNumber() + "\n"+ "City: " + getCity().toString() +"\n"+
-                //"City district: " + getDistrict().toString() + "\n"+
-                "Longitude: " + getLongitude() + "\n"+
-                "Latitude: " + getLatitude() + "\n"+ "Number of likes: "+ getNumberLikes() + "\n"+
-                "Comments: " + getComments());
+    public String getEmail() {
+        return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", profession=" + profession +
+                ", phoneNumber=" + phoneNumber +
+                ", city=" + city +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", numberLikes=" + numberLikes +
+                ", comments='" + comments + '\'' +
+                '}';
+    }
 }
 
 
