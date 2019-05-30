@@ -34,6 +34,10 @@ public class UserLogin {
     @PastOrPresent
     private LocalDate signUpDate;
 
+    @NotNull
+    private Role role;
+
+
     public UserLogin(String email, String password) {
         this.email = email;
         this.password = password;

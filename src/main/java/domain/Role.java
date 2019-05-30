@@ -3,6 +3,7 @@ package domain;
 public enum Role {
 
     PROFESSIONAL("fachowiec"),
+    ADMIN("administrator"),
     CLIENT("klient");
 
 
