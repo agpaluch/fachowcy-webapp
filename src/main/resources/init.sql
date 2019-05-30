@@ -1,11 +1,12 @@
-CREATE SCHEMA IF NOT EXISTS fachowcy;
 
-ALTER DATABASE fachowcy CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE SCHEMA IF NOT EXISTS fachmann;
 
-USE fachowcy;
+ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE fachmann;
 
 --+ Create table for login data
-CREATE TABLE IF NOT EXISTS userLogin (
+CREATE TABLE IF NOT EXISTS fachmann.ul (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(100) NOT NULL,
@@ -13,7 +14,7 @@ CREATE TABLE IF NOT EXISTS userLogin (
 );
 
 
-INSERT INTO userLogin (email, password) VALUES
+INSERT INTO fachmann.ul (email, password) VALUES
   ('client1@gmail.com', 'client1'),
   ('client2@gmail.com', 'client2'),
   ('prof1@gmail.com', 'prof1'),
@@ -22,8 +23,7 @@ INSERT INTO userLogin (email, password) VALUES
 
 
 --+create table for user details
-CREATE TABLE IF NOT EXISTS userDetails (
-  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS fachmann.ud (
   login_id INT UNSIGNED,
   name VARCHAR(100) NOT NULL,
   surname VARCHAR(100) NOT NULL,
@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS userDetails (
   numberOfLikes SMALLINT UNSIGNED NOT NULL
 );
 
-ALTER TABLE userDetails ADD FOREIGN KEY (login_id) REFERENCES userLogin (id);
 
+ALTER TABLE fachmann.ud ADD FOREIGN KEY (login_id) REFERENCES fachmann.ul (id);
 
-INSERT INTO userDetails (login_id, name, surname, phoneNumber,
+INSERT INTO ud (login_id, name, surname, phoneNumber,
 city, longitude, latitude, numberOfLikes) VALUES
   (1, 'aaa', 'Kowalski', 111111111, 'Warsaw', 23.0, 23.0, 0),
   (2, 'bbb', 'Manur', 222222222,'Warsaw', 24.0, 24.0, 0),

@@ -161,7 +161,7 @@ public class SignupClient extends HttpServlet {
             Double latitude = Double.parseDouble(latitudeString);
 
             UserLogin userLogin = new UserLogin(email, password);
-            UserDetails userDetails = new UserDetails(email, name, surname, null, phoneNumber,
+            UserDetails userDetails = new UserDetails(name, surname, null, phoneNumber,
                                                         city, longitude, latitude);
             printWriter.write(userDetails.toString() +"\n" + userLogin.toString());
 

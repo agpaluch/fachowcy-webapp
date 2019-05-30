@@ -13,30 +13,31 @@ import java.time.LocalDate;
 @Table(name = "userLogin")
 public class UserLogin {
 
+    @OneToOne(mappedBy = "userLogin", cascade = CascadeType.ALL)
+    @JoinColumn(name = "userDetailsID")
+    private UserDetails userDetails;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
     @Column(unique = true)
-    @NotBlank
+    @NotNull
     private String email;
-
-    @OneToOne(mappedBy = "userLogin", cascade = CascadeType.ALL)
-    @JoinColumn(name = "userDetailsID")
-    private UserDetails userDetails;
 
     @Column
     @NotEmpty
     private String password;
 
+    @Column
     @NotNull
-    @PastOrPresent
-    private LocalDate signUpDate;
-
-    @NotNull
+    @Enumerated
     private Role role;
 
+    @Column
+    @PastOrPresent
+    private LocalDate signUpDate;
 
     public UserLogin(String email, String password) {
         this.email = email;
@@ -78,6 +79,14 @@ public class UserLogin {
 
     public void setUserDetails(UserDetails userDetails) {
         this.userDetails = userDetails;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String toString(){

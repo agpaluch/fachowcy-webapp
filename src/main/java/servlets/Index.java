@@ -3,6 +3,7 @@ package servlets;
 import dao.UserDao;
 import dao.UserDaoBean;
 import domain.HibernateUtil;
+import domain.Role;
 import domain.UserDetails;
 import domain.UserLogin;
 import freemarker.TemplateProvider;
@@ -52,36 +53,8 @@ public class Index extends HttpServlet {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-
         EntityManager em = HibernateUtil.getSessionFactory().createEntityManager();
-
-        EntityTransaction trans = em.getTransaction();
-        trans.begin();
-        UserDetails ud = userDao.getByProfession("plumber").get(1);
-
-        UserLogin ul = new UserLogin();
-        ul.setEmail("aaa@gmail.com");
-        ul.setPassword("pass");
-        ul.setSignUpDate(LocalDate.of(1991, 10 ,5));
-
-        ud.setUserLogin(ul);
-        em.persist(ud);
-        trans.commit();
-
-        /*EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        UserLogin ul = new UserLogin();
-        ul.setEmail("ccc@gmail.com");
-        ul.setPassword("pass");
-        ul.setSignUpDate(LocalDate.of(1991, 10 ,5));*/
-        //ul.setUserDetails(userDao.getByProfession("plumber").get(0));
-        //UserDetails ud = userDao.getByProfession("plumber").get(0);
-        //em.persist(ud);
-        //em.persist(ul);
-        //transaction.commit();
-
         em.close();
-
     }
 
     @Override

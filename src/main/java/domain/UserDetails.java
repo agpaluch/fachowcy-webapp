@@ -10,17 +10,14 @@ import javax.validation.constraints.NotNull;
 @Table(name = "userDetails")
 public class UserDetails {
 
-    @Id
-    @Column(name = "id")
-    private Long id;
-
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne
     @JoinColumn(name = "id")
     @MapsId
     UserLogin userLogin;
 
-    @Column(name = "email")
-    String email;
+    @Id
+    @Column(name = "id")
+    private Long id;
 
     @Column
     @NotNull
@@ -59,11 +56,10 @@ public class UserDetails {
         // Hibernate
     }
 
-    public UserDetails(String email, String name, String surname, TypeOfProfession profession,
+    public UserDetails(String name, String surname, TypeOfProfession profession,
                                long phoneNumber, City city,
                                //CityDistrict district,
                                double longitude, double latitude) {
-        this.email = email;
         this.name = name;
         this.surname = surname;
         this.profession = profession;
@@ -163,18 +159,9 @@ public class UserDetails {
         this.comments = comments;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public String toString() {
         return "UserDetails{" +
-                "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", profession=" + profession +
