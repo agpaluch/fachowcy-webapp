@@ -18,11 +18,13 @@ public class Messages {
     @Length(max = 400)
     private String message;
 
-    @Column(name = "sender")
-    private Long sender;
+    @ManyToOne
+    @JoinColumn(name = "sender", referencedColumnName = "id")
+    private UserLogin sender;
 
-    @Column(name = "recipient")
-    private Long recipient;
+    @ManyToOne
+    @JoinColumn(name = "recipient", referencedColumnName = "id")
+    private UserLogin recipient;
 
     @Column
     private boolean wasRead;
@@ -43,19 +45,19 @@ public class Messages {
         this.message = message;
     }
 
-    public Long getSender() {
+    public UserLogin getSender() {
         return sender;
     }
 
-    public void setSender(Long sender) {
+    public void setSender(UserLogin sender) {
         this.sender = sender;
     }
 
-    public Long getRecipient() {
+    public UserLogin getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(Long recipient) {
+    public void setRecipient(UserLogin recipient) {
         this.recipient = recipient;
     }
 
