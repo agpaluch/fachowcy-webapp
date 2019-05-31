@@ -1,6 +1,8 @@
 package servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.*;
+import domain.UserAllData;
 import domain.UserDetails;
 import domain.UserLogin;
 import dto.PasswordDto;
@@ -36,11 +38,13 @@ import java.util.stream.Stream;
 @WebServlet("/signup-prof")
 public class SignupProf extends HttpServlet {
 
-    Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
-    Map<String, Object> dataMap = new HashMap<>();
-    Map<String, String> mapOfErrors = new HashMap<>();
-    Map<String, String> mapOfValues = new HashMap<>();
+    private Logger logger = Logger.getLogger(getClass().getName());
+    private Template template;
+    private Map<String, Object> dataMap = new HashMap<>();
+    private Map<String, String> mapOfErrors = new HashMap<>();
+    private Map<String, String> mapOfValues = new HashMap<>();
+    private ObjectMapper objectMapper = new ObjectMapper();
+
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -100,6 +104,8 @@ public class SignupProf extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
+        UserAllData userAllData = objectMapper.readValue(req.getInputStream(), UserAllData.class);
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");

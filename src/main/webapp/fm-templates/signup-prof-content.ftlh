@@ -14,7 +14,7 @@
         <form id="form">
 
 
-        Profesja: <select name="profession">
+        Profesja: <select name="profession" id="register-profession">
            <#list professions as prof>
                <#if inputData.profession==prof>
                    <option value="${prof}" selected>${prof.fullName}</option>
@@ -29,13 +29,18 @@
 
     <div id="odp"></div>
 
+
 </main>
 
 
+<#--
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initAutocomplete"></script>
+-->
 
 
     <#include "JSform.ftlh">
+
+
 
 <script>
     (function() {
@@ -47,22 +52,31 @@
         const inputCity = document.getElementById('register-city');
         const inputLatitude= document.getElementById('register-latitude');
         const inputLongitude = document.getElementById('register-longitude');
+        const inputProfession = document.getElementById('register-profession');
         const odp = document.getElementById('odp');
 
         document.getElementById('submitButton').addEventListener('click', (clickEvent) => {
             clickEvent.preventDefault();
-            if (checkEverything()){
-                fetch('signup-prof', {
+            if (!checkEverything()) {
+                return;
+            }
+
+                fetch('/signup-prof', {
                     method: 'POST',
                     body: JSON.stringify({
-                        email: inputEmail.value,
-                        password: inputPassword.value,
-                        name: inputName.value,
-                        surname: inputSurname.value,
-                        phoneNumber: inputPhoneNumber.value,
-                        city: inputCity.value,
-                        latitude: inputLatitude.value,
-                        longitude: inputLongitude.value
+                        "userLogin": {
+                            email: inputEmail.value,
+                            password: inputPassword.value
+                        },
+                        "userDetails": {
+                            name: inputName.value,
+                            surname: inputSurname.value,
+                            phoneNumber: inputPhoneNumber.value,
+                            city: inputCity.value,
+                            latitude: inputLatitude.value,
+                            longitude: inputLongitude.value,
+                            profession: inputProfession.value
+                        }
                     }),
                     headers: {
                         'Content-Type': 'application/json'
@@ -73,7 +87,7 @@
                     }
                     odp.innerHTML = response.statusText;
                 })
-            }
+
         });
 
     })();

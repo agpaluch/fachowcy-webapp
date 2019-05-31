@@ -22,10 +22,10 @@ public class UserLogin {
 
     @NotNull
     @PastOrPresent
-    private LocalDate signUpDate;
+    private LocalDate signUpDate = null;
 
     @NotNull
-    private Role role;
+    private Role role = null;
 
 
     public UserLogin(String email, String password) {

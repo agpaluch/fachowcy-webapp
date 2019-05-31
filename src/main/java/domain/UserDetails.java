@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class UserDetails {
 
     @Id
-    String login;
+    String login = null;
 
     @Column
     @NotNull

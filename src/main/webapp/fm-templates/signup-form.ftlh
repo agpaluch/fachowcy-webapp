@@ -1,7 +1,7 @@
 
 
 
-        <div>E-mail: <input type="text" id="register-email" name="email"
+        <div>E-mail: <input type="email" id="register-email" name="email"
                             oninput="validateFieldEmail()" value="${inputData.email}" /><br/><br/></div>
         <div id="email-error">${errors.email}</div>
         <div>Hasło: <input type="password" id="register-password" name="password"
@@ -38,19 +38,19 @@
                </#list>
     </select><br/><br/>-->
 
-        <div>Szerokość geograficzna: <input id="register-latitude" type="text" name="latitude" readonly
+        <div>Szerokość geograficzna: <input id="register-latitude" type="number" name="latitude" readonly
                                             <#--onchange="validateLocationField('latitude')"-->
                                             value="${inputData.latitude}"/><br/><br/></div>
         <div id="latitude-error">${errors.latitude}</div>
 
-        <div>Długość geograficzna: <input id="register-longitude" type="text" name="longitude" readonly
+        <div>Długość geograficzna: <input id="register-longitude" type="number" name="longitude" readonly
                                           <#--onchange="validateLocationField('longitude')"-->
                                           value="${inputData.longitude}"/><br/><br/></div>
         <div id="longitude-error">${errors.longitude}</div>
 
         <#--<input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>-->
 
-         <button id="submitButton" class="btn btn-success">Zarejestruj</button>
+        <button id="submitButton" class="btn btn-success">Zarejestruj</button>
 
     <#--    AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM-->
 
