@@ -14,9 +14,6 @@ import java.util.Set;
 @Table(name = "userLogin")
 public class UserLogin {
 
-    @OneToMany(mappedBy = "userLogin", cascade = CascadeType.ALL)
-    private Set<Messages> messages;
-
     @OneToOne(mappedBy = "userLogin", cascade = CascadeType.ALL)
     @JoinColumn(name = "userDetailsID")
     private UserDetails userDetails;
@@ -46,7 +43,7 @@ public class UserLogin {
     public UserLogin(String email, String password) {
         this.email = email;
         this.password = password;
-        this.signUpDate =  LocalDate.now();
+        this.signUpDate = LocalDate.now();
     }
 
     public UserLogin() {
@@ -97,21 +94,13 @@ public class UserLogin {
         return id;
     }
 
-    public Set<Messages> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Messages> messages) {
-        this.messages = messages;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String toString(){
-        return("Login: " + getEmail() + "\n" +
-                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate()+ "\n" );
+    public String toString() {
+        return ("Login: " + getEmail() + "\n" +
+                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate() + "\n");
     }
 
 

@@ -19,14 +19,6 @@ public class Messages {
     @Length(max = 400)
     private String message;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "sender")
-    private UserLogin userLogin1;
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "recipient")
-    private UserLogin userLogin2;
-
     @Id
     @Column(name = "sender")
     private Long sender;
@@ -72,22 +64,6 @@ public class Messages {
 
     public boolean isWasRead() {
         return wasRead;
-    }
-
-    public UserLogin getUserLogin1() {
-        return userLogin1;
-    }
-
-    public void setUserLogin1(UserLogin userLogin1) {
-        this.userLogin1 = userLogin1;
-    }
-
-    public UserLogin getUserLogin2() {
-        return userLogin2;
-    }
-
-    public void setUserLogin2(UserLogin userLogin2) {
-        this.userLogin2 = userLogin2;
     }
 
     public void setWasRead(boolean wasRead) {
