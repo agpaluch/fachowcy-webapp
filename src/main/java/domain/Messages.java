@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 public class Messages {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "message_id")
     private Long id;
 
@@ -19,11 +18,9 @@ public class Messages {
     @Length(max = 400)
     private String message;
 
-    @Id
     @Column(name = "sender")
     private Long sender;
 
-    @Id
     @Column(name = "recipient")
     private Long recipient;
 
