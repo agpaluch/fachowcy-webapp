@@ -14,4 +14,4 @@ INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, ci
 INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES  (5, 'eee', 'Żółć', null, 555555555,'Warsaw', 23.0, 27.0, 0, 'com1');
 
 ALTER TABLE fachmann.userDetails DROP FOREIGN KEY FKsi6y9hiyw9phgcji85fg2cgkt;
-ALTER TABLE fachmann.userDetails ADD CONSTRAINT FKsi6y9hiyw9phgcji85fg2cgkt FOREIGN KEY (id) REFERENCES fachmann.userLogin (id) ON DELETE CASCADE;
+ALTER TABLE fachmann.userDetails ADD CONSTRAINT fk1 FOREIGN KEY (id) REFERENCES fachmann.userLogin (id) ON DELETE CASCADE;

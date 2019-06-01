@@ -1,22 +1,17 @@
 package servlets;
 
+import dao.RootInterfaceDAO;
 import dao.UserDao;
-import dao.UserDaoBean;
+import dao.UserLoginDAOBean;
 import domain.HibernateUtil;
-import domain.Role;
-import domain.UserDetails;
-import domain.UserLogin;
 import freemarker.TemplateProvider;
-import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.hibernate.SessionFactory;
-import repository.RepositoryOfUsers;
 import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,13 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
 
 @WebServlet("/")
 public class Index extends HttpServlet {
@@ -46,6 +38,9 @@ public class Index extends HttpServlet {
     @EJB
     UserDao userDao;
 
+    @EJB
+    RootInterfaceDAO rootInterfaceDAO;
+
     @Override
     public void init() {
         try {
@@ -55,6 +50,7 @@ public class Index extends HttpServlet {
         }
         EntityManager em = HibernateUtil.getSessionFactory().createEntityManager();
         em.close();
+
     }
 
     @Override
