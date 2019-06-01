@@ -3,6 +3,11 @@ package domain;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.EntityManager;
+
+
+@ApplicationScoped
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
@@ -15,6 +20,11 @@ public class HibernateUtil {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
+    }
+
+    public EntityManager getEntityManager() {
+        EntityManager em = buildSessionFactory().createEntityManager();
+        return em;
     }
 
     public static void shutdown() {

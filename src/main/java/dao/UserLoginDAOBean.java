@@ -1,25 +1,48 @@
 package dao;
 
+import domain.HibernateUtil;
 import domain.Role;
 import domain.UserDetails;
 import domain.UserLogin;
 
-import javax.ejb.Stateful;
-import java.io.Serializable;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 
-@Stateful
+@Stateless
 public class UserLoginDAOBean implements UserLoginDAO {
 
+    private final HibernateUtil hibernateUtil;
+    Logger logger = Logger.getLogger(getClass().getName());
+
+    @Inject
+    public UserLoginDAOBean(HibernateUtil hibernateUtil) {
+        this.hibernateUtil = hibernateUtil;
+    }
+
     @Override
-    public UserLogin getByLogin(String email) {
-        return null;
+    public Optional<UserLogin> getByLogin(String email) {
+        EntityManager em = hibernateUtil.getEntityManager();
+         return em.createQuery("FROM UserLogin WHERE email = :val", UserLogin.class)
+                .setParameter("val", email)
+                .getResultStream()
+                .findFirst();
     }
 
     @Override
     public UserDetails getDetailsByLogin(String email) {
-        return null;
+        Optional<UserLogin> userLogin = getByLogin(email);
+        if(userLogin.isPresent()) {
+            return userLogin.get().getUserDetails();
+        } else {
+            logger.severe("NO USER FOUND");
+            throw new NoSuchElementException("ddd");
+        }
     }
 
     @Override
@@ -38,7 +61,7 @@ public class UserLoginDAOBean implements UserLoginDAO {
     }
 
     @Override
-    public UserLogin get(Serializable id) {
+    public UserLogin get(Long id) {
         return null;
     }
 

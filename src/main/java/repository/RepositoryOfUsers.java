@@ -1,7 +1,7 @@
 package repository;
 
 import com.google.gson.Gson;
-import dao.UserDaoBean;
+import daoOld.UserDaoBean;
 
 import java.io.BufferedReader;
 import java.io.IOException;

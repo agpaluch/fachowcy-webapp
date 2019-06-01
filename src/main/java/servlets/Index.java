@@ -1,9 +1,7 @@
 package servlets;
 
-import dao.RootInterfaceDAO;
-import dao.UserDao;
-import dao.UserLoginDAOBean;
-import domain.HibernateUtil;
+import dao.UserLoginDAO;
+import domain.UserDetails;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -11,7 +9,6 @@ import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,10 +33,7 @@ public class Index extends HttpServlet {
     SessionInfo sessionInfo;
 
     @EJB
-    UserDao userDao;
-
-    @EJB
-    RootInterfaceDAO rootInterfaceDAO;
+    UserLoginDAO userLoginDAO;
 
     @Override
     public void init() {
@@ -48,8 +42,12 @@ public class Index extends HttpServlet {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-        EntityManager em = HibernateUtil.getSessionFactory().createEntityManager();
-        em.close();
+        
+// testy, testy...
+/*        if(userLoginDAO.getByLogin("client1@gmail.com").isPresent()) {
+            logger.info(userLoginDAO.getByLogin("client1@gmail.com")
+                    .get().toString());
+        }*/
 
     }
 

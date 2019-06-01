@@ -7,11 +7,11 @@ INSERT INTO fachmann.userLogin (id, email, password, role, signUpDate) VALUES (3
 INSERT INTO fachmann.userLogin (id, email, password, role, signUpDate) VALUES (4, 'prof2@gmail.com', 'prof2', 0, '1991-01-01');
 INSERT INTO fachmann.userLogin (id, email, password, role, signUpDate) VALUES (5, 'admin@gmail.com', 'admin', 2, '1991-01-01');
 
-INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES (1, 'aaa', 'Kowalski', null , 111111111, 'Warsaw', 23.0, 23.0, 0, 'com1');
-INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES  (2, 'bbb', 'Manur', null,  222222222,'Warsaw', 24.0, 24.0, 0, 'com1');
-INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES (3, 'ccc', 'Nowak', 'PLUMBER' , 333333333,'Warsaw', 25.0, 25.0, 0, 'com1');
-INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES (4, 'ddd', 'Tomczyk', 'ELECTRICIAN', 444444444,'Warsaw', 23.0, 26.0, 0, 'com1');
-INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES  (5, 'eee', 'Żółć', null, 555555555,'Warsaw', 23.0, 27.0, 0, 'com1');
+INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES (1, 'aaa', 'Kowalski', null , 111111111, 'WARSZAWA', 23.0, 23.0, 0, 'com1');
+INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES  (2, 'bbb', 'Manur', null,  222222222, 'WARSZAWA', 24.0, 24.0, 0, 'com1');
+INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES (3, 'ccc', 'Nowak', 'PLUMBER' , 333333333, 'WARSZAWA', 25.0, 25.0, 0, 'com1');
+INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES (4, 'ddd', 'Tomczyk', 'ELECTRICIAN', 444444444, 'WARSZAWA', 23.0, 26.0, 0, 'com1');
+INSERT INTO fachmann.userDetails (id, name, surname, profession, phoneNumber, city, longitude, latitude, numberLikes, comments) VALUES  (5, 'eee', 'Żółć', null, 555555555, 'WARSZAWA', 23.0, 27.0, 0, 'com1');
 
 INSERT INTO fachmann.messages (message_id, message, recipient, sender, wasRead) VALUES (1, 'Siema Heniu trza mi dżewo urąbać', 1, 2, 0);
 INSERT INTO fachmann.messages (message_id, message, recipient, sender, wasRead) VALUES (2, 'Siema Heniu tępa ta twoja siekiera jak nóź do masła', 1, 3, 1);
