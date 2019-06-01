@@ -16,5 +16,6 @@
         <!-- Definicje mapowania -->
         <mapping class="domain.UserLogin"/>
         <mapping class="domain.UserDetails"/>
+        <mapping class="domain.Messages"/>
     </session-factory>
 </hibernate-configuration>

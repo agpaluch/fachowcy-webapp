@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "userLogin")
@@ -42,7 +43,7 @@ public class UserLogin {
     public UserLogin(String email, String password) {
         this.email = email;
         this.password = password;
-        this.signUpDate =  LocalDate.now();
+        this.signUpDate = LocalDate.now();
     }
 
     public UserLogin() {
@@ -89,9 +90,17 @@ public class UserLogin {
         this.role = role;
     }
 
-    public String toString(){
-        return("Login: " + getEmail() + "\n" +
-                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate()+ "\n" );
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String toString() {
+        return ("Login: " + getEmail() + "\n" +
+                "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate() + "\n");
     }
 
 
