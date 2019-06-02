@@ -4,18 +4,24 @@ ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE fachmann;
 
---+
-Create table for login data
-CREATE TABLE IF NOT EXISTS fachmann.ul
+--+ Create table for user data (login and details)
+CREATE TABLE IF NOT EXISTS userData
 (
     id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     email       VARCHAR(100) UNIQUE NOT NULL,
     password    VARCHAR(100)        NOT NULL,
-    signup_date DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP
+    signup_date DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    name          VARCHAR(100)      NOT NULL,
+    surname       VARCHAR(100)      NOT NULL,
+    phoneNumber   BIGINT(11)        NOT NULL,
+    city          ENUM ('Warsaw')   NOT NULL,
+    longitude     DECIMAL(10, 7)    NOT NULL,
+    latitude      DECIMAL(10, 7)    NOT NULL,
+    numberOfLikes SMALLINT UNSIGNED NOT NULL
 );
 
 
-INSERT INTO fachmann.ul (email, password)
+INSERT INTO fachmann.userData (email, password)
 VALUES ('client1@gmail.com', 'client1'),
        ('client2@gmail.com', 'client2'),
        ('prof1@gmail.com', 'prof1'),
