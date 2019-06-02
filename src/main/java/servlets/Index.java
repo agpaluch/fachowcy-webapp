@@ -1,7 +1,9 @@
 package servlets;
 
 import dao.UserLoginDAO;
+import domain.HibernateUtil;
 import domain.UserDetails;
+import domain.UserLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,10 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +39,9 @@ public class Index extends HttpServlet {
     @EJB
     UserLoginDAO userLoginDAO;
 
+    @Inject
+    HibernateUtil hibernateUtil;
+
     @Override
     public void init() {
         try {
@@ -42,13 +49,13 @@ public class Index extends HttpServlet {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-        
-// testy, testy...
-/*        if(userLoginDAO.getByLogin("client1@gmail.com").isPresent()) {
-            logger.info(userLoginDAO.getByLogin("client1@gmail.com")
-                    .get().toString());
-        }*/
+        hibernateUtil.getEntityManager();
+        /*Optional<UserLogin> userLogin = userLoginDAO.getByLogin("client1@gmail.com");
 
+        if(userLogin.isPresent()) {
+            System.out.println(userLoginDAO.getByLogin("client1@gmail.com").get().toString());
+            System.out.println(userLoginDAO.getDetailsByLogin("client1@gmail.com").toString());
+        }*/
     }
 
     @Override
@@ -61,13 +68,10 @@ public class Index extends HttpServlet {
         map.put("content", "index");
         map.put("sessionInfo", sessionInfo);
 
-
         try {
             template.process(map, printWriter);
         } catch (TemplateException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-
     }
-
 }

@@ -2,10 +2,11 @@ package dao;
 
 import domain.Messages;
 
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import java.util.List;
 
-@Stateless
+@Singleton
 public class MessagesDAOBean implements MessagesDAO {
 
     // and some additional methods

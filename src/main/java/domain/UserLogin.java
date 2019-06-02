@@ -1,14 +1,10 @@
 package domain;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Table(name = "userLogin")
@@ -102,7 +98,5 @@ public class UserLogin {
         return ("Login: " + getEmail() + "\n" +
                 "Password: " + getPassword() + "\n" + "Sign-up-date: " + getSignUpDate() + "\n");
     }
-
-
 }
 

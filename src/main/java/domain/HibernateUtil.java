@@ -3,11 +3,10 @@ package domain;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 
-
-@ApplicationScoped
+@Singleton
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory = buildSessionFactory();
@@ -27,7 +26,7 @@ public class HibernateUtil {
         return em;
     }
 
-    public static void shutdown() {
+    public void shutdown() {
         // Czyści cache i connection poole
         getSessionFactory().close();
     }
