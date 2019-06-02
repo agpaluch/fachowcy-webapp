@@ -1,6 +1,6 @@
 package servlets;
 
-import dao.*;
+import daoOld.UserDao;
 import domain.UserDetails;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
