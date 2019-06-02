@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS userData
     signup_date DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
     name          VARCHAR(100)      NOT NULL,
     surname       VARCHAR(100)      NOT NULL,
+    profession    VARCHAR(32)              ,
     phoneNumber   BIGINT(11)        NOT NULL,
     city          ENUM ('Warsaw')   NOT NULL,
     longitude     DECIMAL(10, 7)    NOT NULL,
