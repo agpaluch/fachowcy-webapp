@@ -6,17 +6,16 @@
     <session-factory>
         <!-- Czego z JDBC używać -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/isa?useSSL=false</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/fachmann?useSSL=false</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">password</property>
-        <!-- Co robić z bazą przy wstawianiu? create-drop by np. "resetowało" -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
-        <!-- Ustawić w zależności od bazy i wersji, Hibernate tu optymalizuje -->
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
         <!-- Będzie nam ładnie logować SQL w konsoli -->
         <property name="show_sql">true</property>
         <!-- Definicje mapowania -->
         <mapping class="domain.UserLogin"/>
         <mapping class="domain.UserDetails"/>
+        <mapping class="domain.Messages"/>
     </session-factory>
 </hibernate-configuration>

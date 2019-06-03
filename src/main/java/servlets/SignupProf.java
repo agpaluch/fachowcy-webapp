@@ -175,7 +175,8 @@ public class SignupProf extends HttpServlet {
             Double latitude = Double.parseDouble(latitudeString);
 
             UserLogin userLogin = new UserLogin(email, password);
-            UserDetails userDetails = new UserDetails(name, surname, profession, phoneNumber, city, longitude, latitude);
+            UserDetails userDetails = new UserDetails(name, surname, profession, phoneNumber,
+                                                        city, longitude, latitude);
 
             try {
                 userDao.createUser(email, userLogin, userDetails);
