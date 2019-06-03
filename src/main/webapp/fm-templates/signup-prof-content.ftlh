@@ -46,6 +46,7 @@
     (function() {
         const inputEmail = document.getElementById('register-email');
         const inputPassword = document.getElementById('register-password');
+        const inputConfirmPassword = document.getElementById('register-confirmPassword');
         const inputName = document.getElementById('register-name');
         const inputSurname = document.getElementById('register-surname');
         const inputPhoneNumber = document.getElementById('register-phoneNumber');
@@ -64,11 +65,9 @@
                 fetch('/signup-prof', {
                     method: 'POST',
                     body: JSON.stringify({
-                        "userLogin": {
                             email: inputEmail.value,
-                            password: inputPassword.value
-                        },
-                        "userDetails": {
+                            password: inputPassword.value,
+                            confirmPassword: inputConfirmPassword.value,
                             name: inputName.value,
                             surname: inputSurname.value,
                             phoneNumber: inputPhoneNumber.value,
@@ -76,7 +75,6 @@
                             latitude: inputLatitude.value,
                             longitude: inputLongitude.value,
                             profession: inputProfession.value
-                        }
                     }),
                     headers: {
                         'Content-Type': 'application/json'

@@ -60,24 +60,21 @@ public class SignupProf extends HttpServlet {
 
     @Override
     public void init() {
-/*        mapOfValues = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
-                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfValues.put("confirmPassword", "");
 
-        mapOfErrors = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
-                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfErrors.put("confirmPassword", "");*/
+
+        mapOfValues = Arrays.stream(UserAllData.class.getDeclaredFields())
+                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
+
+        mapOfErrors = Arrays.stream(UserAllData.class.getDeclaredFields())
+                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
+
 
         dataMap.put("content", "signup-prof");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
-        //dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
         dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
         dataMap.put("sessionInfo", sessionInfo);
-        //dataMap.put("context", "/home/agnesmagnes/Documents/jjdzw2-fachowcy-web/src/main/webapp/fm-templates/formValidation.js");
 
 
         try {

@@ -1,25 +1,22 @@
 package domain;
 
-import java.util.Map;
+import lombok.Data;
+import repository.City;
+import repository.TypeOfProfession;
 
+@Data
 public class UserAllData {
 
-    UserLogin userLogin;
-    UserDetails userDetails;
+    private String email;
+    private String password;
+    private String confirmPassword;
+    private String name;
+    private String surname;
+    private TypeOfProfession profession;
+    private long phoneNumber;
+    private City city;
+    private double longitude;
+    private double latitude;
 
-    public UserLogin getUserLogin() {
-        return userLogin;
-    }
 
-    public void setUserLogin(UserLogin userLogin) {
-        this.userLogin = userLogin;
-    }
-
-    public UserDetails getUserDetails() {
-        return userDetails;
-    }
-
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
-    }
 }
