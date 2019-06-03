@@ -4,94 +4,95 @@ ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE fachmann;
 
---+ Create table for user data (login and details)
+--+ Create table for professions
+CREATE TABLE IF NOT EXISTS professions
+(
+  id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  profession VARCHAR(100) NOT NULL
+);
+
+
+INSERT INTO fachmann.professions (profession) VALUES
+('PLUMBER'),
+('ELECTRICIAN');
+
+
+--+ Create table for user data (login and details) and connect it with professions
 CREATE TABLE IF NOT EXISTS userData
 (
     id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     email       VARCHAR(100) UNIQUE NOT NULL,
     password    VARCHAR(100)        NOT NULL,
+    role        VARCHAR(32) NOT NULL,
     signup_date DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
     name          VARCHAR(100)      NOT NULL,
     surname       VARCHAR(100)      NOT NULL,
-    profession    VARCHAR(32)              ,
-    phoneNumber   BIGINT(11)        NOT NULL,
-    city          ENUM ('Warsaw')   NOT NULL,
+    profession_id  INT UNSIGNED,
+    phoneNumber   BIGINT(14)        NOT NULL,
+    city          VARCHAR(100)   NOT NULL,
     longitude     DECIMAL(10, 7)    NOT NULL,
     latitude      DECIMAL(10, 7)    NOT NULL,
     numberOfLikes SMALLINT UNSIGNED NOT NULL
 );
 
-
-INSERT INTO fachmann.userData (email, password)
-VALUES ('client1@gmail.com', 'client1'),
-       ('client2@gmail.com', 'client2'),
-       ('prof1@gmail.com', 'prof1'),
-       ('prof2@gmail.com', 'prof2'),
-       ('admin@gmail.com', 'admin');
+ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES professions (id);
 
 
---+
-create table for user details
-CREATE TABLE IF NOT EXISTS fachmann.ud
-(
-    login_id      INT UNSIGNED,
-    name          VARCHAR(100)      NOT NULL,
-    surname       VARCHAR(100)      NOT NULL,
-    phoneNumber   BIGINT(11)        NOT NULL,
-    city          ENUM ('Warsaw')   NOT NULL,
-    longitude     DECIMAL(10, 7)    NOT NULL,
-    latitude      DECIMAL(10, 7)    NOT NULL,
-    numberOfLikes SMALLINT UNSIGNED NOT NULL
-);
-
-
-ALTER TABLE fachmann.ud
-    ADD FOREIGN KEY (login_id) REFERENCES fachmann.ul (id);
-
-INSERT INTO ud (login_id, name, surname, phoneNumber,
-                city, longitude, latitude, numberOfLikes)
-VALUES (1, 'aaa', 'Kowalski', 111111111, 'Warsaw', 23.0, 23.0, 0),
-       (2, 'bbb', 'Manur', 222222222, 'Warsaw', 24.0, 24.0, 0),
-       (3, 'ccc', 'Nowak', 333333333, 'Warsaw', 25.0, 25.0, 0),
-       (4, 'ddd', 'Tomczyk', 444444444, 'Warsaw', 23.0, 26.0, 0),
-       (5, 'eee', 'Żółć', 555555555, 'Warsaw', 23.0, 27.0, 0);
+INSERT INTO fachmann.userData (email, password, role, name, surname, profession_id,
+phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
+    ('client1@gmail.com', 'client1', 'CLIENT', 'Jan', 'Kowalski',
+    null, 507654321, 'Warsaw', 51, 21.7, 2),
+    ('client2@gmail.com', 'client2', 'CLIENT', 'Piotr', 'Mazur',
+    null, 222222222, 'Warsaw', 51, 21.7, 2),
+    ('professional1@gmail.com', 'professional1', 'PROFESSIONAL', 'Maria', 'Nowak',
+    1, 0048765432123, 'Warsaw', 51, 21.7, 3),
+    ('professional2@gmail.com', 'professional2', 'PROFESSIONAL', 'Sylwester', 'Dębski',
+    2, 444444444, 'Warsaw', 51, 21.7, 12),
+    ('admin1@gmail.com', 'admin1', 'ADMIN', 'Józef', 'Nijaki',
+    null, 555555555, 'Warsaw', 51, 21.7, 0);
 
 
 
---+
-create table for professions and connect it with userDetails
 
 
-                                                --+
-create table for storing comments
-
-
-    --+
-create table for storing messages
+--+create table for storing messages
 
 CREATE TABLE IF NOT EXISTS fachmann.messages
 (
     message_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     message    VARCHAR(400) NOT NULL,
     wasRead    BOOLEAN DEFAULT '0',
-    sender     BIGINT       NOT NULL,
-    recipient  BIGINT       NOT NULL
+    sender_id     INT UNSIGNED NOT NULL,
+    recipient_id  INT UNSIGNED NOT NULL
 );
 
-ALTER TABLE fachmann.messages
-    ADD FOREIGN KEY (sender) REFERENCES fachmann.userLogin (id);
-ALTER TABLE fachmann.messages
-    ADD FOREIGN KEY (recipient) REFERENCES fachmann.userLogin (id);
+ALTER TABLE messages
+    ADD FOREIGN KEY (sender_id) REFERENCES userData (id);
+ALTER TABLE messages
+    ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
 
---+
-create table for storing info about transactions
+INSERT INTO messages (message, sender_id, recipient_id) VALUES
+("Ok.", 1, 2),
+("Będę o 16:00.", 1, 2);
+
+
+
+                                                --+
+--+ create table for storing comments
+
+CREATE TABLE IF NOT EXISTS comments
 (
-    who fixed sth for whom
-)
+ id INT UNSIGNED UNIQUE PRIMARY KEY AUTO_INCREMENT,
+ opinion_maker_id INT UNSIGNED NOT NULL,
+ recipient_id INT UNSIGNED NOT NULL,
+ opinion VARCHAR (400) NOT NULL
+);
 
+ALTER TABLE comments
+    ADD FOREIGN KEY (opinion_maker_id) REFERENCES userData (id);
+ALTER TABLE comments
+    ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
 
-
-
-
-
-
+INSERT INTO comments (opinion_maker_id, recipient_id, opinion) VALUES
+(1, 2, "Dobra robota."),
+(1, 1, "Dobra robota.");
