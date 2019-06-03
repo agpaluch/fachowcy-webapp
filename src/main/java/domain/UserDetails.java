@@ -1,11 +1,18 @@
 package domain;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import repository.City;
 import repository.TypeOfProfession;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+
+
+@Data
 @Entity
 @Table(name = "userDetails")
 public class UserDetails {
@@ -47,7 +54,7 @@ public class UserDetails {
     private double latitude;
 
     @Column
-    private int numberLikes = 0;
+    private int numberOfLikes = 0;
 
     @Column
     private String comments = "";
@@ -70,109 +77,7 @@ public class UserDetails {
         this.latitude = latitude;
     }
 
-    public UserLogin getUserLogin() {
-        return userLogin;
-    }
 
-    public void setUserLogin(UserLogin userLogin) {
-        this.userLogin = userLogin;
-    }
-
-    public TypeOfProfession getProfession() {
-        return profession;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-/*    @Override
-    public CityDistrict getDistrict() {
-        return district;
-    }*/
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public int getNumberLikes() {
-        return numberLikes;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setProfession(TypeOfProfession profession) {
-        this.profession = profession;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-/*    public void setDistrict(CityDistrict district) {
-        this.district = district;
-    }*/
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setNumberLikes(int numberLikes) {
-        this.numberLikes = numberLikes;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDetails{" +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", profession=" + profession +
-                ", phoneNumber=" + phoneNumber +
-                ", city=" + city +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", numberLikes=" + numberLikes +
-                ", comments='" + comments + '\'' +
-                '}';
-    }
 }
 
 

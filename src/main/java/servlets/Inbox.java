@@ -1,7 +1,6 @@
 package servlets;
 
-import dao.UserDao;
-import domain.HibernateUtil;
+import daoOld.UserDao;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -10,6 +9,7 @@ import session.SessionInfo;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +24,9 @@ import java.util.logging.Logger;
 
 @WebServlet("/inbox")
 public class Inbox extends HttpServlet {
+
+    @PersistenceContext(unitName = "primary")
+    private EntityManager entityManager;
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
@@ -43,8 +46,7 @@ public class Inbox extends HttpServlet {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-        EntityManager em = HibernateUtil.getSessionFactory().createEntityManager();
-        em.close();
+        entityManager.close();
     }
 
     @Override

@@ -3,6 +3,7 @@ package servlets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.*;
 import domain.UserAllData;
+import daoOld.UserDao;
 import domain.UserDetails;
 import domain.UserLogin;
 import dto.PasswordDto;
@@ -59,7 +60,7 @@ public class SignupProf extends HttpServlet {
 
     @Override
     public void init() {
-        mapOfValues = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
+/*        mapOfValues = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
                 .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
         mapOfValues.put("confirmPassword", "");
@@ -67,7 +68,7 @@ public class SignupProf extends HttpServlet {
         mapOfErrors = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
                 .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfErrors.put("confirmPassword", "");
+        mapOfErrors.put("confirmPassword", "");*/
 
         dataMap.put("content", "signup-prof");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
@@ -105,7 +106,9 @@ public class SignupProf extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
+
         UserAllData userAllData = objectMapper.readValue(req.getInputStream(), UserAllData.class);
+
 
         String email = req.getParameter("email");
         String password = req.getParameter("password");
