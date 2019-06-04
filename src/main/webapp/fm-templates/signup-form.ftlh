@@ -16,7 +16,7 @@
         <div>Nazwisko: <input type="text" id="register-surname" name="surname"
                               oninput="validateSurnameField()" value="${inputData.surname}"/><br/><br/></div>
         <div id="surname-error">${errors.surname}</div>
-        <div>Numer telefonu: <input type="text" id="register-phoneNumber" name="phoneNumber"
+        <div>Numer telefonu: <input type="number" id="register-phoneNumber" name="phoneNumber"
                                     oninput="validatePhoneNumberField()" value="${inputData.phoneNumber}"/><br/><br/></div>
         <div id="phoneNumber-error">${errors.phoneNumber}</div>
 
@@ -27,8 +27,10 @@
                     <option value="${city}" selected>${city.fullName}</option>
                <#else>
                 <option value="${city}">${city.fullName}</option>
+
                </#if>
            </#list>
+            <option value="">Uwaga</option>
     </select><br/><br/>
         <div id="city-error">${errors.city}</div>
 

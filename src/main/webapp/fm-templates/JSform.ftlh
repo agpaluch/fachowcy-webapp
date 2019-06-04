@@ -102,12 +102,14 @@
         var res5 = validateSurnameField();
         var res6 = validatePhoneNumberField();
 
-        if (res1 && res2 && res3 && res4 && res5 && res6) {
+        return true;
+
+/*        if (res1 && res2 && res3 && res4 && res5 && res6) {
             return true;
         //document.getElementById('id1').submit();
         } else {
             return false;
-        }
+        }*/
     }
 
 
