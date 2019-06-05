@@ -87,12 +87,26 @@ public class SignupProf extends HttpServlet {
 
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
-
         try {
             template.process(dataMap, printWriter);
         } catch (TemplateException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
+
+
+
+/*        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
+        //objectMapper.writeValue(resp.getOutputStream(), mapOfErrors);
+
+        //ObjectMapper obj = new ObjectMapper();
+        resp.setStatus(200);
+        //resp.getWriter().print(obj.writeValueAsString(mapOfErrors));
+
+        objectMapper.writeValue(resp.getOutputStream(), new UserDTO());*/
+
+
     }
 
 
@@ -117,92 +131,38 @@ public class SignupProf extends HttpServlet {
         }
 
 
+ /*       resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
+        //objectMapper.writeValue(resp.getOutputStream(), mapOfErrors);
+
+        //ObjectMapper obj = new ObjectMapper();
+        resp.setStatus(200);
+        //resp.getWriter().print(obj.writeValueAsString(mapOfErrors));
+
+        objectMapper.writeValue(resp.getOutputStream(), userDTO);*/
 
 
 
- /*       String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String confirmPassword = req.getParameter("confirmPassword");
-        String name = req.getParameter("name");
-        String surname = req.getParameter("surname");
-        String phoneNumberString = req.getParameter("phoneNumber").replace("-","")
-                .replace("+", "00");
-        String cityString = req.getParameter("city");
-        //String cityDistrictString = req.getParameter("cityDistrict");
-        String professionString = req.getParameter("profession");
-        String longitudeString = req.getParameter("longitude");
-        String latitudeString = req.getParameter("latitude");
 
 
-        ProfessionalDto professionalDto = new ProfessionalDto(name, surname, professionString,
-                phoneNumberString, cityString, longitudeString, latitudeString,
-                email, password);
-
-        PasswordDto passwordDto = new PasswordDto(password, confirmPassword);*/
-/*
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-
-        ValidatorFactory factory2 = Validation.buildDefaultValidatorFactory();
-        Validator validator2 = factory2.getValidator();
 
 
-       Set<ConstraintViolation<ProfessionalDto>> constraintViolations =
-                validator.validate(professionalDto);
-        Set<ConstraintViolation<PasswordDto>> constraintViolationsPassword =
-                validator2.validate(passwordDto);
-
-        mapOfErrors = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
-                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfErrors.put("confirmPassword", "");
-
-        for (ConstraintViolation<ProfessionalDto> constraintViolation: constraintViolations){
-            mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
-        }
-
-        if (!(constraintViolationsPassword.isEmpty())){
-            for (ConstraintViolation<PasswordDto> constraintViolation: constraintViolationsPassword){
-                mapOfErrors.put("confirmPassword", constraintViolation.getMessage());
-            }
-        } else {
-                mapOfErrors.put("confirmPassword", "");
-        }
-
-        */
-
-
-/*        Field[] fields = UserDTO.class.getDeclaredFields();
-
-
-        String nameVar;
-        for (Field f : UserDTO.class.getDeclaredFields()){
-            f.setAccessible(true);
-            nameVar = f.getName();
-            try {
-                f.get(userDTO);
-            } catch (Exception e){
-                f.getName();
-            }
-
-            System.out.println(f.getName());
-        }*/
-
-        mapOfValues = Arrays.stream(UserDTO.class.getDeclaredFields())
-                    .peek(f -> f.setAccessible(true))
-                    .collect(Collectors.toMap(Field::getName, n -> {
-                        try {
-                            return n.get(userDTO);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            return "";
-                        }
-                    }));
-
+        mapOfValues.put("email", userDTO.getEmail());
+        mapOfValues.put("password", userDTO.getPassword());
+        mapOfValues.put("confirmPassword", userDTO.getConfirmPassword());
+        mapOfValues.put("name", userDTO.getName());
+        mapOfValues.put("surname", userDTO.getSurname());
+        mapOfValues.put("profession", userDTO.getProfession());
+        mapOfValues.put("longitude", userDTO.getLongitude());
+        mapOfValues.put("latitude", userDTO.getLatitude());
 
 
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
+
+        resp.setContentType("text/html; charset=utf-8");
+        resp.setStatus(200);
 
         PrintWriter printWriter = resp.getWriter();
 

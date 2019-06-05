@@ -16,7 +16,7 @@
 
         Profesja: <select name="profession" id="register-profession">
            <#list professions as prof>
-               <#if inputData.profession==prof>
+               <#if inputData.profession?? && inputData.profession==prof>
                    <option value="${prof}" selected>${prof.fullName}</option>
                <#else>
                <option value="${prof}">${prof.fullName}</option>
@@ -28,6 +28,8 @@
     </form>
 
     <div id="odp"></div>
+
+    <article id="my-result"></article>
 
 
 </main>
@@ -81,15 +83,24 @@
                     }
                 }).then(response => {
                     if (response.status === 200) {
-                        return response.json();
+                        return response;
                     }
-                    odp.innerHTML = response.statusText;
-                })
+                    //odp.innerHTML = response.statusText;
+                });
+
+/*                        .then(data => {
+                    if (data) {
+                        const { email, password, confirmPassword,
+                            name, surname, phoneNumber, city, latitude, longitude, profession} = data;
+
+                    }
+                });*/
 
         });
 
     })();
 </script>
+
 
 
 </body>

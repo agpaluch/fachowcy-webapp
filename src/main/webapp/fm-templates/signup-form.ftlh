@@ -17,13 +17,17 @@
                               oninput="validateSurnameField()" value="${inputData.surname}"/><br/><br/></div>
         <div id="surname-error">${errors.surname}</div>
         <div>Numer telefonu: <input type="number" id="register-phoneNumber" name="phoneNumber"
-                                    oninput="validatePhoneNumberField()" value="${inputData.phoneNumber}"/><br/><br/></div>
+                                    oninput="validatePhoneNumberField()"
+                                    <#if inputData.phoneNumber?? >
+                                    value="${inputData.phoneNumber}"
+                                    </#if>
+        /><br/><br/></div>
         <div id="phoneNumber-error">${errors.phoneNumber}</div>
 
 
         Miasto: <select name="city" id="register-city">
            <#list cities as city>
-               <#if inputData.city==city>
+               <#if inputData.city?? && inputData.city==city>
                     <option value="${city}" selected>${city.fullName}</option>
                <#else>
                 <option value="${city}">${city.fullName}</option>
@@ -42,12 +46,18 @@
 
         <div>Szerokość geograficzna: <input id="register-latitude" type="number" name="latitude" readonly
                                             <#--onchange="validateLocationField('latitude')"-->
-                                            value="${inputData.latitude}"/><br/><br/></div>
+                <#if inputData.latitude?? >
+                 value="${inputData.latitude}"
+                </#if>
+                /><br/><br/></div>
         <div id="latitude-error">${errors.latitude}</div>
 
         <div>Długość geograficzna: <input id="register-longitude" type="number" name="longitude" readonly
                                           <#--onchange="validateLocationField('longitude')"-->
-                                          value="${inputData.longitude}"/><br/><br/></div>
+                               <#if inputData.longitude?? >
+                                value="${inputData.longitude}"
+                               </#if>
+                               /><br/><br/></div>
         <div id="longitude-error">${errors.longitude}</div>
 
         <#--<input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>-->
