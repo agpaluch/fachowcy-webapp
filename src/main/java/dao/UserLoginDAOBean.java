@@ -1,34 +1,31 @@
 package dao;
 
-import domain.HibernateUtil;
 import domain.Role;
 import domain.UserDetails;
 import domain.UserLogin;
 
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 
-@Stateless
+@Singleton
 public class UserLoginDAOBean implements UserLoginDAO {
 
-    private final HibernateUtil hibernateUtil;
+    @PersistenceContext(unitName = "primary")
+    private EntityManager entityManager;
+
     Logger logger = Logger.getLogger(getClass().getName());
 
-    @Inject
-    public UserLoginDAOBean(HibernateUtil hibernateUtil) {
-        this.hibernateUtil = hibernateUtil;
-    }
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {
-        EntityManager em = hibernateUtil.getEntityManager();
-         return em.createQuery("FROM UserLogin WHERE email = :val", UserLogin.class)
+         return entityManager.createQuery("FROM UserLogin WHERE email = :val", UserLogin.class)
                 .setParameter("val", email)
                 .getResultStream()
                 .findFirst();

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 public class ProfessionalDto extends ClientDto{
 
-    @CheckProfession
+    //@CheckProfession
     @NotBlank(message = "Wybierz profesję.")
     private String profession;
 

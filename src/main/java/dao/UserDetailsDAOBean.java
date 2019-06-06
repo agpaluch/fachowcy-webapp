@@ -3,10 +3,11 @@ package dao;
 import domain.UserDetails;
 import repository.City;
 
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import java.util.List;
 
-@Stateless
+@Singleton
 public class UserDetailsDAOBean implements UserDetailsDAO {
 
     @Override

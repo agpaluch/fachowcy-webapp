@@ -1,15 +1,13 @@
 package servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import daoOld.UserDao;
-import domain.UserDetails;
-import domain.UserLogin;
-import dto.PasswordDto;
-import dto.ProfessionalDto;
-import exceptions.UserAlreadyExistsException;
+import domain.UserDTO;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import repository.*;
+import repository.City;
+import repository.TypeOfProfession;
 import session.SessionInfo;
 
 import javax.inject.Inject;
@@ -26,21 +24,25 @@ import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @WebServlet("/signup-prof")
 public class SignupProf extends HttpServlet {
 
-    Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
-    Map<String, Object> dataMap = new HashMap<>();
-    Map<String, String> mapOfErrors = new HashMap<>();
-    Map<String, String> mapOfValues = new HashMap<>();
+    private Logger logger = Logger.getLogger(getClass().getName());
+    private Template template;
+    private Map<String, Object> dataMap = new HashMap<>();
+    private Map<String, String> mapOfErrors = new HashMap<>();
+    private Map<String, Object> mapOfValues = new HashMap<>();
+    private ObjectMapper objectMapper = new ObjectMapper();
+
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -55,24 +57,21 @@ public class SignupProf extends HttpServlet {
 
     @Override
     public void init() {
-        mapOfValues = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
-                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfValues.put("confirmPassword", "");
 
-        mapOfErrors = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
-                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfErrors.put("confirmPassword", "");
+
+        mapOfValues = Arrays.stream(UserDTO.class.getDeclaredFields())
+                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
+
+        mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
+                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
+
 
         dataMap.put("content", "signup-prof");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
-        //dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
         dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
         dataMap.put("sessionInfo", sessionInfo);
-        //dataMap.put("context", "/home/agnesmagnes/Documents/jjdzw2-fachowcy-web/src/main/webapp/fm-templates/formValidation.js");
 
 
         try {
@@ -100,7 +99,28 @@ public class SignupProf extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String email = req.getParameter("email");
+
+
+        UserDTO userDTO = objectMapper.readValue(req.getInputStream(), UserDTO.class);
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
+        Set<ConstraintViolation<UserDTO>> constraintViolations =
+                validator.validate(userDTO);
+
+        mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
+                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
+
+        for (ConstraintViolation<UserDTO> constraintViolation: constraintViolations){
+            mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
+        }
+
+
+
+
+
+ /*       String email = req.getParameter("email");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
         String name = req.getParameter("name");
@@ -118,15 +138,16 @@ public class SignupProf extends HttpServlet {
                 phoneNumberString, cityString, longitudeString, latitudeString,
                 email, password);
 
-        PasswordDto passwordDto = new PasswordDto(password, confirmPassword);
-
+        PasswordDto passwordDto = new PasswordDto(password, confirmPassword);*/
+/*
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
 
         ValidatorFactory factory2 = Validation.buildDefaultValidatorFactory();
         Validator validator2 = factory2.getValidator();
 
-        Set<ConstraintViolation<ProfessionalDto>> constraintViolationsDetails =
+
+       Set<ConstraintViolation<ProfessionalDto>> constraintViolations =
                 validator.validate(professionalDto);
         Set<ConstraintViolation<PasswordDto>> constraintViolationsPassword =
                 validator2.validate(passwordDto);
@@ -136,7 +157,7 @@ public class SignupProf extends HttpServlet {
                 .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
         mapOfErrors.put("confirmPassword", "");
 
-        for (ConstraintViolation<ProfessionalDto> constraintViolation: constraintViolationsDetails){
+        for (ConstraintViolation<ProfessionalDto> constraintViolation: constraintViolations){
             mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
         }
 
@@ -148,10 +169,37 @@ public class SignupProf extends HttpServlet {
                 mapOfErrors.put("confirmPassword", "");
         }
 
-        mapOfValues = req.getParameterMap()
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue()[0]));
+        */
+
+
+/*        Field[] fields = UserDTO.class.getDeclaredFields();
+
+
+        String nameVar;
+        for (Field f : UserDTO.class.getDeclaredFields()){
+            f.setAccessible(true);
+            nameVar = f.getName();
+            try {
+                f.get(userDTO);
+            } catch (Exception e){
+                f.getName();
+            }
+
+            System.out.println(f.getName());
+        }*/
+
+        mapOfValues = Arrays.stream(UserDTO.class.getDeclaredFields())
+                    .peek(f -> f.setAccessible(true))
+                    .collect(Collectors.toMap(Field::getName, n -> {
+                        try {
+                            return n.get(userDTO);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return "";
+                        }
+                    }));
+
+
 
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
@@ -159,7 +207,24 @@ public class SignupProf extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
 
-        if (constraintViolationsDetails.isEmpty() && (constraintViolationsPassword.isEmpty())){
+
+        if (constraintViolations.isEmpty()){
+            // TODO: stworzyć właściwego użytkownika, sprawdzić czy taki mail istnieje w bazie
+            //i jeśli nie to zapisać użytkownika do bazy danych
+            //Jeśli istnieje to przekierować do widoku z komunikatem, że użytkownik o takim
+            //emailu ma już konto.
+            sessionInfo.setUserType("professional");
+            resp.sendRedirect("/login-form");
+        } else {
+            try {
+                template.process(dataMap, printWriter);
+            } catch (TemplateException e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
+            }
+        }
+
+
+   /*     if (constraintViolations.isEmpty() && (constraintViolationsPassword.isEmpty())){
             long phoneNumber = Long.parseLong(phoneNumberString);
             City city = City.valueOf(cityString);
             //CityDistrict cityDistrict = CityDistrict.valueOf(cityDistrictString);
@@ -187,7 +252,7 @@ public class SignupProf extends HttpServlet {
             } catch (TemplateException e) {
                 logger.log(Level.SEVERE, e.getMessage(), e);
             }
-        }
+        }*/
 
 
 

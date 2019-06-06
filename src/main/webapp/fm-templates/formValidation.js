@@ -1,3 +1,5 @@
+
+
 function checkEverything() {
     var res1 = validateFieldEmail();
     var res2 = validateFieldPassword();
@@ -7,9 +9,14 @@ function checkEverything() {
     var res6 = validatePhoneNumberField();
 
 
-    //if (res1 && res2 && res3 && res4 && res5 && res6) {
-    document.getElementById('id1').submit();
-    //}
+    if (res1 && res2 && res3 && res4 && res5 && res6) {
+        //document.getElementById('submitButton').disabled = false;
+        return true;
+        //document.getElementById('form').submit();
+    } else {
+       // document.getElementById('submitButton').disabled = true;
+        return true;
+    }
 }
 
 

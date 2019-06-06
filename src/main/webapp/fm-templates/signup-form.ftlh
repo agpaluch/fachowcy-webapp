@@ -1,7 +1,7 @@
 
 
 
-        <div>E-mail: <input type="text" id="register-email" name="email"
+        <div>E-mail: <input type="email" id="register-email" name="email"
                             oninput="validateFieldEmail()" value="${inputData.email}" /><br/><br/></div>
         <div id="email-error">${errors.email}</div>
         <div>Hasło: <input type="password" id="register-password" name="password"
@@ -16,19 +16,21 @@
         <div>Nazwisko: <input type="text" id="register-surname" name="surname"
                               oninput="validateSurnameField()" value="${inputData.surname}"/><br/><br/></div>
         <div id="surname-error">${errors.surname}</div>
-        <div>Numer telefonu: <input type="text" id="register-phoneNumber" name="phoneNumber"
+        <div>Numer telefonu: <input type="number" id="register-phoneNumber" name="phoneNumber"
                                     oninput="validatePhoneNumberField()" value="${inputData.phoneNumber}"/><br/><br/></div>
         <div id="phoneNumber-error">${errors.phoneNumber}</div>
 
 
-        Miasto: <select name="city">
+        Miasto: <select name="city" id="register-city">
            <#list cities as city>
                <#if inputData.city==city>
                     <option value="${city}" selected>${city.fullName}</option>
                <#else>
                 <option value="${city}">${city.fullName}</option>
+
                </#if>
            </#list>
+            <option value="">Uwaga</option>
     </select><br/><br/>
         <div id="city-error">${errors.city}</div>
 
@@ -38,18 +40,19 @@
                </#list>
     </select><br/><br/>-->
 
-        <div>Szerokość geograficzna: <input id="latitude" type="text" name="latitude" readonly
+        <div>Szerokość geograficzna: <input id="register-latitude" type="number" name="latitude" readonly
                                             <#--onchange="validateLocationField('latitude')"-->
                                             value="${inputData.latitude}"/><br/><br/></div>
         <div id="latitude-error">${errors.latitude}</div>
 
-        <div>Długość geograficzna: <input id="longitude" type="text" name="longitude" readonly
+        <div>Długość geograficzna: <input id="register-longitude" type="number" name="longitude" readonly
                                           <#--onchange="validateLocationField('longitude')"-->
                                           value="${inputData.longitude}"/><br/><br/></div>
         <div id="longitude-error">${errors.longitude}</div>
 
-        <input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>
+        <#--<input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>-->
 
+        <button id="submitButton" class="btn btn-success">Zarejestruj</button>
 
     <#--    AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM-->
 

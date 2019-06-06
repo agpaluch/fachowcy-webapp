@@ -1,7 +1,6 @@
 package servlets;
 
 import dao.UserLoginDAO;
-import domain.UserDetails;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -9,6 +8,8 @@ import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,11 @@ import java.util.logging.Logger;
 @WebServlet("/")
 public class Index extends HttpServlet {
 
+
+    @PersistenceContext(unitName = "primary")
+    private EntityManager entityManager;
+
+
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
@@ -37,17 +43,19 @@ public class Index extends HttpServlet {
 
     @Override
     public void init() {
+
         try {
             template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-        
+
+        //userLoginDAO.getByLogin("client1@gmail.com").get();
 // testy, testy...
-/*        if(userLoginDAO.getByLogin("client1@gmail.com").isPresent()) {
+        if(userLoginDAO.getByLogin("client1@gmail.com").isPresent()) {
             logger.info(userLoginDAO.getByLogin("client1@gmail.com")
                     .get().toString());
-        }*/
+        }
 
     }
 

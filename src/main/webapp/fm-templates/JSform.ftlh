@@ -55,8 +55,8 @@
                     console.log("Returned place contains no geometry");
                     return;
                 } else {
-                    document.getElementById("latitude").value = place.geometry.location.lat();
-                    document.getElementById("longitude").value = place.geometry.location.lng();
+                    document.getElementById("register-latitude").value = place.geometry.location.lat();
+                    document.getElementById("register-longitude").value = place.geometry.location.lng();
                 }
 
                 var icon = {
@@ -102,9 +102,14 @@
         var res5 = validateSurnameField();
         var res6 = validatePhoneNumberField();
 
-        //if (res1 && res2 && res3 && res4 && res5 && res6) {
-        document.getElementById('id1').submit();
-        //}
+        return true;
+
+/*        if (res1 && res2 && res3 && res4 && res5 && res6) {
+            return true;
+        //document.getElementById('id1').submit();
+        } else {
+            return false;
+        }*/
     }
 
 
