@@ -94,25 +94,11 @@ public class SignupProf extends HttpServlet {
         }
 
 
-
-/*        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-
-        //objectMapper.writeValue(resp.getOutputStream(), mapOfErrors);
-
-        //ObjectMapper obj = new ObjectMapper();
-        resp.setStatus(200);
-        //resp.getWriter().print(obj.writeValueAsString(mapOfErrors));
-
-        objectMapper.writeValue(resp.getOutputStream(), new UserDTO());*/
-
-
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
 
         UserDTO userDTO = objectMapper.readValue(req.getInputStream(), UserDTO.class);
@@ -131,23 +117,6 @@ public class SignupProf extends HttpServlet {
         }
 
 
- /*       resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-
-        //objectMapper.writeValue(resp.getOutputStream(), mapOfErrors);
-
-        //ObjectMapper obj = new ObjectMapper();
-        resp.setStatus(200);
-        //resp.getWriter().print(obj.writeValueAsString(mapOfErrors));
-
-        objectMapper.writeValue(resp.getOutputStream(), userDTO);*/
-
-
-
-
-
-
-
         mapOfValues.put("email", userDTO.getEmail());
         mapOfValues.put("password", userDTO.getPassword());
         mapOfValues.put("confirmPassword", userDTO.getConfirmPassword());
@@ -161,58 +130,31 @@ public class SignupProf extends HttpServlet {
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
 
-        resp.setContentType("text/html; charset=utf-8");
-        resp.setStatus(200);
-
-        PrintWriter printWriter = resp.getWriter();
 
 
 
-        if (constraintViolations.isEmpty()){
+/*        if (constraintViolations.isEmpty()){
             // TODO: stworzyć właściwego użytkownika, sprawdzić czy taki mail istnieje w bazie
             //i jeśli nie to zapisać użytkownika do bazy danych
             //Jeśli istnieje to przekierować do widoku z komunikatem, że użytkownik o takim
             //emailu ma już konto.
+
             sessionInfo.setUserType("professional");
             resp.sendRedirect("/login-form");
-        } else {
-            try {
-                template.process(dataMap, printWriter);
-            } catch (TemplateException e) {
-                logger.log(Level.SEVERE, e.getMessage(), e);
-            }
-        }
 
 
-   /*     if (constraintViolations.isEmpty() && (constraintViolationsPassword.isEmpty())){
-            long phoneNumber = Long.parseLong(phoneNumberString);
-            City city = City.valueOf(cityString);
-            //CityDistrict cityDistrict = CityDistrict.valueOf(cityDistrictString);
-            TypeOfProfession profession = TypeOfProfession.valueOf(professionString);
-            Double longitude = Double.parseDouble(longitudeString);
-            Double latitude = Double.parseDouble(latitudeString);
+        } else {*/
 
-            UserLogin userLogin = new UserLogin(email, password);
-            UserDetails userDetails = new UserDetails(name, surname, profession, phoneNumber,
-                                                        city, longitude, latitude);
+            PrintWriter printWriter = resp.getWriter();
 
-            try {
-                userDao.createUser(email, userLogin, userDetails);
-                sessionInfo.setUserType("professional");
-            } catch (UserAlreadyExistsException e){
-            //TODO: handle this exception
-            }
-
-
-            resp.sendRedirect("/login-form");
-        } else {
 
             try {
                 template.process(dataMap, printWriter);
             } catch (TemplateException e) {
                 logger.log(Level.SEVERE, e.getMessage(), e);
             }
-        }*/
+        //}
+
 
 
 

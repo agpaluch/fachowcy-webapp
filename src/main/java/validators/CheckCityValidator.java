@@ -7,24 +7,16 @@ import repository.TypeOfProfession;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CheckCityValidator implements ConstraintValidator<CheckCity, City> {
+public class CheckCityValidator implements ConstraintValidator<CheckCity, Object> {
 
 
     @Override
-    public boolean isValid(City object, ConstraintValidatorContext constraintContext) {
+    public boolean isValid(Object object, ConstraintValidatorContext constraintContext) {
         if ( object == null ) {
             return true;
         }
 
-        return EnumUtils.isValidEnum(City.class, "CA");
-
-
-/*        try{
-            City city = City.valueOf(object);
-            return true;
-        } catch (Exception e){
-            return false;
-        }*/
+        return EnumUtils.isValidEnum(City.class, object.toString());
 
 
     }

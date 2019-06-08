@@ -38,7 +38,7 @@ public class UserDTO {
     private TypeOfProfession profession;
 
 
-    @Range(min=48100000000L, max=48999999999L, message = "Niepoprawny numer telefonu.")
+    @Range(min=100000000L, max=48999999999L, message = "Niepoprawny numer telefonu.")
     private long phoneNumber;
 
     @CheckCity

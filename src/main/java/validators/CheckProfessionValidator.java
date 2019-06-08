@@ -7,18 +7,18 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.EnumSet;
 
-public class CheckProfessionValidator implements ConstraintValidator<CheckProfession, TypeOfProfession> {
+public class CheckProfessionValidator implements ConstraintValidator<CheckProfession, Object> {
 
 
 
     @Override
-    public boolean isValid(TypeOfProfession object, ConstraintValidatorContext constraintContext) {
+    public boolean isValid(Object object, ConstraintValidatorContext constraintContext) {
 
         if (object == null){
             return true;
         }
 
-        return EnumUtils.isValidEnum(TypeOfProfession.class, "CA");
+        return EnumUtils.isValidEnum(TypeOfProfession.class, object.toString());
 
         //return ((object != null) && EnumUtils.isValidEnum(TypeOfProfession.class, "CA"));
 

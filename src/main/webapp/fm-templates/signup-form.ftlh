@@ -2,7 +2,7 @@
 
 
         <div>E-mail: <input type="email" id="register-email" name="email"
-                            oninput="validateFieldEmail()" value="${inputData.email}" /><br/><br/></div>
+                    oninput="validateFieldEmail()" value="${inputData.email}" /><br/><br/></div>
         <div id="email-error">${errors.email}</div>
         <div>Hasło: <input type="password" id="register-password" name="password"
                            oninput="validateFieldPassword()"/><br/><br/></div>

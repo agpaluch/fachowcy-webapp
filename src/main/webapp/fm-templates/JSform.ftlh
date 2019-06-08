@@ -269,12 +269,5 @@
 
 </script>
 
-
-
-<#--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&callback=initMap"
-        ></script>-->
-<#--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initMap"
-        async defer></script>-->
-<#--<script src="/../src/main/resources/googleAPI.js"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initAutocomplete"></script>
 
