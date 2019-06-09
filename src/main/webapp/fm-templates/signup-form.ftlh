@@ -24,6 +24,18 @@
         /><br/><br/></div>
         <div id="phoneNumber-error">${errors.phoneNumber}</div>
 
+        <#if professions??>
+         Profesja: <select name="profession" id="register-profession">
+           <#list professions as prof>
+               <#if inputData.profession?? && inputData.profession==prof>
+                   <option value="${prof}" selected>${prof.fullName}</option>
+               <#else>
+               <option value="${prof}">${prof.fullName}</option>
+               </#if>
+           </#list>
+        </select><br/><br/>
+        </#if>
+
 
         Miasto: <select name="city" id="register-city">
            <#list cities as city>
@@ -38,11 +50,6 @@
     </select><br/><br/>
         <div id="city-error">${errors.city}</div>
 
-    <#--    Dzielnica: <select name="cityDistrict">
-               <#list districts as district>
-                   <option value="${district}">${district.fullName}</option>
-               </#list>
-    </select><br/><br/>-->
 
         <div>Szerokość geograficzna: <input id="register-latitude" type="number" name="latitude" readonly
                                             <#--onchange="validateLocationField('latitude')"-->
@@ -60,7 +67,6 @@
                                /><br/><br/></div>
         <div id="longitude-error">${errors.longitude}</div>
 
-        <#--<input id="submitButton" type="submit" name="save" value="Zarejestruj"/><br/><br/>-->
 
         <button id="submitButton" class="btn btn-success">Zarejestruj</button>
 

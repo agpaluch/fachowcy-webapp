@@ -12,8 +12,8 @@
                             <li><a href="/inbox" class="text-white">Wiadomości</a></li>
                         </#if>
                         <li><a href="/login-form" class="text-white">Login</a></li>
-                        <li><a href="/signup?role=client" class="text-white">Rejestracja klient</a></li>
-                        <li><a href="/signup?role=prof" class="text-white">Rejestracja fachowiec</a></li>
+                        <li><a href="/signup?role=CLIENT" class="text-white">Rejestracja klient</a></li>
+                        <li><a href="/signup?role=PROFESSIONAL" class="text-white">Rejestracja fachowiec</a></li>
                         <li><a href="#" class="text-white">Kontakt</a></li>
                     </ul>
                 </div>

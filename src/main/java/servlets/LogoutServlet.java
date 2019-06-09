@@ -43,7 +43,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         sessionInfo.setEmail(null);
-        sessionInfo.setUserType(null);
+        sessionInfo.setRole(null);
         sessionInfo.setPassword(null);
         sessionInfo.setUserLogin(null);
 

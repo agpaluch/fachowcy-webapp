@@ -10,12 +10,8 @@ function checkEverything() {
 
 
     if (res1 && res2 && res3 && res4 && res5 && res6) {
-        //document.getElementById('submitButton').disabled = false;
-        return true;
-        //document.getElementById('form').submit();
-    } else {
-       // document.getElementById('submitButton').disabled = true;
-        return true;
+
+        document.getElementById('id1').submit();
     }
 }
 

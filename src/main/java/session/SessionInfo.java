@@ -1,11 +1,12 @@
 package session;
 
+import domain.Role;
 import domain.UserLogin;
 
 public interface SessionInfo {
 
-    void setUserType(String userType);
-    String getUserType();
+    void setRole(Role role);
+    Role getRole();
     UserLogin getUserLogin();
 
     boolean findUserByEmailAndPassword();

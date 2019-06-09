@@ -1,12 +1,7 @@
 package servlets;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.Role;
 import domain.UserDTO;
-import domain.UserDetails;
-import domain.UserLogin;
-import dto.ClientDto;
-import dto.PasswordDto;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -35,10 +30,9 @@ import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @WebServlet("/signup")
-public class SignupClient extends HttpServlet {
+public class Signup extends HttpServlet {
 
     private Logger logger = Logger.getLogger(getClass().getName());
     private Template template;
@@ -63,7 +57,7 @@ public class SignupClient extends HttpServlet {
                 .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
 
 
-        dataMap.put("content", "signup-client");
+        dataMap.put("content", "signup");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
@@ -81,12 +75,14 @@ public class SignupClient extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //Role role = Role.valueOf(req.getParameter("role"));
-        String role = req.getParameter("role");
-        sessionInfo.setUserType(role);
-        if (role.equals("professional")){
+
+        Role role = Role.valueOf(req.getParameter("role"));
+        sessionInfo.setRole(role);
+
+        if (role==Role.PROFESSIONAL){
             dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
         }
+
 
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
