@@ -1,5 +1,7 @@
 package domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
 
@@ -12,6 +14,8 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Data
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "userLogin")
 public class UserLogin {
@@ -26,31 +30,22 @@ public class UserLogin {
     private Long id;
 
     @Column(unique = true)
-    @NotNull
+    @NotEmpty
     private String email;
 
-    @Column
     @NotEmpty
     private String password;
 
-    @Column
-    @NotNull
-
     @Enumerated
+    @NotNull
     private Role role;
 
-
-    @Column
+    @Builder.Default
     @PastOrPresent
-    private LocalDate signUpDate;
+    private LocalDate signUpDate = LocalDate.now();
 
-    public UserLogin(String email, String password) {
-        this.email = email;
-        this.password = password;
-        this.signUpDate = LocalDate.now();
-    }
 
-    public UserLogin() {
+   public UserLogin() {
         // Hibernate
     }
 

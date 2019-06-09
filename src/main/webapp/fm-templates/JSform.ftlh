@@ -102,12 +102,12 @@
         var res5 = validateSurnameField();
         var res6 = validatePhoneNumberField();
 
-        return true;
 
-/*        if (res1 && res2 && res3 && res4 && res5 && res6) {
-            return true;
-        //document.getElementById('id1').submit();
-        } else {
+        if (res1 && res2 && res3 && res4 && res5 && res6) {
+            //return true;
+            document.getElementById('id1').submit();
+
+        } /*else {
             return false;
         }*/
     }
@@ -269,12 +269,5 @@
 
 </script>
 
-
-
-<#--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&callback=initMap"
-        ></script>-->
-<#--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initMap"
-        async defer></script>-->
-<#--<script src="/../src/main/resources/googleAPI.js"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM&libraries=places&callback=initAutocomplete"></script>
 

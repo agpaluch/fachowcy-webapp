@@ -21,7 +21,10 @@
                                 <input type="submit" name="submit" class="btn btn-dark btn-md" value="Zaloguj się">
                             </div>
                             <div id="register-link" class="text-left">
-                                <a href="/signup-prof" class="text-dark">Zarejestruj się</a>
+                                <a href="/signup?role=PROFESSIONAL" class="text-dark">Zarejestruj się jako fachowiec</a>
+                            </div>
+                            <div id="register-link" class="text-left">
+                                <a href="/signup?role=CLIENT" class="text-dark">Zarejestruj się jako klient</a>
                             </div>
                         </form>
                         <#if error=="1">

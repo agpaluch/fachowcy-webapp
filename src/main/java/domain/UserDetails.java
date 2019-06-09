@@ -1,9 +1,6 @@
 package domain;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import repository.City;
 import repository.TypeOfProfession;
 
@@ -13,6 +10,8 @@ import javax.validation.constraints.NotNull;
 
 
 @Data
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "userDetails")
 public class UserDetails {
@@ -48,33 +47,19 @@ public class UserDetails {
     //private CityDistrict district;
 
     @Column
-    private double longitude;
+    private Double longitude;
 
     @Column
-    private double latitude;
+    private Double latitude;
 
+    @Builder.Default
     @Column
     private int numberOfLikes = 0;
 
-    @Column
-    private String comments = "";
 
-    public UserDetails(){
+
+   public UserDetails(){
         // Hibernate
-    }
-
-    public UserDetails(String name, String surname, TypeOfProfession profession,
-                               long phoneNumber, City city,
-                               //CityDistrict district,
-                               double longitude, double latitude) {
-        this.name = name;
-        this.surname = surname;
-        this.profession = profession;
-        this.phoneNumber = phoneNumber;
-        this.city = city;
-        //this.district = district;
-        this.longitude = longitude;
-        this.latitude = latitude;
     }
 
 

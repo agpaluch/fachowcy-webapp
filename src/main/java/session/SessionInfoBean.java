@@ -1,6 +1,8 @@
 package session;
 
+import domain.Role;
 import domain.UserLogin;
+import lombok.Data;
 import repository.RepositoryOfUsers;
 
 import javax.enterprise.context.SessionScoped;
@@ -8,11 +10,12 @@ import java.io.Serializable;
 import java.util.Map;
 
 
+@Data
 @SessionScoped
 public class SessionInfoBean implements SessionInfo, Serializable {
 
 
-    private String userType;
+    private Role role;
     private String password;
     private String email;
     private UserLogin userLogin;
@@ -30,46 +33,6 @@ public class SessionInfoBean implements SessionInfo, Serializable {
         return false;
         }
 
-
-
-    @Override
-    public UserLogin getUserLogin() {
-        return userLogin;
-    }
-
-
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String getUserType() {
-        return userType;
-    }
-
-    @Override
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    @Override
-    public void setUserLogin(UserLogin userLogin) {
-        this.userLogin = userLogin;
-    }
 
 
 }
