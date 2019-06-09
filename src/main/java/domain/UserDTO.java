@@ -1,5 +1,6 @@
 package domain;
 
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import repository.City;
@@ -13,6 +14,7 @@ import javax.validation.constraints.*;
 
 @Data
 @CheckPassword(first = "password", second = "confirmPassword")
+@Builder
 public class UserDTO {
 
     @Email(message = "Nieprawidłowy adres email.")
@@ -34,7 +36,7 @@ public class UserDTO {
     private String surname;
 
     @CheckProfession
-    @NotNull(message = "Wybierz profesję.")
+    //@NotNull(message = "Wybierz profesję.")
     private TypeOfProfession profession;
 
 

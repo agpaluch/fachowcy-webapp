@@ -1,5 +1,8 @@
 package servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import domain.Role;
+import domain.UserDTO;
 import domain.UserDetails;
 import domain.UserLogin;
 import dto.ClientDto;
@@ -8,6 +11,7 @@ import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.City;
+import repository.TypeOfProfession;
 import session.SessionInfo;
 
 import javax.inject.Inject;
@@ -33,14 +37,15 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@WebServlet("/signup-client")
+@WebServlet("/signup")
 public class SignupClient extends HttpServlet {
 
-    Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
-    Map<String, Object> dataMap = new HashMap<>();
-    Map<String, String> mapOfErrors = new HashMap<>();
-    Map<String, String> mapOfValues = new HashMap<>();
+    private Logger logger = Logger.getLogger(getClass().getName());
+    private Template template;
+    private Map<String, Object> dataMap = new HashMap<>();
+    private Map<String, String> mapOfErrors = new HashMap<>();
+    private Map<String, Object> mapOfValues = new HashMap<>();
+    private UserDTO userDTO;
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -50,22 +55,20 @@ public class SignupClient extends HttpServlet {
 
     @Override
     public void init() {
-        mapOfValues = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
-                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfValues.put("confirmPassword", "");
 
-        mapOfErrors = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
-                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfErrors.put("confirmPassword", "");
+        mapOfValues = Arrays.stream(UserDTO.class.getDeclaredFields())
+                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
+
+        mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
+                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
+
 
         dataMap.put("content", "signup-client");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
-        //dataMap.put("districts", Arrays.stream(CityDistrict.values()).collect(Collectors.toList()));
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
         dataMap.put("sessionInfo", sessionInfo);
+
 
         try {
             template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -78,6 +81,12 @@ public class SignupClient extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //Role role = Role.valueOf(req.getParameter("role"));
+        String role = req.getParameter("role");
+        sessionInfo.setUserType(role);
+        if (role.equals("professional")){
+            dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
+        }
 
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
@@ -98,47 +107,47 @@ public class SignupClient extends HttpServlet {
         String confirmPassword = req.getParameter("confirmPassword");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
-        String phoneNumberString = req.getParameter("phoneNumber").replace("-","")
-                                    .replace("+", "00");
-        String cityString = req.getParameter("city");
-        //String cityDistrictString = req.getParameter("cityDistrict");
-        String longitudeString = req.getParameter("longitude");
-        String latitudeString = req.getParameter("latitude");
+        long phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
+        City city = City.valueOf(req.getParameter("city"));
+        Double longitude = Double.parseDouble(req.getParameter("longitude"));
+        Double latitude = Double.parseDouble(req.getParameter("latitude"));
+        TypeOfProfession profession = null;
+
+        if (req.getParameter("profession")!=null){
+            profession = TypeOfProfession.valueOf(req.getParameter("profession"));
+        }
 
 
-        ClientDto clientDto = new ClientDto(name, surname,
-                phoneNumberString, cityString, longitudeString, latitudeString,
-                email, password);
 
-        PasswordDto passwordDto = new PasswordDto(password, confirmPassword);
+        UserDTO userDTO = UserDTO.builder()
+                .email(email)
+                .password(password)
+                .confirmPassword(confirmPassword)
+                .name(name)
+                .surname(surname)
+                .profession(profession)
+                .phoneNumber(phoneNumber)
+                .city(city)
+                .longitude(longitude)
+                .latitude(latitude)
+                .build();
+
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
 
-        ValidatorFactory factory2 = Validation.buildDefaultValidatorFactory();
-        Validator validator2 = factory2.getValidator();
 
-        Set<ConstraintViolation<ClientDto>> constraintViolationsDetails =
-                validator.validate(clientDto);
-        Set<ConstraintViolation<PasswordDto>> constraintViolationsPassword =
-                validator2.validate(passwordDto);
+        Set<ConstraintViolation<UserDTO>> constraintViolations =
+                validator.validate(userDTO);
 
-        mapOfErrors = Stream.concat(Arrays.stream(UserDetails.class.getDeclaredFields())
-                .map(Field::getName), Arrays.stream(UserLogin.class.getDeclaredFields())
-                .map(Field::getName)).collect(Collectors.toMap(Function.identity(), n -> ""));
-        mapOfErrors.put("confirmPassword", "");
 
-        for (ConstraintViolation<ClientDto> constraintViolation: constraintViolationsDetails){
+        mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
+                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
+
+        for (ConstraintViolation<UserDTO> constraintViolation: constraintViolations){
             mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
         }
 
-        if (!(constraintViolationsPassword.isEmpty())){
-            for (ConstraintViolation<PasswordDto> constraintViolation: constraintViolationsPassword){
-                mapOfErrors.put("confirmPassword", constraintViolation.getMessage());
-            }
-        } else {
-            mapOfErrors.put("confirmPassword", "");
-        }
 
         mapOfValues = req.getParameterMap()
                 .entrySet()
@@ -151,21 +160,20 @@ public class SignupClient extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
 
+        if (constraintViolations.isEmpty()){
+            // TODO: stworzyć właściwego użytkownika, sprawdzić czy taki mail istnieje w bazie
+            //i jeśli nie to zapisać użytkownika do bazy danych
+            //Jeśli istnieje to przekierować do widoku z komunikatem, że użytkownik o takim
+            //emailu ma już konto.
+
+            //sessionInfo.setUserType("client");
+
+            //resp.sendRedirect("/login-form");
 
 
-        if (constraintViolationsDetails.isEmpty() && (constraintViolationsPassword.isEmpty())){
-            long phoneNumber = Long.parseLong(phoneNumberString);
-            City city = City.valueOf(cityString);
-            //CityDistrict cityDistrict = CityDistrict.valueOf(cityDistrictString);
-            Double longitude = Double.parseDouble(longitudeString);
-            Double latitude = Double.parseDouble(latitudeString);
 
-            UserLogin userLogin = new UserLogin(email, password);
-            UserDetails userDetails = new UserDetails(name, surname, null, phoneNumber,
-                                                        city, longitude, latitude);
-            printWriter.write(userDetails.toString() +"\n" + userLogin.toString());
+            printWriter.write(userDTO.toString());
 
-            //resp.sendRedirect("/details-prof");
         } else {
 
             try {
@@ -174,7 +182,6 @@ public class SignupClient extends HttpServlet {
                 logger.log(Level.SEVERE, e.getMessage(), e);
             }
         }
-
 
 
 

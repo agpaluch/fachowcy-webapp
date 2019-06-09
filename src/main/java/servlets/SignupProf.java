@@ -42,6 +42,7 @@ public class SignupProf extends HttpServlet {
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
     private ObjectMapper objectMapper = new ObjectMapper();
+    private UserDTO userDTO;
 
 
     private static final String TEMPLATE_NAME = "index";
@@ -101,7 +102,12 @@ public class SignupProf extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        UserDTO userDTO = objectMapper.readValue(req.getInputStream(), UserDTO.class);
+        try {
+            userDTO = objectMapper.readValue(req.getInputStream(), UserDTO.class);
+        } catch (Exception e){
+            resp.setStatus(400);
+        }
+
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -145,11 +151,10 @@ public class SignupProf extends HttpServlet {
 
         } else {*/
 
-            PrintWriter printWriter = resp.getWriter();
 
 
             try {
-                template.process(dataMap, printWriter);
+                template.process(dataMap, resp.getWriter());
             } catch (TemplateException e) {
                 logger.log(Level.SEVERE, e.getMessage(), e);
             }

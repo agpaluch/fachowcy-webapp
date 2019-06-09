@@ -24,7 +24,6 @@
     </select><br/><br/>
 
 
-
     <#include "signup-form.ftlh">
     </form>
 
@@ -33,10 +32,10 @@
 </main>
 
 
-
 <#include "JSform.ftlh">
 
 
+<#--
 <script>
 
 
@@ -44,9 +43,9 @@
 
         document.getElementById('submitButton').addEventListener('click', (clickEvent) => {
             clickEvent.preventDefault();
-   /*         if (!checkEverything()) {
+            if (!checkEverything()) {
                 return;
-            }*/
+            }
 
             const inputEmail = document.getElementById('register-email');
             const inputPassword = document.getElementById('register-password');
@@ -92,6 +91,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+-->
 
 
 
