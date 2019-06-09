@@ -2,6 +2,8 @@ package servlets;
 
 import domain.Role;
 import domain.UserDTO;
+import domain.UserDetails;
+import domain.UserLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -162,11 +164,30 @@ public class Signup extends HttpServlet {
             //Jeśli istnieje to przekierować do widoku z komunikatem, że użytkownik o takim
             //emailu ma już konto.
 
-            //sessionInfo.setUserType("client");
+
+            UserLogin userLogin = UserLogin.builder()
+                    .userDetails(null)
+                    .email(email)
+                    .password(password)
+                    .role(sessionInfo.getRole())
+                    .build();
+
+            UserDetails userDetails = UserDetails.builder()
+                    .userLogin(userLogin)
+                    .name(name)
+                    .surname(surname)
+                    .profession(profession)
+                    .phoneNumber(phoneNumber)
+                    .city(city)
+                    .longitude(longitude)
+                    .latitude(latitude)
+                    .build();
+
+            userLogin.setUserDetails(userDetails);
+
+
 
             //resp.sendRedirect("/login-form");
-
-
 
             printWriter.write(userDTO.toString());
 

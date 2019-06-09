@@ -20,15 +20,6 @@ public class CheckProfessionValidator implements ConstraintValidator<CheckProfes
 
         return EnumUtils.isValidEnum(TypeOfProfession.class, object.toString());
 
-        //return ((object != null) && EnumUtils.isValidEnum(TypeOfProfession.class, "CA"));
-
-/*        try{
-            TypeOfProfession profession = TypeOfProfession.valueOf(object);
-            return true;
-        } catch (Exception e){
-            return false;
-        }*/
-
 
     }
 }
