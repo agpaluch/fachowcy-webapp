@@ -41,18 +41,18 @@ public class UserDTO {
 
 
     @Range(min=100000000L, max=48999999999L, message = "Niepoprawny numer telefonu.")
-    private long phoneNumber;
+    private Long phoneNumber;
 
     @CheckCity
     @NotNull(message = "Wybierz miasto")
     private City city;
 
-    @Range(min=-180, max=180, message = "Niepoprawana lokalizacja.")
+    @Range(min=-10, max=10, message = "Niepoprawana lokalizacja.")
     @NotNull(message = "Wpisz adres")
     //@CheckIfNotZero(message = "Znajdź swoją lokalizację.")
     private Double longitude;
 
-    @Range(min= -180, max=180, message = "Niepoprawana lokalizacja.")
+    @Range(min= -10, max=10, message = "Niepoprawana lokalizacja.")
     @NotNull(message = "Wpisz adres")
     //@CheckIfNotZero(message = "Znajdź swoją lokalizację.")
     private Double latitude;
