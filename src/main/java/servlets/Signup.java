@@ -105,14 +105,28 @@ public class Signup extends HttpServlet {
         String confirmPassword = req.getParameter("confirmPassword");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
-        long phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
-        City city = City.valueOf(req.getParameter("city"));
-        Double longitude = Double.parseDouble(req.getParameter("longitude"));
-        Double latitude = Double.parseDouble(req.getParameter("latitude"));
+        Long phoneNumber = null;
+        City city = null;
+        Double longitude = null;
+        Double latitude = null;
         TypeOfProfession profession = null;
 
+        try {
+            phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
+            city = City.valueOf(req.getParameter("city"));
+            longitude = Double.parseDouble(req.getParameter("longitude"));
+            latitude = Double.parseDouble(req.getParameter("latitude"));
+        } catch (IllegalArgumentException e) {
+            resp.setStatus(500);
+        }
+
+
         if (req.getParameter("profession")!=null){
-            profession = TypeOfProfession.valueOf(req.getParameter("profession"));
+            try{
+                profession = TypeOfProfession.valueOf(req.getParameter("profession"));
+            } catch (IllegalArgumentException e) {
+                resp.setStatus(500);
+            }
         }
 
 

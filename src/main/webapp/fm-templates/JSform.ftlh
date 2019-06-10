@@ -2,7 +2,8 @@
 <p>Znajdź swoją lokalizację na mapie: </p>
 
 
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box"
+    onchange="validateLocationField('latitude'); validateLocationField('longitude');">
     <div id="map"></div>
 
 <script>
@@ -102,6 +103,7 @@
         var res5 = validateSurnameField();
         var res6 = validatePhoneNumberField();
 
+        document.getElementById('id1').submit();
 
         if (res1 && res2 && res3 && res4 && res5 && res6) {
             //return true;
@@ -224,16 +226,14 @@
     }
 
     function validateLocationField(elementID){
-        alert("Uwaga");
-/*            let longitude = document.getElementById(elementID).value;
+            let location = document.getElementById(elementID).value;
             let htmlElement = document.getElementById(elementID.concat('-error'));
-            if (longitude=="" || longitude==null){
-                htmlElement.innerHTML = "uwaga";
-                return true;
-            } else {
+            if (location==="" || location==null){
                 htmlElement.innerHTML = "Znajdź swoją lokalizację.";
                 return false;
-            }*/
+            } else {
+                return true;
+            }
     }
 
 
