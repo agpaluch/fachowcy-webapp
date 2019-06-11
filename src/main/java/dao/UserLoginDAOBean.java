@@ -27,6 +27,7 @@ public class UserLoginDAOBean implements UserLoginDAO {
         commit(em);
     }
 
+
     @Override
     public void deleteByLogin(String email) {
        EntityManager em = startTransaction();
@@ -37,6 +38,8 @@ public class UserLoginDAOBean implements UserLoginDAO {
            commit(em);
        }
     }
+
+
 
     @Override
     public Optional<UserLogin> get(Long id) {

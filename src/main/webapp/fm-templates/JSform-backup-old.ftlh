@@ -2,8 +2,8 @@
 <p>Znajdź swoją lokalizację na mapie: </p>
 
 
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box"
-    onchange="validateLocationField('latitude'); validateLocationField('longitude');">
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<#--    onchange="validateLocationField('latitude'); validateLocationField('longitude');">-->
     <div id="map"></div>
 
 <script>
@@ -56,8 +56,12 @@
                     console.log("Returned place contains no geometry");
                     return;
                 } else {
-                    document.getElementById("register-latitude").value = place.geometry.location.lat();
-                    document.getElementById("register-longitude").value = place.geometry.location.lng();
+                    document.getElementById("latitude").value = place.geometry.location.lat();
+                    document.getElementById("longitude").value = place.geometry.location.lng();
+                    let htmlElement1 = document.getElementById('latitude-error');
+                    let htmlElement2 = document.getElementById('longitude-error');
+                    htmlElement1.innerText = "";
+                    htmlElement2.innerText = "";
                 }
 
                 var icon = {
@@ -94,6 +98,8 @@
 
 <script>
 
+
+
     //Check al the fields (after the button to submit data is clicked)
     function checkEverything() {
         var res1 = validateFieldEmail();
@@ -102,16 +108,33 @@
         var res4 = validateNameField();
         var res5 = validateSurnameField();
         var res6 = validatePhoneNumberField();
+        var res7 = validateLocationField('latitude');
+        var res8 = validateLocationField('longitude');
 
-        document.getElementById('id1').submit();
+        //document.getElementById('id1').submit();
 
-        if (res1 && res2 && res3 && res4 && res5 && res6) {
+        if (res1 && res2 && res3 && res4 && res5 && res6 && res7 && res8) {
             //return true;
             document.getElementById('id1').submit();
 
         } /*else {
             return false;
         }*/
+    }
+
+    function validateLocationField(elementID){
+        let location = document.getElementById(elementID).value;
+        let htmlElement = document.getElementById(elementID.concat('-error'));
+
+        /*htmlElement.innerText = "";*/
+
+        if (location===0 || location==null){
+            htmlElement.innerText = "Znajdź swoją lokalizację.";
+            return false;
+        } else {
+            htmlElement.innerText = "";
+            return true;
+        }
     }
 
 
@@ -122,7 +145,7 @@
             element.innerText = "";
             return true;
         } else if (isEmpty('register-email')) {
-            element.innerText = "Podaj swój adres e-mail."
+            element.innerText = "Podaj swój adres e-mail.";
             return false;
         } else {
             element.innerText = "Podany przez Ciebie adres e-mail jest nieprawidłowy.";
@@ -225,16 +248,7 @@
 
     }
 
-    function validateLocationField(elementID){
-            let location = document.getElementById(elementID).value;
-            let htmlElement = document.getElementById(elementID.concat('-error'));
-            if (location==="" || location==null){
-                htmlElement.innerHTML = "Znajdź swoją lokalizację.";
-                return false;
-            } else {
-                return true;
-            }
-    }
+
 
 
     //Checking if content of a given field is a valid e-mail address using regex expression from validate.js library

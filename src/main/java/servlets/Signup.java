@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.UserLoginDAO;
 import domain.Role;
 import domain.UserDTO;
 import domain.UserDetails;
@@ -13,6 +14,7 @@ import session.SessionInfo;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +43,7 @@ public class Signup extends HttpServlet {
     private Map<String, Object> dataMap = new HashMap<>();
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
-    private UserDTO userDTO;
+    private UserLoginDAO userLoginDAO;
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -117,7 +119,8 @@ public class Signup extends HttpServlet {
             longitude = Double.parseDouble(req.getParameter("longitude"));
             latitude = Double.parseDouble(req.getParameter("latitude"));
         } catch (IllegalArgumentException e) {
-            resp.setStatus(500);
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            //TODO: Zwrócić resp status do widoku.
         }
 
 
@@ -179,12 +182,11 @@ public class Signup extends HttpServlet {
             //emailu ma już konto.
 
 
-            UserLogin userLogin = UserLogin.builder()
-                    .userDetails(null)
-                    .email(email)
-                    .password(password)
-                    .role(sessionInfo.getRole())
-                    .build();
+/*            if (userLoginDAO.getByLogin(email).isPresent()
+                    && userLoginDAO.getByLogin(email).get().getRole()==sessionInfo.getRole()){
+                printWriter.write("Użytkownik ("+ sessionInfo.getRole().getFullName() +
+                        ") o podanym adresie e-mail istnieje w bazie danych.");
+            } else {*/
 
             UserDetails userDetails = UserDetails.builder()
                     //.userLogin(userLogin)
@@ -197,13 +199,25 @@ public class Signup extends HttpServlet {
                     .latitude(latitude)
                     .build();
 
-            userLogin.setUserDetails(userDetails);
+
+                UserLogin userLogin = UserLogin.builder()
+                        .userDetails(userDetails)
+                        .email(email)
+                        .password(password)
+                        .role(sessionInfo.getRole())
+                        .build();
 
 
 
-            //resp.sendRedirect("/login-form");
 
-            printWriter.write(userDTO.toString());
+                //printWriter.write(userDTO.toString());
+
+
+                resp.sendRedirect("/login-form");
+           // }
+
+
+
 
         } else {
 

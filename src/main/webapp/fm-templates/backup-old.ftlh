@@ -1,10 +1,11 @@
+<#--
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<#--    <script type="text/javascript" src="formValidation.js"></script>
-    <script type="text/javascript" src="googleAPI.js"></script>-->
+&lt;#&ndash;    <script type="text/javascript" src="formValidation.js"></script>
+    <script type="text/javascript" src="googleAPI.js"></script>&ndash;&gt;
 </head>
 <body>
 
@@ -32,10 +33,10 @@
 </main>
 
 
-<#include "JSform.ftlh">
+<#include "../../resources/META-INF/JSform.ftlh">
 
 
-<#--
+&lt;#&ndash;
 <script>
 
 
@@ -91,9 +92,9 @@
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
--->
+&ndash;&gt;
 
 
 
 </body>
-</html>
+</html>-->

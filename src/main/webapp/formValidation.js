@@ -1,5 +1,5 @@
 
-
+//Check al the fields (after the button to submit data is clicked)
 function checkEverything() {
     var res1 = validateFieldEmail();
     var res2 = validateFieldPassword();
@@ -7,11 +7,34 @@ function checkEverything() {
     var res4 = validateNameField();
     var res5 = validateSurnameField();
     var res6 = validatePhoneNumberField();
+    var res7 = validateLocationField('latitude');
+    var res8 = validateLocationField('longitude');
 
+    document.getElementById('id1').submit();
 
-    if (res1 && res2 && res3 && res4 && res5 && res6) {
-
+    if (res1 && res2 && res3 && res4 && res5 && res6 && res7 && res8) {
+        //return true;
         document.getElementById('id1').submit();
+
+
+    } /*else {
+            return false;
+        }*/
+}
+
+function validateLocationField(elementID){
+    let location = document.getElementById(elementID).value;
+    let htmlElement = document.getElementById(elementID.concat('-error'));
+
+    /*htmlElement.innerText = "";
+      || location==0 || location===0 || location==null*/
+
+    if (isEmpty(elementID)){
+        htmlElement.innerText = "Znajdź swoją lokalizację.";
+        return false;
+    } else {
+        htmlElement.innerText = "";
+        return true;
     }
 }
 
@@ -23,7 +46,7 @@ function validateFieldEmail() {
         element.innerText = "";
         return true;
     } else if (isEmpty('register-email')) {
-        element.innerText = "Podaj swój adres e-mail."
+        element.innerText = "Podaj swój adres e-mail.";
         return false;
     } else {
         element.innerText = "Podany przez Ciebie adres e-mail jest nieprawidłowy.";
@@ -129,8 +152,6 @@ function validatePhoneNumberField() {
 
 
 
-
-
 //Checking if content of a given field is a valid e-mail address using regex expression from validate.js library
 function validateEmail(fieldID) {
     let expression = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
@@ -159,3 +180,4 @@ function isEmpty(fieldID) {
     let len = document.getElementById(fieldID).value.replace(/\s/g, '').length;
     return len === 0;
 }
+
