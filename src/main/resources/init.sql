@@ -18,7 +18,7 @@ INSERT INTO fachmann.professions (profession) VALUES
 
 
 --+ Create table for user data (login and details) and connect it with professions
-CREATE TABLE IF NOT EXISTS userData
+CREATE TABLE IF NOT EXISTS userLogin
 (
     id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     email       VARCHAR(100) UNIQUE NOT NULL,
@@ -35,10 +35,10 @@ CREATE TABLE IF NOT EXISTS userData
     numberOfLikes SMALLINT UNSIGNED NOT NULL
 );
 
-ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES professions (id);
+ALTER TABLE userLogin ADD FOREIGN KEY (profession_id) REFERENCES professions (id);
 
 
-INSERT INTO fachmann.userData (email, password, role, name, surname, profession_id,
+INSERT INTO fachmann.userLogin (email, password, role, name, surname, profession_id,
 phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
     ('client1@gmail.com', 'client1', 'CLIENT', 'Jan', 'Kowalski',
     null, 507654321, 'Warsaw', 51, 21.7, 2),
@@ -67,9 +67,9 @@ CREATE TABLE IF NOT EXISTS fachmann.messages
 );
 
 ALTER TABLE messages
-    ADD FOREIGN KEY (sender_id) REFERENCES userData (id);
+    ADD FOREIGN KEY (sender_id) REFERENCES userLogin (id);
 ALTER TABLE messages
-    ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
+    ADD FOREIGN KEY (recipient_id) REFERENCES userLogin (id);
 
 INSERT INTO messages (message, sender_id, recipient_id) VALUES
 ("Ok.", 1, 2),
@@ -89,9 +89,9 @@ CREATE TABLE IF NOT EXISTS comments
 );
 
 ALTER TABLE comments
-    ADD FOREIGN KEY (opinion_maker_id) REFERENCES userData (id);
+    ADD FOREIGN KEY (opinion_maker_id) REFERENCES userLogin (id);
 ALTER TABLE comments
-    ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
+    ADD FOREIGN KEY (recipient_id) REFERENCES userLogin (id);
 
 INSERT INTO comments (opinion_maker_id, recipient_id, opinion) VALUES
 (1, 2, "Dobra robota."),

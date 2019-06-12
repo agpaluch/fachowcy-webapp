@@ -20,12 +20,11 @@ import java.util.Set;
 @Table(name = "userLogin")
 public class UserLogin {
 
-    @OneToOne(mappedBy = "userLogin", cascade = CascadeType.ALL)
-    @JoinColumn(name = "userDetailsID")
-    private UserDetails userDetails;
+/*    @OneToOne(mappedBy = "userLogin", cascade = CascadeType.ALL)
+    @JoinColumn(name = "userDetailsID")*/
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -44,10 +43,12 @@ public class UserLogin {
     @PastOrPresent
     private LocalDate signUpDate = LocalDate.now();
 
-
-   public UserLogin() {
+    public UserLogin() {
         // Hibernate
     }
+
+    @Embedded
+    private UserDetails userDetails;
 
 
 }

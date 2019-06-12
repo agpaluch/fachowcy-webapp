@@ -173,7 +173,7 @@ public class Signup extends HttpServlet {
                     .build();
 
             UserDetails userDetails = UserDetails.builder()
-                    .userLogin(userLogin)
+                    //.userLogin(userLogin)
                     .name(name)
                     .surname(surname)
                     .profession(profession)

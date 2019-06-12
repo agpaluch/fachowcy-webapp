@@ -12,18 +12,19 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 @AllArgsConstructor
-@Entity
-@Table(name = "userDetails")
+/*@Entity
+@Table(name = "userDetails")*/
+@Embeddable
 public class UserDetails {
 
-    @OneToOne
+/*    @OneToOne
     @JoinColumn(name = "id")
     @MapsId
     UserLogin userLogin;
 
     @Id
     @Column(name = "id")
-    private Long id;
+    private Long id;*/
 
     @Column
     @NotNull
