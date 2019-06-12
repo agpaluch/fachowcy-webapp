@@ -5,6 +5,7 @@ import repository.City;
 
 import javax.ejb.Singleton;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Singleton
@@ -31,8 +32,8 @@ public class UserDetailsDAOBean implements UserDetailsDAO {
     }
 
     @Override
-    public void save(UserDetails domain) {
-
+    public UserDetails save(UserDetails domain) {
+        return null;
     }
 
     @Override
@@ -47,6 +48,16 @@ public class UserDetailsDAOBean implements UserDetailsDAO {
 
     @Override
     public void delete(UserDetails domain) {
+
+    }
+
+    @Override
+    public EntityManager startTransaction() {
+        return null;
+    }
+
+    @Override
+    public void commit(EntityManager entityManager) {
 
     }
 }

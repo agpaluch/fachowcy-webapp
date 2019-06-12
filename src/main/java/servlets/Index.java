@@ -32,10 +32,6 @@ import java.util.logging.Logger;
 @WebServlet("/")
 public class Index extends HttpServlet {
 
-
-/*    @PersistenceContext(unitName = "primary")
-    private EntityManager entityManager;*/
-
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
 
     Logger logger = Logger.getLogger(getClass().getName());
@@ -57,43 +53,6 @@ public class Index extends HttpServlet {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-
-        //userLoginDAO.getByLogin("client1@gmail.com").get();
-// testy, testy...
-/*        if(userLoginDAO.getByLogin("client1@gmail.com").isPresent()) {
-            logger.info(userLoginDAO.getByLogin("client1@gmail.com")
-                    .get().toString());
-        }*/
-
-
-        /*
-        EntityTransaction et = entityManager.getTransaction();
-et.begin();*/
-
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-
-        UserDetails userDetails = UserDetails.builder()
-                //.userLogin(userLogin)
-                .name("aaa")
-                .surname("bbb")
-                .profession(TypeOfProfession.ELECTRICIAN)
-                .phoneNumber(600000000)
-                .city(City.WARSZAWA)
-                .longitude(6.6)
-                .latitude(7.7)
-                .build();
-
-        UserLogin userLogin = UserLogin.builder()
-                .userDetails(userDetails)
-                .email("bbx@abc.xom")
-                .password("password")
-                .role(Role.ADMIN)
-                .build();
-
-        em.persist(userLogin);
-        em.getTransaction().commit();
-        em.close();
 
     }
 

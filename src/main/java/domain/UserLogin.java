@@ -17,7 +17,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "userLogin")
+@Table(name = "userData")
 public class UserLogin {
 
 /*    @OneToOne(mappedBy = "userLogin", cascade = CascadeType.ALL)

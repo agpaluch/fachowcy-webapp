@@ -24,9 +24,7 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
 
-
     Logger logger = Logger.getLogger(getClass().getName());
-
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {
@@ -58,8 +56,16 @@ public class UserLoginDAOBean implements UserLoginDAO {
     }
 
     @Override
-    public void save(UserLogin domain) {
-
+    public UserLogin save(UserLogin userLogin) {
+        EntityManager entityManager = startTransaction();
+        UserLogin ul = userLogin;
+        if (userLogin.getId() != null) {
+            ul = entityManager.merge(userLogin);
+        } else {
+            entityManager.persist(userLogin);
+        }
+        commit(entityManager);
+        return ul;
     }
 
     @Override
