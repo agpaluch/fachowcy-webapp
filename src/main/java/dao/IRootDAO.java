@@ -1,16 +1,32 @@
 package dao;
 
 import javax.ejb.Local;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Local
 public interface IRootDAO<T> extends Serializable {
 
-    public List<T> getAll();
-    public void save(T domain);
-    public T get(Long id);
-    public void update(T domain);
-    public void delete(T domain);
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
+
+    List<T> getAll();
+    void save(T domain);
+    Optional<T> get(Long id);
+    void delete(Long id);
+
+    default EntityManager startTransaction() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        return em;
+    }
+
+    default void commit(EntityManager entityManager) {
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
 
 }

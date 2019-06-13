@@ -41,15 +41,15 @@ ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES professions (id)
 INSERT INTO fachmann.userData (email, password, role, name, surname, profession_id,
 phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
     ('client1@gmail.com', 'client1', 'CLIENT', 'Jan', 'Kowalski',
-    null, 507654321, 'Warsaw', 51, 21.7, 2),
+    null, 507654321, 'WARSZAWA', 51, 21.7, 2),
     ('client2@gmail.com', 'client2', 'CLIENT', 'Piotr', 'Mazur',
-    null, 222222222, 'Warsaw', 51, 21.7, 2),
+    null, 222222222, 'WARSZAWA', 51, 21.7, 2),
     ('professional1@gmail.com', 'professional1', 'PROFESSIONAL', 'Maria', 'Nowak',
-    1, 0048765432123, 'Warsaw', 51, 21.7, 3),
+    1, 0048765432123, 'WARSZAWA', 51, 21.7, 3),
     ('professional2@gmail.com', 'professional2', 'PROFESSIONAL', 'Sylwester', 'Dębski',
-    2, 444444444, 'Warsaw', 51, 21.7, 12),
+    2, 444444444, 'WARSZAWA', 51, 21.7, 12),
     ('admin1@gmail.com', 'admin1', 'ADMIN', 'Józef', 'Nijaki',
-    null, 555555555, 'Warsaw', 51, 21.7, 0);
+    null, 555555555, 'WARSZAWA', 51, 21.7, 0);
 
 
 

@@ -2,10 +2,13 @@ package dao;
 
 import domain.Messages;
 
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
-@Stateless
+@Singleton
 public class MessagesDAOBean implements MessagesDAO {
 
     // and some additional methods
@@ -21,17 +24,22 @@ public class MessagesDAOBean implements MessagesDAO {
     }
 
     @Override
-    public Messages get(Long id) {
+    public Optional<Messages> get(Long id) {
         return null;
     }
 
     @Override
-    public void update(Messages domain) {
+    public void delete(Long id) {
 
     }
 
     @Override
-    public void delete(Messages domain) {
+    public EntityManager startTransaction() {
+        return null;
+    }
+
+    @Override
+    public void commit(EntityManager entityManager) {
 
     }
 }

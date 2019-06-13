@@ -3,29 +3,22 @@ package domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "userLogin")
+@Table(name = "userData")
 public class UserLogin {
 
-    @OneToOne(mappedBy = "userLogin", cascade = CascadeType.ALL)
-    @JoinColumn(name = "userDetailsID")
-    private UserDetails userDetails;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -36,7 +29,7 @@ public class UserLogin {
     @NotEmpty
     private String password;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @NotNull
     private Role role;
 
@@ -44,11 +37,12 @@ public class UserLogin {
     @PastOrPresent
     private LocalDate signUpDate = LocalDate.now();
 
+    @Embedded
+    private UserDetails userDetails;
 
-   public UserLogin() {
+    public UserLogin() {
         // Hibernate
     }
-
 
 }
 
