@@ -66,12 +66,14 @@ public class Index extends HttpServlet {
                 .build();
         UserLogin userLogin = UserLogin.builder()
                 .userDetails(userDetails)
-                .email("bbx@abc.xom")
+                .email("fuckme@abc.xom")
                 .password("password")
                 .role(Role.ADMIN)
                 .build();
-        userLogin.setPassword("newerPassword");
+        //userLogin.setPassword("Password");
         userLoginDAO.save(userLogin);
+
+
 
     }
 

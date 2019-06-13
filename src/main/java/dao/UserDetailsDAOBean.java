@@ -7,6 +7,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Singleton
 public class UserDetailsDAOBean implements UserDetailsDAO {
@@ -37,7 +38,7 @@ public class UserDetailsDAOBean implements UserDetailsDAO {
     }
 
     @Override
-    public UserDetails get(Long id) {
+    public Optional<UserDetails> get(Long id) {
         return null;
     }
 

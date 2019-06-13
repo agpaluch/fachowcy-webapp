@@ -6,6 +6,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Singleton
 public class MessagesDAOBean implements MessagesDAO {
@@ -23,7 +24,7 @@ public class MessagesDAOBean implements MessagesDAO {
     }
 
     @Override
-    public Messages get(Long id) {
+    public Optional<Messages> get(Long id) {
         return null;
     }
 

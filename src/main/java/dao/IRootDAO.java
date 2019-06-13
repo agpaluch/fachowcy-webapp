@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Local
 public interface IRootDAO<T> extends Serializable {
@@ -14,7 +15,7 @@ public interface IRootDAO<T> extends Serializable {
 
     List<T> getAll();
     void save(T domain);
-    T get(Long id);
+    Optional<T> get(Long id);
     void update(T domain);
     void delete(T domain);
 

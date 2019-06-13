@@ -71,19 +71,16 @@ public class UserLoginDAOBean implements UserLoginDAO {
         if (!doesAUserExist(userLogin.getEmail())) {
             entityManager.persist(userLogin);
         } else {
-            UserLogin oldEntry = null;
             Optional<Long> userID = getIDbyLogin(userLogin.getEmail());
-            if(userID.isPresent()) {
-               oldEntry = entityManager.find(UserLogin.class, userID.get());
-            }
-            userLogin.setId(oldEntry.getId());
+            userLogin.setId(userID.orElseThrow(() ->
+                      new NoSuchElementException("ID not found")));
             entityManager.merge(userLogin);
         }
         commit(entityManager);
     }
 
     @Override
-    public UserLogin get(Long id) {
+    public Optional<UserLogin> get(Long id) {
         return null;
     }
 
