@@ -17,9 +17,6 @@ import java.time.LocalDate;
 @Table(name = "userData")
 public class UserLogin {
 
-/*    @OneToOne(mappedBy = "userLogin", cascade = CascadeType.ALL)
-    @JoinColumn(name = "userDetailsID")*/
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -40,12 +37,12 @@ public class UserLogin {
     @PastOrPresent
     private LocalDate signUpDate = LocalDate.now();
 
+    @Embedded
+    private UserDetails userDetails;
+
     public UserLogin() {
         // Hibernate
     }
-
-    @Embedded
-    private UserDetails userDetails;
 
 }
 

@@ -1,27 +1,20 @@
 package servlets;
 
 import dao.UserLoginDAO;
-import domain.Role;
-import domain.UserDetails;
-import domain.UserLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import repository.City;
-import repository.TypeOfProfession;
 import session.SessionInfo;
 
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.SessionContext;
 import javax.inject.Inject;
-import javax.persistence.*;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -53,30 +46,6 @@ public class Index extends HttpServlet {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-
-        UserDetails userDetails = UserDetails.builder()
-                //.userLogin(userLogin)
-                .name("aaa")
-                .surname("bbb")
-                .profession(TypeOfProfession.ELECTRICIAN)
-                .phoneNumber(600000000)
-                .city(City.WARSZAWA)
-                .longitude(6.6)
-                .latitude(7.7)
-                .build();
-        UserLogin userLogin = UserLogin.builder()
-                .userDetails(userDetails)
-                .email("bbx@abc.xom")
-                .password("password")
-                .role(Role.ADMIN)
-                .build();
-        //userLoginDAO.save(userLogin);
-        //userLoginDAO.deleteByLogin("bbx@abc.xom");
-        //userLoginDAO.delete(9L);
-
-        //UserLogin ul = userLoginDAO.getByLogin("client1@gmail.com").get();
-        //UserLogin ul = userLoginDAO.get(6L).get();
-        //System.out.println(ul.toString());
 
     }
 

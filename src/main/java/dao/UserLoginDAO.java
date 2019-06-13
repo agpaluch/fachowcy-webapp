@@ -13,8 +13,8 @@ public interface UserLoginDAO extends IRootDAO<UserLogin>, Serializable {
 
     void deleteByLogin(String email);
     Optional<UserLogin> getByLogin(String email);
-    Role getRoleByLogin(String email);
+    Optional<Role> getRoleByLogin(String email);
     Optional<Long> getIDbyLogin(String email);
-    UserDetails getDetailsByLogin(String email);
+    Optional<UserDetails> getDetailsByLogin(String email);
 
 }
