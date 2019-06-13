@@ -32,8 +32,8 @@ public class UserDetailsDAOBean implements UserDetailsDAO {
     }
 
     @Override
-    public UserDetails save(UserDetails domain) {
-        return null;
+    public void save(UserDetails domain) {
+
     }
 
     @Override

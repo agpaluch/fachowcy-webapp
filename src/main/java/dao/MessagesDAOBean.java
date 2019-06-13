@@ -18,8 +18,8 @@ public class MessagesDAOBean implements MessagesDAO {
     }
 
     @Override
-    public Messages save(Messages domain) {
-        return null;
+    public void save(Messages domain) {
+
     }
 
     @Override

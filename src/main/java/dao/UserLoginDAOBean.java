@@ -19,19 +19,28 @@ import java.util.logging.Logger;
 @Singleton
 public class UserLoginDAOBean implements UserLoginDAO {
 
-    @PersistenceContext(unitName = "primary")
-    private EntityManager entityManager;
-
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
 
     Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {
-         return entityManager.createQuery("FROM UserLogin WHERE email = :val", UserLogin.class)
+
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+         return em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
                 .setParameter("val", email)
                 .getResultStream()
                 .findFirst();
+    }
+
+    @Override
+    public Optional<Long> getIDbyLogin(String email) {
+        Optional<UserLogin> userLogin = getByLogin(email);
+        if(userLogin.isPresent()) {
+            return Optional.of(userLogin.get().getId());
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -56,16 +65,21 @@ public class UserLoginDAOBean implements UserLoginDAO {
     }
 
     @Override
-    public UserLogin save(UserLogin userLogin) {
+    public void save(UserLogin userLogin) {
         EntityManager entityManager = startTransaction();
         UserLogin ul = userLogin;
-        if (userLogin.getId() != null) {
-            ul = entityManager.merge(userLogin);
-        } else {
+        if (!doesAUserExist(userLogin.getEmail())) {
             entityManager.persist(userLogin);
+        } else {
+            UserLogin oldEntry = null;
+            Optional<Long> userID = getIDbyLogin(userLogin.getEmail());
+            if(userID.isPresent()) {
+               oldEntry = entityManager.find(UserLogin.class, userID.get());
+            }
+            userLogin.setId(oldEntry.getId());
+            entityManager.merge(userLogin);
         }
         commit(entityManager);
-        return ul;
     }
 
     @Override
@@ -82,4 +96,9 @@ public class UserLoginDAOBean implements UserLoginDAO {
     public void delete(UserLogin domain) {
 
     }
+
+    private boolean doesAUserExist(String email) {
+         return getByLogin(email).isPresent();
+    }
+
 }

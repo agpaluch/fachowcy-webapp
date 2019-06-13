@@ -13,7 +13,7 @@ public interface IRootDAO<T> extends Serializable {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
 
     List<T> getAll();
-    T save(T domain);
+    void save(T domain);
     T get(Long id);
     void update(T domain);
     void delete(T domain);
