@@ -16,8 +16,7 @@ public interface IRootDAO<T> extends Serializable {
     List<T> getAll();
     void save(T domain);
     Optional<T> get(Long id);
-    void update(T domain);
-    void delete(T domain);
+    void delete(Long id);
 
     default EntityManager startTransaction() {
         EntityManager em = entityManagerFactory.createEntityManager();

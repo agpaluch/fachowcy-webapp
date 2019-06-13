@@ -43,12 +43,7 @@ public class UserDetailsDAOBean implements UserDetailsDAO {
     }
 
     @Override
-    public void update(UserDetails domain) {
-
-    }
-
-    @Override
-    public void delete(UserDetails domain) {
+    public void delete(Long id) {
 
     }
 

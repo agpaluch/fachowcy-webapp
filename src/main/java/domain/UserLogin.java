@@ -3,15 +3,12 @@ package domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @Builder
@@ -35,7 +32,7 @@ public class UserLogin {
     @NotEmpty
     private String password;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @NotNull
     private Role role;
 
@@ -49,7 +46,6 @@ public class UserLogin {
 
     @Embedded
     private UserDetails userDetails;
-
 
 }
 

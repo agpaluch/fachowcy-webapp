@@ -21,13 +21,22 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
 
-    Logger logger = Logger.getLogger(getClass().getName());
+    private Logger logger = Logger.getLogger(getClass().getName());
+
+    @Override
+    public void deleteByLogin(String email) {
+       EntityManager em = startTransaction();
+       Optional<Long> id = getIDbyLogin(email);
+       if(id.isPresent()) {
+           UserLogin userLogin = get(id.get()).get();
+           em.remove(em.merge(userLogin));
+           commit(em);
+       }
+    }
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {
-
         EntityManager em = entityManagerFactory.createEntityManager();
-
          return em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
                 .setParameter("val", email)
                 .getResultStream()
@@ -81,17 +90,17 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     @Override
     public Optional<UserLogin> get(Long id) {
-        return null;
+        EntityManager em = entityManagerFactory.createEntityManager();
+        return Optional.of(em.find(UserLogin.class, id));
     }
 
     @Override
-    public void update(UserLogin domain) {
-
-    }
-
-    @Override
-    public void delete(UserLogin domain) {
-
+    public void delete(Long id) {
+        EntityManager em = startTransaction();
+        get(id).ifPresent((ul) -> {
+         em.remove(em.merge(ul));
+        });
+        commit(em);
     }
 
     private boolean doesAUserExist(String email) {

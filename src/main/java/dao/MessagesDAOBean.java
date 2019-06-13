@@ -29,12 +29,7 @@ public class MessagesDAOBean implements MessagesDAO {
     }
 
     @Override
-    public void update(Messages domain) {
-
-    }
-
-    @Override
-    public void delete(Messages domain) {
+    public void delete(Long id) {
 
     }
 
