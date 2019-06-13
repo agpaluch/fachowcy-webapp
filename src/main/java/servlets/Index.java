@@ -54,27 +54,6 @@ public class Index extends HttpServlet {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
 
-        UserDetails userDetails = UserDetails.builder()
-                //.userLogin(userLogin)
-                .name("aaa")
-                .surname("bbb")
-                .profession(TypeOfProfession.ELECTRICIAN)
-                .phoneNumber(600000000)
-                .city(City.WARSZAWA)
-                .longitude(6.6)
-                .latitude(7.7)
-                .build();
-        UserLogin userLogin = UserLogin.builder()
-                .userDetails(userDetails)
-                .email("fuckme@abc.xom")
-                .password("password")
-                .role(Role.ADMIN)
-                .build();
-        //userLogin.setPassword("Password");
-        userLoginDAO.save(userLogin);
-
-
-
     }
 
     @Override
