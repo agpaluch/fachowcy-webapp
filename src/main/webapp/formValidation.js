@@ -162,7 +162,8 @@ function validateEmail(fieldID) {
 
 //Util functions
 function validateString(valueOfField) {
-    let letters = /^[a-zA-Z\s]+$/;
+    let letters = new XRegExp("^[a-zA-Z\\s\\p{L}]+$");
+    /*let letters = /^[a-zA-Z\s\p{L}]+$/;*/
     return letters.test(String(valueOfField));
 }
 

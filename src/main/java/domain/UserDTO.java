@@ -27,11 +27,11 @@ public class UserDTO {
     @NotBlank(message = "Potwierdź hasło")
     private String confirmPassword;
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Imię może zawierać tylko litery.")
+    @Pattern(regexp = "^[a-zA-Z\\s\\p{L}]+$", message = "Imię może zawierać tylko litery.")
     @NotBlank(message = "Wpisz imię.")
     private String name;
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Nazwisko może zawierać tylko litery.")
+    @Pattern(regexp = "^[a-zA-Z\\s\\p{L}]+$", message = "Nazwisko może zawierać tylko litery.")
     @NotBlank(message = "Wpisz nazwisko.")
     private String surname;
 

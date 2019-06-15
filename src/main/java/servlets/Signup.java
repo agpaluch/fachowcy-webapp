@@ -1,6 +1,7 @@
 package servlets;
 
 import dao.UserLoginDAO;
+import dao.UserLoginDAOBean;
 import domain.Role;
 import domain.UserDTO;
 import domain.UserDetails;
@@ -15,7 +16,6 @@ import session.SessionInfo;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -193,14 +193,13 @@ public class Signup extends HttpServlet {
                 //emailu ma już konto.
 
 
-/*            if (userLoginDAO.getByLogin(email).isPresent()
-                    && userLoginDAO.getByLogin(email).get().getRole()==sessionInfo.getRole()){
+/*            if (userLoginDAOBean.getByLogin(email).isPresent()
+                    && userLoginDAOBean.getByLogin(email).get().getRole()==sessionInfo.getRole()){
                 printWriter.write("Użytkownik ("+ sessionInfo.getRole().getFullName() +
                         ") o podanym adresie e-mail istnieje w bazie danych.");
             } else {*/
 
                 UserDetails userDetails = UserDetails.builder()
-
                         .name(name)
                         .surname(surname)
                         .profession(profession)
@@ -218,13 +217,14 @@ public class Signup extends HttpServlet {
                         .role(role)
                         .build();
 
+                if (userLoginDAO.doesAUserExist(email)){
+                    printWriter.write("Użytkownik o podanym adresie e-mail juz istnieje w bazie.");
+                } else {
+                    userLoginDAO.save(userLogin);
+                    resp.sendRedirect("/login-form");
+                }
 
-                userLoginDAO.save(userLogin);
 
-                //printWriter.write(userDTO.toString());
-
-
-                resp.sendRedirect("/login-form");
 
 
             } else {

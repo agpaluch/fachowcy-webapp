@@ -1,6 +1,8 @@
 CREATE SCHEMA IF NOT EXISTS fachmann;
 
-ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+--+ALTER DATABASE fachmann CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
 
 USE fachmann;
 
@@ -37,6 +39,8 @@ CREATE TABLE IF NOT EXISTS userData
 
 ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES professions (id);
 
+ALTER TABLE userData CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 
 INSERT INTO fachmann.userData (email, password, role, name, surname, profession_id,
 phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
@@ -44,7 +48,7 @@ phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
     null, 507654321, 'WARSZAWA', 51, 21.7, 2),
     ('client2@gmail.com', 'client2', 'CLIENT', 'Piotr', 'Mazur',
     null, 222222222, 'WARSZAWA', 51, 21.7, 2),
-    ('professional1@gmail.com', 'professional1', 'PROFESSIONAL', 'Maria', 'Nowak',
+    ('professional1@gmail.com', 'professional1', 'PROFESSIONAL', 'Adaś', 'Nowak',
     1, 0048765432123, 'WARSZAWA', 51, 21.7, 3),
     ('professional2@gmail.com', 'professional2', 'PROFESSIONAL', 'Sylwester', 'Dębski',
     2, 444444444, 'WARSZAWA', 51, 21.7, 12),
@@ -96,3 +100,6 @@ ALTER TABLE comments
 INSERT INTO comments (opinion_maker_id, recipient_id, opinion) VALUES
 (1, 2, "Dobra robota."),
 (1, 1, "Dobra robota.");
+
+
+--+ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
