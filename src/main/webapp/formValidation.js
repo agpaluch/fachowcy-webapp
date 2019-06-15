@@ -10,16 +10,11 @@ function checkEverything() {
     var res7 = validateLocationField('latitude');
     var res8 = validateLocationField('longitude');
 
-    document.getElementById('id1').submit();
+    //document.getElementById('id1').submit();
 
     if (res1 && res2 && res3 && res4 && res5 && res6 && res7 && res8) {
-        //return true;
         document.getElementById('id1').submit();
-
-
-    } /*else {
-            return false;
-        }*/
+    }
 }
 
 function validateLocationField(elementID){
