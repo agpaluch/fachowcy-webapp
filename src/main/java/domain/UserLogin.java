@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Data
@@ -35,7 +36,8 @@ public class UserLogin {
 
     @Builder.Default
     @PastOrPresent
-    private LocalDate signUpDate = LocalDate.now();
+    //private LocalDate signUpDate = LocalDate.now();
+    private Instant signUpDate = Instant.now();
 
     @Embedded
     private UserDetails userDetails;

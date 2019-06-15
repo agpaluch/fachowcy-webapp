@@ -34,7 +34,7 @@ public class UserDetails {
     @NotNull
     private String surname;
 
-    @Column
+    @Column(name="profession_id")
     @Enumerated(EnumType.STRING)
     private TypeOfProfession profession;
 

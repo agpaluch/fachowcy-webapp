@@ -9,9 +9,12 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "messages")
 public class Messages {
 
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "message_id")
-    private Long id;
+    private long id;
+
 
     @Column
     @NotBlank
@@ -29,11 +32,11 @@ public class Messages {
     @Column
     private boolean wasRead;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

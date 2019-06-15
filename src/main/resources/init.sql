@@ -9,7 +9,7 @@ USE fachmann;
 --+ Create table for professions
 CREATE TABLE IF NOT EXISTS professions
 (
-  id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  id          BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   profession VARCHAR(100) NOT NULL
 );
 
@@ -22,19 +22,19 @@ INSERT INTO fachmann.professions (profession) VALUES
 --+ Create table for user data (login and details) and connect it with professions
 CREATE TABLE IF NOT EXISTS userData
 (
-    id          INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id          BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     email       VARCHAR(100) UNIQUE NOT NULL,
     password    VARCHAR(100)        NOT NULL,
     role        VARCHAR(32) NOT NULL,
-    signup_date DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    signUpDate DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
     name          VARCHAR(100)      NOT NULL,
     surname       VARCHAR(100)      NOT NULL,
-    profession_id  INT UNSIGNED,
+    profession_id  BIGINT UNSIGNED,
     phoneNumber   BIGINT(14)        NOT NULL,
     city          VARCHAR(100)   NOT NULL,
-    longitude     DECIMAL(10, 7)    NOT NULL,
-    latitude      DECIMAL(10, 7)    NOT NULL,
-    numberOfLikes SMALLINT UNSIGNED NOT NULL
+    longitude     DOUBLE   NOT NULL,
+    latitude      DOUBLE    NOT NULL,
+    numberOfLikes INT UNSIGNED NOT NULL
 );
 
 ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES professions (id);
@@ -63,11 +63,11 @@ phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
 
 CREATE TABLE IF NOT EXISTS fachmann.messages
 (
-    message_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    message_id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     message    VARCHAR(400) NOT NULL,
     wasRead    BOOLEAN DEFAULT '0',
-    sender_id     INT UNSIGNED NOT NULL,
-    recipient_id  INT UNSIGNED NOT NULL
+    sender_id     BIGINT UNSIGNED NOT NULL,
+    recipient_id  BIGINT UNSIGNED NOT NULL
 );
 
 ALTER TABLE messages
@@ -86,9 +86,9 @@ INSERT INTO messages (message, sender_id, recipient_id) VALUES
 
 CREATE TABLE IF NOT EXISTS comments
 (
- id INT UNSIGNED UNIQUE PRIMARY KEY AUTO_INCREMENT,
- opinion_maker_id INT UNSIGNED NOT NULL,
- recipient_id INT UNSIGNED NOT NULL,
+ id BIGINT UNSIGNED UNIQUE PRIMARY KEY AUTO_INCREMENT,
+ opinion_maker_id BIGINT UNSIGNED NOT NULL,
+ recipient_id BIGINT UNSIGNED NOT NULL,
  opinion VARCHAR (400) NOT NULL
 );
 
