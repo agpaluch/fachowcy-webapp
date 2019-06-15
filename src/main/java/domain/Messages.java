@@ -19,11 +19,11 @@ public class Messages {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "sender", referencedColumnName = "id")
+    @JoinColumn(name = "sender_id", referencedColumnName = "id")
     private UserLogin sender;
 
     @ManyToOne
-    @JoinColumn(name = "recipient", referencedColumnName = "id")
+    @JoinColumn(name = "recipient_id", referencedColumnName = "id")
     private UserLogin recipient;
 
     @Column

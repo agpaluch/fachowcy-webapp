@@ -52,7 +52,7 @@ public class UserDTO {
     //@CheckIfNotZero(message = "Znajdź swoją lokalizację.")
     private Double longitude;
 
-    @Range(min= -180, max=180, message = "Niepoprawana lokalizacja.")
+    @Range(min= -180, max=180, message = "Niepoprawna lokalizacja.")
     @NotNull(message = "Wpisz adres")
     //@CheckIfNotZero(message = "Znajdź swoją lokalizację.")
     private Double latitude;
