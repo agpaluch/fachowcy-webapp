@@ -9,9 +9,12 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "messages")
 public class Messages {
 
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "message_id")
-    private Long id;
+    private long id;
+
 
     @Column
     @NotBlank
@@ -19,21 +22,21 @@ public class Messages {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "sender", referencedColumnName = "id")
+    @JoinColumn(name = "sender_id", referencedColumnName = "id")
     private UserLogin sender;
 
     @ManyToOne
-    @JoinColumn(name = "recipient", referencedColumnName = "id")
+    @JoinColumn(name = "recipient_id", referencedColumnName = "id")
     private UserLogin recipient;
 
     @Column
     private boolean wasRead;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

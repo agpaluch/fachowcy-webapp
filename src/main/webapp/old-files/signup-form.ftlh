@@ -1,6 +1,5 @@
 
 
-
         <div>E-mail: <input type="email" id="register-email" name="email"
                     oninput="validateFieldEmail()" value="${inputData.email}" /><br/><br/></div>
         <div id="email-error">${errors.email}</div>
@@ -16,7 +15,7 @@
         <div>Nazwisko: <input type="text" id="register-surname" name="surname"
                               oninput="validateSurnameField()" value="${inputData.surname}"/><br/><br/></div>
         <div id="surname-error">${errors.surname}</div>
-        <div>Numer telefonu: <input type="number" id="register-phoneNumber" name="phoneNumber"
+        <div>Numer telefonu: <input type="number" step="any" id="register-phoneNumber" name="phoneNumber"
                                     oninput="validatePhoneNumberField()"
                                     <#if inputData.phoneNumber?? >
                                     value="${inputData.phoneNumber}"
@@ -51,7 +50,7 @@
         <div id="city-error">${errors.city}</div>
 
 
-        <div>Szerokość geograficzna: <input id="register-latitude" type="number" name="latitude" readonly
+        <div>Szerokość geograficzna: <input id="latitude" type="number" step="any" name="latitude" readonly
                                             <#--onchange="validateLocationField('latitude')"-->
                 <#if inputData.latitude?? >
                  value="${inputData.latitude}"
@@ -59,7 +58,7 @@
                 /><br/><br/></div>
         <div id="latitude-error">${errors.latitude}</div>
 
-        <div>Długość geograficzna: <input id="register-longitude" type="number" name="longitude" readonly
+        <div>Długość geograficzna: <input id="longitude" type="number" step="any" name="longitude" readonly
                                           <#--onchange="validateLocationField('longitude')"-->
                                <#if inputData.longitude?? >
                                 value="${inputData.longitude}"
@@ -69,6 +68,7 @@
 
 
         <button id="submitButton" class="btn btn-success">Zarejestruj</button>
+
 
     <#--    AIzaSyDA3SOTQlxW22gZhsIyKHgkq_1gVYsEhHM-->
 

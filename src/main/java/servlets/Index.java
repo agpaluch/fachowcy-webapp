@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/")
+@WebServlet("/index")
 public class Index extends HttpServlet {
 
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");

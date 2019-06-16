@@ -1,5 +1,7 @@
 package servlets;
 
+import dao.UserLoginDAO;
+import dao.UserLoginDAOBean;
 import domain.Role;
 import domain.UserDTO;
 import domain.UserDetails;
@@ -11,6 +13,7 @@ import repository.City;
 import repository.TypeOfProfession;
 import session.SessionInfo;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,12 +44,15 @@ public class Signup extends HttpServlet {
     private Map<String, Object> dataMap = new HashMap<>();
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
-    private UserDTO userDTO;
+
 
     private static final String TEMPLATE_NAME = "index";
 
     @Inject
     SessionInfo sessionInfo;
+
+    @EJB
+    UserLoginDAO userLoginDAO;
 
 
     @Override
@@ -79,10 +85,11 @@ public class Signup extends HttpServlet {
 
 
         Role role = Role.valueOf(req.getParameter("role"));
-        sessionInfo.setRole(role);
 
         if (role==Role.PROFESSIONAL){
             dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
+        } else {
+            dataMap.put("professions",null);
         }
 
 
@@ -100,6 +107,8 @@ public class Signup extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        resp.setContentType("text/html");
+
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
@@ -110,6 +119,8 @@ public class Signup extends HttpServlet {
         Double longitude = null;
         Double latitude = null;
         TypeOfProfession profession = null;
+        Role role;
+
 
         try {
             phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
@@ -117,77 +128,27 @@ public class Signup extends HttpServlet {
             longitude = Double.parseDouble(req.getParameter("longitude"));
             latitude = Double.parseDouble(req.getParameter("latitude"));
         } catch (IllegalArgumentException e) {
-            resp.setStatus(500);
-        }
+            logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść" +
+                    "walidacji przez Java Script.");
+        } finally{
 
-
-        if (req.getParameter("profession")!=null){
-            try{
-                profession = TypeOfProfession.valueOf(req.getParameter("profession"));
-            } catch (IllegalArgumentException e) {
-                resp.setStatus(500);
+            if (req.getParameter("profession")!=null){
+                role = Role.PROFESSIONAL;
+                try{
+                    profession = TypeOfProfession.valueOf(req.getParameter("profession"));
+                } catch (IllegalArgumentException e) {
+                    resp.setStatus(500);
+                }
+            } else {
+                role = Role.CLIENT;
             }
-        }
 
 
 
-        UserDTO userDTO = UserDTO.builder()
-                .email(email)
-                .password(password)
-                .confirmPassword(confirmPassword)
-                .name(name)
-                .surname(surname)
-                .profession(profession)
-                .phoneNumber(phoneNumber)
-                .city(city)
-                .longitude(longitude)
-                .latitude(latitude)
-                .build();
-
-
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-
-
-        Set<ConstraintViolation<UserDTO>> constraintViolations =
-                validator.validate(userDTO);
-
-
-        mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
-                .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
-
-        for (ConstraintViolation<UserDTO> constraintViolation: constraintViolations){
-            mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
-        }
-
-
-        mapOfValues = req.getParameterMap()
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue()[0]));
-
-        dataMap.put("errors", mapOfErrors);
-        dataMap.put("inputData", mapOfValues);
-
-        PrintWriter printWriter = resp.getWriter();
-
-
-        if (constraintViolations.isEmpty()){
-            // TODO: stworzyć właściwego użytkownika, sprawdzić czy taki mail istnieje w bazie
-            //i jeśli nie to zapisać użytkownika do bazy danych
-            //Jeśli istnieje to przekierować do widoku z komunikatem, że użytkownik o takim
-            //emailu ma już konto.
-
-
-            UserLogin userLogin = UserLogin.builder()
-                    .userDetails(null)
+            UserDTO userDTO = UserDTO.builder()
                     .email(email)
                     .password(password)
-                    .role(sessionInfo.getRole())
-                    .build();
-
-            UserDetails userDetails = UserDetails.builder()
-                    //.userLogin(userLogin)
+                    .confirmPassword(confirmPassword)
                     .name(name)
                     .surname(surname)
                     .profession(profession)
@@ -197,22 +158,87 @@ public class Signup extends HttpServlet {
                     .latitude(latitude)
                     .build();
 
-            userLogin.setUserDetails(userDetails);
+
+            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+            Validator validator = factory.getValidator();
 
 
+            Set<ConstraintViolation<UserDTO>> constraintViolations =
+                    validator.validate(userDTO);
 
-            //resp.sendRedirect("/login-form");
 
-            printWriter.write(userDTO.toString());
+            mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
+                    .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
 
-        } else {
-
-            try {
-                template.process(dataMap, printWriter);
-            } catch (TemplateException e) {
-                logger.log(Level.SEVERE, e.getMessage(), e);
+            for (ConstraintViolation<UserDTO> constraintViolation: constraintViolations){
+                mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
             }
+
+
+            mapOfValues = req.getParameterMap()
+                    .entrySet()
+                    .stream()
+                    .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue()[0]));
+
+            dataMap.put("errors", mapOfErrors);
+            dataMap.put("inputData", mapOfValues);
+
+            PrintWriter printWriter = resp.getWriter();
+
+
+            if (constraintViolations.isEmpty()){
+                // TODO: stworzyć właściwego użytkownika, sprawdzić czy taki mail istnieje w bazie
+                //i jeśli nie to zapisać użytkownika do bazy danych
+                //Jeśli istnieje to przekierować do widoku z komunikatem, że użytkownik o takim
+                //emailu ma już konto.
+
+
+/*            if (userLoginDAOBean.getByLogin(email).isPresent()
+                    && userLoginDAOBean.getByLogin(email).get().getRole()==sessionInfo.getRole()){
+                printWriter.write("Użytkownik ("+ sessionInfo.getRole().getFullName() +
+                        ") o podanym adresie e-mail istnieje w bazie danych.");
+            } else {*/
+
+                UserDetails userDetails = UserDetails.builder()
+                        .name(name)
+                        .surname(surname)
+                        .profession(profession)
+                        .phoneNumber(phoneNumber)
+                        .city(city)
+                        .longitude(longitude)
+                        .latitude(latitude)
+                        .build();
+
+
+                UserLogin userLogin = UserLogin.builder()
+                        .userDetails(userDetails)
+                        .email(email)
+                        .password(password)
+                        .role(role)
+                        .build();
+
+                if (userLoginDAO.doesAUserExist(email)){
+                    printWriter.write("Użytkownik o podanym adresie e-mail juz istnieje w bazie.");
+                } else {
+                    userLoginDAO.save(userLogin);
+                    resp.sendRedirect("/login-form");
+                }
+
+
+
+
+            } else {
+
+                try {
+                    template.process(dataMap, printWriter);
+                } catch (TemplateException e) {
+                    logger.log(Level.SEVERE, e.getMessage(), e);
+                }
+            }
+
+
         }
+
 
 
 

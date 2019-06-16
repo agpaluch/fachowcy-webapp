@@ -27,11 +27,11 @@ public class UserDTO {
     @NotBlank(message = "Potwierdź hasło")
     private String confirmPassword;
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Imię może zawierać tylko litery.")
+    @Pattern(regexp = "^[a-zA-Z\\s\\p{L}]+$", message = "Imię może zawierać tylko litery.")
     @NotBlank(message = "Wpisz imię.")
     private String name;
 
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Nazwisko może zawierać tylko litery.")
+    @Pattern(regexp = "^[a-zA-Z\\s\\p{L}]+$", message = "Nazwisko może zawierać tylko litery.")
     @NotBlank(message = "Wpisz nazwisko.")
     private String surname;
 
@@ -47,12 +47,12 @@ public class UserDTO {
     @NotNull(message = "Wybierz miasto")
     private City city;
 
-    @Range(min=-10, max=10, message = "Niepoprawana lokalizacja.")
+    @Range(min=-180, max=180, message = "Niepoprawana lokalizacja.")
     @NotNull(message = "Wpisz adres")
     //@CheckIfNotZero(message = "Znajdź swoją lokalizację.")
     private Double longitude;
 
-    @Range(min= -10, max=10, message = "Niepoprawana lokalizacja.")
+    @Range(min= -180, max=180, message = "Niepoprawna lokalizacja.")
     @NotNull(message = "Wpisz adres")
     //@CheckIfNotZero(message = "Znajdź swoją lokalizację.")
     private Double latitude;

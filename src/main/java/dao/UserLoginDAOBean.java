@@ -27,6 +27,7 @@ public class UserLoginDAOBean implements UserLoginDAO {
         commit(em);
     }
 
+
     @Override
     public void deleteByLogin(String email) {
        EntityManager em = startTransaction();
@@ -38,26 +39,35 @@ public class UserLoginDAOBean implements UserLoginDAO {
        }
     }
 
+
+
     @Override
     public Optional<UserLogin> get(Long id) {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        return Optional.of(em.find(UserLogin.class, id));
+        EntityManager em = startTransaction();
+        Optional<UserLogin> result = Optional.of(em.find(UserLogin.class, id));
+        commit(em);
+        return result;
     }
 
     @Override
     public List<UserLogin> getAll() {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        return em.createQuery("SELECT ul FROM UserLogin ul", UserLogin.class)
+        EntityManager em = startTransaction();
+        List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul", UserLogin.class)
                 .getResultList();
+        commit(em);
+        return result;
     }
+
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {
-        EntityManager em = entityManagerFactory.createEntityManager();
-         return em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
+        EntityManager em = startTransaction();
+        Optional<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
                 .setParameter("val", email)
                 .getResultStream()
                 .findFirst();
+        commit(em);
+        return result;
     }
 
     @Override
@@ -80,19 +90,19 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     @Override
     public void save(UserLogin userLogin) {
-        EntityManager entityManager = startTransaction();
+        EntityManager em = startTransaction();
         if (!doesAUserExist(userLogin.getEmail())) {
-            entityManager.persist(userLogin);
+            em.persist(userLogin);
         } else {
             Optional<Long> userID = getIDbyLogin(userLogin.getEmail());
             userLogin.setId(userID.orElseThrow(() ->
                       new NoSuchElementException("ID not found")));
-            entityManager.merge(userLogin);
+            em.merge(userLogin);
         }
-        commit(entityManager);
+        commit(em);
     }
 
-    private boolean doesAUserExist(String email) {
+    public boolean doesAUserExist(String email) {
          return getByLogin(email).isPresent();
     }
 
