@@ -17,7 +17,7 @@ public class UserDetailsDAOBean implements UserDetailsDAO {
     }
 
     @Override
-    public UserDetails getbyCity(City city) {
+    public UserDetails getByCity(City city) {
         return null;
     }
 
@@ -26,33 +26,4 @@ public class UserDetailsDAOBean implements UserDetailsDAO {
         return null;
     }
 
-    @Override
-    public List<UserDetails> getAll() {
-        return null;
-    }
-
-    @Override
-    public void save(UserDetails domain) {
-
-    }
-
-    @Override
-    public Optional<UserDetails> get(Long id) {
-        return null;
-    }
-
-    @Override
-    public void delete(Long id) {
-
-    }
-
-    @Override
-    public EntityManager startTransaction() {
-        return null;
-    }
-
-    @Override
-    public void commit(EntityManager entityManager) {
-
-    }
 }

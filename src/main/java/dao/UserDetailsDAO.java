@@ -5,10 +5,10 @@ import repository.City;
 import javax.ejb.Local;
 
 @Local
-public interface UserDetailsDAO extends IRootDAO<UserDetails> {
+public interface UserDetailsDAO {
 
     public UserDetails getByName(String name);
-    public UserDetails getbyCity(City city);
+    public UserDetails getByCity(City city);
     public UserDetails getByProfession(String profession);
 
 }
