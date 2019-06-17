@@ -14,7 +14,7 @@ import java.util.Optional;
 
 
 @Singleton
-public class UserLoginDAOBean implements UserLoginDAO {
+public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
 
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
 
@@ -27,7 +27,6 @@ public class UserLoginDAOBean implements UserLoginDAO {
         commit(em);
     }
 
-
     @Override
     public void deleteByLogin(String email) {
        EntityManager em = startTransaction();
@@ -38,8 +37,6 @@ public class UserLoginDAOBean implements UserLoginDAO {
            commit(em);
        }
     }
-
-
 
     @Override
     public Optional<UserLogin> get(Long id) {
@@ -57,7 +54,6 @@ public class UserLoginDAOBean implements UserLoginDAO {
         commit(em);
         return result;
     }
-
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {

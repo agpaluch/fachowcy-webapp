@@ -1,12 +1,10 @@
 package servlets;
 
-import dao.UserLoginDAO;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -34,9 +32,6 @@ public class Index extends HttpServlet {
 
     @Inject
     SessionInfo sessionInfo;
-
-    @EJB
-    UserLoginDAO userLoginDAO;
 
     @Override
     public void init() {

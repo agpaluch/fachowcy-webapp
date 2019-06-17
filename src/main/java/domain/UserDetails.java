@@ -17,15 +17,6 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class UserDetails {
 
-/*    @OneToOne
-    @JoinColumn(name = "id")
-    @MapsId
-    UserLogin userLogin;
-
-    @Id
-    @Column(name = "id")
-    private Long id;*/
-
     @Column
     @NotNull
     private String name;
@@ -35,7 +26,7 @@ public class UserDetails {
     private String surname;
 
     @Column(name="profession_id")
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     private TypeOfProfession profession;
 
     @Column
@@ -56,8 +47,6 @@ public class UserDetails {
     @Builder.Default
     @Column
     private int numberOfLikes = 0;
-
-
 
    public UserDetails(){
         // Hibernate
