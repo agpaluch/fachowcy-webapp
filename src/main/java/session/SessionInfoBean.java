@@ -1,13 +1,14 @@
 package session;
 
+import dao.UserLoginDAO;
 import domain.Role;
 import domain.UserLogin;
 import lombok.Data;
-import repository.RepositoryOfUsers;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.Map;
+import java.util.Optional;
 
 
 @Data
@@ -15,23 +16,25 @@ import java.util.Map;
 public class SessionInfoBean implements SessionInfo, Serializable {
 
 
+    @EJB
+    private UserLoginDAO userLoginDAO;
+
     private Role role;
     private String password;
     private String email;
     private UserLogin userLogin;
 
     @Override
-    public boolean findUserByEmailAndPassword(){
-        RepositoryOfUsers.fillDatabase();
-            for (Map.Entry<String, UserLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
+    public boolean validateUser(String email, String password) {
 
-                if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                    userLogin = entry.getValue();
-                    return true;
-                }
-            }
-        return false;
+        Optional<UserLogin> userLogin = userLoginDAO.getByLogin(email);
+
+        if (userLogin.isPresent()){
+            return userLogin.get().getPassword().equals(password);
+        } else {
+            return false;
         }
+    }
 
 
 

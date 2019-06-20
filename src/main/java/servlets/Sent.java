@@ -1,6 +1,6 @@
 package servlets;
 
-import daoOld.UserDao;
+import dao.UserLoginDAO;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -37,7 +37,7 @@ public class Sent extends HttpServlet {
     SessionInfo sessionInfo;
 
     @EJB
-    UserDao userDao;
+    UserLoginDAO userLoginDAO;
 
     @Override
     public void init() {

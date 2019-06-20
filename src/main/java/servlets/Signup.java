@@ -2,10 +2,7 @@ package servlets;
 
 import dao.UserLoginDAO;
 import dao.UserLoginDAOBean;
-import domain.Role;
-import domain.UserDTO;
-import domain.UserDetails;
-import domain.UserLogin;
+import domain.*;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -187,22 +184,10 @@ public class Signup extends HttpServlet {
 
 
             if (constraintViolations.isEmpty()){
-                // TODO: stworzyć właściwego użytkownika, sprawdzić czy taki mail istnieje w bazie
-                //i jeśli nie to zapisać użytkownika do bazy danych
-                //Jeśli istnieje to przekierować do widoku z komunikatem, że użytkownik o takim
-                //emailu ma już konto.
-
-
-/*            if (userLoginDAOBean.getByLogin(email).isPresent()
-                    && userLoginDAOBean.getByLogin(email).get().getRole()==sessionInfo.getRole()){
-                printWriter.write("Użytkownik ("+ sessionInfo.getRole().getFullName() +
-                        ") o podanym adresie e-mail istnieje w bazie danych.");
-            } else {*/
 
                 UserDetails userDetails = UserDetails.builder()
                         .name(name)
                         .surname(surname)
-                        .profession(profession)
                         .phoneNumber(phoneNumber)
                         .city(city)
                         .longitude(longitude)
@@ -215,6 +200,7 @@ public class Signup extends HttpServlet {
                         .email(email)
                         .password(password)
                         .role(role)
+                        .profession(new Professions(profession))
                         .build();
 
                 if (userLoginDAO.doesAUserExist(email)){

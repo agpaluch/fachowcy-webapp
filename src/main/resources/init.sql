@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS userData
 
 ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES professions (id);
 
+
 ALTER TABLE userData CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 

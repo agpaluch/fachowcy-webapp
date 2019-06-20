@@ -7,6 +7,7 @@
         <class>domain.UserLogin</class>
         <class>domain.UserDetails</class>
         <class>domain.Messages</class>
+        <class>domain.Professions</class>
 
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
