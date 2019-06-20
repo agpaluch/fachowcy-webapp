@@ -33,13 +33,4 @@ public class MessagesDAOBean implements MessagesDAO {
 
     }
 
-    @Override
-    public EntityManager startTransaction() {
-        return null;
-    }
-
-    @Override
-    public void commit(EntityManager entityManager) {
-
-    }
 }

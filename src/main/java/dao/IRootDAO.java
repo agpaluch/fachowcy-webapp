@@ -18,15 +18,4 @@ public interface IRootDAO<T> extends Serializable {
     Optional<T> get(Long id);
     void delete(Long id);
 
-    default EntityManager startTransaction() {
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-        return em;
-    }
-
-    default void commit(EntityManager entityManager) {
-        entityManager.getTransaction().commit();
-        entityManager.close();
-    }
-
 }
