@@ -25,9 +25,6 @@ public class UserDetails {
     @NotNull
     private String surname;
 
-    @Column(name="profession_id")
-    @Enumerated
-    private TypeOfProfession profession;
 
     @Column
     @NotNull

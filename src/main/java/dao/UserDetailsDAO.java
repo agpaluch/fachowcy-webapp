@@ -12,8 +12,8 @@ import java.util.Optional;
 @Local
 public interface UserDetailsDAO {
 
-    public List<UserLogin> getProfBySurname(String surname);
-    public List<UserLogin> getProfByCity(City city);
-    public List<UserLogin> getProfByProfession(TypeOfProfession profession);
+    public List<UserLogin> getBySurname(String surname);
+    public List<UserLogin> getByCity(City city);
+
 
 }

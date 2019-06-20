@@ -3,6 +3,7 @@ package domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import repository.TypeOfProfession;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -30,9 +31,17 @@ public class UserLogin {
     @NotEmpty
     private String password;
 
+
     @Enumerated(EnumType.STRING)
     @NotNull
     private Role role;
+
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "profession_id")
+    private Professions profession;
+
+
 
     @Builder.Default
     @PastOrPresent

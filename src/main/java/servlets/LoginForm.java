@@ -1,12 +1,13 @@
 package servlets;
 
+import dao.UserLoginDAO;
 import domain.UserLogin;
 import freemarker.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import repository.RepositoryOfUsers;
 import session.SessionInfo;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +30,12 @@ public class LoginForm extends HttpServlet {
 
     @Inject
     SessionInfo sessionInfo;
+
+    @EJB
+    UserLoginDAO userLoginDAO;
+
+
+
 
     @Override
     public void init() {
@@ -66,20 +73,15 @@ public class LoginForm extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        RepositoryOfUsers.fillDatabase();
-
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        sessionInfo.setPassword(password);
-        sessionInfo.setEmail(email);
 
-        UserLogin userFound = findUserByEmailAndPassword(email, password);
-
-        if(userFound != null) {
-            response.sendRedirect("/");
-            sessionInfo.setUserLogin(userFound);
+        if(sessionInfo.validateUser(email, password)) {
+            sessionInfo.setPassword(password);
+            sessionInfo.setEmail(email);
+            response.sendRedirect("/index");
+            sessionInfo.setUserLogin(userLoginDAO.getByLogin(email).get());
         }
         else {
             response.sendRedirect("/login-form?error=1");
@@ -88,16 +90,6 @@ public class LoginForm extends HttpServlet {
 
     }
 
-    private UserLogin findUserByEmailAndPassword(String email, String password){
-        RepositoryOfUsers.fillDatabase();
-        for (Map.Entry<String, UserLogin> entry : RepositoryOfUsers.getProfessionalsDatabaseDaoBean().getLogin().entrySet()) {
-            if (entry.getValue().getEmail().equals(email) && entry.getValue().getPassword().equals(password)) {
-                UserLogin userLogin = entry.getValue();
-                return userLogin;
-            }
-        }
-        return null;
-    }
 
 
 }

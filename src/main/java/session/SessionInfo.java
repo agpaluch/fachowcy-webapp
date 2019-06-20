@@ -9,7 +9,7 @@ public interface SessionInfo {
     Role getRole();
     UserLogin getUserLogin();
 
-    boolean findUserByEmailAndPassword();
+    boolean validateUser(String email, String password);
     void setPassword(String password);
     void setEmail(String email);
     void setUserLogin(UserLogin userLogin);

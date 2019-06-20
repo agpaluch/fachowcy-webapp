@@ -3,6 +3,7 @@ package dao;
 import domain.Role;
 import domain.UserDetails;
 import domain.UserLogin;
+import repository.TypeOfProfession;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Singleton
@@ -83,6 +85,24 @@ public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
         Optional<UserLogin> userLogin = getByLogin(email);
         return userLogin.map(UserLogin::getRole);
     }
+
+    private boolean isProfessional(UserLogin userLogin) {
+        return userLogin.getRole().equals(Role.PROFESSIONAL);
+    }
+
+
+    @Override
+    public List<UserLogin> getProfByProfession(TypeOfProfession profession) {
+        EntityManager em = startTransaction();
+        List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.profession = :val", UserLogin.class)
+                .setParameter("val", profession)
+                .getResultStream()
+                .filter(this::isProfessional)
+                .collect(Collectors.toList());
+        commit(em);
+        return result;
+    }
+
 
     @Override
     public void save(UserLogin userLogin) {
