@@ -1,8 +1,6 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import repository.TypeOfProfession;
 
 import javax.persistence.*;
@@ -12,7 +10,9 @@ import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
 import java.time.LocalDate;
 
-@Data
+
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @Entity
@@ -42,7 +42,6 @@ public class UserLogin {
     private Professions profession;
 
 
-
     @Builder.Default
     @PastOrPresent
     //private LocalDate signUpDate = LocalDate.now();
@@ -55,5 +54,15 @@ public class UserLogin {
         // Hibernate
     }
 
+
+    public String toString() {
+        return
+                "id: " + id +
+                ", email: '" + email + '\'' +
+                ", password: '" + password + '\'' +
+                ", role: " + role.toString() +
+                ", profession: " + profession.toString() +
+                ", signUpDate: " + signUpDate;
+    }
 }
 

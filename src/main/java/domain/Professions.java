@@ -1,12 +1,15 @@
 package domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import repository.TypeOfProfession;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "professions")
 public class Professions {
@@ -32,6 +35,11 @@ public class Professions {
 
     public Professions(TypeOfProfession profession){
         this.profession = profession;
+    }
+
+
+    public String toString() {
+        return profession.toString();
     }
 
 

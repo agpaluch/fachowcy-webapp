@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @Singleton
 public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
 
-    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
 
     @Override
     public void delete(Long id) {

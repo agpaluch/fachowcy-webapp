@@ -4,7 +4,7 @@ import repository.City;
 
 import javax.servlet.http.HttpServletResponse;
 
-public class SinupUtil {
+public class SinupEditUtil {
 
 
 /*    public static checkPhoneNumber

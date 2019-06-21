@@ -12,6 +12,7 @@ import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,8 +42,6 @@ public class Signup extends HttpServlet {
     private Map<String, Object> dataMap = new HashMap<>();
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
-
-
     private static final String TEMPLATE_NAME = "index";
 
     @Inject
@@ -68,12 +67,8 @@ public class Signup extends HttpServlet {
         dataMap.put("inputData", mapOfValues);
         dataMap.put("sessionInfo", sessionInfo);
 
+        template = FreemarkerUtil.createTemplate(TEMPLATE_NAME, logger, getServletContext());
 
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
     }
 
 
@@ -89,15 +84,8 @@ public class Signup extends HttpServlet {
             dataMap.put("professions",null);
         }
 
+        FreemarkerUtil.processData(resp, template, dataMap, logger);
 
-        resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
-
-        try {
-            template.process(dataMap, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
     }
 
 
@@ -125,7 +113,7 @@ public class Signup extends HttpServlet {
             longitude = Double.parseDouble(req.getParameter("longitude"));
             latitude = Double.parseDouble(req.getParameter("latitude"));
         } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść" +
+            logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść " +
                     "walidacji przez Java Script.");
         } finally{
 
@@ -212,14 +200,10 @@ public class Signup extends HttpServlet {
 
 
 
-
             } else {
 
-                try {
-                    template.process(dataMap, printWriter);
-                } catch (TemplateException e) {
-                    logger.log(Level.SEVERE, e.getMessage(), e);
-                }
+                FreemarkerUtil.processData(resp, template, dataMap, logger);
+
             }
 
 

@@ -6,10 +6,11 @@ import repository.TypeOfProfession;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.text.DecimalFormat;
 
 
-
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 /*@Entity
@@ -50,6 +51,20 @@ public class UserDetails {
     }
 
 
+
+
+
+    public String toString() {
+        DecimalFormat decimalFormat = new DecimalFormat("#");
+
+        return "name: '" + name + '\'' +
+                ", surname: '" + surname + '\'' +
+                ", phoneNumber: " + decimalFormat.format(phoneNumber) +
+                ", city: " + city.toString() +
+                ", longitude: " + longitude +
+                ", latitude: " + latitude +
+                ", numberOfLikes: " + numberOfLikes;
+    }
 }
 
 
