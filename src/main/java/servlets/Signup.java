@@ -113,16 +113,20 @@ public class Signup extends HttpServlet {
             longitude = Double.parseDouble(req.getParameter("longitude"));
             latitude = Double.parseDouble(req.getParameter("latitude"));
         } catch (IllegalArgumentException e) {
+            resp.setStatus(500);
             logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść " +
                     "walidacji przez Java Script.");
-        } finally{
+        }
 
-            if (req.getParameter("profession")!=null){
+
+        if (req.getParameter("profession")!=null){
                 role = Role.PROFESSIONAL;
                 try{
                     profession = TypeOfProfession.valueOf(req.getParameter("profession"));
                 } catch (IllegalArgumentException e) {
                     resp.setStatus(500);
+                    logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść " +
+                            "walidacji przez Java Script.");
                 }
             } else {
                 role = Role.CLIENT;
@@ -207,7 +211,7 @@ public class Signup extends HttpServlet {
             }
 
 
-        }
+
 
 
 

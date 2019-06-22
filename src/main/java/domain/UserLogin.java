@@ -2,11 +2,11 @@ package domain;
 
 import lombok.*;
 import repository.TypeOfProfession;
+import validators.CheckPassword;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.time.Instant;
 import java.time.LocalDate;
 
@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "userData")
+@CheckPassword(first = "password", second = "confirmPassword")
 public class UserLogin {
 
     @Id
@@ -26,10 +27,17 @@ public class UserLogin {
 
     @Column(unique = true)
     @NotEmpty
+    @Email(message = "Nieprawidłowy adres email.")
+    @NotBlank(message = "Wpisz adres email.")
     private String email;
 
     @NotEmpty
+    @NotBlank(message = "Wpisz hasło")
     private String password;
+
+    @Transient
+    @NotBlank(message = "Potwierdź hasło")
+    private String confirmPassword;
 
 
     @Enumerated(EnumType.STRING)
@@ -48,6 +56,7 @@ public class UserLogin {
     private Instant signUpDate = Instant.now();
 
     @Embedded
+    @Valid
     private UserDetails userDetails;
 
     public UserLogin() {

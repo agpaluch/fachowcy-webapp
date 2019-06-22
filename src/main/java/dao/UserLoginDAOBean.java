@@ -109,9 +109,10 @@ public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
         if (!doesAUserExist(userLogin.getEmail())) {
             em.persist(userLogin);
         } else {
-            Optional<Long> userID = getIDbyLogin(userLogin.getEmail());
+/*            Optional<Long> userID = getIDbyLogin(userLogin.getEmail());
             userLogin.setId(userID.orElseThrow(() ->
-                      new NoSuchElementException("ID not found")));
+                      new NoSuchElementException("ID not found")));*/
+           // UserLogin trail = userLogin;
             em.merge(userLogin);
         }
         commit(em);

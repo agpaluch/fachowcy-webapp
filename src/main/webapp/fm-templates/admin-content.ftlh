@@ -27,6 +27,7 @@
         <div>nazwisko: ${userDetails.surname}</div>
         <div>numer telefonu: ${userDetails.phoneNumber?c}</div>
         <div>miasto: ${userDetails.city.toString()}</div>
+    <div>liczba polubień: ${userDetails.numberOfLikes?c}</div>
         <div>szerokość geograficzna: ${userDetails.latitude}</div>
         <div>długość geograficzna: ${userDetails.longitude}</div>
 
