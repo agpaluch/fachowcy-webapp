@@ -2,9 +2,8 @@ package servlets;
 
 import dao.UserLoginDAO;
 import domain.*;
+import exceptions.FrontEndFormValidationException;
 import freemarker.template.Template;
-import repository.City;
-import repository.TypeOfProfession;
 import session.SessionInfo;
 
 import javax.ejb.EJB;
@@ -23,7 +22,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.function.Function;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -76,7 +74,7 @@ public class EditUserServlet extends HttpServlet{
 
             userToEdit = user.get();
 
-            dataMap = SinupEditUtil.addCitiesAndProfessions(dataMap, userToEdit.getRole());
+            dataMap = SignupEditUtil.addCitiesAndProfessions(dataMap, userToEdit.getRole());
             dataMap.put("roles", Arrays.stream(Role.values()).collect(Collectors.toList()));
             dataMap.put("inputData", userToEdit);
             dataMap.put("errors", mapOfErrors);
@@ -90,86 +88,30 @@ public class EditUserServlet extends HttpServlet{
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        String email = req.getParameter("email");
-        String name = req.getParameter("name");
-        String surname = req.getParameter("surname");
-        String professionString = req.getParameter("profession");
-        Long phoneNumber = null;
-        TypeOfProfession profession = null;
-        Role role = null;
-        Integer numberOfLikes = null;
-        City city = null;
-        Double longitude = null;
-        Double latitude = null;
-
-        String cityString = req.getParameter("city");
-        String longitudeString = req.getParameter("longitude");
-        String latitudeString = req.getParameter("latitude");
-        String numberOfLikesString = req.getParameter("numberOfLikes");
-        String phoneNumberString = req.getParameter("phoneNumber");
-
-
-
+        UserDTO modifiedUser = null;
 
         try {
-            phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
-            role = Role.valueOf(req.getParameter("role"));
-            numberOfLikes = Integer.parseInt(req.getParameter("numberOfLikes"));
-            city = City.valueOf(req.getParameter("city"));
-            longitude = Double.parseDouble(req.getParameter("longitude"));
-            latitude = Double.parseDouble(req.getParameter("latitude"));
-
-            System.out.println("uwgaa");
-            if(professionString!=null){
-            profession = TypeOfProfession.valueOf(professionString);
-            }
-
-        } catch (IllegalArgumentException e) {
+            modifiedUser = SignupEditUtil.createUserDTOToValidate(req, "edit");
+        } catch (FrontEndFormValidationException e){
             resp.setStatus(500);
-            logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść " +
-                    "walidacji przez Java Script.");
         }
 
 
-        UserLogin modifiedUser = userToEdit;
-        modifiedUser.setConfirmPassword(modifiedUser.getPassword());
 
-        modifiedUser.setEmail(email);
-        modifiedUser.setRole(role);
-        if (professionString != null){
-            modifiedUser.getProfession().setProfession(profession);
-        }
-        modifiedUser.getUserDetails().setName(name);
-        modifiedUser.getUserDetails().setName(surname);
-        modifiedUser.getUserDetails().setPhoneNumber(phoneNumber);
-        modifiedUser.getUserDetails().setCity(city);
-        modifiedUser.getUserDetails().setNumberOfLikes(numberOfLikes);
-        modifiedUser.getUserDetails().setLatitude(latitude);
-        modifiedUser.getUserDetails().setLongitude(longitude);
+        Set<ConstraintViolation<UserDTO>> constraintViolations =
+                SignupEditUtil.validateUserDTO(modifiedUser);
 
 
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-
-        Set<ConstraintViolation<UserLogin>> constraintViolations =
-                validator.validate(modifiedUser);
-
-
-        for (ConstraintViolation<UserLogin> constraintViolation: constraintViolations){
+        for (ConstraintViolation<UserDTO> constraintViolation: constraintViolations){
             mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
         }
-
 
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", modifiedUser);
 
-        PrintWriter printWriter = resp.getWriter();
-
 
         if (constraintViolations.isEmpty()){
-
-                userLoginDAO.save(modifiedUser);
+                userLoginDAO.save(SignupEditUtil.createUserLoginFromUserDTO(modifiedUser));
                 resp.sendRedirect("/login-form");
 
         } else {

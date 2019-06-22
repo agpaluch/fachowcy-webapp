@@ -5,10 +5,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import repository.City;
 import repository.TypeOfProfession;
-import validators.CheckCity;
-import validators.CheckIfNotZero;
-import validators.CheckPassword;
-import validators.CheckProfession;
+import validators.*;
 
 import javax.validation.constraints.*;
 
@@ -27,6 +24,11 @@ public class UserDTO {
     @NotBlank(message = "Potwierdź hasło")
     private String confirmPassword;
 
+
+    @CheckRole
+    private Role role;
+
+
     @Pattern(regexp = "^[a-zA-Z\\s\\p{L}]+$", message = "Imię może zawierać tylko litery.")
     @NotBlank(message = "Wpisz imię.")
     private String name;
@@ -43,18 +45,19 @@ public class UserDTO {
     @Range(min=100000000L, max=48999999999L, message = "Niepoprawny numer telefonu.")
     private Long phoneNumber;
 
+    @Min(0)
+    private Integer numberOfLikes = 0;
+
     @CheckCity
     @NotNull(message = "Wybierz miasto")
     private City city;
 
     @Range(min=-180, max=180, message = "Niepoprawana lokalizacja.")
     @NotNull(message = "Wpisz adres")
-    //@CheckIfNotZero(message = "Znajdź swoją lokalizację.")
     private Double longitude;
 
     @Range(min= -180, max=180, message = "Niepoprawna lokalizacja.")
     @NotNull(message = "Wpisz adres")
-    //@CheckIfNotZero(message = "Znajdź swoją lokalizację.")
     private Double latitude;
 
 

@@ -138,6 +138,7 @@ public class Signup extends HttpServlet {
                     .email(email)
                     .password(password)
                     .confirmPassword(confirmPassword)
+                    .role(role)
                     .name(name)
                     .surname(surname)
                     .profession(profession)

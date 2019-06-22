@@ -23,36 +23,24 @@ import java.text.DecimalFormat;
 public class UserDetails {
 
     @Column
-    @Pattern(regexp = "^[a-zA-Z\\s\\p{L}]+$", message = "Imię może zawierać tylko litery.")
-    @NotBlank(message = "Wpisz imię.")
     private String name;
 
     @Column
-    @Pattern(regexp = "^[a-zA-Z\\s\\p{L}]+$", message = "Nazwisko może zawierać tylko litery.")
-    @NotBlank(message = "Wpisz nazwisko.")
     private String surname;
 
 
     @Column
-    @NotNull
-    @Range(min=100000000L, max=48999999999L, message = "Niepoprawny numer telefonu.")
     private long phoneNumber;
 
     @Column
     @Enumerated(EnumType.STRING)
-    @CheckCity
-    @NotNull(message = "Wybierz miasto")
     private City city;
     //private CityDistrict district;
 
     @Column
-    @Range(min=-180, max=180, message = "Niepoprawana lokalizacja.")
-    @NotNull(message = "Wpisz adres")
     private Double longitude;
 
     @Column
-    @Range(min=-180, max=180, message = "Niepoprawana lokalizacja.")
-    @NotNull(message = "Wpisz adres")
     private Double latitude;
 
 
@@ -66,19 +54,6 @@ public class UserDetails {
 
 
 
-
-
-    public String toString() {
-        DecimalFormat decimalFormat = new DecimalFormat("#");
-
-        return "name: '" + name + '\'' +
-                ", surname: '" + surname + '\'' +
-                ", phoneNumber: " + decimalFormat.format(phoneNumber) +
-                ", city: " + city.toString() +
-                ", longitude: " + longitude +
-                ", latitude: " + latitude +
-                ", numberOfLikes: " + numberOfLikes;
-    }
 }
 
 

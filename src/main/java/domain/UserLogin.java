@@ -27,17 +27,10 @@ public class UserLogin {
 
     @Column(unique = true)
     @NotEmpty
-    @Email(message = "Nieprawidłowy adres email.")
-    @NotBlank(message = "Wpisz adres email.")
     private String email;
 
     @NotEmpty
-    @NotBlank(message = "Wpisz hasło")
     private String password;
-
-    @Transient
-    @NotBlank(message = "Potwierdź hasło")
-    private String confirmPassword;
 
 
     @Enumerated(EnumType.STRING)
@@ -56,7 +49,6 @@ public class UserLogin {
     private Instant signUpDate = Instant.now();
 
     @Embedded
-    @Valid
     private UserDetails userDetails;
 
     public UserLogin() {
@@ -64,14 +56,5 @@ public class UserLogin {
     }
 
 
-    public String toString() {
-        return
-                "id: " + id +
-                ", email: '" + email + '\'' +
-                ", password: '" + password + '\'' +
-                ", role: " + role.toString() +
-                ", profession: " + profession.toString() +
-                ", signUpDate: " + signUpDate;
-    }
 }
 
