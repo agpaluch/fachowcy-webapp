@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import dao.UserLoginDAOBean;
 import domain.*;
@@ -24,10 +25,7 @@ import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +49,8 @@ public class Signup extends HttpServlet {
     @EJB
     UserLoginDAO userLoginDAO;
 
+    @EJB
+    ProfessionsDAO professionsDAO;
 
     @Override
     public void init() {
@@ -83,7 +83,7 @@ public class Signup extends HttpServlet {
 
         Role role = Role.valueOf(req.getParameter("role"));
 
-        if (role==Role.PROFESSIONAL){
+        if (role == Role.PROFESSIONAL){
             dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
         } else {
             dataMap.put("professions",null);
@@ -140,8 +140,6 @@ public class Signup extends HttpServlet {
                 role = Role.CLIENT;
             }
 
-
-
             UserDTO userDTO = UserDTO.builder()
                     .email(email)
                     .password(password)
@@ -182,8 +180,22 @@ public class Signup extends HttpServlet {
 
             PrintWriter printWriter = resp.getWriter();
 
-
             if (constraintViolations.isEmpty()){
+
+                Optional<Professions> maybeProfession = professionsDAO.getByProfession(profession);
+                Professions profToBeAdded = null;
+
+                if(maybeProfession.isPresent()) {
+                    profToBeAdded = Professions.builder()
+                            .id(maybeProfession.get().getId())
+                            .profession(profession)
+                            .build();
+                } else {
+                    profToBeAdded = Professions.builder()
+                            .id(null)
+                            .profession(profession)
+                            .build();
+                }
 
                 UserDetails userDetails = UserDetails.builder()
                         .name(name)
@@ -200,7 +212,7 @@ public class Signup extends HttpServlet {
                         .email(email)
                         .password(password)
                         .role(role)
-                        .profession(new Professions(profession))
+                        .profession(profToBeAdded)
                         .build();
 
                 if (userLoginDAO.doesAUserExist(email)){

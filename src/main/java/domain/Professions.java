@@ -1,12 +1,17 @@
 package domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import repository.TypeOfProfession;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Data
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "professions")
 public class Professions {
@@ -16,8 +21,7 @@ public class Professions {
     @Column(name = "id")
     private Long id;
 
-
-    @OneToMany(mappedBy = "profession", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profession", cascade = {CascadeType.ALL})
     private Set<UserLogin> UserLogin;
 
 
