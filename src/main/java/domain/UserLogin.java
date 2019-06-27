@@ -3,14 +3,12 @@ package domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import repository.TypeOfProfession;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
-import java.time.LocalDate;
 
 @Data
 @Builder

@@ -11,4 +11,8 @@ public interface ProfessionsDAO extends IRootDAO<Professions> {
 
     Optional<Professions> getByProfession(TypeOfProfession profession);
 
+    Optional<Long> getIdByProfession(TypeOfProfession profession);
+
+    void deleteByProfession(TypeOfProfession profession);
+
 }
