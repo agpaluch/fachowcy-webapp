@@ -103,7 +103,6 @@ public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
         return result;
     }
 
-
     @Override
     public void save(UserLogin userLogin) {
         EntityManager em = startTransaction();

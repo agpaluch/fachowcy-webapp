@@ -182,20 +182,13 @@ public class Signup extends HttpServlet {
 
             if (constraintViolations.isEmpty()){
 
-                Optional<Professions> maybeProfession = professionsDAO.getByProfession(profession);
-                Professions profToBeAdded = null;
-
-                if(maybeProfession.isPresent()) {
-                    profToBeAdded = Professions.builder()
-                            .id(maybeProfession.get().getId())
-                            .profession(profession)
-                            .build();
+                Professions profToBeAdded;
+                if(role == Role.CLIENT) {
+                    profToBeAdded = null;
                 } else {
-                    profToBeAdded = Professions.builder()
-                            .id(null)
-                            .profession(profession)
-                            .build();
+                    profToBeAdded = saveProfessionInTheProfessionsTable(profession);
                 }
+                //Professions profToBeAdded = saveProfessionInTheProfessionsTable(profession);
 
                 UserDetails userDetails = UserDetails.builder()
                         .name(name)
@@ -222,9 +215,6 @@ public class Signup extends HttpServlet {
                     resp.sendRedirect("/login-form");
                 }
 
-
-
-
             } else {
 
                 try {
@@ -233,16 +223,28 @@ public class Signup extends HttpServlet {
                     logger.log(Level.SEVERE, e.getMessage(), e);
                 }
             }
-
-
         }
-
-
-
-
-
     }
 
+    private Professions saveProfessionInTheProfessionsTable(TypeOfProfession profession) {
+
+        Optional<Professions> maybeProfession = professionsDAO.getByProfession(profession);
+        Professions profToBeAdded;
+
+        if(maybeProfession.isPresent()) {
+            profToBeAdded = Professions.builder()
+                    .id(maybeProfession.get().getId())
+                    .profession(profession)
+                    .build();
+        } else {
+            profToBeAdded = Professions.builder()
+                    .id(null)
+                    .profession(profession)
+                    .build();
+            professionsDAO.save(profToBeAdded);
+        }
+        return profToBeAdded;
+    }
 
 
 }

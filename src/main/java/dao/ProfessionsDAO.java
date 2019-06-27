@@ -7,7 +7,7 @@ import javax.ejb.Local;
 import java.util.Optional;
 
 @Local
-public interface ProfessionsDAO {
+public interface ProfessionsDAO extends IRootDAO<Professions> {
 
     Optional<Professions> getByProfession(TypeOfProfession profession);
 
