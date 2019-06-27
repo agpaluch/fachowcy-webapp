@@ -28,7 +28,6 @@ public class LogoutServlet extends HttpServlet {
     @Inject
     SessionInfo sessionInfo;
 
-
     @Override
     public void init() {
         try {
@@ -46,8 +45,7 @@ public class LogoutServlet extends HttpServlet {
         sessionInfo.setPassword(null);
         sessionInfo.setUserLogin(null);
 
-        resp.sendRedirect("/");
+        resp.sendRedirect("/index");
 
     }
-
 }

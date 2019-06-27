@@ -40,7 +40,6 @@ public class Signup extends HttpServlet {
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
 
-
     private static final String TEMPLATE_NAME = "index";
 
     @Inject
@@ -61,13 +60,11 @@ public class Signup extends HttpServlet {
         mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
                 .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
 
-
         dataMap.put("content", "signup");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
         dataMap.put("sessionInfo", sessionInfo);
-
 
         try {
             template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -76,10 +73,8 @@ public class Signup extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
         Role role = Role.valueOf(req.getParameter("role"));
 
@@ -88,7 +83,6 @@ public class Signup extends HttpServlet {
         } else {
             dataMap.put("professions",null);
         }
-
 
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
@@ -99,7 +93,6 @@ public class Signup extends HttpServlet {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -117,7 +110,6 @@ public class Signup extends HttpServlet {
         Double latitude = null;
         TypeOfProfession profession = null;
         Role role;
-
 
         try {
             phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
@@ -153,14 +145,11 @@ public class Signup extends HttpServlet {
                     .latitude(latitude)
                     .build();
 
-
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
 
-
             Set<ConstraintViolation<UserDTO>> constraintViolations =
                     validator.validate(userDTO);
-
 
             mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
                     .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
@@ -168,7 +157,6 @@ public class Signup extends HttpServlet {
             for (ConstraintViolation<UserDTO> constraintViolation: constraintViolations){
                 mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
             }
-
 
             mapOfValues = req.getParameterMap()
                     .entrySet()
@@ -188,7 +176,6 @@ public class Signup extends HttpServlet {
                 } else {
                     profToBeAdded = saveProfessionInTheProfessionsTable(profession);
                 }
-                //Professions profToBeAdded = saveProfessionInTheProfessionsTable(profession);
 
                 UserDetails userDetails = UserDetails.builder()
                         .name(name)
@@ -198,7 +185,6 @@ public class Signup extends HttpServlet {
                         .longitude(longitude)
                         .latitude(latitude)
                         .build();
-
 
                 UserLogin userLogin = UserLogin.builder()
                         .userDetails(userDetails)
@@ -245,6 +231,5 @@ public class Signup extends HttpServlet {
         }
         return profToBeAdded;
     }
-
 
 }
