@@ -90,7 +90,6 @@ public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
         return userLogin.getRole().equals(Role.PROFESSIONAL);
     }
 
-
     @Override
     public List<UserLogin> getProfByProfession(TypeOfProfession profession) {
         EntityManager em = startTransaction();
@@ -102,7 +101,6 @@ public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
         commit(em);
         return result;
     }
-
 
     @Override
     public void save(UserLogin userLogin) {

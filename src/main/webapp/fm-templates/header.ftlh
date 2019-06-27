@@ -24,7 +24,7 @@
         <#--        <div class="container d-flex justify-content-between">-->
         <#--        <div class="row">-->
         <div class="col-3">
-            <a href="/" class="navbar-brand d-flex align-items-center" style="margin-right: 10px">
+            <a href="/index" class="navbar-brand d-flex align-items-center" style="margin-right: 10px">
                 <strong>Fachmann.pl</strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"

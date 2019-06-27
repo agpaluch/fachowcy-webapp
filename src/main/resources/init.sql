@@ -9,8 +9,8 @@ USE fachmann;
 --+ Create table for professions
 CREATE TABLE IF NOT EXISTS professions
 (
-  id          BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  profession VARCHAR(100) NOT NULL
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  profession VARCHAR(100)
 );
 
 

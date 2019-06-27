@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import dao.UserLoginDAOBean;
 import domain.*;
@@ -24,10 +25,7 @@ import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +40,6 @@ public class Signup extends HttpServlet {
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
 
-
     private static final String TEMPLATE_NAME = "index";
 
     @Inject
@@ -51,6 +48,8 @@ public class Signup extends HttpServlet {
     @EJB
     UserLoginDAO userLoginDAO;
 
+    @EJB
+    ProfessionsDAO professionsDAO;
 
     @Override
     public void init() {
@@ -61,13 +60,11 @@ public class Signup extends HttpServlet {
         mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
                 .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
 
-
         dataMap.put("content", "signup");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", mapOfValues);
         dataMap.put("sessionInfo", sessionInfo);
-
 
         try {
             template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
@@ -76,19 +73,16 @@ public class Signup extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         Role role = Role.valueOf(req.getParameter("role"));
 
-        if (role==Role.PROFESSIONAL){
+        if (role == Role.PROFESSIONAL){
             dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
         } else {
             dataMap.put("professions",null);
         }
-
 
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
@@ -99,7 +93,6 @@ public class Signup extends HttpServlet {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -117,7 +110,6 @@ public class Signup extends HttpServlet {
         Double latitude = null;
         TypeOfProfession profession = null;
         Role role;
-
 
         try {
             phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
@@ -140,8 +132,6 @@ public class Signup extends HttpServlet {
                 role = Role.CLIENT;
             }
 
-
-
             UserDTO userDTO = UserDTO.builder()
                     .email(email)
                     .password(password)
@@ -155,14 +145,11 @@ public class Signup extends HttpServlet {
                     .latitude(latitude)
                     .build();
 
-
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
 
-
             Set<ConstraintViolation<UserDTO>> constraintViolations =
                     validator.validate(userDTO);
-
 
             mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
                     .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
@@ -170,7 +157,6 @@ public class Signup extends HttpServlet {
             for (ConstraintViolation<UserDTO> constraintViolation: constraintViolations){
                 mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
             }
-
 
             mapOfValues = req.getParameterMap()
                     .entrySet()
@@ -182,8 +168,14 @@ public class Signup extends HttpServlet {
 
             PrintWriter printWriter = resp.getWriter();
 
-
             if (constraintViolations.isEmpty()){
+
+                Professions profToBeAdded;
+                if(role == Role.CLIENT) {
+                    profToBeAdded = null;
+                } else {
+                    profToBeAdded = saveProfessionInTheProfessionsTable(profession);
+                }
 
                 UserDetails userDetails = UserDetails.builder()
                         .name(name)
@@ -194,13 +186,12 @@ public class Signup extends HttpServlet {
                         .latitude(latitude)
                         .build();
 
-
                 UserLogin userLogin = UserLogin.builder()
                         .userDetails(userDetails)
                         .email(email)
                         .password(password)
                         .role(role)
-                        .profession(new Professions(profession))
+                        .profession(profToBeAdded)
                         .build();
 
                 if (userLoginDAO.doesAUserExist(email)){
@@ -210,9 +201,6 @@ public class Signup extends HttpServlet {
                     resp.sendRedirect("/login-form");
                 }
 
-
-
-
             } else {
 
                 try {
@@ -221,16 +209,27 @@ public class Signup extends HttpServlet {
                     logger.log(Level.SEVERE, e.getMessage(), e);
                 }
             }
-
-
         }
-
-
-
-
-
     }
 
+    private Professions saveProfessionInTheProfessionsTable(TypeOfProfession profession) {
 
+        Optional<Professions> maybeProfession = professionsDAO.getByProfession(profession);
+        Professions profToBeAdded;
+
+        if(maybeProfession.isPresent()) {
+            profToBeAdded = Professions.builder()
+                    .id(maybeProfession.get().getId())
+                    .profession(profession)
+                    .build();
+        } else {
+            profToBeAdded = Professions.builder()
+                    .id(null)
+                    .profession(profession)
+                    .build();
+            professionsDAO.save(profToBeAdded);
+        }
+        return profToBeAdded;
+    }
 
 }
