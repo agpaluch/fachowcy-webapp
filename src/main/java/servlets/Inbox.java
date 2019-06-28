@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 @WebServlet("/inbox")
 public class Inbox extends HttpServlet {
 
-    @PersistenceContext(unitName = "primary")
+    @PersistenceContext(unitName = "fachmann")
     private EntityManager entityManager;
 
     Logger logger = Logger.getLogger(getClass().getName());

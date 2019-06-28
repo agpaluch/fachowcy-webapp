@@ -19,56 +19,44 @@ import java.util.stream.Collectors;
 @Singleton
 public class UserLoginDAOBean implements UserLoginDAO {
 
-    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
-
-    @PersistenceContext(unitName = "primary")
+    @PersistenceContext(unitName = "fachmann")
     EntityManager em;
 
     @Override
     public void delete(Long id) {
-        //EntityManager em = startTransaction();
         get(id).ifPresent((ul) -> {
             em.remove(em.merge(ul));
         });
-        //commit(em);
     }
 
     @Override
     public void deleteByLogin(String email) {
-       //EntityManager em = startTransaction();
        Optional<Long> id = getIDbyLogin(email);
        if(id.isPresent()) {
            UserLogin userLogin = get(id.get()).get();
            em.remove(em.merge(userLogin));
-           //commit(em);
        }
     }
 
     @Override
     public Optional<UserLogin> get(Long id) {
-        //EntityManager em = startTransaction();
         Optional<UserLogin> result = Optional.of(em.find(UserLogin.class, id));
-        //commit(em);
         return result;
     }
 
     @Override
     public List<UserLogin> getAll() {
-        //EntityManager em = startTransaction();
         List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul", UserLogin.class)
                 .getResultList();
-        //commit(em);
         return result;
     }
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {
-        //EntityManager em = startTransaction();
         Optional<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
                 .setParameter("val", email)
                 .getResultStream()
                 .findFirst();
-        //commit(em);
         return result;
     }
 
@@ -96,19 +84,16 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     @Override
     public List<UserLogin> getProfByProfession(TypeOfProfession profession) {
-        //EntityManager em = startTransaction();
         List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.profession = :val", UserLogin.class)
                 .setParameter("val", profession)
                 .getResultStream()
                 .filter(this::isProfessional)
                 .collect(Collectors.toList());
-        //commit(em);
         return result;
     }
 
     @Override
     public void save(UserLogin userLogin) {
-        //EntityManager em = startTransaction();
         if (!doesAUserExist(userLogin.getEmail())) {
             em.persist(userLogin);
         } else {
@@ -117,7 +102,6 @@ public class UserLoginDAOBean implements UserLoginDAO {
                       new NoSuchElementException("ID not found")));
             em.merge(userLogin);
         }
-        //commit(em);
     }
 
     public boolean doesAUserExist(String email) {

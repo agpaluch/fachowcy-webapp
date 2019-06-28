@@ -23,8 +23,6 @@ import java.util.logging.Logger;
 @WebServlet("/index")
 public class Index extends HttpServlet {
 
-    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("primary");
-
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
