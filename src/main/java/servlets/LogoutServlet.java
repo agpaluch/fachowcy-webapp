@@ -1,8 +1,7 @@
 package servlets;
 
-import freemarker.TemplateProvider;
+import config.TemplateProvider;
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import session.SessionInfo;
 
 import javax.inject.Inject;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

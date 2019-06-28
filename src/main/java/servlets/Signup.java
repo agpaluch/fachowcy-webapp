@@ -2,9 +2,8 @@ package servlets;
 
 import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
-import dao.UserLoginDAOBean;
 import domain.*;
-import freemarker.TemplateProvider;
+import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.City;

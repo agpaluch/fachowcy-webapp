@@ -1,8 +1,7 @@
 package servlets;
 
 import dao.UserLoginDAO;
-import domain.UserLogin;
-import freemarker.TemplateProvider;
+import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;

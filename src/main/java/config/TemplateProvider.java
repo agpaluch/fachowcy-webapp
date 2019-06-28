@@ -1,4 +1,4 @@
-package freemarker;
+package config;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
