@@ -6,6 +6,7 @@ import domain.UserLogin;
 import repository.TypeOfProfession;
 
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -21,6 +22,9 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     @PersistenceContext(unitName = "fachmann")
     EntityManager em;
+
+    @Inject
+    ProfessionsDAO professionsDAO;
 
     @Override
     public void delete(Long id) {
@@ -83,8 +87,12 @@ public class UserLoginDAOBean implements UserLoginDAO {
     }
 
     @Override
-    public List<UserLogin> getProfByProfession(TypeOfProfession profession) {
-        List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.profession = :val", UserLogin.class)
+    public List<UserLogin> getProfByProfession(String profession) {
+        //List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.professions.profession = :val", UserLogin.class)
+
+        Optional<Long> maybeProfessionsID = professionsDAO.getIdByProfession(profession);
+
+        List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.professions.profession = :val", UserLogin.class)
                 .setParameter("val", profession)
                 .getResultStream()
                 .filter(this::isProfessional)

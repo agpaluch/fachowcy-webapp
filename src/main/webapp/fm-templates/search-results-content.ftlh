@@ -13,8 +13,8 @@
                                             <img src="http://www.mountainhearth.com/wp-content/uploads/2014/01/P1010070-1024x768.jpg" height="300px">
                                             <div class="card-body">
                                                 <p class="card-text">
-                                                        ${sr.getName()} </br>
-                                                        ${sr.getSurname()}
+                                                        ${sr.profession.name} </br>
+                                                        ${sr.profession.surname}
                                                 </p>
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="btn-group">
