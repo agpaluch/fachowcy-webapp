@@ -1,7 +1,7 @@
 package servlets;
 
 import dao.UserLoginDAO;
-import freemarker.TemplateProvider;
+import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 @WebServlet("/inbox")
 public class Inbox extends HttpServlet {
 
-    @PersistenceContext(unitName = "primary")
+    @PersistenceContext(unitName = "fachmann")
     private EntityManager entityManager;
 
     Logger logger = Logger.getLogger(getClass().getName());
