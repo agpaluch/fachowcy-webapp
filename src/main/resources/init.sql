@@ -1,7 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS fachmann;
 
 
---+ALTER DATABASE fachmann CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+/*ALTER DATABASE fachmann CHARACTER SET utf8 COLLATE utf8_unicode_ci;*/
 
 
 USE fachmann;
@@ -76,9 +76,11 @@ ALTER TABLE messages
 ALTER TABLE messages
     ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
 
+
+
 INSERT INTO messages (message, sender_id, recipient_id) VALUES
 ("Ok.", 1, 2),
-("Będę o 16:00.", 1, 2);
+("Bede o 16:00.", 1, 2);
 
 
 

@@ -1,6 +1,8 @@
 package servlets;
 
 import config.TemplateProvider;
+import dao.UserDetailsDAO;
+import dao.UserLoginDAO;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
@@ -29,6 +31,8 @@ public class SearchResults extends HttpServlet {
     @Inject
     SessionInfo sessionInfo;
 
+    @Inject
+    UserLoginDAO userLoginDAO;
 /*    @EJB(beanName = "UserDaoBean")
     UserDao professionalDao;*/
 
@@ -72,7 +76,7 @@ public class SearchResults extends HttpServlet {
         //map.put("se", req.getParameter("search"));
         String s = req.getParameter("search");
 
-
+        //userLoginDAO.getProfByProfession();
 
  /*       RepositoryOfUsers.fillDatabase();
         ProfessionalsDatabaseDaoBean pd = RepositoryOfUsers.getProfessionalsDatabaseDaoBean();

@@ -17,7 +17,7 @@ public class ProfessionsDAOBean implements ProfessionsDAO {
     EntityManager em;
 
     @Override
-    public Optional<Professions> getByProfession(TypeOfProfession profession) {
+    public Optional<Professions> getByProfession(String profession) {
         Optional<Professions> result = em.createQuery("SELECT p FROM Professions p WHERE p.profession = :val",
                 Professions.class)
                 .setParameter("val", profession)
@@ -27,7 +27,7 @@ public class ProfessionsDAOBean implements ProfessionsDAO {
     }
 
     @Override
-    public Optional<Long> getIdByProfession(TypeOfProfession profession) {
+    public Optional<Long> getIdByProfession(String profession) {
         Optional<Long> result = em.createQuery("SELECT p FROM Professions p WHERE p.profession = :val",
                 Professions.class)
                 .setParameter("val", profession)
@@ -68,7 +68,7 @@ public class ProfessionsDAOBean implements ProfessionsDAO {
     }
 
     @Override
-    public void deleteByProfession(TypeOfProfession profession) {
+    public void deleteByProfession(String profession) {
         Optional<Long> id = getIdByProfession(profession);
         if(id.isPresent()) {
             Professions prof = get(id.get()).get();
