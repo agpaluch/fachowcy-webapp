@@ -78,7 +78,7 @@ public class Signup extends HttpServlet {
         Role role = Role.valueOf(req.getParameter("role"));
 
         if (role == Role.PROFESSIONAL){
-            dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
+            dataMap.put("professions", professionsDAO.getAll());
         } else {
             dataMap.put("professions",null);
         }
@@ -107,7 +107,7 @@ public class Signup extends HttpServlet {
         City city = null;
         Double longitude = null;
         Double latitude = null;
-        TypeOfProfession profession = null;
+        String profession = null;
         Role role;
 
         try {
@@ -123,7 +123,7 @@ public class Signup extends HttpServlet {
             if (req.getParameter("profession")!=null){
                 role = Role.PROFESSIONAL;
                 try{
-                    profession = TypeOfProfession.valueOf(req.getParameter("profession"));
+                    profession = req.getParameter("profession");
                 } catch (IllegalArgumentException e) {
                     resp.setStatus(500);
                 }
@@ -211,7 +211,7 @@ public class Signup extends HttpServlet {
         }
     }
 
-    private Professions saveProfessionInTheProfessionsTable(TypeOfProfession profession) {
+    private Professions saveProfessionInTheProfessionsTable(String profession) {
 
         Optional<Professions> maybeProfession = professionsDAO.getByProfession(profession);
         Professions profToBeAdded;

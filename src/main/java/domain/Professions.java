@@ -1,15 +1,13 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import repository.TypeOfProfession;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @Entity
@@ -26,15 +24,18 @@ public class Professions {
 
 
     @Column(name="profession")
-    @Enumerated(EnumType.STRING)
-    private TypeOfProfession profession;
+    private String profession;
 
     public Professions(){
         //Hibernate
     }
 
+    @Override
+    public String toString() {
+        return profession;
+    }
 
-    public Professions(TypeOfProfession profession){
+    public Professions(String profession){
         this.profession = profession;
     }
 
