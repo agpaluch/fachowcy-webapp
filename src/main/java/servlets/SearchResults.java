@@ -76,19 +76,10 @@ public class SearchResults extends HttpServlet {
         map.put("content", "search-results");
         map.put("sessionInfo", sessionInfo);
         //map.put("se", req.getParameter("search"));
-        String s = req.getParameter("search");
+        String searchQuery = req.getParameter("search");
 
-        List<UserLogin> mayBeProfessionals = userLoginDAO.getProfByProfession(s);
+        List<UserLogin> mayBeProfessionals = userLoginDAO.getProfByProfession(searchQuery);
         map.put("searchResults", mayBeProfessionals);
-
- /*       RepositoryOfUsers.fillDatabase();
-        ProfessionalsDatabaseDaoBean pd = RepositoryOfUsers.getProfessionalsDatabaseDaoBean();
-        List<ProfessionalDetails> li = pd.getByProfession(s);*/
-
-
-/*        List<UserDetails> li = professionalDao.getByProfession(s);
-
-        map.put("searchResults", li);*/
 
         try {
             template.process(map, printWriter);

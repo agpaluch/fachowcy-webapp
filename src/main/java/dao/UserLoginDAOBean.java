@@ -44,24 +44,21 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     @Override
     public Optional<UserLogin> get(Long id) {
-        Optional<UserLogin> result = Optional.of(em.find(UserLogin.class, id));
-        return result;
+        return Optional.of(em.find(UserLogin.class, id));
     }
 
     @Override
     public List<UserLogin> getAll() {
-        List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul", UserLogin.class)
+        return em.createQuery("SELECT ul FROM UserLogin ul", UserLogin.class)
                 .getResultList();
-        return result;
     }
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {
-        Optional<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
+        return em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
                 .setParameter("val", email)
                 .getResultStream()
                 .findFirst();
-        return result;
     }
 
     @Override
@@ -88,16 +85,11 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     @Override
     public List<UserLogin> getProfByProfession(String profession) {
-        //List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.professions.profession = :val", UserLogin.class)
-
-        Optional<Long> maybeProfessionsID = professionsDAO.getIdByProfession(profession);
-
-        List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.professions.profession = :val", UserLogin.class)
+        return em.createQuery("SELECT ul FROM UserLogin ul JOIN ul.profession p WHERE p.profession=:val", UserLogin.class)
                 .setParameter("val", profession)
                 .getResultStream()
                 .filter(this::isProfessional)
                 .collect(Collectors.toList());
-        return result;
     }
 
     @Override
