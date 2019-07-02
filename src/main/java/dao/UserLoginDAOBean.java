@@ -3,13 +3,10 @@ package dao;
 import domain.Role;
 import domain.UserDetails;
 import domain.UserLogin;
-import repository.TypeOfProfession;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -28,9 +25,7 @@ public class UserLoginDAOBean implements UserLoginDAO {
 
     @Override
     public void delete(Long id) {
-        get(id).ifPresent((ul) -> {
-            em.remove(em.merge(ul));
-        });
+        get(id).ifPresent((ul) -> em.remove(em.merge(ul)));
     }
 
     @Override
