@@ -3,7 +3,7 @@ package servlets;
 import config.TemplateProvider;
 import dao.MessagesDAO;
 import dao.UserLoginDAO;
-import domain.UserLogin;
+import domain.Messages;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
@@ -18,17 +18,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/sent")
-public class Sent extends HttpServlet {
+@WebServlet("/newmessage")
+public class NewMessage extends HttpServlet {
+
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
 
     private static final String TEMPLATE_NAME = "index";
+    private long recipientId;
 
     @Inject
     SessionInfo sessionInfo;
@@ -55,19 +56,13 @@ public class Sent extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("content", "sent");
+        map.put("content", "newmessage");
         map.put("sessionInfo", sessionInfo);
 
-        Optional<UserLogin> user = userLoginDAO.getByLogin(sessionInfo.getEmail());
-        if (user.isPresent()) {
-            long id = user.get().getId();
-            if (messages.getBySender(id).isPresent()) {
-                map.put("messages", messages.getBySender(id).get());
-            } else {
-                map.put("messages", null);
-            }
+        recipientId = Integer.parseInt(req.getParameter("id"));
+        if (userLoginDAO.get(recipientId).isPresent()) {
+            map.put("recipient", userLoginDAO.get(recipientId).get());
         }
-
 
         try {
             template.process(map, printWriter);
@@ -77,4 +72,33 @@ public class Sent extends HttpServlet {
 
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        resp.setContentType("text/html; charset=utf-8");
+        PrintWriter printWriter = resp.getWriter();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", "newmessage");
+        map.put("sessionInfo", sessionInfo);
+
+
+        String newMessageText = req.getParameter("message");
+        if (newMessageText.length() > 0 && newMessageText.length() <= 400
+                && userLoginDAO.getByLogin(sessionInfo.getEmail()).isPresent()
+                && userLoginDAO.get(recipientId).isPresent()) {
+            Messages message = new Messages();
+            message.setSender(userLoginDAO.getByLogin(sessionInfo.getEmail()).get());
+            message.setRecipient(userLoginDAO.get(recipientId).get());
+            message.setMessage(newMessageText);
+            messages.save(message);
+            resp.sendRedirect("/sent");
+        }
+
+        try {
+            template.process(map, printWriter);
+        } catch (TemplateException e) {
+            logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
 }
