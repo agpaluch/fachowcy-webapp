@@ -1,8 +1,8 @@
 package servlets;
 
+import config.TemplateProvider;
 import dao.MessagesDAO;
 import dao.UserLoginDAO;
-import config.TemplateProvider;
 import domain.Messages;
 import domain.UserLogin;
 import freemarker.template.Template;
@@ -11,9 +11,6 @@ import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +51,7 @@ public class Inbox extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setContentType("text/html; charset=utf-8");
         PrintWriter printWriter = resp.getWriter();
