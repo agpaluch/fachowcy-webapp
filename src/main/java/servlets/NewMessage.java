@@ -1,9 +1,8 @@
 package servlets;
 
+import config.TemplateProvider;
 import dao.MessagesDAO;
 import dao.UserLoginDAO;
-import config.TemplateProvider;
-import domain.Messages;
 import domain.UserLogin;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -11,8 +10,6 @@ import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +23,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/inbox")
-public class Inbox extends HttpServlet {
+@WebServlet("/newmessage")
+public class NewMessage extends HttpServlet {
 
 
     Logger logger = Logger.getLogger(getClass().getName());
@@ -60,21 +57,9 @@ public class Inbox extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> map = new HashMap<>();
-        map.put("content", "inbox");
+        map.put("content", "newmessage");
         map.put("sessionInfo", sessionInfo);
 
-        Optional<UserLogin> user = userLoginDAO.getByLogin(sessionInfo.getEmail());
-        if (user.isPresent()) {
-            long id = user.get().getId();
-            if (messages.getByRecipient(id).isPresent()) {
-                map.put("messages", messages.getByRecipient(id).get());
-                for(Messages message : messages.getByRecipient(id).get()) {
-                    messages.setToRead(message.getId());
-                }
-            } else {
-                map.put("messages", null);
-            }
-        }
 
         try {
             template.process(map, printWriter);

@@ -3,7 +3,6 @@ package dao;
 import domain.Messages;
 
 import javax.ejb.Singleton;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -44,14 +43,14 @@ public class MessagesDAOBean implements MessagesDAO {
 
     @Override
     public Optional<List<Messages>> getBySender(long id) {
-        return Optional.of(em.createQuery("SELECT msg FROM Messages msg WHERE msg.sender = :val", Messages.class)
+        return Optional.of(em.createQuery("SELECT msg FROM Messages msg WHERE msg.sender.id = :val", Messages.class)
                 .setParameter("val", id)
                 .getResultList());
     }
 
     @Override
     public Optional<List<Messages>> getByRecipient(long id) {
-        return Optional.of(em.createQuery("SELECT msg FROM Messages msg WHERE msg.recipient = :val", Messages.class)
+        return Optional.of(em.createQuery("SELECT msg FROM Messages msg WHERE msg.recipient.id = :val", Messages.class)
                 .setParameter("val", id)
                 .getResultList());
     }
@@ -59,7 +58,10 @@ public class MessagesDAOBean implements MessagesDAO {
     @Override
     public void setToRead(long id) {
         Optional<Messages> message = get(id);
-        message.ifPresent(messages -> messages.setWasRead(true));
-        em.merge(message);
+        message.ifPresent(msg ->
+        {
+            msg.setWasRead(true);
+            em.merge(msg);
+        });
     }
 }

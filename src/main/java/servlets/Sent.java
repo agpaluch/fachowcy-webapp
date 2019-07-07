@@ -1,7 +1,9 @@
 package servlets;
 
+import dao.MessagesDAO;
 import dao.UserLoginDAO;
 import config.TemplateProvider;
+import domain.UserLogin;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
@@ -19,14 +21,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet("/sent")
 public class Sent extends HttpServlet {
-
-    @PersistenceContext(unitName = "fachmann")
-    private EntityManager entityManager;
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
@@ -39,6 +39,9 @@ public class Sent extends HttpServlet {
     @EJB
     UserLoginDAO userLoginDAO;
 
+    @EJB
+    MessagesDAO messages;
+
     @Override
     public void init() {
         try {
@@ -46,7 +49,6 @@ public class Sent extends HttpServlet {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-        entityManager.close();
     }
 
     @Override
@@ -58,6 +60,16 @@ public class Sent extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("content", "sent");
         map.put("sessionInfo", sessionInfo);
+
+        Optional<UserLogin> user = userLoginDAO.getByLogin(sessionInfo.getEmail());
+        if (user.isPresent()) {
+            long id = user.get().getId();
+            if (messages.getBySender(id).isPresent()) {
+                map.put("messages", messages.getBySender(id).get());
+            } else {
+                map.put("messages", null);
+            }
+        }
 
 
         try {
