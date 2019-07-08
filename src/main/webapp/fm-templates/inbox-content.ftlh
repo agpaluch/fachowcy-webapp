@@ -4,7 +4,7 @@
         <h3 class="text-center text-dark pt-5"></h3>
         <div class="container">
             <h3>Skrzynka Odbiorcza | <a href="/sent">Wysłane</a></h3>
-            <#list messages>
+            <#list messages?reverse>
                 <table class="table table-striped table-bordered table-hover">
                     <col width="20%">
                     <col width="70%">
