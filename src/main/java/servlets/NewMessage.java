@@ -92,6 +92,7 @@ public class NewMessage extends HttpServlet {
             message.setRecipient(userLoginDAO.get(recipientId).get());
             message.setMessage(newMessageText);
             messages.save(message);
+            map.put("recipient", userLoginDAO.get(recipientId).get());
             resp.sendRedirect("/sent");
         }
 
