@@ -75,4 +75,9 @@ public class ProfessionsDAOBean implements ProfessionsDAO {
             em.remove(em.merge(prof));
         }
     }
+
+    @Override
+    public Optional<Professions> getProfessionByLogin(String email) {
+        return Optional.empty();
+    }
 }

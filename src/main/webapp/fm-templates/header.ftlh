@@ -6,11 +6,11 @@
             <strong>Fachmann.pl</strong>
         </a>
         <#if sessionInfo.getUserLogin()??>
-            <#if sessionInfo.getRole()=="PROFESSIONAL">
+            <#--<#if sessionInfo.getRole()=="PROFESSIONAL">-->
                 <a class="btn btn-outline-success my-2 my-sm-0 offset-md-9" href="/details-prof" style="color: white">Moje konto</a>
-            <#elseif sessionInfo.getRole()=="CLIENT">
+            <#--<#elseif sessionInfo.getRole()=="CLIENT">
                 <a class="btn btn-outline-success my-2 my-sm-0 offset-md-9" href="/details-client" style="color: white">Moje konto</a>
-            </#if>
+            </#if>-->
         </#if>
         <button class="navbar-toggler first-button" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent15" aria-controls="navbarSupportedContent15" aria-expanded="false"
