@@ -64,4 +64,21 @@ public class MessagesDAOBean implements MessagesDAO {
             em.merge(msg);
         });
     }
+
+    @Override
+    public void clearDeletedUser(long id) {
+        Optional<List<Messages>> senderMessages = getBySender(id);
+        Optional<List<Messages>> recipientMessages = getByRecipient(id);
+
+        for(Messages m : senderMessages.get()) {
+            m.setSender(null);
+            em.merge(m);
+        }
+
+        for(Messages m : recipientMessages.get()) {
+            m.setRecipient(null);
+            em.merge(m);
+        }
+
+    }
 }

@@ -1,6 +1,8 @@
 package servlets;
 
 import config.TemplateProvider;
+import dao.CommentDAO;
+import dao.MessagesDAO;
 import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import domain.*;
@@ -47,6 +49,12 @@ public class DetailsProf extends HttpServlet {
 
     @EJB
     ProfessionsDAO professionsDAO;
+
+    @EJB
+    MessagesDAO messagesDAO;
+
+    @EJB
+    CommentDAO commentDAO;
 
     @Override
     public void init() {
@@ -97,6 +105,11 @@ public class DetailsProf extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if(req.getParameter("delete") != null) {
+
+            long idToDelete = userLoginDAO.getIDbyLogin(sessionInfo.getEmail()).get();
+            messagesDAO.clearDeletedUser(idToDelete);
+            commentDAO.clearDeletedUser(idToDelete);
+
             userLoginDAO.deleteByLogin(sessionInfo.getEmail());
             resp.sendRedirect("/logout");
         } else {

@@ -7,8 +7,6 @@ import repository.TypeOfProfession;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -24,7 +22,6 @@ public class UserDetails {
     @Column
     @NotNull
     private String surname;
-
 
     @Column
     @NotNull

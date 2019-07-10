@@ -11,4 +11,5 @@ public interface MessagesDAO extends IRootDAO<Messages> {
     Optional<List<Messages>> getBySender(long id);
     Optional<List<Messages>> getByRecipient(long id);
     void setToRead(long id);
+    void clearDeletedUser(long id);
 }
