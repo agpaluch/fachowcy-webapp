@@ -24,11 +24,7 @@
                             <a style="color: white" href="/inbox" class="nav-link">Wiadomości</a>
                         </li>
                         <li class="nav-item active">
-                            <#if sessionInfo.getRole()=="PROFESSIONAL">
                                 <a style="color: white" href="/details-prof" class="nav-link">Moje konto</a>
-                            <#elseif sessionInfo.getRole()=="CLIENT">
-                                <a style="color: white" href="/details-client" class="nav-link">Moje konto</a>
-                            </#if>
                         </li>
                         <li class="nav-item">
                             <a style="color: red" href="/logout" class="nav-link">Wyloguj</a>
