@@ -73,7 +73,6 @@ public class ContactProf extends HttpServlet {
         map.put("sessionInfo", sessionInfo);
         //map.put("profession", maybeProfession.get().getProfession());
 
-
         try {
             template.process(map, printWriter);
         } catch (TemplateException e) {
