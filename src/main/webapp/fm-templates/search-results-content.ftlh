@@ -2,6 +2,7 @@
 <main role="main">
 
     <section class="jumbotron text-center" >
+        <h2>Wyniki wyszukiwania: </h2>
         <div class="container">
             <#list searchResults as sr>
                         <div class="album py-5">
@@ -19,8 +20,8 @@
                                                     </p>
                                                     <div class="d-flex justify-content-between align-items-center" style="padding-left: 0.7em">
                                                         <div class="btn-groups">
-                                                            <form method="post"
-                                                                <button onclick="location.href='/details-prof'" type="submit" name="email" class="btn btn-dark my-2" value=${sr.email}>
+                                                            <form method="post" action="/contact-prof">
+                                                                <button type="submit" name="email" class="btn btn-dark my-2" value=${sr.email}>
                                                                     Kontakt
                                                                 </button>
                                                             </form>
