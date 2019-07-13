@@ -3,6 +3,7 @@ package servlets;
 import config.TemplateProvider;
 import dao.UserDetailsDAO;
 import dao.UserLoginDAO;
+import domain.UserLogin;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,18 +76,10 @@ public class SearchResults extends HttpServlet {
         map.put("content", "search-results");
         map.put("sessionInfo", sessionInfo);
         //map.put("se", req.getParameter("search"));
-        String s = req.getParameter("search");
+        String searchQuery = req.getParameter("search");
 
-        //userLoginDAO.getProfByProfession();
-
- /*       RepositoryOfUsers.fillDatabase();
-        ProfessionalsDatabaseDaoBean pd = RepositoryOfUsers.getProfessionalsDatabaseDaoBean();
-        List<ProfessionalDetails> li = pd.getByProfession(s);*/
-
-
-/*        List<UserDetails> li = professionalDao.getByProfession(s);
-
-        map.put("searchResults", li);*/
+        List<UserLogin> mayBeProfessionals = userLoginDAO.getProfByProfession(searchQuery);
+        map.put("searchResults", mayBeProfessionals);
 
         try {
             template.process(map, printWriter);

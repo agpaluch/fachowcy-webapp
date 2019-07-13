@@ -39,5 +39,7 @@ public class Professions {
         this.profession = profession;
     }
 
-
+    public Long getId() {
+        return id;
+    }
 }

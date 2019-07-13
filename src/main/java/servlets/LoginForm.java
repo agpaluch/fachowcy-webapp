@@ -2,6 +2,7 @@ package servlets;
 
 import dao.UserLoginDAO;
 import config.TemplateProvider;
+import domain.Role;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
@@ -32,7 +33,6 @@ public class LoginForm extends HttpServlet {
 
     @EJB
     UserLoginDAO userLoginDAO;
-
 
 
 
@@ -77,10 +77,14 @@ public class LoginForm extends HttpServlet {
 
 
         if(sessionInfo.validateUser(email, password)) {
+
+            Role role = userLoginDAO.getRoleByLogin(email).get();
+            sessionInfo.setRole(role);
             sessionInfo.setPassword(password);
             sessionInfo.setEmail(email);
-            response.sendRedirect("/index");
             sessionInfo.setUserLogin(userLoginDAO.getByLogin(email).get());
+
+            response.sendRedirect("/index");
         }
         else {
             response.sendRedirect("/login-form?error=1");

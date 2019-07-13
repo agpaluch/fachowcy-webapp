@@ -115,8 +115,9 @@
                     <input id="pac-input" class="controls form-control"  type="text" placeholder="Search Box">
                     <#--    onchange="validateLocationField('latitude'); validateLocationField('longitude');">-->
                     <div id="map"></div> </br>
-
-                    <button id="submitButton" class="btn btn-success">Zarejestruj</button>
+                    <div class="d-flex justify-content-center">
+                        <button id="submitButton" class="btn btn-success">Zarejestruj</button>
+                    </div>
                     </form>
 
                 </div>
