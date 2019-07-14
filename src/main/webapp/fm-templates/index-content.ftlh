@@ -35,10 +35,17 @@
                     <div class="card mb-4 shadow-sm">
                         <img src="http://www.mountainhearth.com/wp-content/uploads/2014/01/P1010070-1024x768.jpg" height="300px">
                         <div class="card-body">
-                            <p class="card-text">Drwal 1</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type = "submit" href="/details-prof" class="btn btn-dark my-2">Professional details</a>
+                            <div class="d-flex justify-content-center">
+                                <p>Adaś Nowak</p>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn-groups">
+                                    <form method="post" action="/contact-prof">
+                                        <button type="submit" name="email" class="btn btn-dark my-2" value="professional1@gmail.com">
+                                            Kontakt
+                                        </button>
+                                    </form>
+                                <#--<a type = "submit" value=sr.email href="\details-prof" class="btn btn-dark my-2">Kontakt</a>-->
                                 </div>
                             </div>
                         </div>
@@ -49,10 +56,17 @@
                     <div class="card mb-4 shadow-sm">
                         <img src="https://cdn.siadlak.com/wp-content/uploads/2017/01/axe-1008981_1920-1-1920x1280.jpg" height="300px">
                         <div class="card-body">
-                            <p class="card-text">Drwal 2</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type = "submit" href="/details-prof" class="btn btn-dark my-2">Professional details</a>
+                            <div class="d-flex justify-content-center">
+                                <p>Sylwester Dębski</p>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn-groups">
+                                    <form method="post" action="/contact-prof">
+                                        <button type="submit" name="email" class="btn btn-dark my-2" value="professional2@gmail.com">
+                                            Kontakt
+                                        </button>
+                                    </form>
+                                <#--<a type = "submit" value=sr.email href="\details-prof" class="btn btn-dark my-2">Kontakt</a>-->
                                 </div>
                             </div>
                         </div>
@@ -63,10 +77,17 @@
                     <div class="card mb-4 shadow-sm">
                         <img src="https://st2.depositphotos.com/1017228/10442/i/950/depositphotos_104429380-stock-photo-serious-bearded-young-lumberjack-with.jpg" height="300px">
                         <div class="card-body">
-                            <p class="card-text">Drwal 3</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type = "submit" href="/details-prof" class="btn btn-dark my-2">Professional details</a>
+                            <div class="d-flex justify-content-center">
+                                <p>Adaś Nowak</p>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn-groups">
+                                    <form method="post" action="/contact-prof">
+                                        <button type="submit" name="email" class="btn btn-dark my-2" value="professional1@gmail.com">
+                                            Kontakt
+                                        </button>
+                                    </form>
+                                <#--<a type = "submit" value=sr.email href="\details-prof" class="btn btn-dark my-2">Kontakt</a>-->
                                 </div>
                             </div>
                         </div>

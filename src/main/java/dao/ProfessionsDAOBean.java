@@ -1,7 +1,6 @@
 package dao;
 
 import domain.Professions;
-import repository.TypeOfProfession;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
