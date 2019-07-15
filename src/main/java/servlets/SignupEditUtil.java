@@ -108,7 +108,6 @@ public class SignupEditUtil {
                 .numberOfLikes(userDTO.getNumberOfLikes())
                 .longitude(userDTO.getLongitude())
                 .latitude(userDTO.getLatitude())
-                .numberOfLikes(userDTO.getNumberOfLikes())
                 .build();
 
         UserLogin userLogin = UserLogin.builder()
@@ -124,6 +123,32 @@ public class SignupEditUtil {
         }
 
         return userLogin;
+    }
+
+
+    public static UserDTO createUserDTOFromUserLogin(UserLogin userLogin){
+
+        UserDTO userDTO = UserDTO.builder()
+                .email(userLogin.getEmail())
+                .password(userLogin.getPassword())
+                .confirmPassword(userLogin.getPassword())
+                .role(userLogin.getRole())
+                .name(userLogin.getUserDetails().getName())
+                .surname(userLogin.getUserDetails().getSurname())
+                .phoneNumber(userLogin.getUserDetails().getPhoneNumber())
+                .numberOfLikes(userLogin.getUserDetails().getNumberOfLikes())
+                .city(userLogin.getUserDetails().getCity())
+                .longitude(userLogin.getUserDetails().getLongitude())
+                .latitude(userLogin.getUserDetails().getLatitude())
+                .build();
+
+
+
+        if(userLogin.getProfession() !=null){
+            userDTO.setProfession(userLogin.getProfession().getProfession());
+        }
+
+        return userDTO;
     }
 
 

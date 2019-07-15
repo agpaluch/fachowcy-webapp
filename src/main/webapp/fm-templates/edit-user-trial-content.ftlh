@@ -22,10 +22,24 @@
                         </div>
                         <div id="email-error">${errors.email}</div>
 
+                        <div class="form-group">
+                            <label for="password" class="text-dark">Hasło</label><br>
+                            <input type="password" id="register-password" name="password"
+                                   oninput="validateFieldPassword()" value="${inputData.password}" class="form-control">
+                        </div>
+                        <div id="password-error">${errors.password}</div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword" class="text-dark">Potwierdź hasło</label><br>
+                            <input type="password" id="register-confirmPassword" name="confirmPassword"
+                                   oninput="validateConfirmFieldPassword()" value="${inputData.confirmPassword}" class="form-control">
+                        </div>
+                        <div id="confirmPassword-error">${errors.confirmPassword}</div>
+
 
                         <div class="form-group">
                             <label for="name" class="text-dark">Imię</label><br>
-                            <input type="text" id="register-name" name="name" value="${inputData.userDetails.name}"
+                            <input type="text" id="register-name" name="name" value="${inputData.name}"
                                    oninput="validateNameField()" class="form-control">
                         </div>
                         <div id="name-error">${errors.name}</div>
@@ -33,7 +47,7 @@
                         <div class="form-group">
                             <label for="surname" class="text-dark">Nazwisko</label><br>
                             <input type="text" id="register-surname" name="surname"
-                                   oninput="validateSurnameField()" value="${inputData.userDetails.surname}"
+                                   oninput="validateSurnameField()" value="${inputData.surname}"
                                    class="form-control">
                         </div>
                         <div id="surname-error">${errors.surname}</div>
@@ -43,8 +57,8 @@
                             <input class="form-control" type="number" step="any" id="register-phoneNumber"
                                    name="phoneNumber"
                                    oninput="validatePhoneNumberField()"
-                                            <#if inputData.userDetails.phoneNumber?? >
-                                            value="${inputData.userDetails.phoneNumber?c}"
+                                            <#if inputData.phoneNumber?? >
+                                            value="${inputData.phoneNumber?c}"
                                             </#if> >
                         </div>
                         <div id="phoneNumber-error">${errors.phoneNumber}</div>
@@ -83,8 +97,8 @@
                                    name="numberOfLikes"
                                    <#--TODO: validation-->
                                    oninput=""
-                                            <#if inputData.userDetails.numberOfLikes?? >
-                                            value="${inputData.userDetails.numberOfLikes?c}"
+                                            <#if inputData.numberOfLikes?? >
+                                            value="${inputData.numberOfLikes?c}"
                                             </#if> >
                         </div>
                         <div id="numberOfLikes-error">${errors.numberOfLikes}</div>
@@ -93,7 +107,7 @@
                             <label for="city" class="text-dark">Miasto</label><br>
                             <select class="form-control" name="city" id="register-city">
                        <#list cities as city>
-                           <#if inputData.userDetails.city?? && inputData.userDetails.city==city>
+                           <#if inputData.city?? && inputData.city==city>
                                 <option value="${city}" selected>${city.fullName}</option>
                            <#else>
                             <option value="${city}">${city.fullName}</option>
@@ -108,8 +122,8 @@
                             <label for="latitude" class="text-dark">Szerokość geograficzna</label><br>
                             <input class="form-control" id="latitude" type="number" step="any" name="latitude" readonly
                             <#--onchange="validateLocationField('latitude')"-->
-                            <#if inputData.userDetails.latitude?? >
-                             value="${inputData.userDetails.latitude}"
+                            <#if inputData.latitude?? >
+                             value="${inputData.latitude}"
                             </#if>>
                         </div>
                         <div id="latitude-error">${errors.latitude}</div>
@@ -119,8 +133,8 @@
                             <input class="form-control" id="longitude" type="number" step="any" name="longitude"
                                    readonly
                             <#--onchange="validateLocationField('longitude')"-->
-                                           <#if inputData.userDetails.longitude?? >
-                                            value="${inputData.userDetails.longitude}"
+                                           <#if inputData.longitude?? >
+                                            value="${inputData.longitude}"
                                            </#if> >
                         </div>
                         <div id="longitude-error">${errors.longitude}</div>

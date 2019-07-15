@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "userData")
-@CheckPassword(first = "password", second = "confirmPassword")
 public class UserLogin {
 
     @Id

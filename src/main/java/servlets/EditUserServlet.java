@@ -34,8 +34,9 @@ public class EditUserServlet extends HttpServlet{
     private Map<String, Object> dataMap = new HashMap<>();
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
-    private UserLogin userToEdit;
+    private UserDTO userToEdit;
     private static final String TEMPLATE_NAME = "index";
+    private Long idOfUserToEdit;
 
 
     @Inject
@@ -48,10 +49,7 @@ public class EditUserServlet extends HttpServlet{
     public void init(){
         template = FreemarkerUtil.createTemplate(TEMPLATE_NAME, logger, getServletContext());
 
-        List<Field> fields = Stream.concat(Arrays.stream(UserLogin.class.getDeclaredFields()),
-                Arrays.stream(UserDetails.class.getDeclaredFields()))
-                .filter(f -> !f.getName().equals("userDetails"))
-                .filter(f -> !f.getName().equals("id"))
+        List<Field> fields = Arrays.stream(UserDTO.class.getDeclaredFields())
                 .collect(Collectors.toList());
 
         mapOfErrors = fields.stream().map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
@@ -72,7 +70,8 @@ public class EditUserServlet extends HttpServlet{
 
         if (user.isPresent()){
 
-            userToEdit = user.get();
+            idOfUserToEdit = user.get().getId();
+            userToEdit = SignupEditUtil.createUserDTOFromUserLogin(user.get());
 
             dataMap = SignupEditUtil.addCitiesAndProfessions(dataMap, userToEdit.getRole());
             dataMap.put("roles", Arrays.stream(Role.values()).collect(Collectors.toList()));
@@ -97,7 +96,6 @@ public class EditUserServlet extends HttpServlet{
         }
 
 
-
         Set<ConstraintViolation<UserDTO>> constraintViolations =
                 SignupEditUtil.validateUserDTO(modifiedUser);
 
@@ -108,6 +106,9 @@ public class EditUserServlet extends HttpServlet{
 
         dataMap.put("errors", mapOfErrors);
         dataMap.put("inputData", modifiedUser);
+
+
+        UserLogin us = SignupEditUtil.createUserLoginFromUserDTO(modifiedUser);
 
 
         if (constraintViolations.isEmpty()){
