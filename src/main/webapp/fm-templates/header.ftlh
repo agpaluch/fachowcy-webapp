@@ -41,6 +41,10 @@
                             <a style="color: green" href="/login-form" class="nav-link">Zaloguj</a>
                         </li>
                     </#if>
+                <li class="nav-item">
+                    <a href="/contact-us" class="nav-link">Kontakt</a>
+                </li>
+
             </ul>
         </div>
     </nav>
