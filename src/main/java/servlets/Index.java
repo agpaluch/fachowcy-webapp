@@ -6,8 +6,6 @@ import freemarker.template.TemplateException;
 import session.SessionInfo;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +37,8 @@ public class Index extends HttpServlet {
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
-
+        //ContactServer.runContactService();
+        //ContactClient.testClient();
     }
 
     @Override
@@ -51,7 +50,6 @@ public class Index extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("content", "index");
         map.put("sessionInfo", sessionInfo);
-
 
         try {
             template.process(map, printWriter);
