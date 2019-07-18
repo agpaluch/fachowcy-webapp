@@ -1,7 +1,10 @@
-<main role="main" class="flex-shrink-0">
+<main role="main" class="flex-shrink-0" xmlns="http://java.sun.com/jsf/html">
+
+    <row>
+        <div class="offset-md-5">
 
     <div class="container">
-        <h1 class="mt-5"></h1>
+        <h1 class="mt-6"></h1>
     </div>
 
     <form action="/admin" method="post">
@@ -48,5 +51,7 @@
 
     <div>${error}</div>
 
+        </div>
+    </row>
 
 </main>

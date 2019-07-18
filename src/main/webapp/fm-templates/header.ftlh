@@ -20,12 +20,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent15">
             <ul class="navbar-nav">
                     <#if sessionInfo.getUserLogin()??>
-                        <li class="nav-item active">
-                            <a style="color: white" href="/inbox" class="nav-link">Wiadomości</a>
-                        </li>
-                        <li class="nav-item active">
-                                <a style="color: white" href="/details-prof" class="nav-link">Moje konto</a>
-                        </li>
+                        <#if sessionInfo.getUserLogin().getRole() == "ADMIN">
+                            <li class="nav-item active">
+                                <a style="color: white" href="/admin" class="nav-link">Edycja użytkowników</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a style="color: white" href="/admin/stats" class="nav-link">Statystyki kontaktu</a>
+                            </li>
+                        <#else>
+                            <li class="nav-item active">
+                                <a style="color: white" href="/inbox" class="nav-link">Wiadomości</a>
+                            </li>
+                            <li class="nav-item active">
+                                    <a style="color: white" href="/details-prof" class="nav-link">Moje konto</a>
+                            </li>
+                        </#if>
                         <li class="nav-item">
                             <a style="color: red" href="/logout" class="nav-link">Wyloguj</a>
                         </li>
