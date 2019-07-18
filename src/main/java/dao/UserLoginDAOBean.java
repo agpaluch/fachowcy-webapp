@@ -17,11 +17,13 @@ import java.util.stream.Collectors;
 @Singleton
 public class UserLoginDAOBean implements UserLoginDAO {
 
+
     @PersistenceContext(unitName = "fachmann")
     EntityManager em;
 
     @Inject
     ProfessionsDAO professionsDAO;
+
 
     @Override
     public void delete(Long id) {
@@ -78,7 +80,7 @@ public class UserLoginDAOBean implements UserLoginDAO {
         return userLogin.getRole().equals(Role.PROFESSIONAL);
     }
 
-    @Override
+
     public List<UserLogin> getProfByProfession(String profession) {
         return em.createQuery("SELECT ul FROM UserLogin ul JOIN ul.profession p WHERE p.profession=:val", UserLogin.class)
                 .setParameter("val", profession)
@@ -98,6 +100,15 @@ public class UserLoginDAOBean implements UserLoginDAO {
             em.merge(userLogin);
         }
     }
+
+
+/*    public void updateById(UserLogin userLogin){
+        EntityManager em = startTransaction();
+        Optional<UserLogin> user = get(userLogin.getId());
+        em.merge(userLogin);
+        commit(em);
+    }*/
+
 
     public boolean doesAUserExist(String email) {
          return getByLogin(email).isPresent();

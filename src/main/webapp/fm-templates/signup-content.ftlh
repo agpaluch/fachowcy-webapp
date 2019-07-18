@@ -14,7 +14,7 @@
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
-                    <form method="post" action="/signup" id="id1" onsubmit="event.preventDefault(); return checkEverything(); ">
+                    <form method="post" action="/signup" id="id1" onsubmit="event.preventDefault(); checkEverything();">
                     </br><h2 class="text-center text-dark">Rejestracja</h2>
                     <div class="form-group">
                         <label for="email" class="text-dark">Email</label><br>

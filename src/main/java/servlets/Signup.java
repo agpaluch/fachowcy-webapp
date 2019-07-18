@@ -12,6 +12,7 @@ import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,11 +66,9 @@ public class Signup extends HttpServlet {
         dataMap.put("inputData", mapOfValues);
         dataMap.put("sessionInfo", sessionInfo);
 
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        template = FreemarkerUtil.createTemplate(TEMPLATE_NAME, logger, getServletContext());
+
+
     }
 
     @Override
@@ -83,14 +82,9 @@ public class Signup extends HttpServlet {
             dataMap.put("professions",null);
         }
 
-        resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+        FreemarkerUtil.processData(resp, template, dataMap, logger);
 
-        try {
-            template.process(dataMap, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+
     }
 
     @Override
@@ -116,16 +110,20 @@ public class Signup extends HttpServlet {
             longitude = Double.parseDouble(req.getParameter("longitude"));
             latitude = Double.parseDouble(req.getParameter("latitude"));
         } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść" +
+            resp.setStatus(500);
+            logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść " +
                     "walidacji przez Java Script.");
-        } finally{
+        }
 
-            if (req.getParameter("profession")!=null){
+
+        if (req.getParameter("profession")!=null){
                 role = Role.PROFESSIONAL;
                 try{
                     profession = req.getParameter("profession");
                 } catch (IllegalArgumentException e) {
                     resp.setStatus(500);
+                    logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść " +
+                            "walidacji przez Java Script.");
                 }
             } else {
                 role = Role.CLIENT;
@@ -135,6 +133,7 @@ public class Signup extends HttpServlet {
                     .email(email)
                     .password(password)
                     .confirmPassword(confirmPassword)
+                    .role(role)
                     .name(name)
                     .surname(surname)
                     .profession(profession)
@@ -200,16 +199,16 @@ public class Signup extends HttpServlet {
                     resp.sendRedirect("/login-form");
                 }
 
+
             } else {
 
-                try {
-                    template.process(dataMap, printWriter);
-                } catch (TemplateException e) {
-                    logger.log(Level.SEVERE, e.getMessage(), e);
-                }
+                FreemarkerUtil.processData(resp, template, dataMap, logger);
+
             }
+
         }
-    }
+
+
 
     private Professions saveProfessionInTheProfessionsTable(String profession) {
 

@@ -1,11 +1,17 @@
 package domain;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 import repository.City;
 import repository.TypeOfProfession;
+import validators.CheckCity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.text.DecimalFormat;
+
 
 @Data
 @Builder
@@ -16,15 +22,12 @@ import javax.validation.constraints.NotNull;
 public class UserDetails {
 
     @Column
-    @NotNull
     private String name;
 
     @Column
-    @NotNull
     private String surname;
 
     @Column
-    @NotNull
     private long phoneNumber;
 
     @Column
@@ -38,6 +41,7 @@ public class UserDetails {
     @Column
     private Double latitude;
 
+
     @Builder.Default
     @Column
     private int numberOfLikes = 0;
@@ -45,6 +49,7 @@ public class UserDetails {
    public UserDetails(){
         // Hibernate
     }
+
 
 
 }

@@ -1,7 +1,7 @@
 package domain;
 
+
 import lombok.*;
-import repository.TypeOfProfession;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -35,11 +35,14 @@ public class Professions {
         return profession;
     }
 
+
     public Professions(String profession){
         this.profession = profession;
     }
 
+
     public Long getId() {
         return id;
     }
+
 }

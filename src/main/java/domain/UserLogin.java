@@ -1,17 +1,16 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
 
-@Data
+
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @Entity
@@ -38,6 +37,7 @@ public class UserLogin {
     @JoinColumn(name = "profession_id")
     private Professions profession;
 
+
     @Builder.Default
     @PastOrPresent
     //private LocalDate signUpDate = LocalDate.now();
@@ -61,6 +61,7 @@ public class UserLogin {
     public UserLogin() {
         // Hibernate
     }
+
 
 }
 

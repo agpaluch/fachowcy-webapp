@@ -85,6 +85,7 @@ public class LoginForm extends HttpServlet {
             sessionInfo.setUserLogin(userLoginDAO.getByLogin(email).get());
 
             response.sendRedirect("/index");
+
         }
         else {
             response.sendRedirect("/login-form?error=1");
