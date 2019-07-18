@@ -1,67 +1,47 @@
 <header>
-    <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-7 py-4">
-                    <h4 class="text-white"></h4>
-                    <p class="text-muted"></p>
-                </div>
-                <div class="col-sm-4 offset-md-1 py-4">
-                    <ul class="list-unstyled">
-                        <#if sessionInfo.getUserLogin()??>
-                            <li><a href="/inbox" class="text-white">Wiadomości</a></li>
-                        </#if>
-                        <li><a href="/login-form" class="text-white">Login</a></li>
-                        <li><a href="/signup?role=CLIENT" class="text-white">Rejestracja klient</a></li>
-                        <li><a href="/signup?role=PROFESSIONAL" class="text-white">Rejestracja fachowiec</a></li>
-                        <li><a href="#" class="text-white">Kontakt</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="navbar navbar-dark bg-dark shadow-sm">
-        <#--        <div class="container d-flex justify-content-between">-->
-        <#--        <div class="row">-->
-        <div class="col-3">
-            <a href="/" class="navbar-brand d-flex align-items-center" style="margin-right: 10px">
-                <strong>Fachmann.pl</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
-                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-        <div class="col-7">
 
-        </div>
-        <div class="col-2">
-            <#if sessionInfo.getUserLogin()??>
-                <div style="color: #FFF; margin-right: 10px;"> ${sessionInfo.getUserLogin().getEmail()}</div>
-                <a href="/logout" class="btn btn-outline-success my-2 my-sm-0">LogOut</a>
-            <#else>
-                <div style="color: #FFF; margin-right: 10px;">Użytkownik anonimowy</div>
-                <a href="/login-form" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>
-            </#if>
 
-            <#--<div style="color: #FFF; margin-right: 10px;"> Użytkownik anonimowy </div>-->
-            <#--<a href="/login" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>-->
+    <nav class="bg-dark navbar navbar-dark light-blue lighten-4">
+        <a class="navbar-brand" href="/index" style="color: white">
+            <strong>Fachmann.pl</strong>
+        </a>
+        <#if sessionInfo.getUserLogin()??>
+            <#--<#if sessionInfo.getRole()=="PROFESSIONAL">-->
+                <a class="btn btn-outline-success my-2 my-sm-0 offset-md-9" href="/details-prof" style="color: white">Moje konto</a>
+            <#--<#elseif sessionInfo.getRole()=="CLIENT">
+                <a class="btn btn-outline-success my-2 my-sm-0 offset-md-9" href="/details-client" style="color: white">Moje konto</a>
+            </#if>-->
+        </#if>
+        <button class="navbar-toggler first-button" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent15" aria-controls="navbarSupportedContent15" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fa fa-navicon"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent15">
+            <ul class="navbar-nav">
+                    <#if sessionInfo.getUserLogin()??>
+                        <li class="nav-item active">
+                            <a style="color: white" href="/inbox" class="nav-link">Wiadomości</a>
+                        </li>
+                        <li class="nav-item active">
+                                <a style="color: white" href="/details-prof" class="nav-link">Moje konto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: red" href="/logout" class="nav-link">Wyloguj</a>
+                        </li>
+                    <#else>
+                        <li class="nav-item">
+                            <a style="color: white" href="/signup?role=CLIENT" class="nav-link">Rejestracja klient</a>
+                        </li>
+                        <li class="nav-item">
+                        <#--<div class="jsx-1542968643 kirk-item-leftAddon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="kirk-icon" width="24" height="24" aria-hidden="true" fill="#708C91"><g><path d="M23.739,8.061l-11-6c-0.149-0.082-0.331-0.081-0.479,0l-11,6C1.1,8.148,1,8.317,1,8.5v3C1,11.776,1.224,12,1.5,12h22 c0.276,0,0.5-0.224,0.5-0.5v-3C24,8.317,23.9,8.148,23.739,8.061z M23,11H2V8.797l10.5-5.728L23,8.797V11z"></path><path d="M16,20.5v-6c0-0.276-0.224-0.5-0.5-0.5S15,14.224,15,14.5v6c0,0.276,0.224,0.5,0.5,0.5S16,20.776,16,20.5z"></path><path d="M4,20.5v-6C4,14.224,3.776,14,3.5,14S3,14.224,3,14.5v6C3,20.776,3.224,21,3.5,21S4,20.776,4,20.5z"></path><path d="M10,20.5v-6c0-0.276-0.224-0.5-0.5-0.5S9,14.224,9,14.5v6C9,20.776,9.224,21,9.5,21S10,20.776,10,20.5z"></path><path d="M22,20.5v-6c0-0.276-0.224-0.5-0.5-0.5S21,14.224,21,14.5v6c0,0.276,0.224,0.5,0.5,0.5S22,20.776,22,20.5z"></path><path d="M23.5,23h-22C1.224,23,1,23.224,1,23.5S1.224,24,1.5,24h22c0.276,0,0.5-0.224,0.5-0.5S23.776,23,23.5,23z"></path><circle cx="12.5" cy="7.5" r="1"></circle></g></svg></div>-->
+                            <a style="color: white" href="/signup?role=PROFESSIONAL" class="nav-link">Rejestracja fachowiec</a>
+                        </li>
+                        <li class="nav-item">
+                            <a style="color: green" href="/login-form" class="nav-link">Zaloguj</a>
+                        </li>
+                    </#if>
+            </ul>
         </div>
-        <#--        </div>-->
-        <#--        </div>-->
-
-        <#--        <div class="container d-flex justify-content-between">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a href="/" class="navbar-brand d-flex align-items-center" style="margin-right: 10px">
-                        &lt;#&ndash;<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>&ndash;&gt;
-                        <strong>Fachmann.pl</strong>
-                    </a>
-                </div>
-                <div style="color: #FFF; margin-right: 10px;"> Użytkownik anonimowy </div>
-                <a href="#" class="btn btn-outline-success my-2 my-sm-0">LogIn</a>-->
-    </div>
+    </nav>
 </header>
-
-

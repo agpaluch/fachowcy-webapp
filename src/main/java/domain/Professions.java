@@ -1,15 +1,15 @@
 package domain;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import repository.TypeOfProfession;
+
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "professions")
 public class Professions {
@@ -19,28 +19,30 @@ public class Professions {
     @Column(name = "id")
     private Long id;
 
-
-    @OneToMany(mappedBy = "profession", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profession", cascade = {CascadeType.ALL})
     private Set<UserLogin> UserLogin;
 
 
     @Column(name="profession")
-    @Enumerated(EnumType.STRING)
-    private TypeOfProfession profession;
+    private String profession;
 
     public Professions(){
         //Hibernate
     }
 
+    @Override
+    public String toString() {
+        return profession;
+    }
 
-    public Professions(TypeOfProfession profession){
+
+    public Professions(String profession){
         this.profession = profession;
     }
 
 
-    public String toString() {
-        return profession.toString();
+    public Long getId() {
+        return id;
     }
-
 
 }

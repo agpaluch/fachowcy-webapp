@@ -73,7 +73,7 @@ public class SignupEditUtil {
                     .role(role)
                     .name(name)
                     .surname(surname)
-                    .profession(profession)
+                    .profession(profession.toString())
                     .phoneNumber(phoneNumber)
                     .city(city)
                     .longitude(longitude)

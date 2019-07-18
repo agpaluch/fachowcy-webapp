@@ -13,8 +13,7 @@ import javax.validation.constraints.Pattern;
 import java.text.DecimalFormat;
 
 
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 /*@Entity
@@ -27,7 +26,6 @@ public class UserDetails {
 
     @Column
     private String surname;
-
 
     @Column
     private long phoneNumber;

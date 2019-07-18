@@ -1,7 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS fachmann;
 
 
---+ALTER DATABASE fachmann CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+/*ALTER DATABASE fachmann CHARACTER SET utf8 COLLATE utf8_unicode_ci;*/
 
 
 USE fachmann;
@@ -9,8 +9,8 @@ USE fachmann;
 --+ Create table for professions
 CREATE TABLE IF NOT EXISTS professions
 (
-  id          BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  profession VARCHAR(100) NOT NULL
+  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  profession VARCHAR(100)
 );
 
 
@@ -67,8 +67,8 @@ CREATE TABLE IF NOT EXISTS fachmann.messages
     message_id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     message    VARCHAR(400) NOT NULL,
     wasRead    BOOLEAN DEFAULT '0',
-    sender_id     BIGINT UNSIGNED NOT NULL,
-    recipient_id  BIGINT UNSIGNED NOT NULL
+    sender_id     BIGINT UNSIGNED,
+    recipient_id  BIGINT UNSIGNED
 );
 
 ALTER TABLE messages
@@ -76,11 +76,11 @@ ALTER TABLE messages
 ALTER TABLE messages
     ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
 
+
+
 INSERT INTO messages (message, sender_id, recipient_id) VALUES
 ("Ok.", 1, 2),
-("Będę o 16:00.", 1, 2);
-
-
+("Bede o 16:00.", 1, 2);
 
                                                 --+
 --+ create table for storing comments
@@ -88,8 +88,8 @@ INSERT INTO messages (message, sender_id, recipient_id) VALUES
 CREATE TABLE IF NOT EXISTS comments
 (
  id BIGINT UNSIGNED UNIQUE PRIMARY KEY AUTO_INCREMENT,
- opinion_maker_id BIGINT UNSIGNED NOT NULL,
- recipient_id BIGINT UNSIGNED NOT NULL,
+ opinion_maker_id BIGINT UNSIGNED,
+ recipient_id BIGINT UNSIGNED,
  opinion VARCHAR (400) NOT NULL
 );
 

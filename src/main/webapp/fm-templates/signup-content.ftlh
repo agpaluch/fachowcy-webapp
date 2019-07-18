@@ -67,9 +67,9 @@
                      <select class="form-control" name="profession" id="register-profession">
                        <#list professions as prof>
                            <#if inputData.profession?? && inputData.profession==prof>
-                               <option value="${prof}" selected>${prof.fullName}</option>
+                               <option value="${prof}" selected>${prof}</option>
                            <#else>
-                           <option value="${prof}">${prof.fullName}</option>
+                           <option value="${prof}">${prof}</option>
                            </#if>
                        </#list>
                                 </select>
@@ -115,8 +115,9 @@
                     <input id="pac-input" class="controls form-control"  type="text" placeholder="Search Box">
                     <#--    onchange="validateLocationField('latitude'); validateLocationField('longitude');">-->
                     <div id="map"></div> </br>
-
-                    <button id="submitButton" class="btn btn-success">Zarejestruj</button>
+                    <div class="d-flex justify-content-center">
+                        <button id="submitButton" class="btn btn-success">Zarejestruj</button>
+                    </div>
                     </form>
 
                 </div>

@@ -1,9 +1,9 @@
 package servlets;
 
+import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
-import dao.UserLoginDAOBean;
 import domain.*;
-import freemarker.TemplateProvider;
+import config.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.City;
@@ -25,10 +25,7 @@ import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +39,7 @@ public class Signup extends HttpServlet {
     private Map<String, Object> dataMap = new HashMap<>();
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
+
     private static final String TEMPLATE_NAME = "index";
 
     @Inject
@@ -50,6 +48,8 @@ public class Signup extends HttpServlet {
     @EJB
     UserLoginDAO userLoginDAO;
 
+    @EJB
+    ProfessionsDAO professionsDAO;
 
     @Override
     public void init() {
@@ -60,7 +60,6 @@ public class Signup extends HttpServlet {
         mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
                 .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
 
-
         dataMap.put("content", "signup");
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
         dataMap.put("errors", mapOfErrors);
@@ -69,25 +68,24 @@ public class Signup extends HttpServlet {
 
         template = FreemarkerUtil.createTemplate(TEMPLATE_NAME, logger, getServletContext());
 
-    }
 
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         Role role = Role.valueOf(req.getParameter("role"));
 
-        if (role==Role.PROFESSIONAL){
-            dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
+        if (role == Role.PROFESSIONAL){
+            dataMap.put("professions", professionsDAO.getAll());
         } else {
             dataMap.put("professions",null);
         }
 
         FreemarkerUtil.processData(resp, template, dataMap, logger);
 
-    }
 
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -103,9 +101,8 @@ public class Signup extends HttpServlet {
         City city = null;
         Double longitude = null;
         Double latitude = null;
-        TypeOfProfession profession = null;
+        String profession = null;
         Role role;
-
 
         try {
             phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
@@ -122,7 +119,7 @@ public class Signup extends HttpServlet {
         if (req.getParameter("profession")!=null){
                 role = Role.PROFESSIONAL;
                 try{
-                    profession = TypeOfProfession.valueOf(req.getParameter("profession"));
+                    profession = req.getParameter("profession");
                 } catch (IllegalArgumentException e) {
                     resp.setStatus(500);
                     logger.log(Level.SEVERE, "Niepoprawne dane wejściowe. Nie powinny przejść " +
@@ -131,8 +128,6 @@ public class Signup extends HttpServlet {
             } else {
                 role = Role.CLIENT;
             }
-
-
 
             UserDTO userDTO = UserDTO.builder()
                     .email(email)
@@ -148,14 +143,11 @@ public class Signup extends HttpServlet {
                     .latitude(latitude)
                     .build();
 
-
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
 
-
             Set<ConstraintViolation<UserDTO>> constraintViolations =
                     validator.validate(userDTO);
-
 
             mapOfErrors = Arrays.stream(UserDTO.class.getDeclaredFields())
                     .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
@@ -163,7 +155,6 @@ public class Signup extends HttpServlet {
             for (ConstraintViolation<UserDTO> constraintViolation: constraintViolations){
                 mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
             }
-
 
             mapOfValues = req.getParameterMap()
                     .entrySet()
@@ -175,8 +166,14 @@ public class Signup extends HttpServlet {
 
             PrintWriter printWriter = resp.getWriter();
 
-
             if (constraintViolations.isEmpty()){
+
+                Professions profToBeAdded;
+                if(role == Role.CLIENT) {
+                    profToBeAdded = null;
+                } else {
+                    profToBeAdded = saveProfessionInTheProfessionsTable(profession);
+                }
 
                 UserDetails userDetails = UserDetails.builder()
                         .name(name)
@@ -187,13 +184,12 @@ public class Signup extends HttpServlet {
                         .latitude(latitude)
                         .build();
 
-
                 UserLogin userLogin = UserLogin.builder()
                         .userDetails(userDetails)
                         .email(email)
                         .password(password)
                         .role(role)
-                        .profession(new Professions(profession))
+                        .profession(profToBeAdded)
                         .build();
 
                 if (userLoginDAO.doesAUserExist(email)){
@@ -204,22 +200,34 @@ public class Signup extends HttpServlet {
                 }
 
 
-
             } else {
 
                 FreemarkerUtil.processData(resp, template, dataMap, logger);
 
             }
 
+        }
 
 
 
+    private Professions saveProfessionInTheProfessionsTable(String profession) {
 
+        Optional<Professions> maybeProfession = professionsDAO.getByProfession(profession);
+        Professions profToBeAdded;
 
-
-
+        if(maybeProfession.isPresent()) {
+            profToBeAdded = Professions.builder()
+                    .id(maybeProfession.get().getId())
+                    .profession(profession)
+                    .build();
+        } else {
+            profToBeAdded = Professions.builder()
+                    .id(null)
+                    .profession(profession)
+                    .build();
+            professionsDAO.save(profToBeAdded);
+        }
+        return profToBeAdded;
     }
-
-
 
 }

@@ -37,15 +37,16 @@ public class UserDTO {
     @NotBlank(message = "Wpisz nazwisko.")
     private String surname;
 
-    @CheckProfession
+    //@CheckProfession
     //@NotNull(message = "Wybierz profesję.")
-    private TypeOfProfession profession;
+    private String profession;
 
 
     @Range(min=100000000L, max=48999999999L, message = "Niepoprawny numer telefonu.")
     private Long phoneNumber;
 
     @Min(0)
+    @Builder.Default
     private Integer numberOfLikes = 0;
 
     @CheckCity

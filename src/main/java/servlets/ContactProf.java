@@ -1,8 +1,10 @@
 package servlets;
 
+
 import config.TemplateProvider;
-import dao.MessagesDAO;
+import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
+import domain.Professions;
 import domain.UserLogin;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -10,6 +12,7 @@ import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +25,10 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/sent")
-public class Sent extends HttpServlet {
+@WebServlet("/contact-prof")
+public class ContactProf extends HttpServlet {
+
+    Map<String, Object> map = new HashMap<>();
 
     Logger logger = Logger.getLogger(getClass().getName());
     Template template;
@@ -37,7 +42,7 @@ public class Sent extends HttpServlet {
     UserLoginDAO userLoginDAO;
 
     @EJB
-    MessagesDAO messages;
+    ProfessionsDAO professionsDAO;
 
     @Override
     public void init() {
@@ -49,25 +54,24 @@ public class Sent extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
+    }
 
-        resp.setContentType("text/html; charset=utf-8");
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         PrintWriter printWriter = resp.getWriter();
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("content", "sent");
+        String userToDisplay = req.getParameterValues("email")[0];
+        Optional<UserLogin> maybeUser = userLoginDAO.getByLogin(userToDisplay);
+        Optional<Professions> maybeProfession = professionsDAO.getProfessionByLogin(userToDisplay);
+
+        map.put("userLogin", maybeUser.get());
+        map.put("userEmail", userToDisplay);
+        map.put("content", "contact-prof");
         map.put("sessionInfo", sessionInfo);
-
-        Optional<UserLogin> user = userLoginDAO.getByLogin(sessionInfo.getEmail());
-        if (user.isPresent()) {
-            long id = user.get().getId();
-            if (messages.getBySender(id).isPresent()) {
-                map.put("messages", messages.getBySender(id).get());
-            } else {
-                map.put("messages", null);
-            }
-        }
-
+        //map.put("profession", maybeProfession.get().getProfession());
 
         try {
             template.process(map, printWriter);
@@ -75,6 +79,6 @@ public class Sent extends HttpServlet {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
 
-    }
 
+    }
 }

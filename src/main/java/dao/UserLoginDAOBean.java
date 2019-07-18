@@ -3,12 +3,11 @@ package dao;
 import domain.Role;
 import domain.UserDetails;
 import domain.UserLogin;
-import repository.TypeOfProfession;
 
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -16,55 +15,47 @@ import java.util.stream.Collectors;
 
 
 @Singleton
-public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
+public class UserLoginDAOBean implements UserLoginDAO {
+
+
+    @PersistenceContext(unitName = "fachmann")
+    EntityManager em;
+
+    @Inject
+    ProfessionsDAO professionsDAO;
 
 
     @Override
     public void delete(Long id) {
-        EntityManager em = startTransaction();
-        get(id).ifPresent((ul) -> {
-            em.remove(em.merge(ul));
-        });
-        commit(em);
+        get(id).ifPresent((ul) -> em.remove(em.merge(ul)));
     }
 
     @Override
     public void deleteByLogin(String email) {
-       EntityManager em = startTransaction();
        Optional<Long> id = getIDbyLogin(email);
        if(id.isPresent()) {
            UserLogin userLogin = get(id.get()).get();
            em.remove(em.merge(userLogin));
-           commit(em);
        }
     }
 
     @Override
     public Optional<UserLogin> get(Long id) {
-        EntityManager em = startTransaction();
-        Optional<UserLogin> result = Optional.of(em.find(UserLogin.class, id));
-        commit(em);
-        return result;
+        return Optional.of(em.find(UserLogin.class, id));
     }
 
     @Override
     public List<UserLogin> getAll() {
-        EntityManager em = startTransaction();
-        List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul", UserLogin.class)
+        return em.createQuery("SELECT ul FROM UserLogin ul", UserLogin.class)
                 .getResultList();
-        commit(em);
-        return result;
     }
 
     @Override
     public Optional<UserLogin> getByLogin(String email) {
-        EntityManager em = startTransaction();
-        Optional<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
+        return em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
                 .setParameter("val", email)
                 .getResultStream()
                 .findFirst();
-        commit(em);
-        return result;
     }
 
     @Override
@@ -90,22 +81,16 @@ public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
     }
 
 
-    @Override
-    public List<UserLogin> getProfByProfession(TypeOfProfession profession) {
-        EntityManager em = startTransaction();
-        List<UserLogin> result = em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.profession = :val", UserLogin.class)
+    public List<UserLogin> getProfByProfession(String profession) {
+        return em.createQuery("SELECT ul FROM UserLogin ul JOIN ul.profession p WHERE p.profession=:val", UserLogin.class)
                 .setParameter("val", profession)
                 .getResultStream()
                 .filter(this::isProfessional)
                 .collect(Collectors.toList());
-        commit(em);
-        return result;
     }
-
 
     @Override
     public void save(UserLogin userLogin) {
-        EntityManager em = startTransaction();
         if (!doesAUserExist(userLogin.getEmail())) {
             em.persist(userLogin);
         } else {
@@ -114,16 +99,15 @@ public class UserLoginDAOBean extends TransactionsUtil implements UserLoginDAO {
                       new NoSuchElementException("ID not found")));
             em.merge(userLogin);
         }
-        commit(em);
     }
 
 
-    public void updateById(UserLogin userLogin){
+/*    public void updateById(UserLogin userLogin){
         EntityManager em = startTransaction();
         Optional<UserLogin> user = get(userLogin.getId());
         em.merge(userLogin);
         commit(em);
-    }
+    }*/
 
 
     public boolean doesAUserExist(String email) {
