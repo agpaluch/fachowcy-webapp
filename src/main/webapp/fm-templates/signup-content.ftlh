@@ -86,7 +86,6 @@
                             <option value="${city}">${city.fullName}</option>
                            </#if>
                        </#list>
-                            <option value="">Uwaga</option>
                         </select>
                     </div>
                     <div id="city-error">${errors.city}</div>

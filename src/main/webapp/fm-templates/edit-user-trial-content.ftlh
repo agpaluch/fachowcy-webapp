@@ -68,10 +68,10 @@
                         <label for="profession" class="text-dark">Profesja</label><br>
                         <select class="form-control" name="profession" id="register-profession">
                        <#list professions as prof>
-                           <#if inputData.profession.profession?? && inputData.profession.profession==prof>
-                               <option value="${prof}" selected>${prof.fullName}</option>
+                           <#if inputData.profession?? && inputData.profession==prof>
+                               <option value="${prof}" selected>${prof.profession}</option>
                            <#else>
-                           <option value="${prof}">${prof.fullName}</option>
+                           <option value="${prof}">${prof.profession}</option>
                            </#if>
                        </#list>
                         </select>

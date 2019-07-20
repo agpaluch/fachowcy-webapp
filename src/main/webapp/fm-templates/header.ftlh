@@ -29,6 +29,7 @@
                         <li class="nav-item">
                             <a style="color: red" href="/logout" class="nav-link">Wyloguj</a>
                         </li>
+
                     <#else>
                         <li class="nav-item">
                             <a style="color: white" href="/signup?role=CLIENT" class="nav-link">Rejestracja klient</a>

@@ -1,10 +1,12 @@
 package servlets;
 
+import dao.ProfessionsDAO;
 import domain.*;
 import exceptions.FrontEndFormValidationException;
 import repository.City;
 import repository.TypeOfProfession;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
@@ -19,12 +21,18 @@ import java.util.stream.Collectors;
 
 public class SignupEditUtil {
 
-    public static Map<String, Object> addCitiesAndProfessions(Map<String, Object> dataMap, Role role){
+
+
+
+
+    public static Map<String, Object> addCitiesAndProfessions(Map<String, Object> dataMap, Role role,
+                                                              ProfessionsDAO professionsDAO){
 
         dataMap.put("cities", Arrays.stream(City.values()).collect(Collectors.toList()));
 
         if (role==Role.PROFESSIONAL){
-            dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
+            dataMap.put("professions", professionsDAO.getAll());
+            //dataMap.put("professions", Arrays.stream(TypeOfProfession.values()).collect(Collectors.toList()));
         } else {
             dataMap.put("professions",null);
         }
@@ -39,10 +47,10 @@ public class SignupEditUtil {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         Role role = null;
-        TypeOfProfession profession = null;
+        String profession = req.getParameter("profession");
         Integer numberOfLikes = null;
 
-        String professionString = req.getParameter("profession");
+
 
         try {
             Long phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
@@ -55,11 +63,10 @@ public class SignupEditUtil {
                 numberOfLikes = Integer.parseInt(req.getParameter("numberOfLikes"));
             }
 
-            if(professionString!=null){
+            if(profession!=null){
                 if (function.equals("signup")){
                     role = Role.PROFESSIONAL;
                 }
-                profession = TypeOfProfession.valueOf(professionString);
             } else {
                 if (function.equals("signup")){
                     role = Role.CLIENT;
@@ -73,7 +80,7 @@ public class SignupEditUtil {
                     .role(role)
                     .name(name)
                     .surname(surname)
-                    .profession(profession.toString())
+                    .profession(profession)
                     .phoneNumber(phoneNumber)
                     .city(city)
                     .longitude(longitude)
