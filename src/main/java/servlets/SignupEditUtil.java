@@ -22,9 +22,6 @@ import java.util.stream.Collectors;
 public class SignupEditUtil {
 
 
-
-
-
     public static Map<String, Object> addCitiesAndProfessions(Map<String, Object> dataMap, Role role,
                                                               ProfessionsDAO professionsDAO){
 
