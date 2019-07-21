@@ -15,8 +15,11 @@ CREATE TABLE IF NOT EXISTS professions
 
 
 INSERT INTO fachmann.professions (profession) VALUES
-('PLUMBER'),
-('ELECTRICIAN');
+('hydraulik'),
+('elektryk');
+
+--('PLUMBER'),
+--('ELECTRICIAN');
 
 
 --+ Create table for user data (login and details) and connect it with professions
@@ -103,6 +106,7 @@ INSERT INTO comments (opinion_maker_id, recipient_id, opinion) VALUES
 (1, 1, "Dobra robota.");
 
 
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS contactStats
 (
  id BIGINT UNSIGNED UNIQUE PRIMARY KEY AUTO_INCREMENT,
@@ -116,4 +120,4 @@ CREATE TABLE IF NOT EXISTS contactStats
 INSERT INTO contactStats (reason, contactNight, contactMorning, contactAfternoon) VALUES
 ("Stupid reason", 0, 0, 0);
 
---+ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

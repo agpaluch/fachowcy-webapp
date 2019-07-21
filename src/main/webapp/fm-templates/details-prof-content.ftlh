@@ -54,7 +54,7 @@
                             <label for="phoneNumber" class="text-dark">Numer telefonu</label><br>
                             <input type="tel" step="any" id="register-phoneNumber" name="phoneNumber"
                                    oninput="validatePhoneNumberField()"
-                                            value="${userLogin.userDetails.getPhoneNumber()}" class="form-control">
+                                            value="${userLogin.userDetails.getPhoneNumber()?c}" class="form-control">
                         </div>
                         <div id="phoneNumber-error">${errors.phoneNumber}</div>
 

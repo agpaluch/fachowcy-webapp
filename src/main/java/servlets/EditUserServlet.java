@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import domain.*;
 import exceptions.FrontEndFormValidationException;
@@ -45,6 +46,9 @@ public class EditUserServlet extends HttpServlet{
     @EJB
     UserLoginDAO userLoginDAO;
 
+    @EJB
+    ProfessionsDAO professionsDAO;
+
 
     public void init(){
         template = FreemarkerUtil.createTemplate(TEMPLATE_NAME, logger, getServletContext());
@@ -73,7 +77,7 @@ public class EditUserServlet extends HttpServlet{
             idOfUserToEdit = user.get().getId();
             userToEdit = SignupEditUtil.createUserDTOFromUserLogin(user.get());
 
-            dataMap = SignupEditUtil.addCitiesAndProfessions(dataMap, userToEdit.getRole());
+            dataMap = SignupEditUtil.addCitiesAndProfessions(dataMap, userToEdit.getRole(), professionsDAO);
             dataMap.put("roles", Arrays.stream(Role.values()).collect(Collectors.toList()));
             dataMap.put("inputData", userToEdit);
             dataMap.put("errors", mapOfErrors);

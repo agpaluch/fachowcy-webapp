@@ -10,6 +10,8 @@ import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.EnumSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CheckProfessionValidator implements ConstraintValidator<CheckProfession, Object> {
 
@@ -20,14 +22,17 @@ public class CheckProfessionValidator implements ConstraintValidator<CheckProfes
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext constraintContext) {
 
-        em.createQuery("SELECT prof.profession FROM Professions prof", Professions.class)
-                .getResultList();
+        List<String> profsInDatabase = em.createQuery("SELECT prof.profession FROM Professions prof", Professions.class)
+                .getResultStream()
+                .map(Professions::getProfession)
+                .collect(Collectors.toList());
+
 
         if (object == null){
             return true;
         }
 
-        return EnumUtils.isValidEnum(TypeOfProfession.class, object.toString());
+        return profsInDatabase.contains(object.toString());
 
 
     }
