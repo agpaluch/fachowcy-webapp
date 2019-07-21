@@ -105,19 +105,4 @@ INSERT INTO comments (opinion_maker_id, recipient_id, opinion) VALUES
 (1, 2, "Dobra robota."),
 (1, 1, "Dobra robota.");
 
-
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS contactStats
-(
- id BIGINT UNSIGNED UNIQUE PRIMARY KEY AUTO_INCREMENT,
- contactDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
- reason VARCHAR (100),
- contactNight INT,
- contactMorning INT,
- contactAfternoon INT
-);
-
-INSERT INTO contactStats (reason, contactNight, contactMorning, contactAfternoon) VALUES
-("Stupid reason", 0, 0, 0);
-
 ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
