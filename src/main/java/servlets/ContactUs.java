@@ -1,6 +1,7 @@
 package servlets;
 
 import config.TemplateProvider;
+import domain.ContactEvent;
 import isa.webapp.contactClient.ContactClient;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -56,12 +57,19 @@ public class ContactUs extends HttpServlet {
             e.printStackTrace();
         }
 
-        URL url = new URL("http://localhost:9999/service?wsdl");
+/*        URL url = new URL("http://172.17.0.3:9999/service?wsdl");
         QName qName = new QName("http://contactService.webapp.isa/", "ContactServiceImpService");
         Service service = Service.create(url, qName);
         ContactService port = service.getPort(ContactService.class);
         System.out.println(port.toUpperCase("ala"));
 
+        ContactEvent contactEvent = ContactEvent.builder()
+                .email("client2@gmail.com")
+                .reason("gtfo")
+                .message("buka mumin")
+                .build();
+
+        port.addContactEvent(contactEvent);*/
 
     }
 
