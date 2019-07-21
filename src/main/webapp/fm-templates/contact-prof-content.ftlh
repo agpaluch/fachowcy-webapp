@@ -22,6 +22,11 @@
                 <p class="kirk-text kirk-text-body">${userLogin.userDetails.getCity()}</p>
                 <p class="kirk-text kirk-text-body"><strong>email:</strong> ${userLogin.getEmail()}</p>
                 <p class="kirk-text kirk-text-body"><strong>telefon:</strong> ${userLogin.userDetails.getPhoneNumber()}</p>
+                <p>
+                   <#if sessionInfo.getUserLogin()??>
+                       <td><a href="/newmessage?id=${sessionInfo.getUserLogin().id}">Napisz wiadomość</a>
+                   </#if>
+                </p>
 
             </section>
 
