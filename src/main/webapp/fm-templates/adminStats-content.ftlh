@@ -1,4 +1,4 @@
 
 <main>
-    <p>dupa dupa</p>
+    <p>statystyki</p>
 </main>

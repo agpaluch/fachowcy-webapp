@@ -6,7 +6,7 @@ CREATE SCHEMA IF NOT EXISTS fachmann;
 
 USE fachmann;
 
---+ Create table for professions
+/*Create table for professions*/
 CREATE TABLE IF NOT EXISTS professions
 (
   id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -18,11 +18,11 @@ INSERT INTO fachmann.professions (profession) VALUES
 ('hydraulik'),
 ('elektryk');
 
---('PLUMBER'),
---('ELECTRICIAN');
+/*('PLUMBER'),
+('ELECTRICIAN');*/
 
 
---+ Create table for user data (login and details) and connect it with professions
+/*Create table for user data (login and details) and connect it with professions*/
 CREATE TABLE IF NOT EXISTS userData
 (
     id          BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -63,7 +63,7 @@ phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
 
 
 
---+create table for storing messages
+/*create table for storing messages*/
 
 CREATE TABLE IF NOT EXISTS fachmann.messages
 (
@@ -82,11 +82,11 @@ ALTER TABLE messages
 
 
 INSERT INTO messages (message, sender_id, recipient_id) VALUES
-("Ok.", 1, 2),
-("Bede o 16:00.", 1, 2);
+('Ok.', 1, 2),
+('Bede o 16:00.', 1, 2);
 
-                                                --+
---+ create table for storing comments
+
+/*create table for storing comments*/
 
 CREATE TABLE IF NOT EXISTS comments
 (
@@ -102,7 +102,7 @@ ALTER TABLE comments
     ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
 
 INSERT INTO comments (opinion_maker_id, recipient_id, opinion) VALUES
-(1, 2, "Dobra robota."),
-(1, 1, "Dobra robota.");
+(1, 2, 'Dobra robota.'),
+(1, 1, 'Dobra robota.');
 
 ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
