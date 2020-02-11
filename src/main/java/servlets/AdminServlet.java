@@ -1,6 +1,6 @@
 package servlets;
 
-import config.TemplateProvider;
+import template.TemplateProvider;
 import dao.UserLoginDAO;
 import domain.UserDetails;
 import domain.UserLogin;

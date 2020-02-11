@@ -3,16 +3,12 @@ package servlets;
 import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import domain.*;
-import config.TemplateProvider;
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import repository.City;
-import repository.TypeOfProfession;
 import session.SessionInfo;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

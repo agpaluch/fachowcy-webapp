@@ -1,7 +1,7 @@
 package servlets;
 
 
-import config.TemplateProvider;
+import template.TemplateProvider;
 import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import domain.Professions;

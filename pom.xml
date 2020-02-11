@@ -18,6 +18,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <cxf.version>3.1.7</cxf.version>
+      <slf4j.version>1.7.25</slf4j.version>
     <web-service-wsdl-url>
       http://localhost:9999/service?wsdl
     </web-service-wsdl-url>
@@ -160,6 +161,18 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.0</version>
     </dependency>
+
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>${slf4j.version}</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-simple</artifactId>
+          <version>${slf4j.version}</version>
+      </dependency>
 
 
 

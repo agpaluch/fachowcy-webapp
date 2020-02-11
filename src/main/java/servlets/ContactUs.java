@@ -1,11 +1,8 @@
 package servlets;
 
-import config.TemplateProvider;
-import domain.ContactEvent;
-import isa.webapp.contactClient.ContactClient;
+import template.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import isa.webapp.contactService.ContactService;
 import session.SessionInfo;
 
 import javax.inject.Inject;
@@ -14,11 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;

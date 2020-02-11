@@ -1,0 +1,10 @@
+Properties prop = new Properties();
+try (FileReader reader = new
+FileReader("src/main/resources/settings.properties"))
+{
+prop.load(reader);
+prop.getProperty("myapp.data2");
+System.out.println(prop);
+} catch (IOException e) {
+e.printStackTrace();
+}

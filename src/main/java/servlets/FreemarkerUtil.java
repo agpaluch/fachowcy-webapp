@@ -2,7 +2,7 @@ package servlets;
 
 
 
-import config.TemplateProvider;
+import template.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
