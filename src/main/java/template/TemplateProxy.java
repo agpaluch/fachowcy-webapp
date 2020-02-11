@@ -6,16 +6,14 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class TemplateUtil {
+public class TemplateProxy {
 
-    private static final Logger logger = LoggerFactory.getLogger(TemplateUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(TemplateProxy.class);
     private final Template template;
 
     public void freemarkerEngine(Map<String, Object> dataMap, HttpServletResponse resp) {

@@ -7,6 +7,7 @@ import domain.UserLogin;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
+import template.TemplateProxy;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -28,7 +29,8 @@ import java.util.logging.Logger;
 public class AdminServlet extends HttpServlet {
 
     private Logger logger = Logger.getLogger(getClass().getName());
-    private Template template;
+    private TemplateProxy templateProxy;
+
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -41,18 +43,15 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     public void init(){
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
+
     }
 
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+
 
         String emailToDelete = req.getParameter("emailOfUserToDelete");
 
@@ -72,11 +71,8 @@ public class AdminServlet extends HttpServlet {
         map.put("sessionInfo", sessionInfo);
         map.put("error", "");
 
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy.freemarkerEngine(map, resp);
+
 
     }
 
@@ -84,7 +80,7 @@ public class AdminServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+
 
         String email = req.getParameter("search");
         Optional<UserLogin> searchedUserLogin = userLoginDAO.getByLogin(email);
@@ -102,11 +98,8 @@ public class AdminServlet extends HttpServlet {
             map.put("error", "Nie ma takiego użytkownika w bazie.");
         }
 
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy.freemarkerEngine(map, resp);
+
 
 
     }
