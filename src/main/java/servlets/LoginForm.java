@@ -6,6 +6,7 @@ import domain.Role;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
+import template.TemplateProxy;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -24,7 +25,7 @@ import java.util.logging.Logger;
 public class LoginForm extends HttpServlet {
 
     Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
+    private TemplateProxy templateProxy;
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -38,11 +39,8 @@ public class LoginForm extends HttpServlet {
 
     @Override
     public void init() {
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
+
     }
 
     @Override
@@ -62,11 +60,8 @@ public class LoginForm extends HttpServlet {
             dataMap.put("error",error);
         }
 
-        try {
-            template.process(dataMap, resp.getWriter());
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
+        templateProxy.freemarkerEngine(dataMap, resp);
+
 
     }
 

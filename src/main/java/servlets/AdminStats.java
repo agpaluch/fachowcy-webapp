@@ -4,6 +4,7 @@ import template.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
+import template.TemplateProxy;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -22,18 +23,14 @@ public class AdminStats extends HttpServlet {
 
     private static final String TEMPLATE_NAME = "index";
     Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
+    private TemplateProxy templateProxy;
 
     @Inject
     SessionInfo sessionInfo;
 
     @Override
     public void init() {
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
 
     }
 
@@ -43,11 +40,9 @@ public class AdminStats extends HttpServlet {
         dataMap.put("content", "adminStats");
         dataMap.put("sessionInfo", sessionInfo);
 
-        try {
-            template.process(dataMap, resp.getWriter());
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
+        templateProxy.freemarkerEngine(dataMap, resp);
+
+
     }
 
     @Override

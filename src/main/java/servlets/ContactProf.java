@@ -1,14 +1,14 @@
 package servlets;
 
 
-import template.TemplateProvider;
 import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import domain.Professions;
 import domain.UserLogin;
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import session.SessionInfo;
+import template.TemplateProvider;
+import template.TemplateProxy;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -18,16 +18,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet("/contact-prof")
 public class ContactProf extends HttpServlet {
 
+    private TemplateProxy templateProxy;
     Map<String, Object> map = new HashMap<>();
 
     Logger logger = Logger.getLogger(getClass().getName());
@@ -46,11 +45,8 @@ public class ContactProf extends HttpServlet {
 
     @Override
     public void init() {
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
+
     }
 
     @Override
@@ -61,7 +57,6 @@ public class ContactProf extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        PrintWriter printWriter = resp.getWriter();
 
         String userToDisplay = req.getParameterValues("email")[0];
         Optional<UserLogin> maybeUser = userLoginDAO.getByLogin(userToDisplay);
@@ -73,11 +68,7 @@ public class ContactProf extends HttpServlet {
         map.put("sessionInfo", sessionInfo);
         //map.put("profession", maybeProfession.get().getProfession());
 
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy.freemarkerEngine(map, resp);
 
 
     }

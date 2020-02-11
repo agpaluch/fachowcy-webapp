@@ -3,6 +3,7 @@ package servlets;
 import template.TemplateProvider;
 import freemarker.template.Template;
 import session.SessionInfo;
+import template.TemplateProxy;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 public class LogoutServlet extends HttpServlet {
 
     Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
+    private TemplateProxy templateProxy;
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -27,11 +28,7 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     public void init() {
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
     }
 
     @Override

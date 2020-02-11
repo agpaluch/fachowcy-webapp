@@ -6,6 +6,8 @@ import domain.*;
 import freemarker.template.Template;
 import repository.City;
 import session.SessionInfo;
+import template.TemplateProvider;
+import template.TemplateProxy;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -31,7 +33,7 @@ import java.util.stream.Collectors;
 public class Signup extends HttpServlet {
 
     private Logger logger = Logger.getLogger(getClass().getName());
-    private Template template;
+    private TemplateProxy templateProxy;
     private Map<String, Object> dataMap = new HashMap<>();
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
@@ -62,7 +64,7 @@ public class Signup extends HttpServlet {
         dataMap.put("inputData", mapOfValues);
         dataMap.put("sessionInfo", sessionInfo);
 
-        template = FreemarkerUtil.createTemplate(TEMPLATE_NAME, logger, getServletContext());
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
 
 
     }
@@ -78,7 +80,7 @@ public class Signup extends HttpServlet {
             dataMap.put("professions",null);
         }
 
-        FreemarkerUtil.processData(resp, template, dataMap, logger);
+        templateProxy.freemarkerEngine(dataMap, resp);
 
 
     }
@@ -198,7 +200,7 @@ public class Signup extends HttpServlet {
 
             } else {
 
-                FreemarkerUtil.processData(resp, template, dataMap, logger);
+                templateProxy.freemarkerEngine(dataMap, resp);
 
             }
 

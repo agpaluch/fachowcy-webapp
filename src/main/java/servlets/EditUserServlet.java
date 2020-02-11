@@ -6,6 +6,8 @@ import domain.*;
 import exceptions.FrontEndFormValidationException;
 import freemarker.template.Template;
 import session.SessionInfo;
+import template.TemplateProvider;
+import template.TemplateProxy;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -31,7 +33,7 @@ import java.util.stream.Stream;
 public class EditUserServlet extends HttpServlet{
 
     private Logger logger = Logger.getLogger(getClass().getName());
-    private Template template;
+    private TemplateProxy templateProxy;
     private Map<String, Object> dataMap = new HashMap<>();
     private Map<String, String> mapOfErrors = new HashMap<>();
     private Map<String, Object> mapOfValues = new HashMap<>();
@@ -51,7 +53,7 @@ public class EditUserServlet extends HttpServlet{
 
 
     public void init(){
-        template = FreemarkerUtil.createTemplate(TEMPLATE_NAME, logger, getServletContext());
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
 
         List<Field> fields = Arrays.stream(UserDTO.class.getDeclaredFields())
                 .collect(Collectors.toList());
@@ -67,7 +69,7 @@ public class EditUserServlet extends HttpServlet{
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+
 
         String emailToEdit = req.getParameter("emailOfUserToEdit");
         Optional<UserLogin> user = userLoginDAO.getByLogin(emailToEdit);
@@ -83,7 +85,9 @@ public class EditUserServlet extends HttpServlet{
             dataMap.put("errors", mapOfErrors);
         }
 
-        FreemarkerUtil.processData(resp, template, dataMap, logger);
+        templateProxy.freemarkerEngine(dataMap, resp);
+
+
 
     }
 
@@ -121,7 +125,8 @@ public class EditUserServlet extends HttpServlet{
 
         } else {
 
-            FreemarkerUtil.processData(resp, template, dataMap, logger);
+            templateProxy.freemarkerEngine(dataMap, resp);
+
 
         }
 

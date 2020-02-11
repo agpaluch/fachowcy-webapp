@@ -7,6 +7,7 @@ import domain.Messages;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
+import template.TemplateProxy;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -26,7 +27,7 @@ public class NewMessage extends HttpServlet {
 
 
     Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
+    private TemplateProxy templateProxy;
 
     private static final String TEMPLATE_NAME = "index";
     private long recipientId;
@@ -42,18 +43,15 @@ public class NewMessage extends HttpServlet {
 
     @Override
     public void init() {
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "newmessage");
@@ -64,11 +62,7 @@ public class NewMessage extends HttpServlet {
             map.put("recipient", userLoginDAO.get(recipientId).get());
         }
 
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy.freemarkerEngine(map, resp);
 
     }
 
@@ -76,7 +70,7 @@ public class NewMessage extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
+
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "newmessage");
@@ -96,10 +90,6 @@ public class NewMessage extends HttpServlet {
             resp.sendRedirect("/sent");
         }
 
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy.freemarkerEngine(map, resp);
     }
 }

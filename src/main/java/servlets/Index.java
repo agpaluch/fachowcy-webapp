@@ -4,6 +4,7 @@ import template.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
+import template.TemplateProxy;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
 public class Index extends HttpServlet {
 
     Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
+    private TemplateProxy templateProxy;
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -31,12 +32,7 @@ public class Index extends HttpServlet {
 
     @Override
     public void init() {
-
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
         //ContactServer.runContactService();
         //ContactClient.testClient();
     }
@@ -45,17 +41,14 @@ public class Index extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "index");
         map.put("sessionInfo", sessionInfo);
 
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy.freemarkerEngine(map, resp);
+
+
 
     }
 

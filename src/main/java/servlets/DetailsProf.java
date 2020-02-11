@@ -10,6 +10,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import repository.City;
 import session.SessionInfo;
+import template.TemplateProxy;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -37,7 +38,7 @@ public class DetailsProf extends HttpServlet {
     private Map<String, Object> mapOfValues = new HashMap<>();
 
     Logger logger = Logger.getLogger(getClass().getName());
-    Template template;
+    private TemplateProxy templateProxy;
 
     private static final String TEMPLATE_NAME = "index";
 
@@ -58,18 +59,13 @@ public class DetailsProf extends HttpServlet {
 
     @Override
     public void init() {
-        try {
-            template = TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy = new TemplateProxy(TemplateProvider.createTemplate(getServletContext(), TEMPLATE_NAME));
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
-        PrintWriter printWriter = resp.getWriter();
 
         mapOfValues = Arrays.stream(UserDTO.class.getDeclaredFields())
                 .map(Field::getName).collect(Collectors.toMap(Function.identity(), n -> ""));
@@ -93,11 +89,7 @@ public class DetailsProf extends HttpServlet {
             map.put("professions", professionsDAO.getAll());
         }
 
-        try {
-            template.process(map, printWriter);
-        } catch (TemplateException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-        }
+        templateProxy.freemarkerEngine(map, resp);
     }
 
 
