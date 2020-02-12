@@ -7,14 +7,14 @@ CREATE SCHEMA IF NOT EXISTS fachmann;
 USE fachmann;
 
 /*Create table for professions*/
-CREATE TABLE IF NOT EXISTS professions
+CREATE TABLE IF NOT EXISTS Professions
 (
   id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   profession VARCHAR(100)
 );
 
 
-INSERT INTO fachmann.professions (profession) VALUES
+INSERT INTO fachmann.Professions (profession) VALUES
 ('hydraulik'),
 ('elektryk');
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS userData
     numberOfLikes INT UNSIGNED NOT NULL
 );
 
-ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES professions (id);
+ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES Professions (id);
 
 
 ALTER TABLE userData CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

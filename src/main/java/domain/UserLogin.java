@@ -1,12 +1,15 @@
 package domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
-import java.util.Set;
 
 
 @Getter
@@ -19,7 +22,6 @@ public class UserLogin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @Column(unique = true)
@@ -33,14 +35,13 @@ public class UserLogin {
     @NotNull
     private Role role;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "profession_id")
     private Professions profession;
 
 
     @Builder.Default
     @PastOrPresent
-    //private LocalDate signUpDate = LocalDate.now();
     private Instant signUpDate = Instant.now();
 
     @Embedded
@@ -59,7 +60,7 @@ public class UserLogin {
     private Set<Comment> commentR;*/
 
     public UserLogin() {
-        // Hibernate
+        // Constructor used by Hibernate
     }
 
 

@@ -1,7 +1,10 @@
 package domain;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,23 +14,20 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "professions")
 public class Professions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @OneToMany(mappedBy = "profession", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "profession", cascade = {CascadeType.PERSIST})
     private Set<UserLogin> UserLogin;
 
 
-    @Column(name="profession")
     private String profession;
 
     public Professions(){
-        //Hibernate
+        //Constructor used by Hibernate
     }
 
     @Override
@@ -40,9 +40,5 @@ public class Professions {
         this.profession = profession;
     }
 
-
-    public Long getId() {
-        return id;
-    }
 
 }
