@@ -16,8 +16,8 @@
 
     <section class="jumbotron text-center" >
         <div class="container">
-            <h1 class="jumbotron-heading"> Sprzedam Opla </h1>
-            <p class="lead text-muted"> Kup Pan Opla </p>
+            <h1 class="jumbotron-heading">  </h1>
+            <p class="lead text-muted">Wyszukaj fachowca po nazwie profesji</p>
 
             <form class="btn btn-secondary my-2" method="post" action="/search-results">
                 <input type="text" name="search"/>
@@ -78,7 +78,7 @@
                         <img src="https://st2.depositphotos.com/1017228/10442/i/950/depositphotos_104429380-stock-photo-serious-bearded-young-lumberjack-with.jpg" height="300px">
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
-                                <p>Adaś Nowak</p>
+                                <p>Andrzej Rycki</p>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <div class="btn-groups">

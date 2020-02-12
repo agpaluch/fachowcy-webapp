@@ -56,6 +56,8 @@ phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
     1, 0048765432123, 'WARSZAWA', 51, 21.7, 3),
     ('professional2@gmail.com', 'professional2', 'PROFESSIONAL', 'Sylwester', 'Dębski',
     2, 444444444, 'WARSZAWA', 51, 21.7, 12),
+    ('professional3@gmail.com', 'professional3', 'PROFESSIONAL', 'Andrzej', 'Rycki',
+     1, 444444444, 'WARSZAWA', 51, 21.7, 12),
     ('admin1@gmail.com', 'admin1', 'ADMIN', 'Józef', 'Nijaki',
     null, 555555555, 'WARSZAWA', 51, 21.7, 0);
 
