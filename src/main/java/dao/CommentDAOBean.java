@@ -1,7 +1,6 @@
 package dao;
 
 import domain.Comment;
-import domain.Messages;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -17,29 +16,29 @@ public class CommentDAOBean implements CommentDAO {
 
     @Override
     public void clearDeletedUser(long id) {
-        Optional<List<Comment>> senderComments = getBySender(id);
-        Optional<List<Comment>> recipientComments = getByRecipient(id);
+        Optional<List<Comment>> senderComments = getCommentBySender(id);
+        Optional<List<Comment>> recipientComments = getCommentByRecipient(id);
 
         for(Comment c : senderComments.get()) {
-            c.setSenderC(null);
+            c.setSenderOfComment(null);
             em.merge(c);
         }
 
         for(Comment c : recipientComments.get()) {
-            c.setRecipientC(null);
+            c.setRecipientOfComment(null);
             em.merge(c);
         }
     }
 
     @Override
-    public Optional<List<Comment>> getBySender(long id) {
+    public Optional<List<Comment>> getCommentBySender(long id) {
         return Optional.of(em.createQuery("SELECT com FROM Comment com WHERE com.senderC.id = :val", Comment.class)
                 .setParameter("val", id)
                 .getResultList());
     }
 
     @Override
-    public Optional<List<Comment>> getByRecipient(long id) {
+    public Optional<List<Comment>> getCommentByRecipient(long id) {
         return Optional.of(em.createQuery("SELECT com FROM Comment com WHERE com.recipientC.id = :val", Comment.class)
                 .setParameter("val", id)
                 .getResultList());

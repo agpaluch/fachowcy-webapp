@@ -52,13 +52,13 @@ phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
     null, 507654321, 'WARSZAWA', 51, 21.7, 2),
     ('client2@gmail.com', 'client2', 'CLIENT', 'Piotr', 'Mazur',
     null, 222222222, 'WARSZAWA', 51, 21.7, 2),
-    ('professional1@gmail.com', 'professional1', 'PROFESSIONAL', 'Adaś', 'Nowak',
+    ('professional1@gmail.com', 'professional1', 'PROFESSIONAL', 'Adam', 'Nowak',
     1, 0048765432123, 'WARSZAWA', 51, 21.7, 3),
-    ('professional2@gmail.com', 'professional2', 'PROFESSIONAL', 'Sylwester', 'Dębski',
+    ('professional2@gmail.com', 'professional2', 'PROFESSIONAL', 'Sylwester', 'Nowakowski',
     2, 444444444, 'WARSZAWA', 51, 21.7, 12),
-    ('professional3@gmail.com', 'professional3', 'PROFESSIONAL', 'Andrzej', 'Rycki',
-     1, 444444444, 'WARSZAWA', 51, 21.7, 12),
-    ('admin1@gmail.com', 'admin1', 'ADMIN', 'Józef', 'Nijaki',
+    ('professional3@gmail.com', 'professional3', 'PROFESSIONAL', 'Andrzej', 'Kowalski',
+     2, 444444444, 'WARSZAWA', 51, 21.7, 12),
+    ('admin1@gmail.com', 'admin1', 'ADMIN', 'Józef', 'Szostak',
     null, 555555555, 'WARSZAWA', 51, 21.7, 0);
 
 
@@ -67,30 +67,30 @@ phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
 
 /*create table for storing messages*/
 
-CREATE TABLE IF NOT EXISTS fachmann.messages
+CREATE TABLE IF NOT EXISTS fachmann.Messages
 (
-    message_id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     message    VARCHAR(400) NOT NULL,
     wasRead    BOOLEAN DEFAULT '0',
     sender_id     BIGINT UNSIGNED,
     recipient_id  BIGINT UNSIGNED
 );
 
-ALTER TABLE messages
+ALTER TABLE Messages
     ADD FOREIGN KEY (sender_id) REFERENCES userData (id);
-ALTER TABLE messages
+ALTER TABLE Messages
     ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
 
 
 
-INSERT INTO messages (message, sender_id, recipient_id) VALUES
+INSERT INTO Messages (message, sender_id, recipient_id) VALUES
 ('Ok.', 1, 2),
 ('Bede o 16:00.', 1, 2);
 
 
 /*create table for storing comments*/
 
-CREATE TABLE IF NOT EXISTS comments
+CREATE TABLE IF NOT EXISTS Comment
 (
  id BIGINT UNSIGNED UNIQUE PRIMARY KEY AUTO_INCREMENT,
  opinion_maker_id BIGINT UNSIGNED,
@@ -98,12 +98,12 @@ CREATE TABLE IF NOT EXISTS comments
  opinion VARCHAR (400) NOT NULL
 );
 
-ALTER TABLE comments
+ALTER TABLE Comment
     ADD FOREIGN KEY (opinion_maker_id) REFERENCES userData (id);
-ALTER TABLE comments
+ALTER TABLE Comment
     ADD FOREIGN KEY (recipient_id) REFERENCES userData (id);
 
-INSERT INTO comments (opinion_maker_id, recipient_id, opinion) VALUES
+INSERT INTO Comment (opinion_maker_id, recipient_id, opinion) VALUES
 (1, 2, 'Dobra robota.'),
 (1, 1, 'Dobra robota.');
 

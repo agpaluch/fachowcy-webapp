@@ -23,11 +23,14 @@ public class Professions {
     @OneToMany(mappedBy = "profession", cascade = {CascadeType.PERSIST})
     private Set<UserLogin> UserLogin;
 
-
     private String profession;
 
     public Professions(){
         //Constructor used by Hibernate
+    }
+
+    public Professions(String profession){
+        this.profession = profession;
     }
 
     @Override
@@ -36,9 +39,7 @@ public class Professions {
     }
 
 
-    public Professions(String profession){
-        this.profession = profession;
-    }
+
 
 
 }

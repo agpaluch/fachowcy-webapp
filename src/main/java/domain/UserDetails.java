@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import repository.City;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,8 +13,6 @@ import javax.persistence.Enumerated;
 @Data
 @Builder
 @AllArgsConstructor
-/*@Entity
-@Table(name = "userDetails")*/
 @Embeddable
 public class UserDetails {
 
@@ -25,7 +22,6 @@ public class UserDetails {
 
     @Enumerated(EnumType.STRING)
     private City city;
-    //private CityDistrict district;
 
     private Double longitude;
     private Double latitude;
@@ -34,7 +30,7 @@ public class UserDetails {
     private int numberOfLikes = 0;
 
    public UserDetails(){
-        // Hibernate
+        // used by Hibernate
     }
 
 

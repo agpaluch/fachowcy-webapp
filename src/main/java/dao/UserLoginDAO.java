@@ -17,8 +17,9 @@ public interface UserLoginDAO extends IRootDAO<UserLogin>, Serializable {
     Optional<UserLogin> getByLogin(String email);
     Optional<Role> getRoleByLogin(String email);
     Optional<Long> getIDbyLogin(String email);
+    List<UserLogin> getAllProfessionals();
     Optional<UserDetails> getDetailsByLogin(String email);
-    public List<UserLogin> getProfByProfession(String profession);
+    List<UserLogin> getProfByProfession(String profession);
     boolean doesAUserExist(String email);
 
 }

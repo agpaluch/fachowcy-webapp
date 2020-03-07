@@ -36,6 +36,7 @@ public class UserLoginDAOBean implements UserLoginDAO {
        if(id.isPresent()) {
            UserLogin userLogin = get(id.get()).get();
            em.remove(em.merge(userLogin));
+           //em.remove(userLogin);
        }
     }
 
@@ -47,6 +48,12 @@ public class UserLoginDAOBean implements UserLoginDAO {
     @Override
     public List<UserLogin> getAll() {
         return em.createQuery("SELECT ul FROM UserLogin ul", UserLogin.class)
+                .getResultList();
+    }
+
+    @Override
+    public List<UserLogin> getAllProfessionals() {
+        return em.createQuery("SELECT ul FROM UserLogin ul WHERE role='PROFESSIONAL'", UserLogin.class)
                 .getResultList();
     }
 
@@ -88,6 +95,7 @@ public class UserLoginDAOBean implements UserLoginDAO {
                 .filter(this::isProfessional)
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public void save(UserLogin userLogin) {

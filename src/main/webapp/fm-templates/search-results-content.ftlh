@@ -32,7 +32,10 @@
 
                                             </div>
                                             <div class="col-md-2">
-                                                <img src="http://www.mountainhearth.com/wp-content/uploads/2014/01/P1010070-1024x768.jpg" height="300px">
+                                         <#--       <img src="http://www.mountainhearth.com/wp-content/uploads/2014/01/P1010070-1024x768.jpg" height="300px">
+                                                -->
+                                                <img src="../electrician1.jpg" height="300px">
+
                                             </div>
 
                                             </div>

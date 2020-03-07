@@ -1,11 +1,16 @@
 package servlets;
 
+import dao.ProfessionsDAO;
+import dao.UserLoginDAO;
+import domain.Professions;
+import domain.UserLogin;
 import template.TemplateProvider;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import session.SessionInfo;
 import template.TemplateProxy;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +35,13 @@ public class Index extends HttpServlet {
 
     @Inject
     SessionInfo sessionInfo;
+
+    @EJB
+    UserLoginDAO userLoginDAO;
+
+    @EJB
+    ProfessionsDAO professionsDAO;
+
 
     @Override
     public void init() {
@@ -45,6 +58,8 @@ public class Index extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("content", "index");
         map.put("sessionInfo", sessionInfo);
+        map.put("professionals", userLoginDAO.getAllProfessionals());
+        map.put("professions", professionsDAO.getAll());
 
         templateProxy.freemarkerEngine(map, resp);
 

@@ -39,7 +39,6 @@ public class UserLogin {
     @JoinColumn(name = "profession_id")
     private Professions profession;
 
-
     @Builder.Default
     @PastOrPresent
     private Instant signUpDate = Instant.now();
@@ -47,20 +46,9 @@ public class UserLogin {
     @Embedded
     private UserDetails userDetails;
 
-/*    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender", orphanRemoval = true)
-    private Set<Messages> messagesS;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipient", orphanRemoval = true)
-    private Set<Messages> messagesR;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "senderC", orphanRemoval = true)
-    private Set<Comment> commentS;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipientC", orphanRemoval = true)
-    private Set<Comment> commentR;*/
 
     public UserLogin() {
-        // Constructor used by Hibernate
+        // used by Hibernate
     }
 
 
