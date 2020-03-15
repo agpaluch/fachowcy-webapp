@@ -1,5 +1,5 @@
-CREATE SCHEMA IF NOT EXISTS fachmann;
-USE fachmann;
+CREATE SCHEMA IF NOT EXISTS testDB;
+USE testDB;
 
 /*Create table for professions*/
 CREATE TABLE IF NOT EXISTS Professions
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Professions
 );
 
 
-INSERT INTO fachmann.Professions (profession) VALUES
+INSERT INTO testDB.Professions (profession) VALUES
 ('hydraulik'),
 ('elektryk');
 
@@ -41,7 +41,7 @@ ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES Professions (id)
 ALTER TABLE userData CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 
-INSERT INTO fachmann.userData (email, password, role, name, surname, profession_id,
+INSERT INTO testDB.userData (email, password, role, name, surname, profession_id,
 phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
     ('client1@gmail.com', 'client1', 'CLIENT', 'Jan', 'Kowalski',
     null, 507654321, 'WARSZAWA', 51, 21.7, 2),
@@ -62,7 +62,7 @@ phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
 
 /*create table for storing messages*/
 
-CREATE TABLE IF NOT EXISTS fachmann.Messages
+CREATE TABLE IF NOT EXISTS testDB.Messages
 (
     id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     message    VARCHAR(400) NOT NULL,
@@ -102,4 +102,4 @@ INSERT INTO Comment (opinion_maker_id, recipient_id, opinion) VALUES
 (1, 2, 'Dobra robota.'),
 (1, 1, 'Dobra robota.');
 
-ALTER DATABASE fachmann CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER DATABASE testDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
