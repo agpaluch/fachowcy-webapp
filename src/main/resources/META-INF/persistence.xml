@@ -4,7 +4,7 @@
              version="2.0">
     <persistence-unit name="fachmann" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-       <!-- <jta-data-source>java:app/fachmann</jta-data-source>-->
+        <jta-data-source>java:app/fachmann</jta-data-source>
         <!--<jta-data-source>java:jboss/datasources/fachmann</jta-data-source>-->
 
         <class>domain.UserLogin</class>
@@ -14,9 +14,9 @@
 
         <properties>
             <property name="hibernate.connection.driver_class" value="org.h2.Driver" />
-            <property name="hibernate.connection.url" value="jdbc:h2:mem:testDB;DB_CLOSE_DELAY=-1" />
-            <property name="hibernate.connection.username" value="root" />
-            <property name="hibernate.connection.password" value="password" />
+            <property name="hibernate.connection.url" value="jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE;INIT=runscript from '/home/agnieszka/Desktop/fachowcy-webapp/src/main/resources/db.migration/V1__create_database.sql'" />
+            <property name="hibernate.connection.username" value="sa" />
+            <property name="hibernate.connection.password" value="" />
             <property name="hibernate.connection.pool_size" value="1"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
