@@ -1,5 +1,5 @@
-/*CREATE SCHEMA IF NOT EXISTS fachmann;
-USE fachmann;*/
+CREATE SCHEMA IF NOT EXISTS FACHMANN;
+/*SET SCHEMA FACHMANN;*/
 
 /*Create table for professions*/
 CREATE TABLE IF NOT EXISTS Professions

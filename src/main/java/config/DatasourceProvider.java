@@ -8,7 +8,6 @@ import javax.ejb.Singleton;
         className = "org.h2.jdbcx.JdbcDataSource",
         user = "sa",
         password = "",
-        url = "jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE;INIT=runscript from '/home/agnieszka/Desktop/fachowcy-webapp/src/main/resources/db.migration/V1__create_database.sql'")
-       /* url = "jdbc:h2:mem:fachmann;DB_CLOSE_DELAY=-1")*/
+        url = "jdbc:h2:mem:test;INIT=runscript from 'classpath:db.migration/V1__create_database.sql'")
 public class DatasourceProvider {
 }
