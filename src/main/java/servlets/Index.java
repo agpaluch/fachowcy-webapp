@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/index")
+@WebServlet("/fachmann")
 public class Index extends HttpServlet {
 
     Logger logger = Logger.getLogger(getClass().getName());
