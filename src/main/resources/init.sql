@@ -9,10 +9,7 @@ USE fachmann;
 /*Create table for professions*/
 CREATE TABLE IF NOT EXISTS Professions
 (
-  id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  profession VARCHAR(100)
-);
-
+  i
 
 INSERT INTO fachmann.Professions (profession) VALUES
 ('hydraulik'),
