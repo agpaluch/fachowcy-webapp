@@ -5,9 +5,9 @@ import javax.ejb.Singleton;
 
 @Singleton
 @DataSourceDefinition(name = "java:app/fachmann",
-        className = "com.mysql.cj.jdbc.MysqlXADataSource",
-        user = "root",
-        password = "password",
-        url = "jdbc:mysql://localhost:3306/fachmann?useSSL=false")
+        className = "org.h2.jdbcx.JdbcDataSource",
+        user = "sa",
+        password = "",
+        url = "jdbc:h2:mem:test;INIT=runscript from 'classpath:db.migration/V1__create_database.sql'")
 public class DatasourceProvider {
 }
