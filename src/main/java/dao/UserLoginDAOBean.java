@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 public class UserLoginDAOBean implements UserLoginDAO {
 
 
-    @PersistenceContext(unitName = "fachmann")
-    EntityManager em;
+        @PersistenceContext(unitName = "fachmann")
+        EntityManager em;
 
     @Inject
     ProfessionsDAO professionsDAO;
@@ -61,7 +61,8 @@ public class UserLoginDAOBean implements UserLoginDAO {
     public Optional<UserLogin> getByLogin(String email) {
         return em.createQuery("SELECT ul FROM UserLogin ul WHERE ul.email = :val", UserLogin.class)
                 .setParameter("val", email)
-                .getResultStream()
+                .getResultList()
+                .stream()
                 .findFirst();
     }
 

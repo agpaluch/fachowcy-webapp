@@ -39,7 +39,7 @@ public class LogoutServlet extends HttpServlet {
         sessionInfo.setPassword(null);
         sessionInfo.setUserLogin(null);
 
-        resp.sendRedirect("/index");
+        resp.sendRedirect("/fachmann");
 
     }
 }

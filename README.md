@@ -9,3 +9,4 @@ with clients.**
 * Uploading a profile picture of the technician once he signs up.
 * Fixing bugs in the messaging module.
 * Rating system.
+

@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Professions;
+import org.hibernate.Transaction;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -38,8 +39,11 @@ public class ProfessionsDAOBean implements ProfessionsDAO {
 
     @Override
     public List<Professions> getAll() {
+
         List<Professions> result = em.createQuery("SELECT p FROM Professions p", Professions.class)
                 .getResultList();
+
+        ;
         return result;
     }
 

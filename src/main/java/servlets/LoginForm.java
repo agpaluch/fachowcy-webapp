@@ -79,7 +79,7 @@ public class LoginForm extends HttpServlet {
             sessionInfo.setEmail(email);
             sessionInfo.setUserLogin(userLoginDAO.getByLogin(email).get());
 
-            response.sendRedirect("/index");
+            response.sendRedirect("/fachmann");
 
         }
         else {
