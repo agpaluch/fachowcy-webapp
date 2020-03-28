@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import java.sql.Blob;
 import java.time.Instant;
 
 
@@ -45,6 +46,8 @@ public class UserLogin {
 
     @Embedded
     private UserDetails userDetails;
+
+
 
 
     public UserLogin() {

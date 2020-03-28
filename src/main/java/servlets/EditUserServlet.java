@@ -23,6 +23,7 @@ import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
+import java.sql.Blob;
 import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Logger;
@@ -73,6 +74,7 @@ public class EditUserServlet extends HttpServlet{
 
         String emailToEdit = req.getParameter("emailOfUserToEdit");
         Optional<UserLogin> user = userLoginDAO.getByLogin(emailToEdit);
+
 
         if (user.isPresent()){
 

@@ -8,6 +8,7 @@ import repository.City;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.sql.Blob;
 
 
 @Data
@@ -18,6 +19,10 @@ public class UserDetails {
 
     private String name;
     private String surname;
+
+    @Builder.Default
+    private Blob profilePicture = null;
+
     private long phoneNumber;
 
     @Enumerated(EnumType.STRING)

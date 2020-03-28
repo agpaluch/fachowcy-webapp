@@ -19,9 +19,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.reflect.Field;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,7 +77,25 @@ public class DetailsProf extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
 
         Optional<UserLogin> maybeUser = userLoginDAO.getByLogin(sessionInfo.getEmail());
+/*///////////////
+        Blob pic = maybeUser.get().getUserDetails().getProfilePicture();
+        String fileName = "text";
+        OutputStream out = new FileOutputStream(new File("/home/agnieszka/static-images/" + fileName +".txt"));
 
+
+        int read = 0;
+        final byte[] bytes = new byte[1024];
+
+        while (true) {
+            try {
+                if (!((read = pic.getBinaryStream().read(bytes)) != -1)) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            out.write(bytes, 0, read);
+        }
+
+    ///////////////*/
         maybeUser.ifPresent(userLogin -> map.put("userLogin", userLogin));
 
         map.put("content", "details-prof");

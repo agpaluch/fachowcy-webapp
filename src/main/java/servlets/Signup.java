@@ -1,9 +1,12 @@
 package servlets;
 
+
 import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import domain.*;
 import freemarker.template.Template;
+import images.FileUploadProcessor;
+import org.apache.commons.io.IOUtils;
 import repository.City;
 import session.SessionInfo;
 import template.TemplateProvider;
@@ -12,17 +15,21 @@ import template.TemplateProxy;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialBlob;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.reflect.Field;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Level;
@@ -30,6 +37,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @WebServlet("/signup")
+@MultipartConfig
 public class Signup extends HttpServlet {
 
     private Logger logger = Logger.getLogger(getClass().getName());
@@ -48,6 +56,10 @@ public class Signup extends HttpServlet {
 
     @EJB
     ProfessionsDAO professionsDAO;
+
+    @Inject
+    FileUploadProcessor fileUploadProcessor;
+
 
     @Override
     public void init() {
@@ -88,6 +100,7 @@ public class Signup extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        PrintWriter printWriter = resp.getWriter();
         resp.setContentType("text/html");
 
         String email = req.getParameter("email");
@@ -101,6 +114,22 @@ public class Signup extends HttpServlet {
         Double latitude = null;
         String profession = null;
         Role role;
+        final Part filePart = req.getPart("image");
+/*        String fileName = filePart.getName();
+        OutputStream out = new FileOutputStream(new File("/home/agnieszka/static-images/" + fileName +".txt"));*/
+        InputStream filecontent = filePart.getInputStream();
+
+/*        int read = 0;
+        final byte[] bytes = new byte[1024];
+
+        while ((read = filecontent.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }*/
+
+
+        //final Optional<File> maybeFile = fileUploadProcessor.processImage(filePart);
+
+
 
         try {
             phoneNumber = Long.parseLong(req.getParameter("phoneNumber"));
@@ -154,15 +183,19 @@ public class Signup extends HttpServlet {
                 mapOfErrors.put(constraintViolation.getPropertyPath().toString(),constraintViolation.getMessage());
             }
 
-            mapOfValues = req.getParameterMap()
+            Map<String, String[]> parameterMap = req.getParameterMap();
+            parameterMap.remove("image");
+
+            mapOfValues = parameterMap
                     .entrySet()
                     .stream()
                     .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue()[0]));
 
+
             dataMap.put("errors", mapOfErrors);
             dataMap.put("inputData", mapOfValues);
 
-            PrintWriter printWriter = resp.getWriter();
+
 
             if (constraintViolations.isEmpty()){
 
@@ -173,14 +206,22 @@ public class Signup extends HttpServlet {
                     profToBeAdded = saveProfessionInTheProfessionsTable(profession);
                 }
 
-                UserDetails userDetails = UserDetails.builder()
-                        .name(name)
-                        .surname(surname)
-                        .phoneNumber(phoneNumber)
-                        .city(city)
-                        .longitude(longitude)
-                        .latitude(latitude)
-                        .build();
+
+                UserDetails userDetails = null;
+                try {
+                    userDetails = UserDetails.builder()
+                            .name(name)
+                            .surname(surname)
+                            .profilePicture(new SerialBlob(IOUtils.toByteArray(filecontent)))
+                            .phoneNumber(phoneNumber)
+                            .city(city)
+                            .longitude(longitude)
+                            .latitude(latitude)
+                            .build();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
 
                 UserLogin userLogin = UserLogin.builder()
                         .userDetails(userDetails)

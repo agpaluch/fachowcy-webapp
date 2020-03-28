@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS userData
     signUpDate DATETIME            NOT NULL DEFAULT CURRENT_TIMESTAMP,
     name          VARCHAR(100)      NOT NULL,
     surname       VARCHAR(100)      NOT NULL,
+    profilePicture BLOB,
     profession_id  BIGINT,
     /*profession_id  BIGINT UNSIGNED,*/
     phoneNumber   BIGINT(14)        NOT NULL,

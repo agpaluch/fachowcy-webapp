@@ -14,9 +14,17 @@
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
-                    <form method="post" action="/signup" id="id1" onsubmit="event.preventDefault(); checkEverything();">
+                    <form method="post" action="/signup" id="id1" enctype="multipart/form-data"
+                          onsubmit="event.preventDefault(); checkEverything();">
                     </br><h2 class="text-center text-dark">Rejestracja</h2>
                     <div class="form-group">
+
+                        <label for="image" class="text-dark">Zdjęcie profilowe</label><br>
+                        <input type="file" class="filestyle" data-classButton="btn btn-primary"
+                               data-input="false" data-classIcon="icon-plus" data-buttonText="Your label here."
+                               name="image" value="Wybierz plik"/><br/>
+
+
                         <label for="email" class="text-dark">Email</label><br>
                         <input type="email" id="register-email" name="email"
                                oninput="validateFieldEmail()" value="${inputData.email}" class="form-control">
@@ -129,7 +137,7 @@
 <#--    <#include "JSform.ftlh">-->
 
 <#--<script>initAutocomplete()</script>-->
-<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzICm_l4rvwRw4DP_Im3oX24SWXSuAkDA&libraries=places&callback=initAutocomplete"></script>
 <script src="https://unpkg.com/xregexp/xregexp-all.js"></script>
 </body>
 </html>
