@@ -131,7 +131,7 @@
 <#--    <#include "JSform.ftlh">-->
 
 <#--<script>initAutocomplete()</script>-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzICm_l4rvwRw4DP_Im3oX24SWXSuAkDA&libraries=places&callback=initAutocomplete"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initAutocomplete"></script>
 <script src="https://unpkg.com/xregexp/xregexp-all.js"></script>
 </body>
 </html>
