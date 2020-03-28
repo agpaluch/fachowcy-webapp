@@ -45,19 +45,22 @@ ALTER TABLE userData ADD FOREIGN KEY (profession_id) REFERENCES Professions (id)
 /*ALTER TABLE userData CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 */
 
-INSERT INTO userData (email, password, role, name, surname, profession_id,
+INSERT INTO userData (email, password, role, name, surname, profilePicture, profession_id,
 phoneNumber, city, longitude, latitude, numberOfLikes) VALUES
-    ('client1@gmail.com', 'client1', 'CLIENT', 'Jan', 'Kowalski',
+    ('client1@gmail.com', 'client1', 'CLIENT', 'Jan', 'Kowalski', null,
     null, 507654321, 'WARSZAWA', 51, 21.7, 2),
-    ('client2@gmail.com', 'client2', 'CLIENT', 'Piotr', 'Mazur',
+    ('client2@gmail.com', 'client2', 'CLIENT', 'Piotr', 'Mazur', null,
     null, 222222222, 'WARSZAWA', 51, 21.7, 2),
     ('professional1@gmail.com', 'professional1', 'PROFESSIONAL', 'Adam', 'Nowak',
+     FILE_READ('/home/agnieszka/static-images/electrician1.jpg'),
     1, 0048765432123, 'WARSZAWA', 51, 21.7, 3),
     ('professional2@gmail.com', 'professional2', 'PROFESSIONAL', 'Sylwester', 'Nowakowski',
+     FILE_READ('/home/agnieszka/static-images/electrician2.jpg'),
     2, 444444444, 'WARSZAWA', 51, 21.7, 12),
     ('professional3@gmail.com', 'professional3', 'PROFESSIONAL', 'Andrzej', 'Kowalski',
+     FILE_READ('/home/agnieszka/static-images/plumber1.jpg'),
      2, 444444444, 'WARSZAWA', 51, 21.7, 12),
-    ('admin1@gmail.com', 'admin1', 'ADMIN', 'Józef', 'Szostak',
+    ('admin1@gmail.com', 'admin1', 'ADMIN', 'Józef', 'Szostak', null,
     null, 555555555, 'WARSZAWA', 51, 21.7, 0);
 
 
