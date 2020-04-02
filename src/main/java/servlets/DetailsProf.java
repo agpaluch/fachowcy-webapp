@@ -132,7 +132,7 @@ public class DetailsProf extends HttpServlet {
                     .build();
 
             userLoginDAO.save(userLogin);
-            resp.sendRedirect("/index");
+            resp.sendRedirect("/fachmann");
         }
     }
 }

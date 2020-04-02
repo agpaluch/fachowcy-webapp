@@ -3,11 +3,8 @@ package servlets;
 import dao.ProfessionsDAO;
 import dao.UserLoginDAO;
 import domain.Professions;
-import domain.UserLogin;
-import template.TemplateProvider;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import session.SessionInfo;
+import template.TemplateProvider;
 import template.TemplateProxy;
 
 import javax.ejb.EJB;
@@ -18,14 +15,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/index")
+@WebServlet("/fachmann")
 public class Index extends HttpServlet {
 
     Logger logger = Logger.getLogger(getClass().getName());
@@ -54,6 +49,9 @@ public class Index extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/html; charset=utf-8");
+        List<Professions> list = professionsDAO.getAll();
+
+
 
         Map<String, Object> map = new HashMap<>();
         map.put("content", "index");
