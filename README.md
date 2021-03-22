@@ -5,7 +5,7 @@ with clients.**
 
 **Front-end:** bootstrap 4, JavaScript
 
-**Features to be added (work in progress):** 
+**Features to be added:** 
 * Uploading a profile picture of the technician once he signs up.
 * Fixing bugs in the messaging module.
 * Rating system.
